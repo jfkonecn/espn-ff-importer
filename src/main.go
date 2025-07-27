@@ -14,7 +14,7 @@ func main() {
 		dataDir = flag.String("data", "data", "Directory containing ESPN league JSON files")
 		output  = flag.String("output", "static", "Output directory for static website")
 	)
-	
+
 	flag.Parse()
 
 	// Create output directory
@@ -70,7 +70,7 @@ func processSeasonFile(filePath, outputDir string) (SeasonInfo, error) {
 	// Extract year from filename (e.g., "espn_league_2024.json" -> "2024")
 	baseName := filepath.Base(filePath)
 	year := strings.TrimSuffix(strings.TrimPrefix(baseName, "espn_league_"), ".json")
-	
+
 	// Create league reader
 	reader, err := NewLeagueReader(filePath)
 	if err != nil {
@@ -88,7 +88,7 @@ func processSeasonFile(filePath, outputDir string) (SeasonInfo, error) {
 
 	// Get season information for the index page
 	teams := reader.GetTeams()
-	
+
 	return SeasonInfo{
 		Year:        year,
 		LeagueName:  generator.getLeagueName(),
@@ -102,8 +102,8 @@ func processSeasonFile(filePath, outputDir string) (SeasonInfo, error) {
 func generateIndexPage(seasons []SeasonInfo, outputDir string) error {
 	// Create index generator
 	generator := NewIndexGenerator(seasons)
-	
+
 	// Generate the index page
 	outputFile := filepath.Join(outputDir, "index.html")
 	return generator.GenerateIndexPage(outputFile)
-} 
+}
