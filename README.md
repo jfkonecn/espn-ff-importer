@@ -131,3 +131,9 @@ To get your ESPN credentials:
 ## License
 
 [Add your license information here]
+
+## Voice
+
+```sh
+ffmpeg -ss 00:00:30 -i input.mp4 -t 10 -vn -acodec pcm_s16le -ar 44100 -ac 2 output.wav
+```
