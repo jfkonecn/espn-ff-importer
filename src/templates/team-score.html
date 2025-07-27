@@ -1,0 +1,20 @@
+<div class="text-center">
+  <div class="font-medium text-gray-900">{{.TeamName}}</div>
+  <div class="text-sm text-gray-500">{{.OwnerName}}</div>
+  <div class="text-2xl font-bold text-fantasy-blue">{{.Score}}</div>
+  <div class="flex justify-center space-x-1 mt-1">
+    {{if .IsHighScore}}
+    <span
+      class="inline-flex items-center px-1.5 py-0.5 rounded text-xs font-medium bg-fantasy-gold text-white"
+    >
+      🏆 High Score
+    </span>
+    {{end}} {{if .IsTopHalf}}
+    <span
+      class="inline-flex items-center px-1.5 py-0.5 rounded text-xs font-medium bg-fantasy-green text-white"
+    >
+      📈 Top Half
+    </span>
+    {{end}}
+  </div>
+</div>

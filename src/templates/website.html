@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{.LeagueName}} - Fantasy Football League</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              "fantasy-blue": "#1e40af",
+              "fantasy-green": "#059669",
+              "fantasy-gold": "#d97706",
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-gray-100 min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+      {{template "header.html" .}} {{template "standings.html" .}} {{template
+      "payouts.html" .}} {{template "recent-games.html" .}}
+    </div>
+  </body>
+</html>

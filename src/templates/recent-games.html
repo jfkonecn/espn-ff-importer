@@ -1,0 +1,31 @@
+<!-- Recent Games Component -->
+<section class="mb-12">
+  <h2 class="text-2xl font-bold text-gray-800 mb-6">Recent Games</h2>
+  <div class="space-y-8">
+    {{range .RecentGamesByWeek}}
+    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+      <div class="bg-fantasy-blue text-white px-6 py-3">
+        <h3 class="text-lg font-semibold">Week {{.Week}}</h3>
+      </div>
+      <div class="p-6 space-y-4">
+        {{range .Games}}
+        <div class="border border-gray-200 rounded-lg p-4">
+          <div class="flex justify-between items-center mb-3">
+            <span class="text-sm text-gray-500">Matchup #{{.MatchupID}}</span>
+          </div>
+          <div class="grid grid-cols-3 gap-4 items-center">
+            {{template "team-score.html" .GetAwayTeamData}}
+            <div class="text-center text-gray-500">vs</div>
+            {{template "team-score.html" .GetHomeTeamData}}
+          </div>
+          <div class="mt-4 text-center">
+            <span class="text-sm text-gray-600">Winner: </span>
+            <span class="{{.WinnerClass}}">{{.Winner}}</span>
+          </div>
+        </div>
+        {{end}}
+      </div>
+    </div>
+    {{end}}
+  </div>
+</section>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fantasy Football League - Seasons</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              "fantasy-blue": "#1e40af",
+              "fantasy-green": "#059669",
+              "fantasy-gold": "#d97706",
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-gray-50 min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+      <header class="text-center mb-12">
+        <h1 class="text-4xl font-bold text-gray-800 mb-4">
+          Fantasy Football League
+        </h1>
+        <p class="text-xl text-gray-600">
+          Select a season to view league information
+        </p>
+      </header>
+
+      <div class="max-w-4xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {{range .Seasons}}
+          <div
+            class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-200"
+          >
+            <div class="bg-fantasy-blue text-white px-6 py-4">
+              <h2 class="text-xl font-semibold">{{.Year}} Season</h2>
+            </div>
+            <div class="p-6">
+              <div class="text-sm text-gray-600 mb-4">
+                <p><strong>League:</strong> {{.LeagueName}}</p>
+                <p><strong>Teams:</strong> {{.TeamCount}}</p>
+                <p><strong>Last Updated:</strong> {{.LastUpdated}}</p>
+              </div>
+              <a
+                href="{{.FileName}}"
+                class="inline-block w-full bg-fantasy-green text-white text-center py-2 px-4 rounded-md hover:bg-green-700 transition-colors duration-200"
+              >
+                View Season
+              </a>
+            </div>
+          </div>
+          {{end}}
+        </div>
+      </div>
+
+      <footer class="text-center mt-12 text-gray-500">
+        <p>Generated on {{.GeneratedAt}}</p>
+      </footer>
+    </div>
+  </body>
+</html>
