@@ -610,18 +610,30 @@ func (wg *WebsiteGenerator) analyzeKeeperHistory(playerID int, teamName string, 
 	var acquisitionType string
 	var currentPrice int
 	var foundInitialAcquisition bool
-	
+	var previousYearDraftPrice int
+
+	// Only search the previous year for the draft value
+	prevYear := currentSeason - 1
+	reader, exists := wg.historicalReaders[prevYear]
+	if exists {
+		league := reader.GetLeague()
+		for _, pick := range league.DraftDetail.Picks {
+			if pick.PlayerID == playerID {
+				previousYearDraftPrice = pick.BidAmount
+				break
+			}
+		}
+	}
+
 	// Track the player's history backwards from current season
 	for year := currentSeason - 1; year >= currentSeason - 3; year-- {
 		reader, exists := wg.historicalReaders[year]
 		if !exists {
 			continue
 		}
-		
+
 		// Check if this player was kept in this season's draft (first pick of each team)
 		league := reader.GetLeague()
-		
-		// Find the team ID for this team name
 		var teamID int
 		teams := reader.GetTeams()
 		for _, team := range teams {
@@ -630,84 +642,48 @@ func (wg *WebsiteGenerator) analyzeKeeperHistory(playerID int, teamName string, 
 				break
 			}
 		}
-		
 		if teamID == 0 {
 			continue
 		}
-		
-		// Find the first pick for this team in the draft
-		var firstPick *DraftPick
+		// Find the first pick for this team
+		var firstPickPlayerID int
 		for _, pick := range league.DraftDetail.Picks {
 			if pick.TeamID == teamID {
-				firstPick = &pick
+				firstPickPlayerID = pick.PlayerID
 				break
 			}
 		}
-		
-		// If this player was the first pick (keeper) for this team
-		if firstPick != nil && firstPick.PlayerID == playerID {
-			// This player was kept in this season's draft
+		if firstPickPlayerID == playerID {
 			keeperYears++
-			
-			// Determine acquisition type and price for the most recent season
-			if year == currentSeason - 1 {
-				// Check if this player was drafted in the previous year
-				draftPrice := wg.getPlayerDraftPrice(playerID, teamID, year)
-				if draftPrice > 0 {
-					// Player was drafted - use draft price
-					acquisitionType = "draft"
-					currentPrice = draftPrice
-				} else {
-					// Player was acquired via free agency
-					acquisitionType = "free_agency"
-					currentPrice = 15
-				}
-			}
 		}
-		
-		// Check if this player was on the roster this year (for initial acquisition)
+		// Mark initial acquisition if on roster in this year
 		if !foundInitialAcquisition {
 			for _, team := range teams {
-				if team.Name == teamName {
-					// Check if this player was on the roster this year
-					if team.Roster != nil {
-						for _, entry := range team.Roster.Entries {
-							if entry.PlayerPoolEntry.Player.ID == playerID {
-								// This player was on the roster this year - count as initial acquisition
-								keeperYears++
-								foundInitialAcquisition = true
-								
-								// Determine acquisition type and price for the most recent season
-								if year == currentSeason - 1 {
-									// Check if this player was drafted in the previous year
-									draftPrice := wg.getPlayerDraftPrice(playerID, teamID, year)
-									if draftPrice > 0 {
-										// Player was drafted - use draft price
-										acquisitionType = "draft"
-										currentPrice = draftPrice
-									} else {
-										// Player was acquired via free agency
-										acquisitionType = "free_agency"
-										currentPrice = 15
-									}
-								}
-								break
-							}
+				if team.Name == teamName && team.Roster != nil {
+					for _, entry := range team.Roster.Entries {
+						if entry.PlayerPoolEntry.Player.ID == playerID {
+							foundInitialAcquisition = true
+							break
 						}
 					}
-					break
 				}
 			}
 		}
 	}
-	
-	// If we didn't find any history, assume this is a new player (minimum 1 year)
-	if keeperYears == 0 {
-		keeperYears = 1
+
+	if foundInitialAcquisition {
+		keeperYears++ // +1 for initial acquisition
+	}
+
+	// Determine acquisition type and price
+	if previousYearDraftPrice > 0 {
+		acquisitionType = "draft"
+		currentPrice = previousYearDraftPrice
+	} else {
 		acquisitionType = "free_agency"
 		currentPrice = 15
 	}
-	
+
 	return KeeperEligibility{
 		PlayerID:        playerID,
 		PlayerName:      "", // Will be filled by caller
