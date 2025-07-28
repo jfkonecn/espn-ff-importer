@@ -609,6 +609,7 @@ func (wg *WebsiteGenerator) analyzeKeeperHistory(playerID int, teamName string, 
 	var keeperYears int
 	var acquisitionType string
 	var currentPrice int
+	var foundInitialAcquisition bool
 	
 	// Track the player's history backwards from current season
 	for year := currentSeason - 1; year >= currentSeason - 3; year-- {
@@ -617,36 +618,92 @@ func (wg *WebsiteGenerator) analyzeKeeperHistory(playerID int, teamName string, 
 			continue
 		}
 		
-		// Check if this player was kept in this season
+		// Check if this player was kept in this season's draft (first pick of each team)
+		league := reader.GetLeague()
+		
+		// Find the team ID for this team name
+		var teamID int
 		teams := reader.GetTeams()
 		for _, team := range teams {
 			if team.Name == teamName {
-				// Check if this player was a keeper in this season
-				if team.Roster != nil {
-					for _, entry := range team.Roster.Entries {
-						if entry.PlayerPoolEntry.Player.ID == playerID {
-							// This player was on the roster this year
-							keeperYears++
-							
-							// Determine acquisition type and price
-							if year == currentSeason - 1 {
-								// This is the most recent season, use this for current pricing
-								// For now, assume free agency acquisition at $15
-								// In a full implementation, you'd need to check draft vs free agency
-								acquisitionType = "free_agency"
-								currentPrice = 15
+				teamID = team.ID
+				break
+			}
+		}
+		
+		if teamID == 0 {
+			continue
+		}
+		
+		// Find the first pick for this team in the draft
+		var firstPick *DraftPick
+		for _, pick := range league.DraftDetail.Picks {
+			if pick.TeamID == teamID {
+				firstPick = &pick
+				break
+			}
+		}
+		
+		// If this player was the first pick (keeper) for this team
+		if firstPick != nil && firstPick.PlayerID == playerID {
+			// This player was kept in this season's draft
+			keeperYears++
+			
+			// Determine acquisition type and price for the most recent season
+			if year == currentSeason - 1 {
+				// Check if this player was drafted in the previous year
+				draftPrice := wg.getPlayerDraftPrice(playerID, teamID, year)
+				if draftPrice > 0 {
+					// Player was drafted - use draft price
+					acquisitionType = "draft"
+					currentPrice = draftPrice
+				} else {
+					// Player was acquired via free agency
+					acquisitionType = "free_agency"
+					currentPrice = 15
+				}
+			}
+		}
+		
+		// Check if this player was on the roster this year (for initial acquisition)
+		if !foundInitialAcquisition {
+			for _, team := range teams {
+				if team.Name == teamName {
+					// Check if this player was on the roster this year
+					if team.Roster != nil {
+						for _, entry := range team.Roster.Entries {
+							if entry.PlayerPoolEntry.Player.ID == playerID {
+								// This player was on the roster this year - count as initial acquisition
+								keeperYears++
+								foundInitialAcquisition = true
+								
+								// Determine acquisition type and price for the most recent season
+								if year == currentSeason - 1 {
+									// Check if this player was drafted in the previous year
+									draftPrice := wg.getPlayerDraftPrice(playerID, teamID, year)
+									if draftPrice > 0 {
+										// Player was drafted - use draft price
+										acquisitionType = "draft"
+										currentPrice = draftPrice
+									} else {
+										// Player was acquired via free agency
+										acquisitionType = "free_agency"
+										currentPrice = 15
+									}
+								}
+								break
 							}
-							break
 						}
 					}
+					break
 				}
-				break
 			}
 		}
 	}
 	
-	// If we didn't find any history, assume this is a new player
+	// If we didn't find any history, assume this is a new player (minimum 1 year)
 	if keeperYears == 0 {
+		keeperYears = 1
 		acquisitionType = "free_agency"
 		currentPrice = 15
 	}
@@ -666,6 +723,23 @@ func (wg *WebsiteGenerator) analyzeKeeperHistory(playerID int, teamName string, 
 		NextYearPrice:   0, // Will be calculated by caller
 		IsKeeper:        false,
 	}
+}
+
+// getPlayerDraftPrice looks up a player's draft price from the specified season
+func (wg *WebsiteGenerator) getPlayerDraftPrice(playerID int, teamID int, season int) int {
+	reader, exists := wg.historicalReaders[season]
+	if !exists {
+		return 0
+	}
+	
+	league := reader.GetLeague()
+	for _, pick := range league.DraftDetail.Picks {
+		if pick.PlayerID == playerID && pick.TeamID == teamID {
+			return pick.BidAmount
+		}
+	}
+	
+	return 0
 }
 
 // TemplateData represents the data passed to the HTML template
