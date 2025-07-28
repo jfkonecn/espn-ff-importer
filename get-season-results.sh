@@ -24,7 +24,7 @@ mkdir -p data
 
 # Construct the URL
 # URL="https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/seasons/$YEAR/segments/0/leagues/$ESPN_LEAGUE_ID?scoringPeriodId=2&view=modular&view=mNav&view=mMatchupScore&view=mScoreboard&view=mSettings&view=mTopPerformers&view=mTeam"
-URL_SEASON="https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/seasons/$YEAR/segments/0/leagues/$ESPN_LEAGUE_ID?view=mMatchupScore&view=mScoreboard&view=mTeam&view=mSettings&view=mDraftDetail"
+URL_SEASON="https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/seasons/$YEAR/segments/0/leagues/$ESPN_LEAGUE_ID?view=mMatchupScore&view=mScoreboard&view=mTeam&view=mSettings&view=mDraftDetail&view=mRoster"
 
 # Build the Cookie header
 COOKIE="espn_s2=$ESPN_ESPNS2; SWID=$ESPN_SWID"
@@ -43,7 +43,7 @@ curl -sSL \
   "$URL_PLAYERS" -o "data/espn_players_${YEAR}.json"
 
 
-URL_PRO_TEAMS="https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/seasons/2025?view=proTeamSchedules_wl"
+URL_PRO_TEAMS="https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/seasons/$YEAR?view=proTeamSchedules_wl"
 
 # Download the data into the data directory
 curl -sSL \

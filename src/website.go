@@ -15,11 +15,15 @@ var templateFS embed.FS
 // WebsiteGenerator handles the generation of the static website
 type WebsiteGenerator struct {
 	reader *LeagueReader
+	historicalReaders map[int]*LeagueReader // Map of season ID to reader
 }
 
 // NewWebsiteGenerator creates a new website generator
 func NewWebsiteGenerator(reader *LeagueReader) *WebsiteGenerator {
-	return &WebsiteGenerator{reader: reader}
+	return &WebsiteGenerator{
+		reader: reader,
+		historicalReaders: make(map[int]*LeagueReader),
+	}
 }
 
 // IndexGenerator handles the generation of the main index page
@@ -40,8 +44,16 @@ type IndexData struct {
 
 // GenerateIndexPage creates the main index HTML page
 func (ig *IndexGenerator) GenerateIndexPage(outputPath string) error {
-	// Parse the index template
-	tmpl, err := template.ParseFS(templateFS, "templates/index.html")
+	// Parse the index template with custom functions
+	tmpl, err := template.New("index.html").Funcs(template.FuncMap{
+		"groupByTeam": func(eligibilities []KeeperEligibility) map[string][]KeeperEligibility {
+			grouped := make(map[string][]KeeperEligibility)
+			for _, eligibility := range eligibilities {
+				grouped[eligibility.TeamName] = append(grouped[eligibility.TeamName], eligibility)
+			}
+			return grouped
+		},
+	}).ParseFS(templateFS, "templates/index.html")
 	if err != nil {
 		return fmt.Errorf("failed to parse index template: %w", err)
 	}
@@ -70,8 +82,16 @@ func (ig *IndexGenerator) GenerateIndexPage(outputPath string) error {
 
 // GenerateWebsite creates the static HTML website
 func (wg *WebsiteGenerator) GenerateWebsite(outputPath string) error {
-	// Parse all template files
-	tmpl, err := template.ParseFS(templateFS, "templates/*.html")
+	// Parse all template files with custom functions
+	tmpl, err := template.New("website.html").Funcs(template.FuncMap{
+		"groupByTeam": func(eligibilities []KeeperEligibility) map[string][]KeeperEligibility {
+			grouped := make(map[string][]KeeperEligibility)
+			for _, eligibility := range eligibilities {
+				grouped[eligibility.TeamName] = append(grouped[eligibility.TeamName], eligibility)
+			}
+			return grouped
+		},
+	}).ParseFS(templateFS, "templates/*.html")
 	if err != nil {
 		return fmt.Errorf("failed to parse templates: %w", err)
 	}
@@ -95,10 +115,42 @@ func (wg *WebsiteGenerator) GenerateWebsite(outputPath string) error {
 	return nil
 }
 
+// LoadHistoricalData loads data from previous seasons for keeper analysis
+func (wg *WebsiteGenerator) LoadHistoricalData(dataDir string) error {
+	currentSeason := wg.reader.GetSeasonID()
+	
+	fmt.Printf("Loading historical data for season %d from directory: %s\n", currentSeason, dataDir)
+	
+	// Load data from the 3 previous seasons for keeper analysis
+	for year := currentSeason - 3; year < currentSeason; year++ {
+		filePath := fmt.Sprintf("%s/espn_league_%d.json", dataDir, year)
+		fmt.Printf("  Trying to load: %s\n", filePath)
+		reader, err := NewLeagueReader(filePath)
+		if err != nil {
+			// Skip if file doesn't exist or can't be read
+			fmt.Printf("    Failed to load %s: %v\n", filePath, err)
+			continue
+		}
+		wg.historicalReaders[year] = reader
+		fmt.Printf("    Successfully loaded %s\n", filePath)
+	}
+	
+	fmt.Printf("Loaded %d historical seasons\n", len(wg.historicalReaders))
+	return nil
+}
+
 // GenerateSeasonPage creates a season-specific HTML page
 func (wg *WebsiteGenerator) GenerateSeasonPage(outputPath string) error {
-	// Parse all template files
-	tmpl, err := template.ParseFS(templateFS, "templates/*.html")
+	// Parse all template files with custom functions
+	tmpl, err := template.New("website.html").Funcs(template.FuncMap{
+		"groupByTeam": func(eligibilities []KeeperEligibility) map[string][]KeeperEligibility {
+			grouped := make(map[string][]KeeperEligibility)
+			for _, eligibility := range eligibilities {
+				grouped[eligibility.TeamName] = append(grouped[eligibility.TeamName], eligibility)
+			}
+			return grouped
+		},
+	}).ParseFS(templateFS, "templates/*.html")
 	if err != nil {
 		return fmt.Errorf("failed to parse templates: %w", err)
 	}
@@ -129,8 +181,16 @@ func (wg *WebsiteGenerator) getLastUpdated() string {
 
 // GenerateDraftPage creates a draft-specific HTML page
 func (wg *WebsiteGenerator) GenerateDraftPage(outputPath string) error {
-	// Parse all template files
-	tmpl, err := template.ParseFS(templateFS, "templates/*.html")
+	// Parse all template files with custom functions
+	tmpl, err := template.New("draft.html").Funcs(template.FuncMap{
+		"groupByTeam": func(eligibilities []KeeperEligibility) map[string][]KeeperEligibility {
+			grouped := make(map[string][]KeeperEligibility)
+			for _, eligibility := range eligibilities {
+				grouped[eligibility.TeamName] = append(grouped[eligibility.TeamName], eligibility)
+			}
+			return grouped
+		},
+	}).ParseFS(templateFS, "templates/*.html")
 	if err != nil {
 		return fmt.Errorf("failed to parse templates: %w", err)
 	}
@@ -162,6 +222,9 @@ func (wg *WebsiteGenerator) prepareDraftData() DraftData {
 	draftPicks := wg.prepareDraftPicks()
 	keeperPicks := wg.getKeeperPicks(draftPicks)
 	
+	// Calculate keeper eligibility
+	keeperEligibility := wg.calculateKeeperEligibility()
+	
 	// Format draft date
 	draftDate := "Unknown"
 	if league.DraftDetail.CompleteDate > 0 {
@@ -169,24 +232,29 @@ func (wg *WebsiteGenerator) prepareDraftData() DraftData {
 		draftDate = draftTime.Format("January 2, 2006 at 3:04 PM")
 	}
 	
-	// Determine draft status
+	// Determine draft status and if draft has started
 	draftStatus := "Not Started"
+	draftHasStarted := false
 	if league.DraftDetail.InProgress {
 		draftStatus = "In Progress"
+		draftHasStarted = true
 	} else if league.DraftDetail.Drafted {
 		draftStatus = "Completed"
+		draftHasStarted = true
 	}
 
 	return DraftData{
-		LeagueName:    wg.getLeagueName(),
-		SeasonYear:    fmt.Sprintf("%d", league.SeasonID),
-		LastUpdated:   wg.getLastUpdated(),
-		GeneratedAt:   time.Now().Format("January 2, 2006 at 3:04 PM"),
-		TotalPicks:    len(draftPicks),
-		DraftDate:     draftDate,
-		DraftStatus:   draftStatus,
-		DraftPicks:    draftPicks,
-		KeeperPicks:   keeperPicks,
+		LeagueName:         wg.getLeagueName(),
+		SeasonYear:         fmt.Sprintf("%d", league.SeasonID),
+		LastUpdated:        wg.getLastUpdated(),
+		GeneratedAt:        time.Now().Format("January 2, 2006 at 3:04 PM"),
+		TotalPicks:         len(draftPicks),
+		DraftDate:          draftDate,
+		DraftStatus:        draftStatus,
+		DraftHasStarted:    draftHasStarted,
+		DraftPicks:         draftPicks,
+		KeeperPicks:        keeperPicks,
+		KeeperEligibility:  keeperEligibility,
 	}
 }
 
@@ -303,6 +371,301 @@ func (wg *WebsiteGenerator) getProTeamAbbrev(proTeamID int) string {
 		return proTeam.Abbrev
 	}
 	return "UNK"
+}
+
+// calculateKeeperEligibility calculates keeper eligibility for all players
+func (wg *WebsiteGenerator) calculateKeeperEligibility() []KeeperEligibility {
+	league := wg.reader.GetLeague()
+	currentSeason := league.SeasonID
+	draftHasStarted := league.DraftDetail.Drafted || league.DraftDetail.InProgress
+	
+	var eligibilities []KeeperEligibility
+	
+	if draftHasStarted {
+		// Draft has started - show current draft picks and keeper eligibility
+		teamPlayers := make(map[int][]DraftPickRow)
+		draftPicks := wg.prepareDraftPicks()
+		
+		// Group players by team
+		for _, pick := range draftPicks {
+			teamID := wg.getTeamIDByName(pick.TeamName)
+			if teamID != 0 {
+				teamPlayers[teamID] = append(teamPlayers[teamID], pick)
+			}
+		}
+		
+		// Calculate keeper eligibility for each team
+		for teamID, players := range teamPlayers {
+			team := wg.reader.GetTeamByID(teamID)
+			if team == nil {
+				continue
+			}
+			
+			owner := wg.reader.GetMemberByID(team.PrimaryOwner)
+			ownerName := "Unknown"
+			if owner != nil {
+				ownerName = fmt.Sprintf("%s %s", owner.FirstName, owner.LastName)
+			}
+			
+			// For each player on the team, calculate keeper eligibility
+			for _, player := range players {
+				eligibility := wg.calculatePlayerKeeperEligibility(player, currentSeason, ownerName)
+				eligibilities = append(eligibilities, eligibility)
+			}
+		}
+	} else {
+		// Draft hasn't started - show ending rosters from previous season
+		eligibilities = wg.getPreDraftKeeperEligibility()
+	}
+	
+	return eligibilities
+}
+
+// calculatePlayerKeeperEligibility calculates keeper eligibility for a single player
+func (wg *WebsiteGenerator) calculatePlayerKeeperEligibility(player DraftPickRow, currentSeason int, ownerName string) KeeperEligibility {
+	// This is a simplified implementation
+	// In a full system, you'd need to load historical data from previous seasons
+	
+	// For now, assume this is the first year the player is on the roster
+	// and they were acquired via draft
+	acquisitionType := "draft"
+	currentPrice := player.BidAmount
+	keeperYears := 0
+	isEligible := true
+	
+	// Calculate next year's price based on keeper rules
+	nextYearPrice := wg.calculateNextYearKeeperPrice(currentPrice, acquisitionType, keeperYears)
+	
+	// Determine if this player is currently a keeper (first pick of the team)
+	isKeeper := player.IsKeeper
+	
+	return KeeperEligibility{
+		PlayerID:        0, // Would need to track actual player ID
+		PlayerName:      player.PlayerName,
+		TeamName:        player.TeamName,
+		OwnerName:       ownerName,
+		Position:        player.Position,
+		ProTeamName:     player.ProTeamName,
+		ProTeamAbbrev:   player.ProTeamAbbrev,
+		IsEligible:      isEligible,
+		KeeperYears:     keeperYears,
+		AcquisitionType: acquisitionType,
+		CurrentPrice:    currentPrice,
+		NextYearPrice:   nextYearPrice,
+		IsKeeper:        isKeeper,
+	}
+}
+
+// calculateNextYearKeeperPrice calculates the keeper price for next year
+func (wg *WebsiteGenerator) calculateNextYearKeeperPrice(currentPrice int, acquisitionType string, keeperYears int) int {
+	if keeperYears >= 3 {
+		return 0 // Not eligible for keeping after 3 years
+	}
+	
+	if acquisitionType == "draft" {
+		switch keeperYears {
+		case 0: // First year being kept
+			return currentPrice + 5
+		case 1: // Second year being kept
+			return currentPrice + 7
+		case 2: // Third year being kept
+			return currentPrice + 10
+		}
+	} else if acquisitionType == "free_agency" {
+		switch keeperYears {
+		case 0: // First year being kept
+			return 15
+		case 1: // Second year being kept
+			return 22
+		case 2: // Third year being kept
+			return 32
+		}
+	}
+	
+	return 0
+}
+
+// getTeamIDByName gets team ID from team name
+func (wg *WebsiteGenerator) getTeamIDByName(teamName string) int {
+	teams := wg.reader.GetTeams()
+	for _, team := range teams {
+		if team.Name == teamName {
+			return team.ID
+		}
+	}
+	return 0
+}
+
+// getPreDraftKeeperEligibility calculates keeper eligibility for pre-draft rosters
+func (wg *WebsiteGenerator) getPreDraftKeeperEligibility() []KeeperEligibility {
+	var eligibilities []KeeperEligibility
+	teams := wg.reader.GetTeams()
+	currentSeason := wg.reader.GetSeasonID()
+	
+	// Get the latest roster data from the previous season
+	latestRosterSeason := currentSeason - 1
+	latestRosterReader, hasLatestRoster := wg.historicalReaders[latestRosterSeason]
+	
+	for _, team := range teams {
+		owner := wg.reader.GetMemberByID(team.PrimaryOwner)
+		ownerName := "Unknown"
+		if owner != nil {
+			ownerName = fmt.Sprintf("%s %s", owner.FirstName, owner.LastName)
+		}
+		
+		// Try to get roster data from the latest available season
+		var rosterEntries []RosterEntry
+		if hasLatestRoster {
+			// Find the team in the latest roster season
+			latestTeams := latestRosterReader.GetTeams()
+			fmt.Printf("Looking for team '%s' in %d season (found %d teams)\n", team.Name, latestRosterSeason, len(latestTeams))
+			for _, latestTeam := range latestTeams {
+				if latestTeam.Name == team.Name {
+					fmt.Printf("  Found matching team '%s'\n", latestTeam.Name)
+					if latestTeam.Roster != nil {
+						rosterEntries = latestTeam.Roster.Entries
+						fmt.Printf("  Found %d roster entries\n", len(rosterEntries))
+					} else {
+						fmt.Printf("  No roster data available\n")
+					}
+					break
+				}
+			}
+		} else {
+			fmt.Printf("No historical data available for season %d\n", latestRosterSeason)
+		}
+		
+		if len(rosterEntries) > 0 {
+			// Process each player on the roster
+			for _, entry := range rosterEntries {
+				player := entry.PlayerPoolEntry.Player
+				
+				// Skip players without valid data
+				if player.ID == 0 || player.FullName == "" {
+					continue
+				}
+				
+				// Get position name
+				position := wg.getPositionFromSlotID(entry.LineupSlotID)
+				
+				// Get pro team information
+				proTeamName := wg.getProTeamName(player.ProTeamID)
+				proTeamAbbrev := wg.getProTeamAbbrev(player.ProTeamID)
+				
+				// Analyze keeper history across the 3 previous seasons
+				keeperHistory := wg.analyzeKeeperHistory(player.ID, team.Name, currentSeason)
+				
+				// Calculate next year's price based on historical data
+				nextYearPrice := wg.calculateNextYearKeeperPrice(keeperHistory.CurrentPrice, keeperHistory.AcquisitionType, keeperHistory.KeeperYears)
+				
+				// Determine eligibility (max 3 years)
+				isEligible := keeperHistory.KeeperYears < 3
+				
+				eligibility := KeeperEligibility{
+					PlayerID:        player.ID,
+					PlayerName:      player.FullName,
+					TeamName:        team.Name,
+					OwnerName:       ownerName,
+					Position:        position,
+					ProTeamName:     proTeamName,
+					ProTeamAbbrev:   proTeamAbbrev,
+					IsEligible:      isEligible,
+					KeeperYears:     keeperHistory.KeeperYears,
+					AcquisitionType: keeperHistory.AcquisitionType,
+					CurrentPrice:    keeperHistory.CurrentPrice,
+					NextYearPrice:   nextYearPrice,
+					IsKeeper:        false, // Not a keeper yet, just showing eligibility
+				}
+				
+				eligibilities = append(eligibilities, eligibility)
+			}
+		} else {
+			// No roster data available - create a placeholder entry for the team
+			eligibility := KeeperEligibility{
+				PlayerID:        0,
+				PlayerName:      fmt.Sprintf("No Roster Data Available for %s", team.Name),
+				TeamName:        team.Name,
+				OwnerName:       ownerName,
+				Position:        "N/A",
+				ProTeamName:     "N/A",
+				ProTeamAbbrev:   "N/A",
+				IsEligible:      false,
+				KeeperYears:     0,
+				AcquisitionType: "unknown",
+				CurrentPrice:    0,
+				NextYearPrice:   0,
+				IsKeeper:        false,
+			}
+			
+			eligibilities = append(eligibilities, eligibility)
+		}
+	}
+	
+	return eligibilities
+}
+
+// analyzeKeeperHistory analyzes a player's keeper history across the 3 previous seasons
+func (wg *WebsiteGenerator) analyzeKeeperHistory(playerID int, teamName string, currentSeason int) KeeperEligibility {
+	var keeperYears int
+	var acquisitionType string
+	var currentPrice int
+	
+	// Track the player's history backwards from current season
+	for year := currentSeason - 1; year >= currentSeason - 3; year-- {
+		reader, exists := wg.historicalReaders[year]
+		if !exists {
+			continue
+		}
+		
+		// Check if this player was kept in this season
+		teams := reader.GetTeams()
+		for _, team := range teams {
+			if team.Name == teamName {
+				// Check if this player was a keeper in this season
+				if team.Roster != nil {
+					for _, entry := range team.Roster.Entries {
+						if entry.PlayerPoolEntry.Player.ID == playerID {
+							// This player was on the roster this year
+							keeperYears++
+							
+							// Determine acquisition type and price
+							if year == currentSeason - 1 {
+								// This is the most recent season, use this for current pricing
+								// For now, assume free agency acquisition at $15
+								// In a full implementation, you'd need to check draft vs free agency
+								acquisitionType = "free_agency"
+								currentPrice = 15
+							}
+							break
+						}
+					}
+				}
+				break
+			}
+		}
+	}
+	
+	// If we didn't find any history, assume this is a new player
+	if keeperYears == 0 {
+		acquisitionType = "free_agency"
+		currentPrice = 15
+	}
+	
+	return KeeperEligibility{
+		PlayerID:        playerID,
+		PlayerName:      "", // Will be filled by caller
+		TeamName:        teamName,
+		OwnerName:       "", // Will be filled by caller
+		Position:        "", // Will be filled by caller
+		ProTeamName:     "", // Will be filled by caller
+		ProTeamAbbrev:   "", // Will be filled by caller
+		IsEligible:      keeperYears < 3,
+		KeeperYears:     keeperYears,
+		AcquisitionType: acquisitionType,
+		CurrentPrice:    currentPrice,
+		NextYearPrice:   0, // Will be calculated by caller
+		IsKeeper:        false,
+	}
 }
 
 // TemplateData represents the data passed to the HTML template
@@ -983,13 +1346,15 @@ type DraftPickRow struct {
 
 // DraftData represents the data passed to the draft template
 type DraftData struct {
-	LeagueName    string
-	SeasonYear    string
-	LastUpdated   string
-	GeneratedAt   string
-	TotalPicks    int
-	DraftDate     string
-	DraftStatus   string
-	DraftPicks    []DraftPickRow
-	KeeperPicks   []DraftPickRow
+	LeagueName         string
+	SeasonYear         string
+	LastUpdated        string
+	GeneratedAt        string
+	TotalPicks         int
+	DraftDate          string
+	DraftStatus        string
+	DraftHasStarted    bool
+	DraftPicks         []DraftPickRow
+	KeeperPicks        []DraftPickRow
+	KeeperEligibility  []KeeperEligibility
 }

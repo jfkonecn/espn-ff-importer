@@ -126,6 +126,7 @@ type Team struct {
 	RankCalculatedFinal   int         `json:"rankCalculatedFinal"`
 	RankFinal             int         `json:"rankFinal"`
 	Record                Record      `json:"record"`
+	Roster                *TeamRoster `json:"roster,omitempty"`
 	TransactionCounter    TransactionCounter `json:"transactionCounter"`
 	ValuesByStat          interface{} `json:"valuesByStat"`
 	WaiverRank            int         `json:"waiverRank"`
@@ -198,4 +199,75 @@ type ProTeamsData struct {
 	Settings struct {
 		ProTeams []ProTeam `json:"proTeams"`
 	} `json:"settings"`
-} 
+}
+
+// KeeperEligibility represents keeper eligibility information
+type KeeperEligibility struct {
+	PlayerID        int
+	PlayerName      string
+	TeamName        string
+	OwnerName       string
+	Position        string
+	ProTeamName     string
+	ProTeamAbbrev   string
+	IsEligible      bool
+	KeeperYears     int
+	AcquisitionType string // "draft" or "free_agency"
+	CurrentPrice    int
+	NextYearPrice   int
+	IsKeeper        bool
+}
+
+// PlayerHistory represents a player's history for keeper calculations
+type PlayerHistory struct {
+	PlayerID        int
+	PlayerName      string
+	FirstAcquired   int    // Season when first acquired
+	AcquisitionType string // "draft" or "free_agency"
+	OriginalPrice   int    // Original acquisition price
+	YearsKept       int    // Number of years kept so far
+	LastKeptSeason  int    // Last season this player was kept
+}
+
+// RosterEntry represents a player on a team's roster
+type RosterEntry struct {
+	InjuryStatus string `json:"injuryStatus"`
+	LineupSlotID int    `json:"lineupSlotId"`
+	PlayerID     int    `json:"playerId"`
+	PlayerPoolEntry RosterPlayerPoolEntry `json:"playerPoolEntry"`
+}
+
+// RosterPlayerPoolEntry represents the player pool entry for a roster player
+type RosterPlayerPoolEntry struct {
+	AppliedStatTotal float64 `json:"appliedStatTotal"`
+	ID               int     `json:"id"`
+	OnTeamID         int     `json:"onTeamId"`
+	Player           RosterPlayer `json:"player"`
+}
+
+// RosterPlayer represents a player in the roster
+type RosterPlayer struct {
+	Active             bool    `json:"active"`
+	DefaultPositionID  int     `json:"defaultPositionId"`
+	EligibleSlots     []int   `json:"eligibleSlots"`
+	FirstName         string  `json:"firstName"`
+	FullName          string  `json:"fullName"`
+	ID                int     `json:"id"`
+	Injured           bool    `json:"injured"`
+	InjuryStatus      string  `json:"injuryStatus"`
+	Jersey            string  `json:"jersey"`
+	LastName          string  `json:"lastName"`
+	ProTeamID         int     `json:"proTeamId"`
+	Stats             []RosterStat `json:"stats"`
+}
+
+// RosterStat represents player statistics
+type RosterStat struct {
+	AppliedStats map[string]float64 `json:"appliedStats"`
+}
+
+// TeamRoster represents a team's roster for a matchup period
+type TeamRoster struct {
+	AppliedStatTotal float64      `json:"appliedStatTotal"`
+	Entries          []RosterEntry `json:"entries"`
+}

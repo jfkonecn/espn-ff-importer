@@ -223,6 +223,139 @@
       </div>
       {{end}}
 
+      <!-- Keeper Eligibility & Pricing -->
+      {{if .KeeperEligibility}}
+      <div class="bg-white rounded-lg shadow-md overflow-hidden mt-8">
+        <div class="bg-fantasy-green text-white px-6 py-4">
+          <h3 class="text-xl font-semibold">
+            {{if .DraftHasStarted}}Keeper Eligibility & Pricing{{else}}Pre-Draft
+            Roster Analysis{{end}}
+          </h3>
+        </div>
+        <div class="p-6">
+          {{if .DraftHasStarted}}
+          <!-- Keeper Rules (only show if draft has started) -->
+          <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h3 class="text-xl font-semibold text-gray-800 mb-4">
+              Keeper Rules
+            </h3>
+            <div class="space-y-4 text-sm text-gray-700">
+              <div>
+                <h4 class="font-semibold text-gray-800">Duration Limit:</h4>
+                <p>Players can be kept for a maximum of 3 years.</p>
+              </div>
+              <div>
+                <h4 class="font-semibold text-gray-800">Pricing Rules:</h4>
+                <ul class="list-disc list-inside space-y-2 ml-4">
+                  <li>
+                    <strong>Draft Acquisitions:</strong> 1st year = Draft Price
+                    + $5, 2nd year = previous price + $7, 3rd year = previous
+                    price + $10
+                  </li>
+                  <li>
+                    <strong>Free Agency Acquisitions:</strong> 1st year = $15,
+                    2nd year = $22, 3rd year = $32
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-semibold text-gray-800">
+                  Drop & Re-acquire Rule:
+                </h4>
+                <p>
+                  If a player is drafted and then dropped, they retain their
+                  draft value (not FA price) when re-acquired.
+                </p>
+              </div>
+            </div>
+          </div>
+          {{else}}
+          <!-- Pre-Draft Roster Analysis -->
+          <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h3 class="text-xl font-semibold text-gray-800 mb-4">
+              Pre-Draft Keeper Analysis
+            </h3>
+            <div class="p-4 bg-blue-50 border border-blue-200 rounded-md">
+              <p class="text-sm text-blue-800">
+                <strong>Draft Status:</strong> The draft has not started yet.
+                This page shows each team's current roster with keeper
+                eligibility and pricing for each player based on the roster
+                data.
+              </p>
+            </div>
+            <div
+              class="mt-4 p-3 bg-yellow-50 border border-yellow-200 rounded-md"
+            >
+              <p class="text-sm text-yellow-800">
+                <strong>Note:</strong> Keeper pricing assumes free agency
+                acquisition ($15 for 1st year). For accurate pricing, historical
+                acquisition data (draft vs free agency) would need to be tracked
+                across seasons.
+              </p>
+            </div>
+          </div>
+          {{end}}
+
+          <!-- Team Grouped Roster Analysis -->
+          <div class="space-y-8">
+            {{range $teamName, $players := (groupByTeam .KeeperEligibility)}}
+            <div class="border border-gray-200 rounded-lg overflow-hidden">
+              <div class="bg-gray-100 px-6 py-4">
+                <h4 class="text-lg font-semibold text-gray-800">
+                  {{$teamName}}
+                </h4>
+              </div>
+
+              <div
+                class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-6"
+              >
+                {{range $players}}
+                <div class="border border-gray-200 rounded-lg p-4">
+                  <div class="flex items-center justify-between mb-2">
+                    <div class="flex items-center space-x-2">
+                      <span class="text-sm font-medium text-gray-600"
+                        >{{.Position}}</span
+                      >
+                      <span class="text-xs text-gray-500"
+                        >{{.ProTeamAbbrev}}</span
+                      >
+                    </div>
+                    <div class="text-lg font-semibold text-gray-900">
+                      {{.PlayerName}}
+                    </div>
+                  </div>
+                  <div class="text-sm text-gray-600 mb-2">
+                    Current: ${{.CurrentPrice}} → Next Year: ${{.NextYearPrice}}
+                  </div>
+                  <div class="flex items-center justify-between">
+                    <span class="text-xs text-gray-500"
+                      >{{.KeeperYears}}/3 years kept</span
+                    >
+
+                    {{if .IsEligible}}
+                    <span
+                      class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800"
+                    >
+                      ✅ Can Keep
+                    </span>
+                    {{else}}
+                    <span
+                      class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800"
+                    >
+                      ❌ Max Years
+                    </span>
+                    {{end}}
+                  </div>
+                </div>
+                {{end}}
+              </div>
+            </div>
+            {{end}}
+          </div>
+        </div>
+      </div>
+      {{end}}
+
       <footer class="text-center mt-12 text-gray-500">
         <p>Generated on {{.GeneratedAt}}</p>
       </footer>

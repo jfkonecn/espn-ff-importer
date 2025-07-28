@@ -38,7 +38,7 @@ func main() {
 	// Process each season file
 	var seasons []SeasonInfo
 	for _, file := range files {
-		seasonInfo, err := processSeasonFile(file, *output)
+		seasonInfo, err := processSeasonFile(file, *output, *dataDir)
 		if err != nil {
 			fmt.Printf("Error processing %s: %v\n", file, err)
 			continue
@@ -67,7 +67,7 @@ type SeasonInfo struct {
 }
 
 // processSeasonFile processes a single season file and generates its HTML page
-func processSeasonFile(filePath, outputDir string) (SeasonInfo, error) {
+func processSeasonFile(filePath, outputDir, dataDir string) (SeasonInfo, error) {
 	// Extract year from filename (e.g., "espn_league_2024.json" -> "2024")
 	baseName := filepath.Base(filePath)
 	year := strings.TrimSuffix(strings.TrimPrefix(baseName, "espn_league_"), ".json")
@@ -80,6 +80,12 @@ func processSeasonFile(filePath, outputDir string) (SeasonInfo, error) {
 
 	// Create website generator
 	generator := NewWebsiteGenerator(reader)
+
+	// Load historical data for keeper analysis
+	if err := generator.LoadHistoricalData(dataDir); err != nil {
+		// Log warning but don't fail - historical data is optional
+		fmt.Printf("Warning: Could not load historical data: %v\n", err)
+	}
 
 	// Generate the season page
 	outputFile := filepath.Join(outputDir, fmt.Sprintf("season-%s.html", year))
