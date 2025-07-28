@@ -181,4 +181,21 @@ type Player struct {
 // Ownership represents player ownership information
 type Ownership struct {
 	PercentOwned float64 `json:"percentOwned"`
+}
+
+// ProTeam represents an NFL team
+type ProTeam struct {
+	ID     int    `json:"id"`
+	Name   string `json:"name"`
+	Abbrev string `json:"abbrev"`
+	Location string `json:"location"`
+	ByeWeek int    `json:"byeWeek"`
+}
+
+// ProTeamsData represents the pro teams data structure
+type ProTeamsData struct {
+	Display bool `json:"display"`
+	Settings struct {
+		ProTeams []ProTeam `json:"proTeams"`
+	} `json:"settings"`
 } 

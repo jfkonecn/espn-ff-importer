@@ -8,8 +8,9 @@ import (
 
 // LeagueReader provides functionality to read and access ESPN league data
 type LeagueReader struct {
-	league  *ESPNLeague
-	players map[int]*Player
+	league    *ESPNLeague
+	players   map[int]*Player
+	proTeams  map[int]*ProTeam
 }
 
 // NewLeagueReader creates a new LeagueReader from a JSON file path
@@ -26,13 +27,23 @@ func NewLeagueReader(filePath string) (*LeagueReader, error) {
 		return nil, fmt.Errorf("failed to parse JSON: %w", err)
 	}
 
-	// Create reader and load player data
-	reader := &LeagueReader{league: &league, players: make(map[int]*Player)}
+	// Create reader and load player and pro team data
+	reader := &LeagueReader{
+		league:   &league,
+		players:  make(map[int]*Player),
+		proTeams: make(map[int]*ProTeam),
+	}
 	
 	// Load player data for the same season
 	if err := reader.loadPlayerData(); err != nil {
 		// Log the error but don't fail - player data is optional
 		fmt.Printf("Warning: Could not load player data: %v\n", err)
+	}
+
+	// Load pro team data for the same season
+	if err := reader.loadProTeamData(); err != nil {
+		// Log the error but don't fail - pro team data is optional
+		fmt.Printf("Warning: Could not load pro team data: %v\n", err)
 	}
 
 	return reader, nil
@@ -64,6 +75,39 @@ func (lr *LeagueReader) loadPlayerData() error {
 	}
 
 	return nil
+}
+
+// loadProTeamData loads pro team data from the corresponding season file
+func (lr *LeagueReader) loadProTeamData() error {
+	// Extract season from league data
+	season := lr.league.SeasonID
+	
+	// Try to find the pro team file
+	proTeamFilePath := fmt.Sprintf("data/espn_pro_teams_%d.json", season)
+	
+	// Read the pro team JSON file
+	data, err := ioutil.ReadFile(proTeamFilePath)
+	if err != nil {
+		return fmt.Errorf("failed to read pro team file %s: %w", proTeamFilePath, err)
+	}
+
+	// Parse the pro team data
+	var proTeamsData ProTeamsData
+	if err := json.Unmarshal(data, &proTeamsData); err != nil {
+		return fmt.Errorf("failed to parse pro team JSON: %w", err)
+	}
+
+	// Build pro team lookup map
+	for i := range proTeamsData.Settings.ProTeams {
+		lr.proTeams[proTeamsData.Settings.ProTeams[i].ID] = &proTeamsData.Settings.ProTeams[i]
+	}
+
+	return nil
+}
+
+// GetProTeamByID returns a pro team by their ID
+func (lr *LeagueReader) GetProTeamByID(proTeamID int) *ProTeam {
+	return lr.proTeams[proTeamID]
 }
 
 // GetPlayerByID returns a player by their ID

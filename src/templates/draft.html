@@ -166,7 +166,8 @@
                   {{.Position}}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
-                  {{.ProTeamName}}
+                  <div class="text-gray-900">{{.ProTeamName}}</div>
+                  <div class="text-xs text-gray-500">{{.ProTeamAbbrev}}</div>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
                   {{if gt .BidAmount 0}}${{.BidAmount}}{{else}}-{{end}}
@@ -213,7 +214,7 @@
                 {{.PlayerName}}
               </div>
               <div class="text-sm text-gray-600">
-                {{.Position}} • {{.ProTeamName}} • {{.OwnerName}}
+                {{.Position}} • {{.ProTeamAbbrev}} • {{.OwnerName}}
               </div>
             </div>
             {{end}}

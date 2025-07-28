@@ -228,9 +228,11 @@ func (wg *WebsiteGenerator) prepareDraftPicks() []DraftPickRow {
 		player := wg.reader.GetPlayerByID(pick.PlayerID)
 		playerName := fmt.Sprintf("Player %d", pick.PlayerID)
 		proTeamName := "Unknown Team"
+		proTeamAbbrev := "UNK"
 		if player != nil {
 			playerName = player.FullName
 			proTeamName = wg.getProTeamName(player.ProTeamID)
+			proTeamAbbrev = wg.getProTeamAbbrev(player.ProTeamID)
 		}
 
 		picks = append(picks, DraftPickRow{
@@ -240,6 +242,7 @@ func (wg *WebsiteGenerator) prepareDraftPicks() []DraftPickRow {
 			PlayerName:       playerName,
 			Position:         position,
 			ProTeamName:      proTeamName,
+			ProTeamAbbrev:    proTeamAbbrev,
 			BidAmount:        pick.BidAmount,
 			IsKeeper:         isKeeper,
 		})
@@ -284,47 +287,22 @@ func (wg *WebsiteGenerator) getPositionFromSlotID(slotID int) string {
 	return "Unknown"
 }
 
-// getProTeamName converts pro team ID to team name
+// getProTeamName converts pro team ID to team name using lookup data
 func (wg *WebsiteGenerator) getProTeamName(proTeamID int) string {
-	teams := map[int]string{
-		1:  "Atlanta Falcons",
-		2:  "Buffalo Bills",
-		3:  "Chicago Bears",
-		4:  "Cincinnati Bengals",
-		5:  "Cleveland Browns",
-		6:  "Dallas Cowboys",
-		7:  "Denver Broncos",
-		8:  "Detroit Lions",
-		9:  "Green Bay Packers",
-		10: "Tennessee Titans",
-		11: "Indianapolis Colts",
-		12: "Kansas City Chiefs",
-		13: "Las Vegas Raiders",
-		14: "Los Angeles Rams",
-		15: "Miami Dolphins",
-		16: "Minnesota Vikings",
-		17: "New England Patriots",
-		18: "New Orleans Saints",
-		19: "New York Giants",
-		20: "New York Jets",
-		21: "Philadelphia Eagles",
-		22: "Arizona Cardinals",
-		23: "Pittsburgh Steelers",
-		24: "Los Angeles Chargers",
-		25: "Seattle Seahawks",
-		26: "San Francisco 49ers",
-		27: "Tampa Bay Buccaneers",
-		28: "Washington Commanders",
-		29: "Carolina Panthers",
-		30: "Jacksonville Jaguars",
-		33: "Baltimore Ravens",
-		34: "Houston Texans",
-	}
-	
-	if team, exists := teams[proTeamID]; exists {
-		return team
+	proTeam := wg.reader.GetProTeamByID(proTeamID)
+	if proTeam != nil {
+		return fmt.Sprintf("%s %s", proTeam.Location, proTeam.Name)
 	}
 	return "Unknown Team"
+}
+
+// getProTeamAbbrev converts pro team ID to team abbreviation using lookup data
+func (wg *WebsiteGenerator) getProTeamAbbrev(proTeamID int) string {
+	proTeam := wg.reader.GetProTeamByID(proTeamID)
+	if proTeam != nil {
+		return proTeam.Abbrev
+	}
+	return "UNK"
 }
 
 // TemplateData represents the data passed to the HTML template
@@ -998,6 +976,7 @@ type DraftPickRow struct {
 	PlayerName       string
 	Position         string
 	ProTeamName      string
+	ProTeamAbbrev    string
 	BidAmount        int
 	IsKeeper         bool
 }
