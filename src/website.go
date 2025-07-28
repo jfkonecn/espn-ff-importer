@@ -14,14 +14,14 @@ var templateFS embed.FS
 
 // WebsiteGenerator handles the generation of the static website
 type WebsiteGenerator struct {
-	reader *LeagueReader
+	reader            *LeagueReader
 	historicalReaders map[int]*LeagueReader // Map of season ID to reader
 }
 
 // NewWebsiteGenerator creates a new website generator
 func NewWebsiteGenerator(reader *LeagueReader) *WebsiteGenerator {
 	return &WebsiteGenerator{
-		reader: reader,
+		reader:            reader,
 		historicalReaders: make(map[int]*LeagueReader),
 	}
 }
@@ -118,9 +118,9 @@ func (wg *WebsiteGenerator) GenerateWebsite(outputPath string) error {
 // LoadHistoricalData loads data from previous seasons for keeper analysis
 func (wg *WebsiteGenerator) LoadHistoricalData(dataDir string) error {
 	currentSeason := wg.reader.GetSeasonID()
-	
+
 	fmt.Printf("Loading historical data for season %d from directory: %s\n", currentSeason, dataDir)
-	
+
 	// Load data from the 3 previous seasons for keeper analysis
 	for year := currentSeason - 3; year < currentSeason; year++ {
 		filePath := fmt.Sprintf("%s/espn_league_%d.json", dataDir, year)
@@ -134,7 +134,7 @@ func (wg *WebsiteGenerator) LoadHistoricalData(dataDir string) error {
 		wg.historicalReaders[year] = reader
 		fmt.Printf("    Successfully loaded %s\n", filePath)
 	}
-	
+
 	fmt.Printf("Loaded %d historical seasons\n", len(wg.historicalReaders))
 	return nil
 }
@@ -217,21 +217,21 @@ func (wg *WebsiteGenerator) GenerateDraftPage(outputPath string) error {
 // prepareDraftData prepares all the data needed for the draft template
 func (wg *WebsiteGenerator) prepareDraftData() DraftData {
 	league := wg.reader.GetLeague()
-	
+
 	// Get draft picks and mark keepers
 	draftPicks := wg.prepareDraftPicks()
 	keeperPicks := wg.getKeeperPicks(draftPicks)
-	
+
 	// Calculate keeper eligibility
 	keeperEligibility := wg.calculateKeeperEligibility()
-	
+
 	// Format draft date
 	draftDate := "Unknown"
 	if league.DraftDetail.CompleteDate > 0 {
 		draftTime := time.Unix(league.DraftDetail.CompleteDate/1000, 0)
 		draftDate = draftTime.Format("January 2, 2006 at 3:04 PM")
 	}
-	
+
 	// Determine draft status and if draft has started
 	draftStatus := "Not Started"
 	draftHasStarted := false
@@ -244,17 +244,17 @@ func (wg *WebsiteGenerator) prepareDraftData() DraftData {
 	}
 
 	return DraftData{
-		LeagueName:         wg.getLeagueName(),
-		SeasonYear:         fmt.Sprintf("%d", league.SeasonID),
-		LastUpdated:        wg.getLastUpdated(),
-		GeneratedAt:        time.Now().Format("January 2, 2006 at 3:04 PM"),
-		TotalPicks:         len(draftPicks),
-		DraftDate:          draftDate,
-		DraftStatus:        draftStatus,
-		DraftHasStarted:    draftHasStarted,
-		DraftPicks:         draftPicks,
-		KeeperPicks:        keeperPicks,
-		KeeperEligibility:  keeperEligibility,
+		LeagueName:        wg.getLeagueName(),
+		SeasonYear:        fmt.Sprintf("%d", league.SeasonID),
+		LastUpdated:       wg.getLastUpdated(),
+		GeneratedAt:       time.Now().Format("January 2, 2006 at 3:04 PM"),
+		TotalPicks:        len(draftPicks),
+		DraftDate:         draftDate,
+		DraftStatus:       draftStatus,
+		DraftHasStarted:   draftHasStarted,
+		DraftPicks:        draftPicks,
+		KeeperPicks:       keeperPicks,
+		KeeperEligibility: keeperEligibility,
 	}
 }
 
@@ -265,7 +265,7 @@ func (wg *WebsiteGenerator) prepareDraftPicks() []DraftPickRow {
 
 	// Track first picks for each team to mark as keepers
 	teamFirstPicks := make(map[int]bool)
-	
+
 	// First pass: identify first picks for each team
 	for _, pick := range league.DraftDetail.Picks {
 		if !teamFirstPicks[pick.TeamID] {
@@ -305,14 +305,14 @@ func (wg *WebsiteGenerator) prepareDraftPicks() []DraftPickRow {
 
 		picks = append(picks, DraftPickRow{
 			OverallPickNumber: pick.OverallPickNumber,
-			TeamName:         team.Name,
-			OwnerName:        ownerName,
-			PlayerName:       playerName,
-			Position:         position,
-			ProTeamName:      proTeamName,
-			ProTeamAbbrev:    proTeamAbbrev,
-			BidAmount:        pick.BidAmount,
-			IsKeeper:         isKeeper,
+			TeamName:          team.Name,
+			OwnerName:         ownerName,
+			PlayerName:        playerName,
+			Position:          position,
+			ProTeamName:       proTeamName,
+			ProTeamAbbrev:     proTeamAbbrev,
+			BidAmount:         pick.BidAmount,
+			IsKeeper:          isKeeper,
 		})
 	}
 
@@ -348,7 +348,7 @@ func (wg *WebsiteGenerator) getPositionFromSlotID(slotID int) string {
 		21: "IR",
 		23: "FLEX",
 	}
-	
+
 	if pos, exists := positions[slotID]; exists {
 		return pos
 	}
@@ -378,14 +378,14 @@ func (wg *WebsiteGenerator) calculateKeeperEligibility() []KeeperEligibility {
 	league := wg.reader.GetLeague()
 	currentSeason := league.SeasonID
 	draftHasStarted := league.DraftDetail.Drafted || league.DraftDetail.InProgress
-	
+
 	var eligibilities []KeeperEligibility
-	
+
 	if draftHasStarted {
 		// Draft has started - show current draft picks and keeper eligibility
 		teamPlayers := make(map[int][]DraftPickRow)
 		draftPicks := wg.prepareDraftPicks()
-		
+
 		// Group players by team
 		for _, pick := range draftPicks {
 			teamID := wg.getTeamIDByName(pick.TeamName)
@@ -393,20 +393,20 @@ func (wg *WebsiteGenerator) calculateKeeperEligibility() []KeeperEligibility {
 				teamPlayers[teamID] = append(teamPlayers[teamID], pick)
 			}
 		}
-		
+
 		// Calculate keeper eligibility for each team
 		for teamID, players := range teamPlayers {
 			team := wg.reader.GetTeamByID(teamID)
 			if team == nil {
 				continue
 			}
-			
+
 			owner := wg.reader.GetMemberByID(team.PrimaryOwner)
 			ownerName := "Unknown"
 			if owner != nil {
 				ownerName = fmt.Sprintf("%s %s", owner.FirstName, owner.LastName)
 			}
-			
+
 			// For each player on the team, calculate keeper eligibility
 			for _, player := range players {
 				eligibility := wg.calculatePlayerKeeperEligibility(player, currentSeason, ownerName)
@@ -417,7 +417,7 @@ func (wg *WebsiteGenerator) calculateKeeperEligibility() []KeeperEligibility {
 		// Draft hasn't started - show ending rosters from previous season
 		eligibilities = wg.getPreDraftKeeperEligibility()
 	}
-	
+
 	return eligibilities
 }
 
@@ -425,20 +425,20 @@ func (wg *WebsiteGenerator) calculateKeeperEligibility() []KeeperEligibility {
 func (wg *WebsiteGenerator) calculatePlayerKeeperEligibility(player DraftPickRow, currentSeason int, ownerName string) KeeperEligibility {
 	// This is a simplified implementation
 	// In a full system, you'd need to load historical data from previous seasons
-	
+
 	// For now, assume this is the first year the player is on the roster
 	// and they were acquired via draft
 	acquisitionType := "draft"
 	currentPrice := player.BidAmount
 	keeperYears := 0
 	isEligible := true
-	
+
 	// Calculate next year's price based on keeper rules
 	nextYearPrice := wg.calculateNextYearKeeperPrice(currentPrice, acquisitionType, keeperYears)
-	
+
 	// Determine if this player is currently a keeper (first pick of the team)
 	isKeeper := player.IsKeeper
-	
+
 	return KeeperEligibility{
 		PlayerID:        0, // Would need to track actual player ID
 		PlayerName:      player.PlayerName,
@@ -461,7 +461,7 @@ func (wg *WebsiteGenerator) calculateNextYearKeeperPrice(currentPrice int, acqui
 	if keeperYears >= 3 {
 		return 0 // Not eligible for keeping after 3 years
 	}
-	
+
 	if acquisitionType == "draft" {
 		switch keeperYears {
 		case 0: // First year being kept
@@ -481,7 +481,7 @@ func (wg *WebsiteGenerator) calculateNextYearKeeperPrice(currentPrice int, acqui
 			return 32
 		}
 	}
-	
+
 	return 0
 }
 
@@ -501,18 +501,18 @@ func (wg *WebsiteGenerator) getPreDraftKeeperEligibility() []KeeperEligibility {
 	var eligibilities []KeeperEligibility
 	teams := wg.reader.GetTeams()
 	currentSeason := wg.reader.GetSeasonID()
-	
+
 	// Get the latest roster data from the previous season
 	latestRosterSeason := currentSeason - 1
 	latestRosterReader, hasLatestRoster := wg.historicalReaders[latestRosterSeason]
-	
+
 	for _, team := range teams {
 		owner := wg.reader.GetMemberByID(team.PrimaryOwner)
 		ownerName := "Unknown"
 		if owner != nil {
 			ownerName = fmt.Sprintf("%s %s", owner.FirstName, owner.LastName)
 		}
-		
+
 		// Try to get roster data from the latest available season
 		var rosterEntries []RosterEntry
 		if hasLatestRoster {
@@ -534,33 +534,33 @@ func (wg *WebsiteGenerator) getPreDraftKeeperEligibility() []KeeperEligibility {
 		} else {
 			fmt.Printf("No historical data available for season %d\n", latestRosterSeason)
 		}
-		
+
 		if len(rosterEntries) > 0 {
 			// Process each player on the roster
 			for _, entry := range rosterEntries {
 				player := entry.PlayerPoolEntry.Player
-				
+
 				// Skip players without valid data
 				if player.ID == 0 || player.FullName == "" {
 					continue
 				}
-				
+
 				// Get position name
 				position := wg.getPositionFromSlotID(entry.LineupSlotID)
-				
+
 				// Get pro team information
 				proTeamName := wg.getProTeamName(player.ProTeamID)
 				proTeamAbbrev := wg.getProTeamAbbrev(player.ProTeamID)
-				
+
 				// Analyze keeper history across the 3 previous seasons
 				keeperHistory := wg.analyzeKeeperHistory(player.ID, team.Name, currentSeason)
-				
+
 				// Calculate next year's price based on historical data
 				nextYearPrice := wg.calculateNextYearKeeperPrice(keeperHistory.CurrentPrice, keeperHistory.AcquisitionType, keeperHistory.KeeperYears)
-				
+
 				// Determine eligibility (max 3 years)
 				isEligible := keeperHistory.KeeperYears < 3
-				
+
 				eligibility := KeeperEligibility{
 					PlayerID:        player.ID,
 					PlayerName:      player.FullName,
@@ -576,7 +576,7 @@ func (wg *WebsiteGenerator) getPreDraftKeeperEligibility() []KeeperEligibility {
 					NextYearPrice:   nextYearPrice,
 					IsKeeper:        false, // Not a keeper yet, just showing eligibility
 				}
-				
+
 				eligibilities = append(eligibilities, eligibility)
 			}
 		} else {
@@ -596,11 +596,11 @@ func (wg *WebsiteGenerator) getPreDraftKeeperEligibility() []KeeperEligibility {
 				NextYearPrice:   0,
 				IsKeeper:        false,
 			}
-			
+
 			eligibilities = append(eligibilities, eligibility)
 		}
 	}
-	
+
 	return eligibilities
 }
 
@@ -609,7 +609,6 @@ func (wg *WebsiteGenerator) analyzeKeeperHistory(playerID int, teamName string, 
 	var keeperYears int
 	var acquisitionType string
 	var currentPrice int
-	var foundInitialAcquisition bool
 	var previousYearDraftPrice int
 
 	// Only search the previous year for the draft value
@@ -626,7 +625,7 @@ func (wg *WebsiteGenerator) analyzeKeeperHistory(playerID int, teamName string, 
 	}
 
 	// Track the player's history backwards from current season
-	for year := currentSeason - 1; year >= currentSeason - 3; year-- {
+	for year := currentSeason - 1; year >= currentSeason-3; year-- {
 		reader, exists := wg.historicalReaders[year]
 		if !exists {
 			continue
@@ -634,6 +633,8 @@ func (wg *WebsiteGenerator) analyzeKeeperHistory(playerID int, teamName string, 
 
 		// Check if this player was kept in this season's draft (first pick of each team)
 		league := reader.GetLeague()
+
+		// Find the team ID for this team name
 		var teamID int
 		teams := reader.GetTeams()
 		for _, team := range teams {
@@ -642,46 +643,35 @@ func (wg *WebsiteGenerator) analyzeKeeperHistory(playerID int, teamName string, 
 				break
 			}
 		}
-		if teamID == 0 {
-			continue
-		}
-		// Find the first pick for this team
-		var firstPickPlayerID int
+
+		// Check if this player was the first pick for this team in this year's draft
 		for _, pick := range league.DraftDetail.Picks {
-			if pick.TeamID == teamID {
-				firstPickPlayerID = pick.PlayerID
+			if pick.TeamID == teamID && pick.PlayerID == playerID {
+				// Check if this was the first pick for this team
+				isFirstPick := true
+				for _, otherPick := range league.DraftDetail.Picks {
+					if otherPick.TeamID == teamID && otherPick.RoundID < pick.RoundID {
+						isFirstPick = false
+						break
+					}
+				}
+
+				if isFirstPick {
+					// This player was kept in this season
+					keeperYears++
+				}
 				break
 			}
 		}
-		if firstPickPlayerID == playerID {
-			keeperYears++
-		}
-		// Mark initial acquisition if on roster in this year
-		if !foundInitialAcquisition {
-			for _, team := range teams {
-				if team.Name == teamName && team.Roster != nil {
-					for _, entry := range team.Roster.Entries {
-						if entry.PlayerPoolEntry.Player.ID == playerID {
-							foundInitialAcquisition = true
-							break
-						}
-					}
-				}
-			}
-		}
 	}
 
-	if foundInitialAcquisition {
-		keeperYears++ // +1 for initial acquisition
-	}
-
-	// Determine acquisition type and price
+	// Determine acquisition type and price based on previous year's draft
 	if previousYearDraftPrice > 0 {
 		acquisitionType = "draft"
 		currentPrice = previousYearDraftPrice
 	} else {
 		acquisitionType = "free_agency"
-		currentPrice = 15
+		currentPrice = 0
 	}
 
 	return KeeperEligibility{
@@ -707,14 +697,14 @@ func (wg *WebsiteGenerator) getPlayerDraftPrice(playerID int, teamID int, season
 	if !exists {
 		return 0
 	}
-	
+
 	league := reader.GetLeague()
 	for _, pick := range league.DraftDetail.Picks {
 		if pick.PlayerID == playerID && pick.TeamID == teamID {
 			return pick.BidAmount
 		}
 	}
-	
+
 	return 0
 }
 
@@ -1379,32 +1369,30 @@ func (wg *WebsiteGenerator) prepareTeamPayoutTotals(weeklyHighScorers []WeeklyHi
 	return result
 }
 
-
-
 // DraftPickRow represents a draft pick for the template
 type DraftPickRow struct {
 	OverallPickNumber int
-	TeamName         string
-	OwnerName        string
-	PlayerName       string
-	Position         string
-	ProTeamName      string
-	ProTeamAbbrev    string
-	BidAmount        int
-	IsKeeper         bool
+	TeamName          string
+	OwnerName         string
+	PlayerName        string
+	Position          string
+	ProTeamName       string
+	ProTeamAbbrev     string
+	BidAmount         int
+	IsKeeper          bool
 }
 
 // DraftData represents the data passed to the draft template
 type DraftData struct {
-	LeagueName         string
-	SeasonYear         string
-	LastUpdated        string
-	GeneratedAt        string
-	TotalPicks         int
-	DraftDate          string
-	DraftStatus        string
-	DraftHasStarted    bool
-	DraftPicks         []DraftPickRow
-	KeeperPicks        []DraftPickRow
-	KeeperEligibility  []KeeperEligibility
+	LeagueName        string
+	SeasonYear        string
+	LastUpdated       string
+	GeneratedAt       string
+	TotalPicks        int
+	DraftDate         string
+	DraftStatus       string
+	DraftHasStarted   bool
+	DraftPicks        []DraftPickRow
+	KeeperPicks       []DraftPickRow
+	KeeperEligibility []KeeperEligibility
 }
