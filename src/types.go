@@ -153,7 +153,7 @@ type Record struct {
 	Overall  GameRecord `json:"overall"`
 }
 
-// GameRecord represents wins, losses, and ties
+// GameRecord represents individual game statistics
 type GameRecord struct {
 	GamesBack float64 `json:"gamesBack"`
 	Losses    int     `json:"losses"`
@@ -162,4 +162,23 @@ type GameRecord struct {
 	PointsFor float64 `json:"pointsFor"`
 	Ties      int     `json:"ties"`
 	Wins      int     `json:"wins"`
+}
+
+// Player represents a fantasy football player
+type Player struct {
+	ID                 int     `json:"id"`
+	FirstName          string  `json:"firstName"`
+	LastName           string  `json:"lastName"`
+	FullName           string  `json:"fullName"`
+	DefaultPositionID  int     `json:"defaultPositionId"`
+	ProTeamID          int     `json:"proTeamId"`
+	UniverseID         int     `json:"universeId"`
+	Droppable          bool    `json:"droppable"`
+	EligibleSlots      []int   `json:"eligibleSlots"`
+	Ownership          Ownership `json:"ownership"`
+}
+
+// Ownership represents player ownership information
+type Ownership struct {
+	PercentOwned float64 `json:"percentOwned"`
 } 

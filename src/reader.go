@@ -8,7 +8,8 @@ import (
 
 // LeagueReader provides functionality to read and access ESPN league data
 type LeagueReader struct {
-	league *ESPNLeague
+	league  *ESPNLeague
+	players map[int]*Player
 }
 
 // NewLeagueReader creates a new LeagueReader from a JSON file path
@@ -25,7 +26,49 @@ func NewLeagueReader(filePath string) (*LeagueReader, error) {
 		return nil, fmt.Errorf("failed to parse JSON: %w", err)
 	}
 
-	return &LeagueReader{league: &league}, nil
+	// Create reader and load player data
+	reader := &LeagueReader{league: &league, players: make(map[int]*Player)}
+	
+	// Load player data for the same season
+	if err := reader.loadPlayerData(); err != nil {
+		// Log the error but don't fail - player data is optional
+		fmt.Printf("Warning: Could not load player data: %v\n", err)
+	}
+
+	return reader, nil
+}
+
+// loadPlayerData loads player data from the corresponding season file
+func (lr *LeagueReader) loadPlayerData() error {
+	// Extract season from league data
+	season := lr.league.SeasonID
+	
+	// Try to find the player file
+	playerFilePath := fmt.Sprintf("data/espn_players_%d.json", season)
+	
+	// Read the player JSON file
+	data, err := ioutil.ReadFile(playerFilePath)
+	if err != nil {
+		return fmt.Errorf("failed to read player file %s: %w", playerFilePath, err)
+	}
+
+	// Parse the player data
+	var players []Player
+	if err := json.Unmarshal(data, &players); err != nil {
+		return fmt.Errorf("failed to parse player JSON: %w", err)
+	}
+
+	// Build player lookup map
+	for i := range players {
+		lr.players[players[i].ID] = &players[i]
+	}
+
+	return nil
+}
+
+// GetPlayerByID returns a player by their ID
+func (lr *LeagueReader) GetPlayerByID(playerID int) *Player {
+	return lr.players[playerID]
 }
 
 // GetLeague returns the full league data
