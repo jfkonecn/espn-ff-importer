@@ -296,10 +296,32 @@
           </div>
           {{end}}
 
+          <!-- Team Filter Dropdown -->
+          <div class="mb-6">
+            <label
+              for="teamFilter"
+              class="block text-sm font-medium text-gray-700 mb-2"
+            >
+              Filter by Team:
+            </label>
+            <select
+              id="teamFilter"
+              class="block w-full max-w-xs px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            >
+              <option value="all">All Teams</option>
+              {{range $teamName, $players := (groupByTeam .KeeperEligibility)}}
+              <option value="{{$teamName}}">{{$teamName}}</option>
+              {{end}}
+            </select>
+          </div>
+
           <!-- Team Grouped Roster Analysis -->
-          <div class="space-y-8">
+          <div class="space-y-8" id="keeperAnalysis">
             {{range $teamName, $players := (groupByTeam .KeeperEligibility)}}
-            <div class="border border-gray-200 rounded-lg overflow-hidden">
+            <div
+              class="border border-gray-200 rounded-lg overflow-hidden team-section"
+              data-team="{{$teamName}}"
+            >
               <div class="bg-gray-100 px-6 py-4">
                 <h4 class="text-lg font-semibold text-gray-800">
                   {{$teamName}}
@@ -360,5 +382,26 @@
         <p>Generated on {{.GeneratedAt}}</p>
       </footer>
     </div>
+
+    <script>
+      // Team filter functionality
+      document.addEventListener("DOMContentLoaded", function () {
+        const teamFilter = document.getElementById("teamFilter");
+        const teamSections = document.querySelectorAll(".team-section");
+
+        teamFilter.addEventListener("change", function () {
+          const selectedTeam = this.value;
+
+          teamSections.forEach(function (section) {
+            const teamName = section.getAttribute("data-team");
+            if (selectedTeam === "all" || teamName === selectedTeam) {
+              section.style.display = "block";
+            } else {
+              section.style.display = "none";
+            }
+          });
+        });
+      });
+    </script>
   </body>
 </html>

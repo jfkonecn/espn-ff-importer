@@ -72,7 +72,7 @@
         <h2 class="text-2xl font-semibold text-gray-700 mb-2">
           2024 Draft
         </h2>
-        <p class="text-sm text-gray-500">Last updated: July 28, 2025 at 5:33 PM</p>
+        <p class="text-sm text-gray-500">Last updated: July 28, 2025 at 5:38 PM</p>
       </header>
 
       
@@ -6124,9 +6124,49 @@
           
 
           
-          <div class="space-y-8">
+          <div class="mb-6">
+            <label
+              for="teamFilter"
+              class="block text-sm font-medium text-gray-700 mb-2"
+            >
+              Filter by Team:
+            </label>
+            <select
+              id="teamFilter"
+              class="block w-full max-w-xs px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            >
+              <option value="all">All Teams</option>
+              
+              <option value="#1 GangGreen">#1 GangGreen</option>
+              
+              <option value="Advanced Metrics">Advanced Metrics</option>
+              
+              <option value="America&#39;s Team">America&#39;s Team</option>
+              
+              <option value="Boeing&#39;s Hitmen ">Boeing&#39;s Hitmen </option>
+              
+              <option value="Caleb&#39;s Cats">Caleb&#39;s Cats</option>
+              
+              <option value="Embrace the Darkness">Embrace the Darkness</option>
+              
+              <option value="FDA Control Group">FDA Control Group</option>
+              
+              <option value="It&#39;s MillerTime">It&#39;s MillerTime</option>
+              
+              <option value="Jensen Huang and Sons">Jensen Huang and Sons</option>
+              
+              <option value="Latin Fury">Latin Fury</option>
+              
+            </select>
+          </div>
+
+          
+          <div class="space-y-8" id="keeperAnalysis">
             
-            <div class="border border-gray-200 rounded-lg overflow-hidden">
+            <div
+              class="border border-gray-200 rounded-lg overflow-hidden team-section"
+              data-team="#1 GangGreen"
+            >
               <div class="bg-gray-100 px-6 py-4">
                 <h4 class="text-lg font-semibold text-gray-800">
                   #1 GangGreen
@@ -6652,7 +6692,10 @@
               </div>
             </div>
             
-            <div class="border border-gray-200 rounded-lg overflow-hidden">
+            <div
+              class="border border-gray-200 rounded-lg overflow-hidden team-section"
+              data-team="Advanced Metrics"
+            >
               <div class="bg-gray-100 px-6 py-4">
                 <h4 class="text-lg font-semibold text-gray-800">
                   Advanced Metrics
@@ -7178,7 +7221,10 @@
               </div>
             </div>
             
-            <div class="border border-gray-200 rounded-lg overflow-hidden">
+            <div
+              class="border border-gray-200 rounded-lg overflow-hidden team-section"
+              data-team="America&#39;s Team"
+            >
               <div class="bg-gray-100 px-6 py-4">
                 <h4 class="text-lg font-semibold text-gray-800">
                   America&#39;s Team
@@ -7704,7 +7750,10 @@
               </div>
             </div>
             
-            <div class="border border-gray-200 rounded-lg overflow-hidden">
+            <div
+              class="border border-gray-200 rounded-lg overflow-hidden team-section"
+              data-team="Boeing&#39;s Hitmen "
+            >
               <div class="bg-gray-100 px-6 py-4">
                 <h4 class="text-lg font-semibold text-gray-800">
                   Boeing&#39;s Hitmen 
@@ -8230,7 +8279,10 @@
               </div>
             </div>
             
-            <div class="border border-gray-200 rounded-lg overflow-hidden">
+            <div
+              class="border border-gray-200 rounded-lg overflow-hidden team-section"
+              data-team="Caleb&#39;s Cats"
+            >
               <div class="bg-gray-100 px-6 py-4">
                 <h4 class="text-lg font-semibold text-gray-800">
                   Caleb&#39;s Cats
@@ -8756,7 +8808,10 @@
               </div>
             </div>
             
-            <div class="border border-gray-200 rounded-lg overflow-hidden">
+            <div
+              class="border border-gray-200 rounded-lg overflow-hidden team-section"
+              data-team="Embrace the Darkness"
+            >
               <div class="bg-gray-100 px-6 py-4">
                 <h4 class="text-lg font-semibold text-gray-800">
                   Embrace the Darkness
@@ -9282,7 +9337,10 @@
               </div>
             </div>
             
-            <div class="border border-gray-200 rounded-lg overflow-hidden">
+            <div
+              class="border border-gray-200 rounded-lg overflow-hidden team-section"
+              data-team="FDA Control Group"
+            >
               <div class="bg-gray-100 px-6 py-4">
                 <h4 class="text-lg font-semibold text-gray-800">
                   FDA Control Group
@@ -9808,7 +9866,10 @@
               </div>
             </div>
             
-            <div class="border border-gray-200 rounded-lg overflow-hidden">
+            <div
+              class="border border-gray-200 rounded-lg overflow-hidden team-section"
+              data-team="It&#39;s MillerTime"
+            >
               <div class="bg-gray-100 px-6 py-4">
                 <h4 class="text-lg font-semibold text-gray-800">
                   It&#39;s MillerTime
@@ -10334,7 +10395,10 @@
               </div>
             </div>
             
-            <div class="border border-gray-200 rounded-lg overflow-hidden">
+            <div
+              class="border border-gray-200 rounded-lg overflow-hidden team-section"
+              data-team="Jensen Huang and Sons"
+            >
               <div class="bg-gray-100 px-6 py-4">
                 <h4 class="text-lg font-semibold text-gray-800">
                   Jensen Huang and Sons
@@ -10860,7 +10924,10 @@
               </div>
             </div>
             
-            <div class="border border-gray-200 rounded-lg overflow-hidden">
+            <div
+              class="border border-gray-200 rounded-lg overflow-hidden team-section"
+              data-team="Latin Fury"
+            >
               <div class="bg-gray-100 px-6 py-4">
                 <h4 class="text-lg font-semibold text-gray-800">
                   Latin Fury
@@ -11392,8 +11459,29 @@
       
 
       <footer class="text-center mt-12 text-gray-500">
-        <p>Generated on July 28, 2025 at 5:33 PM</p>
+        <p>Generated on July 28, 2025 at 5:38 PM</p>
       </footer>
     </div>
+
+    <script>
+      
+      document.addEventListener("DOMContentLoaded", function () {
+        const teamFilter = document.getElementById("teamFilter");
+        const teamSections = document.querySelectorAll(".team-section");
+
+        teamFilter.addEventListener("change", function () {
+          const selectedTeam = this.value;
+
+          teamSections.forEach(function (section) {
+            const teamName = section.getAttribute("data-team");
+            if (selectedTeam === "all" || teamName === selectedTeam) {
+              section.style.display = "block";
+            } else {
+              section.style.display = "none";
+            }
+          });
+        });
+      });
+    </script>
   </body>
 </html>
