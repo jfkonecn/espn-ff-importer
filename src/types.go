@@ -17,8 +17,28 @@ type ESPNLeague struct {
 
 // DraftDetail contains draft information
 type DraftDetail struct {
-	Drafted    bool `json:"drafted"`
-	InProgress bool `json:"inProgress"`
+	CompleteDate int64      `json:"completeDate"`
+	Drafted      bool       `json:"drafted"`
+	InProgress   bool       `json:"inProgress"`
+	Picks        []DraftPick `json:"picks"`
+}
+
+// DraftPick represents a single draft pick
+type DraftPick struct {
+	AutoDraftTypeId     int     `json:"autoDraftTypeId"`
+	BidAmount           int     `json:"bidAmount"`
+	ID                  int     `json:"id"`
+	Keeper              bool    `json:"keeper"`
+	LineupSlotId        int     `json:"lineupSlotId"`
+	MemberID            string  `json:"memberId"`
+	NominatingTeamID    int     `json:"nominatingTeamId"`
+	OverallPickNumber   int     `json:"overallPickNumber"`
+	PlayerID            int     `json:"playerId"`
+	ReservedForKeeper   bool    `json:"reservedForKeeper"`
+	RoundID             int     `json:"roundId"`
+	RoundPickNumber     int     `json:"roundPickNumber"`
+	TeamID              int     `json:"teamId"`
+	TradeLocked         bool    `json:"tradeLocked"`
 }
 
 // Member represents a league member

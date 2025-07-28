@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{.LeagueName}} - {{.SeasonYear}} Draft</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              "fantasy-blue": "#1e40af",
+              "fantasy-green": "#059669",
+              "fantasy-gold": "#d97706",
+              "fantasy-red": "#dc2626",
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-gray-50 min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+      <!-- Navigation -->
+      <nav class="mb-6">
+        <a
+          href="index.html"
+          class="inline-flex items-center px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 transition-colors duration-200 mr-4"
+        >
+          <svg
+            class="w-4 h-4 mr-2"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M10 19l-7-7m0 0l7-7m-7 7h18"
+            ></path>
+          </svg>
+          Back to Seasons
+        </a>
+        <a
+          href="season-{{.SeasonYear}}.html"
+          class="inline-flex items-center px-4 py-2 bg-fantasy-blue text-white rounded-md hover:bg-blue-700 transition-colors duration-200"
+        >
+          <svg
+            class="w-4 h-4 mr-2"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+            ></path>
+          </svg>
+          Season Overview
+        </a>
+      </nav>
+
+      <!-- Header -->
+      <header class="text-center mb-8">
+        <h1 class="text-4xl font-bold text-fantasy-blue mb-2">
+          {{.LeagueName}}
+        </h1>
+        <h2 class="text-2xl font-semibold text-gray-700 mb-2">
+          {{.SeasonYear}} Draft
+        </h2>
+        <p class="text-sm text-gray-500">Last updated: {{.LastUpdated}}</p>
+      </header>
+
+      <!-- Draft Summary -->
+      <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+        <h3 class="text-xl font-semibold text-gray-800 mb-4">Draft Summary</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+          <div>
+            <span class="font-medium text-gray-600">Total Picks:</span>
+            <span class="ml-2 text-gray-800">{{.TotalPicks}}</span>
+          </div>
+          <div>
+            <span class="font-medium text-gray-600">Draft Date:</span>
+            <span class="ml-2 text-gray-800">{{.DraftDate}}</span>
+          </div>
+          <div>
+            <span class="font-medium text-gray-600">Status:</span>
+            <span class="ml-2 text-gray-800">{{.DraftStatus}}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Draft Picks -->
+      <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <div class="bg-fantasy-blue text-white px-6 py-4">
+          <h3 class="text-xl font-semibold">Draft Picks</h3>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full">
+            <thead class="bg-gray-50">
+              <tr>
+                <th
+                  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Pick
+                </th>
+                <th
+                  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Team
+                </th>
+                <th
+                  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Owner
+                </th>
+                <th
+                  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Player
+                </th>
+                <th
+                  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Position
+                </th>
+                <th
+                  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Bid Amount
+                </th>
+                <th
+                  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Status
+                </th>
+              </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200">
+              {{range .DraftPicks}}
+              <tr class="hover:bg-gray-50 {{if .IsKeeper}}bg-yellow-50{{end}}">
+                <td
+                  class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"
+                >
+                  {{.OverallPickNumber}}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                  {{.TeamName}}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                  {{.OwnerName}}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                  {{.PlayerName}}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                  {{.Position}}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                  {{if gt .BidAmount 0}}${{.BidAmount}}{{else}}-{{end}}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  {{if .IsKeeper}}
+                  <span
+                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-fantasy-gold text-white"
+                  >
+                    🏆 Keeper
+                  </span>
+                  {{else}}
+                  <span
+                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800"
+                  >
+                    Draft
+                  </span>
+                  {{end}}
+                </td>
+              </tr>
+              {{end}}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Keeper Summary -->
+      {{if .KeeperPicks}}
+      <div class="bg-white rounded-lg shadow-md overflow-hidden mt-8">
+        <div class="bg-fantasy-gold text-white px-6 py-4">
+          <h3 class="text-xl font-semibold">Keeper Picks</h3>
+        </div>
+        <div class="p-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {{range .KeeperPicks}}
+            <div class="border border-gray-200 rounded-lg p-4">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-sm font-medium text-gray-600"
+                  >Pick #{{.OverallPickNumber}}</span
+                >
+                <span class="text-xs text-gray-500">{{.TeamName}}</span>
+              </div>
+              <div class="text-lg font-semibold text-gray-900">
+                {{.PlayerName}}
+              </div>
+              <div class="text-sm text-gray-600">
+                {{.Position}} • {{.OwnerName}}
+              </div>
+            </div>
+            {{end}}
+          </div>
+        </div>
+      </div>
+      {{end}}
+
+      <footer class="text-center mt-12 text-gray-500">
+        <p>Generated on {{.GeneratedAt}}</p>
+      </footer>
+    </div>
+  </body>
+</html>

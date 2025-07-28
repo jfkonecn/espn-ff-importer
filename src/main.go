@@ -63,6 +63,7 @@ type SeasonInfo struct {
 	TeamCount   int
 	LastUpdated string
 	FileName    string
+	HasDraft    bool
 }
 
 // processSeasonFile processes a single season file and generates its HTML page
@@ -70,7 +71,7 @@ func processSeasonFile(filePath, outputDir string) (SeasonInfo, error) {
 	// Extract year from filename (e.g., "espn_league_2024.json" -> "2024")
 	baseName := filepath.Base(filePath)
 	year := strings.TrimSuffix(strings.TrimPrefix(baseName, "espn_league_"), ".json")
-
+	
 	// Create league reader
 	reader, err := NewLeagueReader(filePath)
 	if err != nil {
@@ -86,15 +87,26 @@ func processSeasonFile(filePath, outputDir string) (SeasonInfo, error) {
 		return SeasonInfo{}, fmt.Errorf("failed to generate season page: %w", err)
 	}
 
+	// Check if draft data exists and generate draft page
+	league := reader.GetLeague()
+	hasDraft := len(league.DraftDetail.Picks) > 0
+	if hasDraft {
+		draftFile := filepath.Join(outputDir, fmt.Sprintf("draft-%s.html", year))
+		if err := generator.GenerateDraftPage(draftFile); err != nil {
+			return SeasonInfo{}, fmt.Errorf("failed to generate draft page: %w", err)
+		}
+	}
+
 	// Get season information for the index page
 	teams := reader.GetTeams()
-
+	
 	return SeasonInfo{
 		Year:        year,
 		LeagueName:  generator.getLeagueName(),
 		TeamCount:   len(teams),
 		LastUpdated: generator.getLastUpdated(),
 		FileName:    fmt.Sprintf("season-%s.html", year),
+		HasDraft:    hasDraft,
 	}, nil
 }
 

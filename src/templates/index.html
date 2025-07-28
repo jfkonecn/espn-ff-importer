@@ -45,12 +45,22 @@
                 <p><strong>Teams:</strong> {{.TeamCount}}</p>
                 <p><strong>Last Updated:</strong> {{.LastUpdated}}</p>
               </div>
-              <a
-                href="{{.FileName}}"
-                class="inline-block w-full bg-fantasy-green text-white text-center py-2 px-4 rounded-md hover:bg-green-700 transition-colors duration-200"
-              >
-                View Season
-              </a>
+              <div class="space-y-2">
+                <a
+                  href="{{.FileName}}"
+                  class="inline-block w-full bg-fantasy-green text-white text-center py-2 px-4 rounded-md hover:bg-green-700 transition-colors duration-200"
+                >
+                  View Season
+                </a>
+                {{if .HasDraft}}
+                <a
+                  href="draft-{{.Year}}.html"
+                  class="inline-block w-full bg-fantasy-gold text-white text-center py-2 px-4 rounded-md hover:bg-yellow-700 transition-colors duration-200"
+                >
+                  View Draft
+                </a>
+                {{end}}
+              </div>
             </div>
           </div>
           {{end}}

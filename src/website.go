@@ -127,11 +127,159 @@ func (wg *WebsiteGenerator) getLastUpdated() string {
 	return time.Now().Format("January 2, 2006 at 3:04 PM")
 }
 
+// GenerateDraftPage creates a draft-specific HTML page
+func (wg *WebsiteGenerator) GenerateDraftPage(outputPath string) error {
+	// Parse all template files
+	tmpl, err := template.ParseFS(templateFS, "templates/*.html")
+	if err != nil {
+		return fmt.Errorf("failed to parse templates: %w", err)
+	}
+
+	// Prepare the template data
+	data := wg.prepareDraftData()
+
+	// Create the output file
+	file, err := os.Create(outputPath)
+	if err != nil {
+		return fmt.Errorf("failed to create output file: %w", err)
+	}
+	defer file.Close()
+
+	// Execute the template
+	err = tmpl.ExecuteTemplate(file, "draft.html", data)
+	if err != nil {
+		return fmt.Errorf("failed to execute draft template: %w", err)
+	}
+
+	return nil
+}
+
+// prepareDraftData prepares all the data needed for the draft template
+func (wg *WebsiteGenerator) prepareDraftData() DraftData {
+	league := wg.reader.GetLeague()
+	
+	// Get draft picks and mark keepers
+	draftPicks := wg.prepareDraftPicks()
+	keeperPicks := wg.getKeeperPicks(draftPicks)
+	
+	// Format draft date
+	draftDate := "Unknown"
+	if league.DraftDetail.CompleteDate > 0 {
+		draftTime := time.Unix(league.DraftDetail.CompleteDate/1000, 0)
+		draftDate = draftTime.Format("January 2, 2006 at 3:04 PM")
+	}
+	
+	// Determine draft status
+	draftStatus := "Not Started"
+	if league.DraftDetail.InProgress {
+		draftStatus = "In Progress"
+	} else if league.DraftDetail.Drafted {
+		draftStatus = "Completed"
+	}
+
+	return DraftData{
+		LeagueName:    wg.getLeagueName(),
+		SeasonYear:    fmt.Sprintf("%d", league.SeasonID),
+		LastUpdated:   wg.getLastUpdated(),
+		GeneratedAt:   time.Now().Format("January 2, 2006 at 3:04 PM"),
+		TotalPicks:    len(draftPicks),
+		DraftDate:     draftDate,
+		DraftStatus:   draftStatus,
+		DraftPicks:    draftPicks,
+		KeeperPicks:   keeperPicks,
+	}
+}
+
+// prepareDraftPicks converts draft picks to template rows
+func (wg *WebsiteGenerator) prepareDraftPicks() []DraftPickRow {
+	league := wg.reader.GetLeague()
+	var picks []DraftPickRow
+
+	// Track first picks for each team to mark as keepers
+	teamFirstPicks := make(map[int]bool)
+	
+	// First pass: identify first picks for each team
+	for _, pick := range league.DraftDetail.Picks {
+		if !teamFirstPicks[pick.TeamID] {
+			teamFirstPicks[pick.TeamID] = true
+		}
+	}
+
+	// Second pass: create pick rows
+	for _, pick := range league.DraftDetail.Picks {
+		team := wg.reader.GetTeamByID(pick.TeamID)
+		if team == nil {
+			continue
+		}
+
+		owner := wg.reader.GetMemberByID(team.PrimaryOwner)
+		ownerName := "Unknown"
+		if owner != nil {
+			ownerName = fmt.Sprintf("%s %s", owner.FirstName, owner.LastName)
+		}
+
+		// Determine if this is the team's first pick (keeper)
+		isKeeper := teamFirstPicks[pick.TeamID] && pick.OverallPickNumber == pick.RoundPickNumber
+
+		// Get position name from lineup slot ID
+		position := wg.getPositionFromSlotID(pick.LineupSlotId)
+
+		picks = append(picks, DraftPickRow{
+			OverallPickNumber: pick.OverallPickNumber,
+			TeamName:         team.Name,
+			OwnerName:        ownerName,
+			PlayerName:       fmt.Sprintf("Player %d", pick.PlayerID), // You might want to add player name lookup
+			Position:         position,
+			BidAmount:        pick.BidAmount,
+			IsKeeper:         isKeeper,
+		})
+	}
+
+	// Sort by overall pick number
+	sort.Slice(picks, func(i, j int) bool {
+		return picks[i].OverallPickNumber < picks[j].OverallPickNumber
+	})
+
+	return picks
+}
+
+// getKeeperPicks filters the draft picks to return only keeper picks
+func (wg *WebsiteGenerator) getKeeperPicks(allPicks []DraftPickRow) []DraftPickRow {
+	var keeperPicks []DraftPickRow
+	for _, pick := range allPicks {
+		if pick.IsKeeper {
+			keeperPicks = append(keeperPicks, pick)
+		}
+	}
+	return keeperPicks
+}
+
+// getPositionFromSlotID converts lineup slot ID to position name
+func (wg *WebsiteGenerator) getPositionFromSlotID(slotID int) string {
+	positions := map[int]string{
+		0:  "QB",
+		2:  "RB",
+		4:  "WR",
+		6:  "TE",
+		16: "D/ST",
+		17: "K",
+		20: "Bench",
+		21: "IR",
+		23: "FLEX",
+	}
+	
+	if pos, exists := positions[slotID]; exists {
+		return pos
+	}
+	return "Unknown"
+}
+
 // TemplateData represents the data passed to the HTML template
 type TemplateData struct {
 	LeagueName          string
 	SeasonID            int
 	LastUpdated         string
+	HasDraft            bool
 	Standings           []StandingRow
 	WeeklyHighScorers   []WeeklyHighScoreRow
 	FinalStandings      []FinalStandingRow
@@ -269,6 +417,7 @@ func (wg *WebsiteGenerator) prepareTemplateData() TemplateData {
 		LeagueName:          wg.getLeagueName(),
 		SeasonID:            league.SeasonID,
 		LastUpdated:         time.Now().Format("January 2, 2006 at 3:04 PM"),
+		HasDraft:            len(league.DraftDetail.Picks) > 0,
 		Standings:           wg.prepareStandingsRows(standings),
 		WeeklyHighScorers:   wg.prepareWeeklyHighScorerRows(payouts.WeeklyHighScorers),
 		FinalStandings:      wg.prepareFinalStandingRows(payouts.FinalStandings),
@@ -784,4 +933,30 @@ func (wg *WebsiteGenerator) prepareTeamPayoutTotals(weeklyHighScorers []WeeklyHi
 	})
 
 	return result
+}
+
+
+
+// DraftPickRow represents a draft pick for the template
+type DraftPickRow struct {
+	OverallPickNumber int
+	TeamName         string
+	OwnerName        string
+	PlayerName       string
+	Position         string
+	BidAmount        int
+	IsKeeper         bool
+}
+
+// DraftData represents the data passed to the draft template
+type DraftData struct {
+	LeagueName    string
+	SeasonYear    string
+	LastUpdated   string
+	GeneratedAt   string
+	TotalPicks    int
+	DraftDate     string
+	DraftStatus   string
+	DraftPicks    []DraftPickRow
+	KeeperPicks   []DraftPickRow
 }
