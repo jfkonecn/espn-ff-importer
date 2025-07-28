@@ -40,7 +40,11 @@ URL_PLAYERS="https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/seasons/$YE
 # Download the data into the data directory
 curl -sSL \
   -H "X-Fantasy-Filter: {\"players\":{\"limit\":10000}}" \
-  -H "Cookie: $COOKIE" \
   "$URL_PLAYERS" -o "data/espn_players_${YEAR}.json"
 
 
+URL_PRO_TEAMS="https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/seasons/2025?view=proTeamSchedules_wl"
+
+# Download the data into the data directory
+curl -sSL \
+  "$URL_PRO_TEAMS" -o "data/espn_pro_teams_${YEAR}.json"
