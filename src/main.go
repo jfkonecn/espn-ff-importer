@@ -52,7 +52,14 @@ func main() {
 		os.Exit(1)
 	}
 
+	// Generate AI data files
+	if err := generateAIData(files, *dataDir); err != nil {
+		fmt.Printf("Error generating AI data: %v\n", err)
+		os.Exit(1)
+	}
+
 	fmt.Printf("Static website generated successfully in: %s\n", *output)
+	fmt.Printf("AI data generated successfully for all seasons in: ai/\n")
 	fmt.Printf("Processed %d seasons\n", len(seasons))
 }
 
@@ -124,4 +131,59 @@ func generateIndexPage(seasons []SeasonInfo, outputDir string) error {
 	// Generate the index page
 	outputFile := filepath.Join(outputDir, "index.html")
 	return generator.GenerateIndexPage(outputFile)
+}
+
+// generateAIData generates AI data files for all seasons
+func generateAIData(files []string, dataDir string) error {
+	if len(files) == 0 {
+		return fmt.Errorf("no files to process")
+	}
+
+	// Process each season file
+	for _, file := range files {
+		// Extract season from filename
+		season := extractSeasonFromFilename(file)
+		if season == "" {
+			continue
+		}
+
+		// Create league reader for this season
+		reader, err := NewLeagueReader(file)
+		if err != nil {
+			fmt.Printf("Warning: failed to read file %s: %v\n", file, err)
+			continue
+		}
+
+		// Create AI data generator for this season
+		seasonDir := fmt.Sprintf("ai/%s", season)
+		generator := NewAIDataGenerator(reader, seasonDir)
+		
+		// Generate all AI data files for this season
+		if err := generator.GenerateAllData(); err != nil {
+			fmt.Printf("Warning: failed to generate AI data for season %s: %v\n", season, err)
+			continue
+		}
+		
+		fmt.Printf("Generated AI data for season %s\n", season)
+	}
+
+	return nil
+}
+
+// extractSeasonFromFilename extracts the season year from a filename
+func extractSeasonFromFilename(filename string) string {
+	// Look for patterns like "espn_league_2024.json"
+	if strings.Contains(filename, "espn_league_") {
+		parts := strings.Split(filename, "_")
+		for i, part := range parts {
+			if part == "league" && i+1 < len(parts) {
+				season := strings.TrimSuffix(parts[i+1], ".json")
+				// Validate it's a 4-digit year
+				if len(season) == 4 {
+					return season
+				}
+			}
+		}
+	}
+	return ""
 }
