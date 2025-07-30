@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fantasy Football Podcasts</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              "fantasy-blue": "#1e40af",
+              "fantasy-green": "#059669",
+              "fantasy-gold": "#d97706",
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-gray-50 min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+      <header class="text-center mb-12">
+        <h1 class="text-4xl font-bold text-gray-800 mb-4">
+          Fantasy Football Podcasts
+        </h1>
+        <p class="text-xl text-gray-600">
+          Listen to our league podcasts and analysis
+        </p>
+        <div class="mt-4">
+          <a
+            href="index.html"
+            class="text-fantasy-blue hover:text-blue-700 underline"
+          >
+            ← Back to Seasons
+          </a>
+        </div>
+      </header>
+
+      <div class="max-w-4xl mx-auto">
+        {{if .Podcasts}}
+        <div class="space-y-6">
+          {{range .Podcasts}}
+          <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <div class="bg-fantasy-blue text-white px-6 py-4">
+              <h2 class="text-xl font-semibold">{{.Title}}</h2>
+              {{if .Date}}
+              <p class="text-sm opacity-90">{{.Date}}</p>
+              {{end}}
+            </div>
+            <div class="p-6">
+              {{if .Description}}
+              <p class="text-gray-700 mb-4">{{.Description}}</p>
+              {{end}}
+              <div class="bg-gray-100 rounded-lg p-4">
+                <audio controls class="w-full">
+                  <source src="{{.FilePath}}" type="audio/wav" />
+                  Your browser does not support the audio element.
+                </audio>
+              </div>
+              <div class="mt-4 text-sm text-gray-600">
+                <p><strong>File:</strong> {{.FileName}}</p>
+                {{if .FileSize}}
+                <p><strong>Size:</strong> {{.FileSize}}</p>
+                {{end}}
+              </div>
+            </div>
+          </div>
+          {{end}}
+        </div>
+        {{else}}
+        <div class="text-center py-12">
+          <div class="text-gray-400 mb-4">
+            <svg
+              class="mx-auto h-12 w-12"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"
+              />
+            </svg>
+          </div>
+          <h3 class="text-lg font-medium text-gray-900 mb-2">
+            No Podcasts Available
+          </h3>
+          <p class="text-gray-500">No podcast files have been found yet.</p>
+        </div>
+        {{end}}
+      </div>
+
+      <footer class="text-center mt-12 text-gray-500">
+        <p>Generated on {{.GeneratedAt}}</p>
+      </footer>
+    </div>
+  </body>
+</html>

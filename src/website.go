@@ -6,6 +6,7 @@ import (
 	"html/template"
 	"os"
 	"sort"
+	"strings"
 	"time"
 )
 
@@ -212,6 +213,156 @@ func (wg *WebsiteGenerator) GenerateDraftPage(outputPath string) error {
 	}
 
 	return nil
+}
+
+// GeneratePodcastsPage creates a podcasts-specific HTML page
+func (wg *WebsiteGenerator) GeneratePodcastsPage(outputPath string) error {
+	// Parse all template files with custom functions
+	tmpl, err := template.New("podcasts.html").Funcs(template.FuncMap{
+		"groupByTeam": func(eligibilities []KeeperEligibility) map[string][]KeeperEligibility {
+			grouped := make(map[string][]KeeperEligibility)
+			for _, eligibility := range eligibilities {
+				grouped[eligibility.TeamName] = append(grouped[eligibility.TeamName], eligibility)
+			}
+			return grouped
+		},
+	}).ParseFS(templateFS, "templates/*.html")
+	if err != nil {
+		return fmt.Errorf("failed to parse templates: %w", err)
+	}
+
+	// Prepare the template data
+	data := wg.preparePodcastsData()
+
+	// Create the output file
+	file, err := os.Create(outputPath)
+	if err != nil {
+		return fmt.Errorf("failed to create output file: %w", err)
+	}
+	defer file.Close()
+
+	// Execute the template
+	err = tmpl.ExecuteTemplate(file, "podcasts.html", data)
+	if err != nil {
+		return fmt.Errorf("failed to execute podcasts template: %w", err)
+	}
+
+	return nil
+}
+
+// preparePodcastsData prepares all the data needed for the podcasts template
+func (wg *WebsiteGenerator) preparePodcastsData() PodcastData {
+	// Scan for WAV files in the podcasts directory
+	podcasts := wg.scanPodcastFiles()
+
+	return PodcastData{
+		GeneratedAt: time.Now().Format("January 2, 2006 at 3:04 PM"),
+		Podcasts:    podcasts,
+	}
+}
+
+// scanPodcastFiles scans the podcasts directory for WAV files
+func (wg *WebsiteGenerator) scanPodcastFiles() []PodcastInfo {
+	var podcasts []PodcastInfo
+
+	// Define the podcasts directory path relative to static assets
+	podcastsDir := "static/assets/podcasts"
+	
+	// Read the directory
+	entries, err := os.ReadDir(podcastsDir)
+	if err != nil {
+		fmt.Printf("Warning: Could not read podcasts directory %s: %v\n", podcastsDir, err)
+		return podcasts
+	}
+
+	for _, entry := range entries {
+		if !entry.IsDir() && strings.HasSuffix(strings.ToLower(entry.Name()), ".wav") {
+			fileName := entry.Name()
+			filePath := fmt.Sprintf("assets/podcasts/%s", fileName)
+			
+			// Get file info for size
+			fileInfo, err := entry.Info()
+			var fileSize string
+			if err == nil {
+				fileSize = wg.formatFileSize(fileInfo.Size())
+			}
+
+			// Extract title and date from filename
+			title, date := wg.extractPodcastInfo(fileName)
+
+			podcast := PodcastInfo{
+				Title:       title,
+				FileName:    fileName,
+				FilePath:    filePath,
+				FileSize:    fileSize,
+				Date:        date,
+				Description: wg.generatePodcastDescription(fileName),
+			}
+
+			podcasts = append(podcasts, podcast)
+		}
+	}
+
+	// Sort podcasts by filename (most recent first, assuming naming convention)
+	sort.Slice(podcasts, func(i, j int) bool {
+		return podcasts[i].FileName > podcasts[j].FileName
+	})
+
+	return podcasts
+}
+
+// formatFileSize formats file size in human-readable format
+func (wg *WebsiteGenerator) formatFileSize(bytes int64) string {
+	const unit = 1024
+	if bytes < unit {
+		return fmt.Sprintf("%d B", bytes)
+	}
+	div, exp := int64(unit), 0
+	for n := bytes / unit; n >= unit; n /= unit {
+		div *= unit
+		exp++
+	}
+	return fmt.Sprintf("%.1f %cB", float64(bytes)/float64(div), "KMGTPE"[exp])
+}
+
+// extractPodcastInfo extracts title and date from filename
+func (wg *WebsiteGenerator) extractPodcastInfo(fileName string) (title, date string) {
+	// Remove .wav extension
+	name := strings.TrimSuffix(fileName, ".wav")
+	
+	// Try to extract year from filename (e.g., "2025_Predraft" -> "2025")
+	parts := strings.Split(name, "_")
+	if len(parts) >= 2 {
+		year := parts[0]
+		if len(year) == 4 {
+			// Extract the rest as title
+			title = strings.Join(parts[1:], " ")
+			date = year
+			return
+		}
+	}
+	
+	// Fallback: use the whole name as title
+	title = name
+	return
+}
+
+// generatePodcastDescription generates a description based on the filename
+func (wg *WebsiteGenerator) generatePodcastDescription(fileName string) string {
+	name := strings.TrimSuffix(fileName, ".wav")
+	
+	// Generate description based on filename patterns
+	if strings.Contains(strings.ToLower(name), "predraft") {
+		return "Pre-draft analysis and strategy discussion"
+	} else if strings.Contains(strings.ToLower(name), "draft") {
+		return "Draft recap and analysis"
+	} else if strings.Contains(strings.ToLower(name), "season") {
+		return "Season review and analysis"
+	} else if strings.Contains(strings.ToLower(name), "playoff") {
+		return "Playoff analysis and predictions"
+	}
+	
+	return "Fantasy football league podcast"
 }
 
 // prepareDraftData prepares all the data needed for the draft template
@@ -1395,4 +1546,20 @@ type DraftData struct {
 	DraftPicks        []DraftPickRow
 	KeeperPicks       []DraftPickRow
 	KeeperEligibility []KeeperEligibility
+}
+
+// PodcastData represents the data passed to the podcasts template
+type PodcastData struct {
+	GeneratedAt string
+	Podcasts    []PodcastInfo
+}
+
+// PodcastInfo represents information about a podcast file
+type PodcastInfo struct {
+	Title       string
+	FileName    string
+	FilePath    string
+	FileSize    string
+	Date        string
+	Description string
 }

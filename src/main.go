@@ -52,6 +52,12 @@ func main() {
 		os.Exit(1)
 	}
 
+	// Generate the podcasts page
+	if err := generatePodcastsPage(*output); err != nil {
+		fmt.Printf("Error generating podcasts page: %v\n", err)
+		os.Exit(1)
+	}
+
 	// Generate AI data files
 	if err := generateAIData(files, *dataDir); err != nil {
 		fmt.Printf("Error generating AI data: %v\n", err)
@@ -131,6 +137,32 @@ func generateIndexPage(seasons []SeasonInfo, outputDir string) error {
 	// Generate the index page
 	outputFile := filepath.Join(outputDir, "index.html")
 	return generator.GenerateIndexPage(outputFile)
+}
+
+// generatePodcastsPage generates the podcasts page
+func generatePodcastsPage(outputDir string) error {
+	// Create a dummy reader for the website generator (we don't need league data for podcasts)
+	// We'll use the first available season file or create a minimal reader
+	files, err := filepath.Glob(filepath.Join("data", "espn_league_*.json"))
+	if err != nil || len(files) == 0 {
+		// If no league files, create a minimal generator
+		generator := &WebsiteGenerator{}
+		outputFile := filepath.Join(outputDir, "podcasts.html")
+		return generator.GeneratePodcastsPage(outputFile)
+	}
+
+	// Use the first available season file
+	reader, err := NewLeagueReader(files[0])
+	if err != nil {
+		return fmt.Errorf("failed to create league reader for podcasts: %w", err)
+	}
+
+	// Create website generator
+	generator := NewWebsiteGenerator(reader)
+
+	// Generate the podcasts page
+	outputFile := filepath.Join(outputDir, "podcasts.html")
+	return generator.GeneratePodcastsPage(outputFile)
 }
 
 // generateAIData generates AI data files for all seasons
