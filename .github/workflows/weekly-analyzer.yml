@@ -31,7 +31,7 @@ jobs:
           ESPN_LEAGUE_ID: ${{ secrets.ESPN_LEAGUE_ID }}
           ESPN_SWID: ${{ secrets.ESPN_SWID }}
         run: |
-          ./get-season-results.sh ${{ var.CURRENT_YEAR }}
+          ./get-season-results.sh ${{ env.CURRENT_YEAR }}
           ./run-analyzer.sh
 
       - name: Commit and push changes
