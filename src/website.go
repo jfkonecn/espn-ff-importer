@@ -267,7 +267,7 @@ func (wg *WebsiteGenerator) scanPodcastFiles() []PodcastInfo {
 
 	// Define the podcasts directory path relative to static assets
 	podcastsDir := "static/assets/podcasts"
-	
+
 	// Read the directory
 	entries, err := os.ReadDir(podcastsDir)
 	if err != nil {
@@ -279,7 +279,7 @@ func (wg *WebsiteGenerator) scanPodcastFiles() []PodcastInfo {
 		if !entry.IsDir() && strings.HasSuffix(strings.ToLower(entry.Name()), ".wav") {
 			fileName := entry.Name()
 			filePath := fmt.Sprintf("assets/podcasts/%s", fileName)
-			
+
 			// Get file info for size
 			fileInfo, err := entry.Info()
 			var fileSize string
@@ -329,7 +329,7 @@ func (wg *WebsiteGenerator) formatFileSize(bytes int64) string {
 func (wg *WebsiteGenerator) extractPodcastInfo(fileName string) (title, date string) {
 	// Remove .wav extension
 	name := strings.TrimSuffix(fileName, ".wav")
-	
+
 	// Try to extract year from filename (e.g., "2025_Predraft" -> "2025")
 	parts := strings.Split(name, "_")
 	if len(parts) >= 2 {
@@ -341,7 +341,7 @@ func (wg *WebsiteGenerator) extractPodcastInfo(fileName string) (title, date str
 			return
 		}
 	}
-	
+
 	// Fallback: use the whole name as title
 	title = name
 	return
@@ -350,7 +350,7 @@ func (wg *WebsiteGenerator) extractPodcastInfo(fileName string) (title, date str
 // generatePodcastDescription generates a description based on the filename
 func (wg *WebsiteGenerator) generatePodcastDescription(fileName string) string {
 	name := strings.TrimSuffix(fileName, ".wav")
-	
+
 	// Generate description based on filename patterns
 	if strings.Contains(strings.ToLower(name), "predraft") {
 		return "Pre-draft analysis and strategy discussion"
@@ -361,7 +361,7 @@ func (wg *WebsiteGenerator) generatePodcastDescription(fileName string) string {
 	} else if strings.Contains(strings.ToLower(name), "playoff") {
 		return "Playoff analysis and predictions"
 	}
-	
+
 	return "Fantasy football league podcast"
 }
 
@@ -796,6 +796,7 @@ func (wg *WebsiteGenerator) analyzeKeeperHistory(playerID int, teamName string, 
 		}
 
 		// Check if this player was the first pick for this team in this year's draft
+		wasKept := false
 		for _, pick := range league.DraftDetail.Picks {
 			if pick.TeamID == teamID && pick.PlayerID == playerID {
 				// Check if this was the first pick for this team
@@ -810,9 +811,13 @@ func (wg *WebsiteGenerator) analyzeKeeperHistory(playerID int, teamName string, 
 				if isFirstPick {
 					// This player was kept in this season
 					keeperYears++
+					wasKept = true
 				}
 				break
 			}
+		}
+		if !wasKept {
+			break
 		}
 	}
 
