@@ -22,16 +22,13 @@ jobs:
         with:
           go-version: "1.21"
 
-      - name: Make run-analyzer.sh executable
-        run: chmod +x run-analyzer.sh
-
       - name: Run analyzer script for current year
         env:
           ESPN_ESPNS2: ${{ secrets.DEPLOY_TOKEN }}
           ESPN_LEAGUE_ID: ${{ secrets.ESPN_LEAGUE_ID }}
           ESPN_SWID: ${{ secrets.ESPN_SWID }}
         run: |
-          ./get-season-results.sh ${{ env.CURRENT_YEAR }}
+          ./get-season-results.sh ${{ vars.CURRENT_YEAR }}
           ./run-analyzer.sh
 
       - name: Commit and push changes
