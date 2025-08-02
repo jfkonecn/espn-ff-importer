@@ -24,7 +24,7 @@ jobs:
 
       - name: Run analyzer script for current year
         env:
-          ESPN_ESPNS2: ${{ secrets.DEPLOY_TOKEN }}
+          ESPN_ESPNS2: ${{ secrets.ESPN_ESPNS2 }}
           ESPN_LEAGUE_ID: ${{ secrets.ESPN_LEAGUE_ID }}
           ESPN_SWID: ${{ secrets.ESPN_SWID }}
         run: |
