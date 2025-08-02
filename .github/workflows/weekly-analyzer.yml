@@ -1,0 +1,44 @@
+name: Weekly Fantasy Football Analyzer
+
+on:
+  # Run weekly on Tuesdays at 9 AM UTC
+  schedule:
+    # cron format: minute hour day month day-of-week
+    # Run every Tuesday from August to January
+    - cron: "0 9 * 8-12,1 2"
+
+  # Allow manual triggering
+  workflow_dispatch:
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: "1.21"
+
+      - name: Make run-analyzer.sh executable
+        run: chmod +x run-analyzer.sh
+
+      - name: Run analyzer script for current year
+        run: |
+          ./get-season-results.sh $CURRENT_YEAR
+          ./run-analyzer.sh
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add static/
+          git add data/
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Weekly fantasy football analysis update [skip ci]"
+            git push
+          fi
