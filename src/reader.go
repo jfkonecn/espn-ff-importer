@@ -3,20 +3,20 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"os"
 )
 
 // LeagueReader provides functionality to read and access ESPN league data
 type LeagueReader struct {
-	league    *ESPNLeague
-	players   map[int]*Player
-	proTeams  map[int]*ProTeam
+	league   *ESPNLeague
+	players  map[int]*Player
+	proTeams map[int]*ProTeam
 }
 
 // NewLeagueReader creates a new LeagueReader from a JSON file path
 func NewLeagueReader(filePath string) (*LeagueReader, error) {
 	// Read the JSON file
-	data, err := ioutil.ReadFile(filePath)
+	data, err := os.ReadFile(filePath)
 	if err != nil {
 		return nil, fmt.Errorf("failed to read file %s: %w", filePath, err)
 	}
@@ -33,7 +33,7 @@ func NewLeagueReader(filePath string) (*LeagueReader, error) {
 		players:  make(map[int]*Player),
 		proTeams: make(map[int]*ProTeam),
 	}
-	
+
 	// Load player data for the same season
 	if err := reader.loadPlayerData(); err != nil {
 		// Log the error but don't fail - player data is optional
@@ -53,12 +53,12 @@ func NewLeagueReader(filePath string) (*LeagueReader, error) {
 func (lr *LeagueReader) loadPlayerData() error {
 	// Extract season from league data
 	season := lr.league.SeasonID
-	
+
 	// Try to find the player file
 	playerFilePath := fmt.Sprintf("data/espn_players_%d.json", season)
-	
+
 	// Read the player JSON file
-	data, err := ioutil.ReadFile(playerFilePath)
+	data, err := os.ReadFile(playerFilePath)
 	if err != nil {
 		return fmt.Errorf("failed to read player file %s: %w", playerFilePath, err)
 	}
@@ -81,12 +81,12 @@ func (lr *LeagueReader) loadPlayerData() error {
 func (lr *LeagueReader) loadProTeamData() error {
 	// Extract season from league data
 	season := lr.league.SeasonID
-	
+
 	// Try to find the pro team file
 	proTeamFilePath := fmt.Sprintf("data/espn_pro_teams_%d.json", season)
-	
+
 	// Read the pro team JSON file
-	data, err := ioutil.ReadFile(proTeamFilePath)
+	data, err := os.ReadFile(proTeamFilePath)
 	if err != nil {
 		return fmt.Errorf("failed to read pro team file %s: %w", proTeamFilePath, err)
 	}
@@ -258,7 +258,7 @@ func (lr *LeagueReader) SaveToFile(filePath string) error {
 		return fmt.Errorf("failed to marshal JSON: %w", err)
 	}
 
-	if err := ioutil.WriteFile(filePath, data, 0644); err != nil {
+	if err := os.WriteFile(filePath, data, 0644); err != nil {
 		return fmt.Errorf("failed to write file: %w", err)
 	}
 

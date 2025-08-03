@@ -609,8 +609,8 @@ func (wg *WebsiteGenerator) calculatePlayerKeeperEligibility(player DraftPickRow
 
 // calculateNextYearKeeperPrice calculates the keeper price for next year
 func (wg *WebsiteGenerator) calculateNextYearKeeperPrice(currentPrice int, acquisitionType string, keeperYears int) int {
-	if keeperYears >= 3 {
-		return 0 // Not eligible for keeping after 3 years
+	if keeperYears >= 2 {
+		return 0 // Not eligible for keeping after 2 years
 	}
 
 	if acquisitionType == "draft" {
@@ -619,8 +619,6 @@ func (wg *WebsiteGenerator) calculateNextYearKeeperPrice(currentPrice int, acqui
 			return currentPrice + 5
 		case 1: // Second year being kept
 			return currentPrice + 7
-		case 2: // Third year being kept
-			return currentPrice + 10
 		}
 	} else if acquisitionType == "free_agency" {
 		switch keeperYears {
@@ -628,8 +626,6 @@ func (wg *WebsiteGenerator) calculateNextYearKeeperPrice(currentPrice int, acqui
 			return 15
 		case 1: // Second year being kept
 			return 22
-		case 2: // Third year being kept
-			return 32
 		}
 	}
 
@@ -709,8 +705,8 @@ func (wg *WebsiteGenerator) getPreDraftKeeperEligibility() []KeeperEligibility {
 				// Calculate next year's price based on historical data
 				nextYearPrice := wg.calculateNextYearKeeperPrice(keeperHistory.CurrentPrice, keeperHistory.AcquisitionType, keeperHistory.KeeperYears)
 
-				// Determine eligibility (max 3 years)
-				isEligible := keeperHistory.KeeperYears < 3
+				// Determine eligibility (max 2 years)
+				isEligible := keeperHistory.KeeperYears < 2
 
 				eligibility := KeeperEligibility{
 					PlayerID:        player.ID,

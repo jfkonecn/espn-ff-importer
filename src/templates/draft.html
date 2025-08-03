@@ -208,12 +208,11 @@
                             <ul class="list-disc list-inside space-y-2 ml-4">
                                 <li>
                                     <strong>Draft Acquisitions:</strong> 1st year = Draft Price
-                                    + $5, 2nd year = previous price + $7, 3rd year = previous
-                                    price + $10
+                                    + $5 and 2nd year = previous price + $7
                                 </li>
                                 <li>
-                                    <strong>Free Agency Acquisitions:</strong> 1st year = $15,
-                                    2nd year = $22, 3rd year = $32
+                                    <strong>Free Agency Acquisitions:</strong> 1st year = $15 and
+                                    2nd year = $22
                                 </li>
                             </ul>
                         </div>
@@ -250,10 +249,10 @@
                                 currently 3 years (with first year being the first time a player
                                 is on the roster either via draft or free agency)</li>
                             <li>"Acquired via
-                                draft: 1st year = Draft Price + $5, 2nd year = previous price
-                                +$7, 3rd year = previous price +$10.</li>
+                                draft: 1st year = Draft Price + $5 and 2nd year = previous price
+                                +$7</li>
                             <li>Aquired via Free Agency: FA
-                                - 1st year $15, 2nd year $22, and third year $32" If a player is
+                                - 1st year $15 and 2nd year $22" If a player is
                                 drafted and then dropped, he is kept for his draft value, not
                                 his FA price, whichever is more</li>
                         </ul>
@@ -303,7 +302,7 @@
                                     Current: ${{.CurrentPrice}} → Next Year: ${{.NextYearPrice}}
                                 </div>
                                 <div class="flex items-center justify-between">
-                                    <span class="text-xs text-gray-500">{{.KeeperYears}}/3 years kept</span>
+                                    <span class="text-xs text-gray-500">{{.KeeperYears}}/2 years kept</span>
 
                                     {{if .IsEligible}}
                                     <span
