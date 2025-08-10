@@ -1,6 +1,6 @@
 # Keeper Eligibility Information
 
-**Note:** Draft has not occurred yet. Here is keeper eligibility information.
+**Note:** Draft has already occurred. Here is keeper eligibility information for next season.
 
 ## Keeper Rules
 

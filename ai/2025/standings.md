@@ -2,7 +2,7 @@
 
 **League:** The League
 **Season:** 2025
-**Current Week:** 0
+**Current Week:** 1
 
 | Rank | Team Name | Owner | Points | Record (W-L-T) | Points For | Points Against |
 |------|-----------|-------|--------|----------------|------------|----------------|
