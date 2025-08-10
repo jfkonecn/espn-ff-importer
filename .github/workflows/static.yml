@@ -4,6 +4,7 @@ name: Deploy static content to Pages
 on:
   workflow_run:
     workflows: ["Weekly Fantasy Football Analyzer"]
+    types: [completed]
   # Runs on pushes targeting the default branch
   push:
     branches: ["main"]
@@ -39,7 +40,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           # Upload entire repository
-          path: 'static'
+          path: "static"
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
