@@ -668,9 +668,11 @@ func (g *AIDataGenerator) generateTeamRosterTable(roster *TeamRoster, teamType s
 	content += "| Position | Player | Pro Team | Status | Projected Points |\n"
 	content += "|----------|--------|----------|--------|------------------|\n"
 	
-	// Sort entries by lineup slot ID to show starters first
+	// Sort entries by custom position order: QB, RB, WR, TE, FLEX, D/ST, K, Bench, IR
 	sort.Slice(roster.Entries, func(i, j int) bool {
-		return roster.Entries[i].LineupSlotID < roster.Entries[j].LineupSlotID
+		orderI := g.getPositionOrder(roster.Entries[i].LineupSlotID)
+		orderJ := g.getPositionOrder(roster.Entries[j].LineupSlotID)
+		return orderI < orderJ
 	})
 	
 	for _, entry := range roster.Entries {
@@ -706,6 +708,26 @@ func (g *AIDataGenerator) generateTeamRosterTable(roster *TeamRoster, teamType s
 	
 	content += "\n"
 	return content
+}
+
+// getPositionOrder returns a numeric order for sorting positions (lower = earlier in lineup)
+func (g *AIDataGenerator) getPositionOrder(slotID int) int {
+	order := map[int]int{
+		0:  1,  // QB
+		2:  2,  // RB
+		4:  3,  // WR
+		6:  4,  // TE
+		23: 5,  // FLEX (between TE and D/ST)
+		16: 6,  // D/ST
+		17: 7,  // K
+		20: 8,  // Bench
+		21: 9,  // IR
+	}
+	
+	if pos, exists := order[slotID]; exists {
+		return pos
+	}
+	return 999 // Unknown positions go last
 }
 
 // getPositionFromSlotID converts lineup slot ID to position name (same as website)
