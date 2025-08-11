@@ -67,11 +67,60 @@ type Matchup struct {
 	Winner           string    `json:"winner"`
 }
 
+// LineupSlotID represents the different lineup positions in fantasy football
+type LineupSlotID int
+
+const (
+	QB LineupSlotID = iota
+	RB
+	WR
+	TE
+	FLEX
+	SUPER_FLEX
+	DEF
+	K
+	BENCH
+	IR
+	NA
+)
+
+// String returns the string representation of the lineup slot
+func (l LineupSlotID) String() string {
+	switch l {
+	case QB:
+		return "QB"
+	case RB:
+		return "RB"
+	case WR:
+		return "WR"
+	case TE:
+		return "TE"
+	case FLEX:
+		return "FLEX"
+	case SUPER_FLEX:
+		return "SUPER_FLEX"
+	case DEF:
+		return "DEF"
+	case K:
+		return "K"
+	case BENCH:
+		return "BENCH"
+	case IR:
+		return "IR"
+	case NA:
+		return "NA"
+	default:
+		return "UNKNOWN"
+	}
+}
+
 // TeamScore represents a team's score in a matchup
 type TeamScore struct {
 	Adjustment        float64                `json:"adjustment"`
 	CumulativeScore   CumulativeScore        `json:"cumulativeScore"`
+	LineupSlotID      LineupSlotID           `json:"lineupSlotId"`
 	PointsByScoringPeriod map[string]float64 `json:"pointsByScoringPeriod"`
+	RosterForCurrentScoringPeriod *TeamRoster `json:"rosterForCurrentScoringPeriod,omitempty"`
 	TeamID            int                    `json:"teamId"`
 	Tiebreak          float64                `json:"tiebreak"`
 	TotalPoints       float64                `json:"totalPoints"`
@@ -264,6 +313,7 @@ type RosterPlayer struct {
 // RosterStat represents player statistics
 type RosterStat struct {
 	AppliedStats map[string]float64 `json:"appliedStats"`
+	AppliedTotal float64             `json:"appliedTotal"`
 }
 
 // TeamRoster represents a team's roster for a matchup period

@@ -51,6 +51,11 @@ func (g *AIDataGenerator) GenerateAllData() error {
 		return fmt.Errorf("failed to generate season results: %w", err)
 	}
 
+	// Generate current matchups if there are pending games
+	if err := g.generateCurrentMatchups(); err != nil {
+		return fmt.Errorf("failed to generate current matchups: %w", err)
+	}
+
 	// Generate final standings if season is complete
 	if err := g.generateFinalStandings(); err != nil {
 		return fmt.Errorf("failed to generate final standings: %w", err)
@@ -601,6 +606,106 @@ func (g *AIDataGenerator) generateFinalStandings() error {
 	}
 
 	return g.writeFile("final-standings.md", content)
+}
+
+// generateCurrentMatchups generates a markdown file showing current week matchups with starting lineups and projected totals
+func (g *AIDataGenerator) generateCurrentMatchups() error {
+	currentMatchups := g.reader.GetCurrentMatchups()
+	
+	// If no current matchups, don't generate the file
+	if len(currentMatchups) == 0 {
+		return nil
+	}
+	
+	content := "# Current Week Matchups\n\n"
+	content += fmt.Sprintf("**League:** %s\n", g.reader.GetLeague().Settings.Name)
+	content += fmt.Sprintf("**Season:** %d\n", g.reader.GetSeasonID())
+	content += fmt.Sprintf("**Current Week:** %d\n\n", g.reader.GetScoringPeriodID())
+	content += "**Status:** Games are pending - showing projected lineups and totals\n\n"
+	
+	for i, matchup := range currentMatchups {
+		content += fmt.Sprintf("## Matchup %d\n\n", i+1)
+		
+		// Away team
+		awayTeam := g.reader.GetTeamByID(matchup.Away.TeamID)
+		awayOwner := g.reader.GetMemberByID(awayTeam.PrimaryOwner)
+		awayOwnerName := "Unknown"
+		if awayOwner != nil {
+			awayOwnerName = fmt.Sprintf("%s %s", awayOwner.FirstName, awayOwner.LastName)
+		}
+		
+		content += fmt.Sprintf("### %s (%s)\n\n", awayTeam.Name, awayOwnerName)
+		if matchup.Away.RosterForCurrentScoringPeriod != nil {
+			content += g.generateTeamRosterTable(matchup.Away.RosterForCurrentScoringPeriod, "Away")
+		} else {
+			content += "*Roster not available*\n\n"
+		}
+		
+		// Home team
+		homeTeam := g.reader.GetTeamByID(matchup.Home.TeamID)
+		homeOwner := g.reader.GetMemberByID(homeTeam.PrimaryOwner)
+		homeOwnerName := "Unknown"
+		if homeOwner != nil {
+			homeOwnerName = fmt.Sprintf("%s %s", homeOwner.FirstName, homeOwner.LastName)
+		}
+		
+		content += fmt.Sprintf("### %s (%s)\n\n", homeTeam.Name, homeOwnerName)
+		if matchup.Home.RosterForCurrentScoringPeriod != nil {
+			content += g.generateTeamRosterTable(matchup.Home.RosterForCurrentScoringPeriod, "Home")
+		} else {
+			content += "*Roster not available*\n\n"
+		}
+		
+		content += "---\n\n"
+	}
+	
+	return g.writeFile("current-matchups.md", content)
+}
+
+// generateTeamRosterTable generates a markdown table for a team's roster
+func (g *AIDataGenerator) generateTeamRosterTable(roster *TeamRoster, teamType string) string {
+	content := fmt.Sprintf("**%s Team Starting Lineup:**\n\n", teamType)
+	content += "| Position | Player | Pro Team | Status | Projected Points |\n"
+	content += "|----------|--------|----------|--------|------------------|\n"
+	
+	// Sort entries by lineup slot ID to show starters first
+	sort.Slice(roster.Entries, func(i, j int) bool {
+		return roster.Entries[i].LineupSlotID < roster.Entries[j].LineupSlotID
+	})
+	
+	for _, entry := range roster.Entries {
+		position := g.getPositionFromSlotID(entry.LineupSlotID)
+		player := entry.PlayerPoolEntry.Player
+		
+		// Get pro team name
+		proTeamName := "Unknown"
+		if player.ProTeamID > 0 {
+			proTeam := g.reader.GetProTeamByID(player.ProTeamID)
+			if proTeam != nil {
+				proTeamName = proTeam.Abbrev
+			}
+		}
+		
+		// Get projected points from stats
+		projectedPoints := "N/A"
+		if len(player.Stats) > 0 && player.Stats[0].AppliedTotal > 0 {
+			projectedPoints = fmt.Sprintf("%.1f", player.Stats[0].AppliedTotal)
+		}
+		
+		// Status indicator
+		status := "Active"
+		if player.Injured {
+			status = "Injured"
+		} else if !player.Active {
+			status = "Inactive"
+		}
+		
+		content += fmt.Sprintf("| %s | %s | %s | %s | %s |\n",
+			position, player.FullName, proTeamName, status, projectedPoints)
+	}
+	
+	content += "\n"
+	return content
 }
 
 // getPositionFromSlotID converts lineup slot ID to position name (same as website)

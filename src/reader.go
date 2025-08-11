@@ -169,6 +169,19 @@ func (lr *LeagueReader) GetMatchupsByPeriod(periodID int) []Matchup {
 	return matchups
 }
 
+// GetCurrentMatchups returns matchups for the current scoring period that are pending
+func (lr *LeagueReader) GetCurrentMatchups() []Matchup {
+	var currentMatchups []Matchup
+	currentPeriod := lr.league.ScoringPeriodID
+	
+	for _, matchup := range lr.league.Schedule {
+		if matchup.MatchupPeriodID == currentPeriod && matchup.Winner == "UNDECIDED" {
+			currentMatchups = append(currentMatchups, matchup)
+		}
+	}
+	return currentMatchups
+}
+
 // GetMembers returns all league members
 func (lr *LeagueReader) GetMembers() []Member {
 	return lr.league.Members
