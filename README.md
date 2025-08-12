@@ -136,3 +136,21 @@ ffmpeg -ss 00:00:30 -i input.mp4 -t 10 -vn -acodec pcm_s16le -ar 44100 -ac 2 out
 
 [Chatterbox TTS Server](https://github.com/devnen/Chatterbox-TTS-Server) works
 the best locally.
+
+If you put bad character then the server will fail and you will have to restart
+the whole server.
+
+### Merging Wav Files
+
+`list.txt`
+
+```txt
+file '1.wav'
+file '2.wav'
+file '3.wav'
+file '4.wav'
+```
+
+```sh
+ffmpeg -f concat -safe 0 -i list.txt -c copy output.wav
+```
