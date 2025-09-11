@@ -88,13 +88,13 @@
 | 81 | America's Team | Eric Stevens | Dalton Kincaid | TE | Buf | $3 | No |
 | 82 | Embrace the Darkness | Jordan Cunningham | TreVeyon Henderson | FLEX | NE | $6 | No |
 | 83 | #1 GangGreen | Paul Konecny | Jake Elliott | K | Phi | $1 | No |
-| 84 | America's Team | Eric Stevens | Chris Godwin | Bench | TB | $4 | No |
+| 84 | America's Team | Eric Stevens | Chris Godwin Jr. | Bench | TB | $4 | No |
 | 85 | America's Team | Eric Stevens | Isiah Pacheco | Bench | KC | $4 | No |
 | 86 | Embrace the Darkness | Jordan Cunningham | Calvin Ridley | Bench | Ten | $9 | No |
 | 87 | Embrace the Darkness | Jordan Cunningham | DeVonta Smith | Bench | Phi | $6 | No |
 | 88 | Caleb's Cats | michael machas | David Njoku | TE | Cle | $3 | No |
 | 89 | Jensen Huang and Sons | Tarek Kaakani | Jameson Williams | FLEX | Det | $6 | No |
-| 90 | Jensen Huang and Sons | Tarek Kaakani | Brian Robinson Jr. | Bench | Wsh | $6 | No |
+| 90 | Jensen Huang and Sons | Tarek Kaakani | Brian Robinson Jr. | Bench | SF | $6 | No |
 | 91 | America's Team | Eric Stevens | Evan Engram | Bench | Den | $2 | No |
 | 92 | #1 GangGreen | Paul Konecny | Jaylen Waddle | Bench | Mia | $5 | No |
 | 93 | Jensen Huang and Sons | Tarek Kaakani | Justin Fields | QB | NYJ | $3 | No |
@@ -106,7 +106,7 @@
 | 99 | Jensen Huang and Sons | Tarek Kaakani | George Pickens | Bench | Dal | $5 | No |
 | 100 | America's Team | Eric Stevens | Tetairoa McMillan | Bench | Car | $17 | No |
 | 101 | Boeing's Hitmen  | Bradford Evans | Tucker Kraft | TE | GB | $2 | No |
-| 102 | FDA Control Group | Conner Graeff | Tank Bigsby | Bench | Jax | $2 | No |
+| 102 | FDA Control Group | Conner Graeff | Tank Bigsby | Bench | Phi | $2 | No |
 | 103 | Jensen Huang and Sons | Tarek Kaakani | J.J. McCarthy | Bench | Min | $2 | No |
 | 104 | Jensen Huang and Sons | Tarek Kaakani | Tyrone Tracy Jr. | Bench | NYG | $5 | No |
 | 105 | Advanced Metrics | John Konecny | Dallas Goedert | Bench | Phi | $1 | No |
@@ -163,5 +163,5 @@
 | 156 | Latin Fury | Benito Molina | Zach Ertz | Bench | Wsh | $1 | No |
 | 157 | It's MillerTime | Colin Miller | Zach Charbonnet | Bench | Sea | $1 | No |
 | 158 | Boeing's Hitmen  | Bradford Evans | Darnell Mooney | Bench | Atl | $1 | No |
-| 159 | Latin Fury | Benito Molina | Adam Thielen | Bench | Car | $1 | No |
+| 159 | Latin Fury | Benito Molina | Adam Thielen | Bench | Min | $1 | No |
 | 160 | It's MillerTime | Colin Miller | Wan'Dale Robinson | Bench | NYG | $1 | No |

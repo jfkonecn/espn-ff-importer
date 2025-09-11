@@ -140,6 +140,14 @@ the best locally.
 If you put bad character then the server will fail and you will have to restart
 the whole server.
 
+### Audiobook Way
+
+[ebook2audiobook](https://github.com/DrewThomasson/ebook2audiobook.git)
+
+```sh
+pandoc test-script.md -o test-script.epub
+```
+
 ### Merging Wav Files
 
 `list.txt`

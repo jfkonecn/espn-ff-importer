@@ -4,48 +4,48 @@
 
 | Rank | Player | Position | Team | % Change | % Owned |
 |------|--------|----------|------|----------|----------|
-| 1 | Keenan Allen | WR | BAL | 31.8% | 38.4% |
-| 2 | Kyle Pitts Sr. | WR | ATL | 13.4% | 49.7% |
-| 3 | Cam Little | TE | HOU | 10.6% | 12.6% |
-| 4 | Jerome Ford | RB | CIN | 9.6% | 58.4% |
-| 5 | Dylan Sampson | RB | CIN | 9.3% | 22.2% |
-| 6 | Jordan Love | RB | GB | 7.2% | 55.8% |
-| 7 | Josh Downs | WR | IND | 6.8% | 45.4% |
-| 8 | Jake Ferguson | WR | DAL | 6.1% | 54.1% |
-| 9 | Colts D/ST | D/ST | IND | 6.0% | 21.7% |
-| 10 | J.K. Dobbins | RB | DEN | 4.9% | 71.7% |
-| 11 | Jared Goff | RB | DET | 4.5% | 65.9% |
-| 12 | Bills D/ST | D/ST | BUF | 4.5% | 53.8% |
-| 13 | Braelon Allen | RB | NYJ | 4.3% | 9.2% |
-| 14 | Hunter Henry | WR | NE | 4.0% | 23.6% |
-| 15 | Matt Gay | TE | ARI | 3.8% | 23.4% |
-| 16 | Zach Ertz | WR | ARI | 3.5% | 21.7% |
-| 17 | Cairo Santos | TE | CAR | 3.4% | 31.2% |
-| 18 | Trevor Lawrence | RB | HOU | 3.3% | 17.2% |
-| 19 | Trey Benson | RB | PIT | 3.0% | 35.4% |
-| 20 | Dak Prescott | RB | DAL | 2.9% | 72.7% |
+| 1 | Quentin Johnston | WR | BAL | 52.0% | 55.5% |
+| 2 | Rams D/ST | D/ST | LAR | 44.1% | 50.5% |
+| 3 | Juwan Johnson | WR | NO | 32.2% | 33.3% |
+| 4 | Dylan Sampson | RB | CIN | 31.2% | 60.7% |
+| 5 | Hollywood Brown | WR | KC | 27.8% | 73.5% |
+| 6 | Matt Prater | TE | BUF | 26.5% | 26.5% |
+| 7 | 49ers D/ST | D/ST | TB | 24.7% | 41.5% |
+| 8 | Kayshon Boutte | WR | NE | 20.1% | 20.6% |
+| 9 | Harold Fannin Jr. | WR | CIN | 19.3% | 20.1% |
+| 10 | Cam Little | TE | HOU | 15.9% | 57.7% |
+| 11 | Daniel Jones | RB | IND | 13.4% | 17.5% |
+| 12 | Hunter Henry | WR | NE | 9.5% | 52.7% |
+| 13 | Aaron Rodgers | RB | SEA | 9.1% | 17.7% |
+| 14 | Tyler Loop | TE | BAL | 9.1% | 58.6% |
+| 15 | JuJu Smith-Schuster | WR | KC | 8.9% | 9.7% |
+| 16 | Justin Fields | RB | NYJ | 8.8% | 80.6% |
+| 17 | Packers D/ST | D/ST | GB | 8.2% | 44.1% |
+| 18 | Calvin Austin III | WR | SEA | 8.1% | 10.3% |
+| 19 | Zach Ertz | WR | ARI | 8.1% | 48.3% |
+| 20 | Jonnu Smith | WR | SEA | 7.1% | 30.0% |
 
 ## Most Dropped Players
 
 | Rank | Player | Position | Team | % Change | % Owned |
 |------|--------|----------|------|----------|----------|
-| 1 | Jonnu Smith | WR | SEA | -16.0% | 44.6% |
-| 2 | Bhayshul Tuten | RB | HOU | -13.1% | 30.1% |
-| 3 | Jack Bech | WR | LV | -11.9% | 42.5% |
-| 4 | Jaydon Blue | RB | DAL | -11.8% | 33.9% |
-| 5 | Najee Harris | RB | BAL | -11.4% | 51.2% |
-| 6 | Hollywood Brown | WR | KC | -9.7% | 42.8% |
-| 7 | Quinshon Judkins | RB | CIN | -9.7% | 70.3% |
-| 8 | Isaac Guerendo | RB | TB | -9.0% | 28.4% |
-| 9 | Zach Charbonnet | RB | LAC | -8.1% | 61.4% |
-| 10 | Packers D/ST | D/ST | GB | -7.4% | 22.8% |
-| 11 | Tyler Loop | TE | BAL | -6.3% | 46.7% |
-| 12 | Cardinals D/ST | D/ST | PIT | -6.0% | 40.2% |
-| 13 | Pat Freiermuth | WR | SEA | -6.0% | 16.1% |
-| 14 | Ka'imi Fairbairn | TE | HOU | -5.7% | 38.4% |
-| 15 | Rachaad White | RB | SF | -5.5% | 67.7% |
-| 16 | Tre Harris | WR | BAL | -5.5% | 21.9% |
-| 17 | Kareem Hunt | RB | KC | -4.1% | 14.7% |
-| 18 | Dolphins D/ST | D/ST | MIA | -3.8% | 7.9% |
-| 19 | Tyler Bass | TE | BUF | -3.7% | 76.8% |
-| 20 | Austin Ekeler | RB | ARI | -3.7% | 74.3% |
+| 1 | Tyler Bass | TE | BUF | -37.4% | 48.2% |
+| 2 | Amari Cooper | WR | LV | -18.0% | 6.2% |
+| 3 | Jerome Ford | RB | CIN | -16.0% | 55.8% |
+| 4 | Tank Bigsby | RB | PHI | -14.1% | 56.1% |
+| 5 | Kaleb Johnson | RB | SEA | -13.8% | 71.6% |
+| 6 | Patriots D/ST | D/ST | NE | -12.6% | 59.4% |
+| 7 | Eagles D/ST | D/ST | PHI | -10.0% | 74.5% |
+| 8 | Lions D/ST | D/ST | DET | -9.2% | 73.9% |
+| 9 | Jayden Higgins | WR | HOU | -9.1% | 49.7% |
+| 10 | Colston Loveland | WR | CAR | -8.5% | 72.6% |
+| 11 | Jaydon Blue | RB | DAL | -7.9% | 36.2% |
+| 12 | Jason Sanders | TE | MIA | -7.9% | 17.0% |
+| 13 | Seahawks D/ST | D/ST | LAC | -7.8% | 71.8% |
+| 14 | Cam Skattebo | RB | NYG | -7.7% | 74.0% |
+| 15 | Tua Tagovailoa | RB | MIA | -6.8% | 25.5% |
+| 16 | Jets D/ST | D/ST | NYJ | -6.5% | 17.6% |
+| 17 | Texans D/ST | D/ST | HOU | -6.4% | 90.2% |
+| 18 | Darren Waller | WR | MIA | -6.3% | 15.4% |
+| 19 | Josh Downs | WR | IND | -6.2% | 60.0% |
+| 20 | Marvin Mims Jr. | WR | DEN | -6.1% | 32.4% |
