@@ -162,3 +162,5 @@ file '4.wav'
 ```sh
 ffmpeg -f concat -safe 0 -i list.txt -c copy output.wav
 ```
+
+Use stephen a with morgan freeman fine tuned model
