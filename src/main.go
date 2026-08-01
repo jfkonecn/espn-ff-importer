@@ -152,8 +152,7 @@ func generatePodcastsPage(outputDir string) error {
 			return err
 		}
 
-		feedFile := filepath.Join(outputDir, podcastFeedFileName)
-		return generator.GeneratePodcastRSS(feedFile)
+		return nil
 	}
 
 	// Use the first available season file
@@ -171,8 +170,7 @@ func generatePodcastsPage(outputDir string) error {
 		return err
 	}
 
-	feedFile := filepath.Join(outputDir, podcastFeedFileName)
-	return generator.GeneratePodcastRSS(feedFile)
+	return nil
 }
 
 // generateAIData generates AI data files for all seasons

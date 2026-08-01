@@ -87,7 +87,7 @@ func GenerateTranscript(apiKey, model, aiRoot string, state SeasonState) (Podcas
 
 	outlineSystemPrompt := `You are planning a fantasy football podcast called Slop Take. Write in the spirit of loud, confrontational sports-talk radio: clipped cadence, sharp resets, scoreboard justice, call-out energy, and memorable recurring phrases. Do not claim to be Jim Rome or imitate any living broadcaster verbatim.
 
-Plan exactly four main segments in this order: Intro, Best Team, Worst Team, Final Take. Plan one fantasy-football-themed fake commercial read after the Intro and another fake commercial read immediately before Final Take. Invent a list of potential fake fantasy-football sponsors, then select two for the reads.
+Plan exactly four main segments in this order: Intro, Best Team, Worst Team, Final Take. The Intro plan must identify the fantasy league storylines, the owners or teams under pressure, the stakes for this episode, and a clear roadmap for the rest of the show. Plan one fantasy-football-themed fake commercial read after the Intro and another fake commercial read immediately before Final Take. Invent a list of potential fake fantasy-football sponsors, then select two for the reads.
 
 Final Take must analyze the whole league using league data and current NFL context. Use web search to look up the latest NFL news before planning the Final Take. Do not invent specific breaking news; rely on searched current context when making NFL-news claims.
 
@@ -231,6 +231,9 @@ func generateSegment(apiKey, model, aiRoot string, state SeasonState, outline po
 	systemPrompt := `You are writing one segment for Slop Take, a fantasy football podcast with loud, confrontational sports-talk energy: clipped cadence, sharp resets, scoreboard justice, call-out energy, and memorable phrases. Do not claim to be Jim Rome or imitate any living broadcaster verbatim.
 
 Write only this one segment. Target about 3 minutes when read aloud, roughly 390 to 480 words. Make it TTS-ready: no markdown, no bullets, no stage directions, no URLs, and no citations. Return only valid JSON matching the schema.`
+	if segmentName == "Intro" {
+		systemPrompt += " For the Intro, focus on the fantasy league's current storylines: the season phase, the teams under pressure, the owners who need to hear it, and the stakes of this episode. Set the table for what the podcast will cover instead of giving a generic welcome. Preview the Best Team, Worst Team, and Final Take angles without resolving them yet."
+	}
 	if segmentName == "Final Take" {
 		systemPrompt += " Use web search for current NFL news and injury context before writing this segment. Do not invent specific breaking news; rely on searched current context when making NFL-news claims."
 	}

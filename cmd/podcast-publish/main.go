@@ -20,6 +20,8 @@ func main() {
 		generatedDir    = flag.String("generated", "static/assets/podcasts/generated", "Generated script directory")
 		podcastDir      = flag.String("podcasts", "static/assets/podcasts", "Podcast asset directory")
 		metadataPath    = flag.String("metadata", "static/assets/podcasts/metadata.json", "Podcast metadata JSON path")
+		feedPath        = flag.String("feed", "static/podcasts.xml", "Podcast RSS feed output path")
+		siteURL         = flag.String("site-url", "https://jfkonecn.github.io/espn-ff-importer", "Public site URL for podcast feed links")
 		introSound      = flag.String("intro-sound", "podcast-sounds/slop_take_intro.mp3", "Intro sound MP3 path")
 		transitionSound = flag.String("transition-sound", "podcast-sounds/slop_take_transition.mp3", "Transition sound MP3 path")
 		outroSound      = flag.String("outro-sound", "podcast-sounds/slop_take_outro.mp3", "Outro sound MP3 path")
@@ -75,8 +77,8 @@ func main() {
 		fatal("update podcast metadata", err)
 	}
 
-	fmt.Println("Regenerating podcast page and RSS feed")
-	if err := runAnalyzer(); err != nil {
+	fmt.Printf("Regenerating podcast RSS feed at %s\n", *feedPath)
+	if err := podcast.GeneratePodcastFeed(*feedPath, *podcastDir, *metadataPath, *siteURL); err != nil {
 		fatal("regenerate podcast feed", err)
 	}
 
@@ -318,13 +320,6 @@ func upsertMetadata(path string, script podcast.PodcastScript) error {
 	}
 
 	return podcast.WriteJSON(path, metadata)
-}
-
-func runAnalyzer() error {
-	cmd := exec.Command("go", "run", "./src", "-data", "data", "-output", "static")
-	cmd.Stdout = os.Stdout
-	cmd.Stderr = os.Stderr
-	return cmd.Run()
 }
 
 func firstNonEmpty(values ...string) string {
