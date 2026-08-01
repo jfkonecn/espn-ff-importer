@@ -235,7 +235,7 @@ Write only this one segment. Target about 3 minutes when read aloud, roughly 390
 		systemPrompt += " For the Intro, focus on the fantasy league's current storylines: the season phase, the teams under pressure, the owners who need to hear it, and the stakes of this episode. Set the table for what the podcast will cover instead of giving a generic welcome. Preview the Best Team, Worst Team, and Final Take angles without resolving them yet."
 	}
 	if segmentName == "Final Take" {
-		systemPrompt += " Use web search for current NFL news and injury context before writing this segment. Do not invent specific breaking news; rely on searched current context when making NFL-news claims."
+		systemPrompt += " Use web search for current NFL news and injury context before writing this segment. Do not invent specific breaking news; rely on searched current context when making NFL-news claims. Every NFL news item you mention must be tied directly back to what is happening in this fantasy league: team outlooks, roster strengths or weaknesses, draft posture, standings pressure, owner decisions, keeper value, or matchup consequences. Do not summarize NFL news in isolation; use it as evidence for a hot take about this league."
 	}
 
 	userPrompt := fmt.Sprintf(`Season state:
