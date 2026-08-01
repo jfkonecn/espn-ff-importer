@@ -14,6 +14,15 @@
   },
   "episodes": [
     {
+      "file": "2026_Draft.mp3",
+      "title": "2026 Fantasy Football Draft Preview",
+      "description": "In this episode of Slop Take, we dive into the upcoming 2026 fantasy football draft, analyzing keeper decisions, team strategies, and the latest NFL news impacting your picks.",
+      "pubDate": "2026-08-01",
+      "duration": "00:10:44",
+      "explicit": false,
+      "episodeType": "full"
+    },
+    {
       "file": "2025_Week3.wav",
       "title": "2025 Week 3",
       "description": "Week 3 league recap and fantasy analysis.",
