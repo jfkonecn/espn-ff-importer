@@ -62,7 +62,7 @@
 | Vikings D/ST | D/ST | Min | 2 | 7 | 0 | Yes |
 | Patrick Mahomes | QB | KC | 12 | 17 | 0 | Yes |
 | Omarion Hampton | RB | LAC | 26 | 31 | 0 | Yes |
-| Tyreek Hill | WR | Mia | 39 | 44 | 0 | Yes |
+| Tyreek Hill | WR | FA | 39 | 44 | 0 | Yes |
 | Xavier Worthy | FLEX | KC | 10 | 15 | 0 | Yes |
 | Kyler Murray | Bench | Ari | 6 | 11 | 0 | Yes |
 | Jerry Jeudy | Bench | Cle | 5 | 10 | 0 | Yes |
@@ -70,7 +70,7 @@
 | Chris Godwin Jr. | Bench | TB | 4 | 9 | 0 | Yes |
 | Isiah Pacheco | Bench | KC | 4 | 9 | 0 | Yes |
 | Evan Engram | Bench | Den | 2 | 7 | 0 | Yes |
-| David Montgomery | Bench | Det | 5 | 10 | 0 | Yes |
+| David Montgomery | Bench | Hou | 5 | 10 | 0 | Yes |
 | Tetairoa McMillan | Bench | Car | 17 | 22 | 0 | Yes |
 | Harrison Butker | K | KC | 1 | 6 | 0 | Yes |
 
@@ -114,7 +114,7 @@
 | Javonte Williams | Bench | Dal | 3 | 8 | 0 | Yes |
 | Jordan Love | Bench | GB | 1 | 6 | 0 | Yes |
 | Bills D/ST | D/ST | Buf | 1 | 6 | 0 | Yes |
-| Joshua Karty | K | FA | 1 | 6 | 0 | Yes |
+| Joshua Karty | K | Ari | 1 | 6 | 0 | Yes |
 
 ### Embrace the Darkness
 

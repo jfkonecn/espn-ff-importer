@@ -4,48 +4,48 @@
 
 | Rank | Player | Position | Team | % Change | % Owned |
 |------|--------|----------|------|----------|----------|
-| 1 | Daniel Jones | RB | IND | 60.2% | 81.6% |
-| 2 | Tre Tucker | WR | LV | 46.9% | 49.2% |
-| 3 | Troy Franklin | WR | DEN | 42.9% | 45.1% |
-| 4 | Packers D/ST | D/ST | GB | 41.0% | 86.0% |
-| 5 | Chargers D/ST | D/ST | BAL | 36.7% | 43.7% |
-| 6 | Spencer Shrader | TE | IND | 36.4% | 39.6% |
-| 7 | Juwan Johnson | WR | NO | 31.6% | 79.8% |
-| 8 | Falcons D/ST | D/ST | ATL | 28.6% | 29.9% |
-| 9 | Wan'Dale Robinson | WR | NYG | 25.8% | 55.9% |
-| 10 | Quinshon Judkins | RB | CIN | 22.9% | 80.0% |
-| 11 | Buccaneers D/ST | D/ST | SF | 22.7% | 37.3% |
-| 12 | Matt Prater | TE | BUF | 21.8% | 56.7% |
-| 13 | Kenneth Gainwell | RB | SEA | 20.5% | 30.4% |
-| 14 | Zach Ertz | WR | ARI | 19.8% | 69.8% |
-| 15 | Quentin Johnston | WR | BAL | 19.5% | 84.4% |
-| 16 | Elic Ayomanor | WR | TEN | 19.5% | 27.2% |
-| 17 | Trey Benson | RB | PIT | 18.9% | 74.6% |
-| 18 | Jake Ferguson | WR | DAL | 17.9% | 85.6% |
-| 19 | Cam Skattebo | RB | NYG | 15.3% | 86.5% |
-| 20 | Jared Goff | RB | DET | 15.2% | 77.4% |
+| 1 | Luther Burden III | WR | CAR | 3.5% | 42.7% |
+| 2 | Jake Tonges | WR | TB | 2.7% | 21.7% |
+| 3 | Parker Washington | WR | HOU | 2.6% | 34.8% |
+| 4 | Jaydon Blue | RB | DAL | 2.4% | 16.1% |
+| 5 | Colston Loveland | WR | CAR | 1.6% | 56.3% |
+| 6 | Dylan Sampson | RB | CIN | 1.5% | 33.6% |
+| 7 | Audric Estime | RB | NO | 1.5% | 18.8% |
+| 8 | Michael Mayer | WR | LV | 1.5% | 15.7% |
+| 9 | Trevor Lawrence | RB | HOU | 1.3% | 77.9% |
+| 10 | Jaylen Wright | RB | MIA | 1.2% | 12.0% |
+| 11 | Adonai Mitchell | WR | NYJ | 1.1% | 37.2% |
+| 12 | Juwan Johnson | WR | NO | 1.1% | 66.8% |
+| 13 | Tyler Shough | RB | NO | 1.0% | 26.5% |
+| 14 | AJ Barner | WR | LAC | 1.0% | 39.7% |
+| 15 | Brenton Strange | WR | HOU | 0.9% | 36.5% |
+| 16 | Jaguars D/ST | D/ST | HOU | 0.8% | 70.0% |
+| 17 | Chimere Dike | WR | TEN | 0.8% | 26.4% |
+| 18 | Devin Singletary | RB | NYG | 0.8% | 35.4% |
+| 19 | Bills D/ST | D/ST | BUF | 0.8% | 63.5% |
+| 20 | Cam Little | TE | HOU | 0.8% | 49.4% |
 
 ## Most Dropped Players
 
 | Rank | Player | Position | Team | % Change | % Owned |
 |------|--------|----------|------|----------|----------|
-| 1 | Rams D/ST | D/ST | LAR | -33.2% | 30.8% |
-| 2 | James Conner | RB | PIT | -31.7% | 65.8% |
-| 3 | Austin Ekeler | RB | ARI | -31.5% | 39.9% |
-| 4 | Cardinals D/ST | D/ST | PIT | -28.0% | 25.7% |
-| 5 | Dylan Sampson | RB | CIN | -26.3% | 39.2% |
-| 6 | J.J. McCarthy | RB | MIN | -22.4% | 41.6% |
-| 7 | Evan Engram | WR | DEN | -21.5% | 61.8% |
-| 8 | Colston Loveland | WR | CAR | -21.5% | 46.8% |
-| 9 | Kaleb Johnson | RB | SEA | -21.3% | 44.8% |
-| 10 | 49ers D/ST | D/ST | TB | -20.7% | 29.8% |
-| 11 | Ravens D/ST | D/ST | BAL | -18.8% | 75.7% |
-| 12 | Joe Burrow | RB | CHI | -18.6% | 78.0% |
-| 13 | Najee Harris | RB | BAL | -15.1% | 24.4% |
-| 14 | Jayden Reed | WR | GB | -14.0% | 54.5% |
-| 15 | Jayden Higgins | WR | HOU | -13.2% | 32.9% |
-| 16 | Tank Bigsby | RB | PHI | -12.5% | 38.0% |
-| 17 | Justin Fields | RB | NYJ | -12.5% | 70.0% |
-| 18 | Tyrone Tracy Jr. | RB | NYG | -12.4% | 75.2% |
-| 19 | Xavier Legette | WR | JAX | -11.3% | 35.5% |
-| 20 | Hollywood Brown | WR | KC | -11.1% | 65.2% |
+| 1 | Dallas Goedert | WR | PHI | -1.0% | 90.6% |
+| 2 | Keon Coleman | WR | BUF | -1.0% | 39.6% |
+| 3 | Rashee Rice | WR | KC | -1.0% | 86.9% |
+| 4 | Calvin Ridley | WR | TEN | -0.9% | 26.1% |
+| 5 | Matthew Golden | WR | GB | -0.9% | 36.4% |
+| 6 | George Kittle | WR | TB | -0.9% | 92.6% |
+| 7 | Kyler Murray | RB | PIT | -0.9% | 26.4% |
+| 8 | Travis Hunter | WR | HOU | -0.9% | 30.6% |
+| 9 | Patrick Mahomes | RB | KC | -0.9% | 64.2% |
+| 10 | Breece Hall | RB | NYJ | -0.9% | 95.1% |
+| 11 | David Njoku | WR | CIN | -0.9% | 42.9% |
+| 12 | Justin Fields | RB | NYJ | -0.9% | 20.7% |
+| 13 | DK Metcalf | WR | SEA | -0.9% | 82.0% |
+| 14 | Marvin Harrison Jr. | WR | PIT | -0.8% | 89.0% |
+| 15 | Quinshon Judkins | RB | CIN | -0.8% | 73.4% |
+| 16 | Wan'Dale Robinson | WR | NYG | -0.8% | 88.5% |
+| 17 | Javonte Williams | RB | DAL | -0.8% | 95.7% |
+| 18 | T.J. Hockenson | WR | MIN | -0.8% | 65.1% |
+| 19 | Jaylen Waddle | WR | MIA | -0.8% | 94.7% |
+| 20 | Austin Ekeler | RB | ARI | -0.8% | 14.5% |

@@ -2,17 +2,17 @@
 
 **League:** The League
 **Season:** 2025
-**Current Week:** 4
+**Current Week:** 19
 
 | Rank | Team Name | Owner | Points | Record (W-L-T) | Points For | Points Against |
 |------|-----------|-------|--------|----------------|------------|----------------|
-| 1 | Embrace the Darkness | Jordan Cunningham | 378.78 | 2-1-0 | 378.78 | 356.96 |
-| 2 | Boeing's Hitmen  | Bradford Evans | 377.16 | 2-1-0 | 377.16 | 370.72 |
-| 3 | #1 GangGreen | Paul Konecny | 370.68 | 2-1-0 | 370.68 | 321.96 |
-| 4 | Jensen Huang and Sons | Tarek Kaakani | 367.50 | 2-1-0 | 367.50 | 343.62 |
-| 5 | Latin Fury | Benito Molina | 350.80 | 2-1-0 | 350.80 | 348.16 |
-| 6 | It's MillerTime | Colin Miller | 320.06 | 3-0-0 | 320.06 | 274.18 |
-| 7 | America's Team | Eric Stevens | 316.28 | 1-2-0 | 316.28 | 319.90 |
-| 8 | FDA Control Group | Conner Graeff | 310.08 | 0-3-0 | 310.08 | 343.12 |
-| 9 | Advanced Metrics | John Konecny | 294.80 | 0-3-0 | 294.80 | 359.62 |
-| 10 | Caleb's Cats | michael machas | 293.44 | 1-2-0 | 293.44 | 341.34 |
+| 1 | Jensen Huang and Sons | Tarek Kaakani | 1830.98 | 8-6-0 | 1830.98 | 1686.12 |
+| 2 | Boeing's Hitmen  | Bradford Evans | 1779.56 | 10-4-0 | 1779.56 | 1609.58 |
+| 3 | It's MillerTime | Colin Miller | 1724.12 | 10-4-0 | 1724.12 | 1622.22 |
+| 4 | #1 GangGreen | Paul Konecny | 1695.96 | 6-8-0 | 1695.96 | 1652.10 |
+| 5 | Embrace the Darkness | Jordan Cunningham | 1641.92 | 7-7-0 | 1641.92 | 1691.82 |
+| 6 | Latin Fury | Benito Molina | 1604.48 | 6-8-0 | 1604.48 | 1686.52 |
+| 7 | Advanced Metrics | John Konecny | 1591.96 | 7-7-0 | 1591.96 | 1588.78 |
+| 8 | The Injured Preserve | Conner Graeff | 1558.68 | 7-7-0 | 1558.68 | 1516.32 |
+| 9 | Caleb's Cats | michael machas | 1516.90 | 7-7-0 | 1516.90 | 1621.48 |
+| 10 | America's Team | Eric Stevens | 1456.34 | 2-12-0 | 1456.34 | 1725.96 |
