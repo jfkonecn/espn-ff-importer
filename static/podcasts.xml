@@ -6,7 +6,7 @@
     <description>The League&#39;s Official AI Slop Podcast</description>
     <language>en-us</language>
     <copyright>Slop Take</copyright>
-    <lastBuildDate>Sat, 01 Aug 2026 12:17:06 -0400</lastBuildDate>
+    <lastBuildDate>Sat, 01 Aug 2026 12:34:57 -0400</lastBuildDate>
     <atom:link href="https://jfkonecn.github.io/espn-ff-importer/podcasts.xml" rel="self" type="application/rss+xml" />
     <itunes:author>Eric&#39;s Beard</itunes:author>
     <itunes:summary>The League&#39;s Official AI Slop Podcast</itunes:summary>
@@ -18,14 +18,14 @@
     </itunes:category>
     
     <item>
-      <title>2026 Fantasy Football Draft Preview</title>
-      <description>In this episode of Slop Take, we dive into the upcoming 2026 fantasy football draft, analyzing keeper decisions, team strategies, and the latest NFL news impacting your picks.</description>
-      <itunes:summary>In this episode of Slop Take, we dive into the upcoming 2026 fantasy football draft, analyzing keeper decisions, team strategies, and the latest NFL news impacting your picks.</itunes:summary>
-      <pubDate>Sat, 01 Aug 2026 12:17:05 -0400</pubDate>
+      <title>Slop Take: 2026 Draft Preview</title>
+      <description>In this episode of Slop Take, we dive into the high-stakes world of &#39;The League&#39; as the 2026 fantasy football draft approaches. We analyze the pressure on team owners, dissect the best and worst teams from last season, and provide a comprehensive league analysis to prepare you for the upcoming season.</description>
+      <itunes:summary>In this episode of Slop Take, we dive into the high-stakes world of &#39;The League&#39; as the 2026 fantasy football draft approaches. We analyze the pressure on team owners, dissect the best and worst teams from last season, and provide a comprehensive league analysis to prepare you for the upcoming season.</itunes:summary>
+      <pubDate>Sat, 01 Aug 2026 16:32:14 +0000</pubDate>
       <guid isPermaLink="false">https://jfkonecn.github.io/espn-ff-importer/assets/podcasts/2026_Draft.mp3</guid>
-      <enclosure url="https://jfkonecn.github.io/espn-ff-importer/assets/podcasts/2026_Draft.mp3" length="10302319" type="audio/mpeg" />
-      <itunes:duration>00:10:44</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
+      <enclosure url="https://jfkonecn.github.io/espn-ff-importer/assets/podcasts/2026_Draft.mp3" length="11233533" type="audio/mpeg" />
+      <itunes:duration>00:11:42</itunes:duration>
+      <itunes:explicit>true</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
     </item>
     
