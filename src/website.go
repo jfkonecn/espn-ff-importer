@@ -3,12 +3,19 @@ package main
 import (
 	"embed"
 	"fmt"
-	"html/template"
+	htmltemplate "html/template"
+	"net/url"
 	"os"
+	"path/filepath"
 	"sort"
 	"strings"
+	texttemplate "text/template"
 	"time"
 )
+
+const podcastFeedFileName = "podcasts.xml"
+
+const podcastSiteURL = "https://jfkonecn.github.io/espn-ff-importer"
 
 //go:embed templates/*.html
 var templateFS embed.FS
@@ -46,7 +53,7 @@ type IndexData struct {
 // GenerateIndexPage creates the main index HTML page
 func (ig *IndexGenerator) GenerateIndexPage(outputPath string) error {
 	// Parse the index template with custom functions
-	tmpl, err := template.New("index.html").Funcs(template.FuncMap{
+	tmpl, err := htmltemplate.New("index.html").Funcs(htmltemplate.FuncMap{
 		"groupByTeam": func(eligibilities []KeeperEligibility) map[string][]KeeperEligibility {
 			grouped := make(map[string][]KeeperEligibility)
 			for _, eligibility := range eligibilities {
@@ -84,7 +91,7 @@ func (ig *IndexGenerator) GenerateIndexPage(outputPath string) error {
 // GenerateWebsite creates the static HTML website
 func (wg *WebsiteGenerator) GenerateWebsite(outputPath string) error {
 	// Parse all template files with custom functions
-	tmpl, err := template.New("website.html").Funcs(template.FuncMap{
+	tmpl, err := htmltemplate.New("website.html").Funcs(htmltemplate.FuncMap{
 		"groupByTeam": func(eligibilities []KeeperEligibility) map[string][]KeeperEligibility {
 			grouped := make(map[string][]KeeperEligibility)
 			for _, eligibility := range eligibilities {
@@ -143,7 +150,7 @@ func (wg *WebsiteGenerator) LoadHistoricalData(dataDir string) error {
 // GenerateSeasonPage creates a season-specific HTML page
 func (wg *WebsiteGenerator) GenerateSeasonPage(outputPath string) error {
 	// Parse all template files with custom functions
-	tmpl, err := template.New("website.html").Funcs(template.FuncMap{
+	tmpl, err := htmltemplate.New("website.html").Funcs(htmltemplate.FuncMap{
 		"groupByTeam": func(eligibilities []KeeperEligibility) map[string][]KeeperEligibility {
 			grouped := make(map[string][]KeeperEligibility)
 			for _, eligibility := range eligibilities {
@@ -183,7 +190,7 @@ func (wg *WebsiteGenerator) getLastUpdated() string {
 // GenerateDraftPage creates a draft-specific HTML page
 func (wg *WebsiteGenerator) GenerateDraftPage(outputPath string) error {
 	// Parse all template files with custom functions
-	tmpl, err := template.New("draft.html").Funcs(template.FuncMap{
+	tmpl, err := htmltemplate.New("draft.html").Funcs(htmltemplate.FuncMap{
 		"groupByTeam": func(eligibilities []KeeperEligibility) map[string][]KeeperEligibility {
 			grouped := make(map[string][]KeeperEligibility)
 			for _, eligibility := range eligibilities {
@@ -218,7 +225,7 @@ func (wg *WebsiteGenerator) GenerateDraftPage(outputPath string) error {
 // GeneratePodcastsPage creates a podcasts-specific HTML page
 func (wg *WebsiteGenerator) GeneratePodcastsPage(outputPath string) error {
 	// Parse all template files with custom functions
-	tmpl, err := template.New("podcasts.html").Funcs(template.FuncMap{
+	tmpl, err := htmltemplate.New("podcasts.html").Funcs(htmltemplate.FuncMap{
 		"groupByTeam": func(eligibilities []KeeperEligibility) map[string][]KeeperEligibility {
 			grouped := make(map[string][]KeeperEligibility)
 			for _, eligibility := range eligibilities {
@@ -250,6 +257,39 @@ func (wg *WebsiteGenerator) GeneratePodcastsPage(outputPath string) error {
 	return nil
 }
 
+// GeneratePodcastRSS creates an RSS feed for podcast apps.
+func (wg *WebsiteGenerator) GeneratePodcastRSS(outputPath string) error {
+	data := wg.preparePodcastsData()
+	feedURL := strings.TrimRight(podcastSiteURL, "/") + "/" + podcastFeedFileName
+	pageURL := strings.TrimRight(podcastSiteURL, "/") + "/podcasts.html"
+
+	file, err := os.Create(outputPath)
+	if err != nil {
+		return fmt.Errorf("failed to create podcast RSS file: %w", err)
+	}
+	defer file.Close()
+
+	rssData := PodcastRSSData{
+		Title:       "Self Aware Fantasy Podcast",
+		Description: "Fantasy football league podcasts and analysis.",
+		Link:        pageURL,
+		FeedURL:     feedURL,
+		BuildDate:   time.Now().Format(time.RFC1123Z),
+		Podcasts:    data.Podcasts,
+	}
+
+	tmpl, err := texttemplate.New("podcasts.xml").Parse(podcastRSSTemplate)
+	if err != nil {
+		return fmt.Errorf("failed to parse podcast RSS template: %w", err)
+	}
+
+	if err := tmpl.Execute(file, rssData); err != nil {
+		return fmt.Errorf("failed to execute podcast RSS template: %w", err)
+	}
+
+	return nil
+}
+
 // preparePodcastsData prepares all the data needed for the podcasts template
 func (wg *WebsiteGenerator) preparePodcastsData() PodcastData {
 	// Scan for WAV files in the podcasts directory
@@ -257,6 +297,7 @@ func (wg *WebsiteGenerator) preparePodcastsData() PodcastData {
 
 	return PodcastData{
 		GeneratedAt: time.Now().Format("January 2, 2006 at 3:04 PM"),
+		FeedURL:     strings.TrimRight(podcastSiteURL, "/") + "/" + podcastFeedFileName,
 		Podcasts:    podcasts,
 	}
 }
@@ -283,20 +324,28 @@ func (wg *WebsiteGenerator) scanPodcastFiles() []PodcastInfo {
 			// Get file info for size
 			fileInfo, err := entry.Info()
 			var fileSize string
+			var fileSizeBytes int64
+			pubDate := time.Now()
 			if err == nil {
-				fileSize = wg.formatFileSize(fileInfo.Size())
+				fileSizeBytes = fileInfo.Size()
+				fileSize = wg.formatFileSize(fileSizeBytes)
+				pubDate = fileInfo.ModTime()
 			}
 
 			// Extract title and date from filename
 			title, date := wg.extractPodcastInfo(fileName)
 
 			podcast := PodcastInfo{
-				Title:       title,
-				FileName:    fileName,
-				FilePath:    filePath,
-				FileSize:    fileSize,
-				Date:        date,
-				Description: wg.generatePodcastDescription(fileName),
+				Title:         title,
+				FileName:      fileName,
+				FilePath:      filePath,
+				AbsoluteURL:   wg.absolutePodcastURL(filePath),
+				FileSize:      fileSize,
+				FileSizeBytes: fileSizeBytes,
+				Date:          date,
+				PubDate:       pubDate.Format(time.RFC1123Z),
+				GUID:          wg.podcastGUID(fileName),
+				Description:   wg.generatePodcastDescription(fileName),
 			}
 
 			podcasts = append(podcasts, podcast)
@@ -309,6 +358,14 @@ func (wg *WebsiteGenerator) scanPodcastFiles() []PodcastInfo {
 	})
 
 	return podcasts
+}
+
+func (wg *WebsiteGenerator) absolutePodcastURL(filePath string) string {
+	return strings.TrimRight(podcastSiteURL, "/") + "/" + strings.TrimLeft(filePath, "/")
+}
+
+func (wg *WebsiteGenerator) podcastGUID(fileName string) string {
+	return strings.TrimRight(podcastSiteURL, "/") + "/" + url.PathEscape(filepath.ToSlash(fileName))
 }
 
 // formatFileSize formats file size in human-readable format
@@ -1552,15 +1609,57 @@ type DraftData struct {
 // PodcastData represents the data passed to the podcasts template
 type PodcastData struct {
 	GeneratedAt string
+	FeedURL     string
+	Podcasts    []PodcastInfo
+}
+
+// PodcastRSSData represents the data passed to the podcast RSS template.
+type PodcastRSSData struct {
+	Title       string
+	Description string
+	Link        string
+	FeedURL     string
+	BuildDate   string
 	Podcasts    []PodcastInfo
 }
 
 // PodcastInfo represents information about a podcast file
 type PodcastInfo struct {
-	Title       string
-	FileName    string
-	FilePath    string
-	FileSize    string
-	Date        string
-	Description string
+	Title         string
+	FileName      string
+	FilePath      string
+	AbsoluteURL   string
+	FileSize      string
+	FileSizeBytes int64
+	Date          string
+	PubDate       string
+	GUID          string
+	Description   string
 }
+
+const podcastRSSTemplate = `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>{{.Title}}</title>
+    <link>{{.Link}}</link>
+    <description>{{.Description}}</description>
+    <language>en-us</language>
+    <lastBuildDate>{{.BuildDate}}</lastBuildDate>
+    <atom:link href="{{.FeedURL}}" rel="self" type="application/rss+xml" />
+    <itunes:author>Self Aware Fantasy Podcast</itunes:author>
+    <itunes:summary>{{.Description}}</itunes:summary>
+    <itunes:explicit>false</itunes:explicit>
+    <itunes:category text="Sports" />
+    {{range .Podcasts}}
+    <item>
+      <title>{{.Title}}</title>
+      <description>{{.Description}}</description>
+      <itunes:summary>{{.Description}}</itunes:summary>
+      <pubDate>{{.PubDate}}</pubDate>
+      <guid isPermaLink="false">{{.GUID}}</guid>
+      <enclosure url="{{.AbsoluteURL}}" length="{{.FileSizeBytes}}" type="audio/wav" />
+    </item>
+    {{end}}
+  </channel>
+</rss>
+`

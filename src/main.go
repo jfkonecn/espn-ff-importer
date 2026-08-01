@@ -84,7 +84,7 @@ func processSeasonFile(filePath, outputDir, dataDir string) (SeasonInfo, error) 
 	// Extract year from filename (e.g., "espn_league_2024.json" -> "2024")
 	baseName := filepath.Base(filePath)
 	year := strings.TrimSuffix(strings.TrimPrefix(baseName, "espn_league_"), ".json")
-	
+
 	// Create league reader
 	reader, err := NewLeagueReader(filePath)
 	if err != nil {
@@ -118,7 +118,7 @@ func processSeasonFile(filePath, outputDir, dataDir string) (SeasonInfo, error) 
 
 	// Get season information for the index page
 	teams := reader.GetTeams()
-	
+
 	return SeasonInfo{
 		Year:        year,
 		LeagueName:  generator.getLeagueName(),
@@ -148,7 +148,12 @@ func generatePodcastsPage(outputDir string) error {
 		// If no league files, create a minimal generator
 		generator := &WebsiteGenerator{}
 		outputFile := filepath.Join(outputDir, "podcasts.html")
-		return generator.GeneratePodcastsPage(outputFile)
+		if err := generator.GeneratePodcastsPage(outputFile); err != nil {
+			return err
+		}
+
+		feedFile := filepath.Join(outputDir, podcastFeedFileName)
+		return generator.GeneratePodcastRSS(feedFile)
 	}
 
 	// Use the first available season file
@@ -162,7 +167,12 @@ func generatePodcastsPage(outputDir string) error {
 
 	// Generate the podcasts page
 	outputFile := filepath.Join(outputDir, "podcasts.html")
-	return generator.GeneratePodcastsPage(outputFile)
+	if err := generator.GeneratePodcastsPage(outputFile); err != nil {
+		return err
+	}
+
+	feedFile := filepath.Join(outputDir, podcastFeedFileName)
+	return generator.GeneratePodcastRSS(feedFile)
 }
 
 // generateAIData generates AI data files for all seasons
@@ -189,13 +199,13 @@ func generateAIData(files []string, dataDir string) error {
 		// Create AI data generator for this season
 		seasonDir := fmt.Sprintf("ai/%s", season)
 		generator := NewAIDataGenerator(reader, seasonDir)
-		
+
 		// Generate all AI data files for this season
 		if err := generator.GenerateAllData(); err != nil {
 			fmt.Printf("Warning: failed to generate AI data for season %s: %v\n", season, err)
 			continue
 		}
-		
+
 		fmt.Printf("Generated AI data for season %s\n", season)
 	}
 
