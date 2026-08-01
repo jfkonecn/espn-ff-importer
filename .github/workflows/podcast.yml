@@ -1,0 +1,21 @@
+name: Podcast Publisher
+
+on:
+  workflow_run:
+    workflows: ["Weekly Fantasy Football Analyzer"]
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  phase-1:
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    uses: ./.github/workflows/podcast-phase-1.yml
+    secrets: inherit
+
+  phase-2:
+    needs: phase-1
+    uses: ./.github/workflows/podcast-phase-2.yml
+    secrets: inherit

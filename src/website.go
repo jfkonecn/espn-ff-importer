@@ -298,7 +298,7 @@ func (wg *WebsiteGenerator) GeneratePodcastRSS(outputPath string) error {
 func (wg *WebsiteGenerator) preparePodcastsData() PodcastData {
 	metadata := wg.loadPodcastMetadata()
 
-	// Scan for WAV files in the podcasts directory
+	// Scan for podcast audio files in the podcasts directory
 	podcasts := wg.scanPodcastFiles(metadata)
 
 	return PodcastData{
@@ -329,7 +329,7 @@ func (wg *WebsiteGenerator) loadPodcastMetadata() PodcastMetadata {
 	return metadata
 }
 
-// scanPodcastFiles scans the podcasts directory for WAV files
+// scanPodcastFiles scans the podcasts directory for supported audio files
 func (wg *WebsiteGenerator) scanPodcastFiles(metadata PodcastMetadata) []PodcastInfo {
 	var podcasts []PodcastInfo
 	episodes := metadata.episodesByFile()
@@ -345,7 +345,7 @@ func (wg *WebsiteGenerator) scanPodcastFiles(metadata PodcastMetadata) []Podcast
 	}
 
 	for _, entry := range entries {
-		if !entry.IsDir() && strings.HasSuffix(strings.ToLower(entry.Name()), ".wav") {
+		if !entry.IsDir() && isPodcastAudioFile(entry.Name()) {
 			fileName := entry.Name()
 			filePath := fmt.Sprintf("assets/podcasts/%s", fileName)
 			episode := episodes[fileName]
@@ -371,6 +371,7 @@ func (wg *WebsiteGenerator) scanPodcastFiles(metadata PodcastMetadata) []Podcast
 				AbsoluteURL:   wg.absolutePodcastURL(filePath),
 				FileSize:      fileSize,
 				FileSizeBytes: fileSizeBytes,
+				AudioType:     podcastAudioType(fileName),
 				Date:          date,
 				PubDate:       pubDate.Format(time.RFC1123Z),
 				GUID:          wg.podcastGUID(fileName),
@@ -484,10 +485,29 @@ func (wg *WebsiteGenerator) formatFileSize(bytes int64) string {
 	return fmt.Sprintf("%.1f %cB", float64(bytes)/float64(div), "KMGTPE"[exp])
 }
 
+func isPodcastAudioFile(fileName string) bool {
+	ext := strings.ToLower(filepath.Ext(fileName))
+	return ext == ".wav" || ext == ".mp3"
+}
+
+func podcastAudioType(fileName string) string {
+	switch strings.ToLower(filepath.Ext(fileName)) {
+	case ".mp3":
+		return "audio/mpeg"
+	case ".wav":
+		return "audio/wav"
+	default:
+		return "application/octet-stream"
+	}
+}
+
+func trimPodcastAudioExtension(fileName string) string {
+	return strings.TrimSuffix(fileName, filepath.Ext(fileName))
+}
+
 // extractPodcastInfo extracts title and date from filename
 func (wg *WebsiteGenerator) extractPodcastInfo(fileName string) (title, date string) {
-	// Remove .wav extension
-	name := strings.TrimSuffix(fileName, ".wav")
+	name := trimPodcastAudioExtension(fileName)
 
 	// Try to extract year from filename (e.g., "2025_Predraft" -> "2025")
 	parts := strings.Split(name, "_")
@@ -508,7 +528,7 @@ func (wg *WebsiteGenerator) extractPodcastInfo(fileName string) (title, date str
 
 // generatePodcastDescription generates a description based on the filename
 func (wg *WebsiteGenerator) generatePodcastDescription(fileName string) string {
-	name := strings.TrimSuffix(fileName, ".wav")
+	name := trimPodcastAudioExtension(fileName)
 
 	// Generate description based on filename patterns
 	if strings.Contains(strings.ToLower(name), "predraft") {
@@ -1766,6 +1786,7 @@ type PodcastInfo struct {
 	AbsoluteURL   string
 	FileSize      string
 	FileSizeBytes int64
+	AudioType     string
 	Date          string
 	PubDate       string
 	GUID          string
@@ -1803,7 +1824,7 @@ const podcastRSSTemplate = `<?xml version="1.0" encoding="UTF-8"?>
       <itunes:summary>{{xml .Description}}</itunes:summary>
       <pubDate>{{.PubDate}}</pubDate>
       <guid isPermaLink="false">{{.GUID}}</guid>
-      <enclosure url="{{.AbsoluteURL}}" length="{{.FileSizeBytes}}" type="audio/wav" />
+      <enclosure url="{{.AbsoluteURL}}" length="{{.FileSizeBytes}}" type="{{.AudioType}}" />
       {{if .Duration}}<itunes:duration>{{.Duration}}</itunes:duration>{{end}}
       <itunes:explicit>{{.Explicit}}</itunes:explicit>
       <itunes:episodeType>{{.EpisodeType}}</itunes:episodeType>

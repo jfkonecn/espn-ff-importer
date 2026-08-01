@@ -1,0 +1,44 @@
+name: Podcast Phase 2 Publish
+
+on:
+  workflow_call:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+
+      - name: Publish podcast audio and feed
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          CURRENT_YEAR: ${{ vars.CURRENT_YEAR }}
+          PODCAST_TTS_MODEL: ${{ vars.PODCAST_TTS_MODEL }}
+          PODCAST_VOICE: ${{ vars.PODCAST_VOICE }}
+        run: go run ./cmd/podcast-publish
+
+      - name: Commit podcast publication
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add static/podcasts.html static/podcasts.xml static/assets/podcasts
+          if git diff --staged --quiet; then
+            echo "No podcast publication changes to commit"
+          else
+            git commit -m "Publish podcast episode [skip ci]"
+            git push
+          fi
