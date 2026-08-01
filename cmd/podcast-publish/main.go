@@ -25,6 +25,7 @@ func main() {
 		outroSound      = flag.String("outro-sound", "podcast-sounds/slop_take_outro.mp3", "Outro sound MP3 path")
 		model           = flag.String("model", getenv("PODCAST_TTS_MODEL", "gpt-4o-mini-tts"), "OpenAI TTS model")
 		voice           = flag.String("voice", getenv("PODCAST_VOICE", "ballad"), "OpenAI TTS voice")
+		forceRun        = flag.Bool("force", boolFromEnv("PODCAST_FORCE_RUN"), "Allow overwriting an existing generated podcast")
 	)
 	flag.Parse()
 	if *season == 0 {
@@ -55,6 +56,9 @@ func main() {
 	}
 
 	audioPath := filepath.Join(*podcastDir, script.AudioFile)
+	if !*forceRun && fileExists(audioPath) {
+		fatal("run safety check", fmt.Errorf("generated podcast audio already exists at %s; manually rerun with force enabled to overwrite it", audioPath))
+	}
 	fmt.Printf("Synthesizing segmented MP3 for episode %s with model=%s voice=%s\n", script.EpisodeID, *model, *voice)
 	if err := synthesizeSegmentedEpisode(apiKey, *model, *voice, script, audioPath, *introSound, *transitionSound, *outroSound, *generatedDir); err != nil {
 		fatal("synthesize segmented audio", err)
@@ -212,6 +216,16 @@ func requireFile(path string) error {
 		return fmt.Errorf("required podcast sound %s is a directory", path)
 	}
 	return nil
+}
+
+func fileExists(path string) bool {
+	_, err := os.Stat(path)
+	return err == nil
+}
+
+func boolFromEnv(key string) bool {
+	value := os.Getenv(key)
+	return value == "1" || value == "true" || value == "TRUE" || value == "yes" || value == "YES"
 }
 
 func sanitizeFilePart(value string) string {

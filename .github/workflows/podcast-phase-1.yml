@@ -2,7 +2,18 @@ name: Podcast Phase 1 Transcript
 
 on:
   workflow_call:
+    inputs:
+      force_run:
+        required: false
+        default: false
+        type: boolean
   workflow_dispatch:
+    inputs:
+      force_run:
+        description: "Overwrite an existing generated podcast for this episode"
+        required: false
+        default: false
+        type: boolean
 
 permissions:
   contents: write
@@ -26,6 +37,7 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           CURRENT_YEAR: ${{ vars.CURRENT_YEAR }}
           PODCAST_MODEL: ${{ vars.PODCAST_MODEL }}
+          PODCAST_FORCE_RUN: ${{ inputs.force_run }}
         run: go run ./cmd/podcast-transcript
 
       - name: Commit transcript

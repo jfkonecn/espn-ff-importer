@@ -2,7 +2,18 @@ name: Podcast Phase 2 Publish
 
 on:
   workflow_call:
+    inputs:
+      force_run:
+        required: false
+        default: false
+        type: boolean
   workflow_dispatch:
+    inputs:
+      force_run:
+        description: "Overwrite an existing generated podcast for this episode"
+        required: false
+        default: false
+        type: boolean
 
 permissions:
   contents: write
@@ -30,6 +41,7 @@ jobs:
           CURRENT_YEAR: ${{ vars.CURRENT_YEAR }}
           PODCAST_TTS_MODEL: ${{ vars.PODCAST_TTS_MODEL }}
           PODCAST_VOICE: ${{ vars.PODCAST_VOICE }}
+          PODCAST_FORCE_RUN: ${{ inputs.force_run }}
         run: go run ./cmd/podcast-publish
 
       - name: Commit podcast publication
