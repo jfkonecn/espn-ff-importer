@@ -2,6 +2,7 @@ package main
 
 import (
 	"embed"
+	"encoding/json"
 	"fmt"
 	htmltemplate "html/template"
 	"net/url"
@@ -16,6 +17,8 @@ import (
 const podcastFeedFileName = "podcasts.xml"
 
 const podcastSiteURL = "https://jfkonecn.github.io/espn-ff-importer"
+
+const podcastMetadataPath = "static/assets/podcasts/metadata.json"
 
 //go:embed templates/*.html
 var templateFS embed.FS
@@ -270,15 +273,16 @@ func (wg *WebsiteGenerator) GeneratePodcastRSS(outputPath string) error {
 	defer file.Close()
 
 	rssData := PodcastRSSData{
-		Title:       "Self Aware Fantasy Podcast",
-		Description: "Fantasy football league podcasts and analysis.",
-		Link:        pageURL,
-		FeedURL:     feedURL,
-		BuildDate:   time.Now().Format(time.RFC1123Z),
-		Podcasts:    data.Podcasts,
+		Channel:   data.Channel,
+		Link:      pageURL,
+		FeedURL:   feedURL,
+		BuildDate: time.Now().Format(time.RFC1123Z),
+		Podcasts:  data.Podcasts,
 	}
 
-	tmpl, err := texttemplate.New("podcasts.xml").Parse(podcastRSSTemplate)
+	tmpl, err := texttemplate.New("podcasts.xml").Funcs(texttemplate.FuncMap{
+		"xml": htmltemplate.HTMLEscapeString,
+	}).Parse(podcastRSSTemplate)
 	if err != nil {
 		return fmt.Errorf("failed to parse podcast RSS template: %w", err)
 	}
@@ -292,19 +296,43 @@ func (wg *WebsiteGenerator) GeneratePodcastRSS(outputPath string) error {
 
 // preparePodcastsData prepares all the data needed for the podcasts template
 func (wg *WebsiteGenerator) preparePodcastsData() PodcastData {
+	metadata := wg.loadPodcastMetadata()
+
 	// Scan for WAV files in the podcasts directory
-	podcasts := wg.scanPodcastFiles()
+	podcasts := wg.scanPodcastFiles(metadata)
 
 	return PodcastData{
 		GeneratedAt: time.Now().Format("January 2, 2006 at 3:04 PM"),
 		FeedURL:     strings.TrimRight(podcastSiteURL, "/") + "/" + podcastFeedFileName,
+		Channel:     metadata.Channel.withDefaults(),
 		Podcasts:    podcasts,
 	}
 }
 
+func (wg *WebsiteGenerator) loadPodcastMetadata() PodcastMetadata {
+	metadata := PodcastMetadata{
+		Channel: defaultPodcastChannel(),
+	}
+
+	contents, err := os.ReadFile(podcastMetadataPath)
+	if err != nil {
+		fmt.Printf("Warning: Could not read podcast metadata %s: %v\n", podcastMetadataPath, err)
+		return metadata
+	}
+
+	if err := json.Unmarshal(contents, &metadata); err != nil {
+		fmt.Printf("Warning: Could not parse podcast metadata %s: %v\n", podcastMetadataPath, err)
+		return PodcastMetadata{Channel: defaultPodcastChannel()}
+	}
+
+	metadata.Channel = metadata.Channel.withDefaults()
+	return metadata
+}
+
 // scanPodcastFiles scans the podcasts directory for WAV files
-func (wg *WebsiteGenerator) scanPodcastFiles() []PodcastInfo {
+func (wg *WebsiteGenerator) scanPodcastFiles(metadata PodcastMetadata) []PodcastInfo {
 	var podcasts []PodcastInfo
+	episodes := metadata.episodesByFile()
 
 	// Define the podcasts directory path relative to static assets
 	podcastsDir := "static/assets/podcasts"
@@ -320,6 +348,7 @@ func (wg *WebsiteGenerator) scanPodcastFiles() []PodcastInfo {
 		if !entry.IsDir() && strings.HasSuffix(strings.ToLower(entry.Name()), ".wav") {
 			fileName := entry.Name()
 			filePath := fmt.Sprintf("assets/podcasts/%s", fileName)
+			episode := episodes[fileName]
 
 			// Get file info for size
 			fileInfo, err := entry.Info()
@@ -346,6 +375,24 @@ func (wg *WebsiteGenerator) scanPodcastFiles() []PodcastInfo {
 				PubDate:       pubDate.Format(time.RFC1123Z),
 				GUID:          wg.podcastGUID(fileName),
 				Description:   wg.generatePodcastDescription(fileName),
+				Duration:      episode.Duration,
+				Explicit:      formatBool(episode.Explicit),
+				EpisodeType:   firstNonEmpty(episode.EpisodeType, "full"),
+			}
+
+			if episode.Title != "" {
+				podcast.Title = episode.Title
+			}
+			if episode.Description != "" {
+				podcast.Description = episode.Description
+			}
+			if episode.PubDate != "" {
+				parsedPubDate, err := time.Parse(time.RFC3339, episode.PubDate)
+				if err == nil {
+					podcast.PubDate = parsedPubDate.Format(time.RFC1123Z)
+				} else {
+					fmt.Printf("Warning: Could not parse pubDate for %s: %v\n", fileName, err)
+				}
 			}
 
 			podcasts = append(podcasts, podcast)
@@ -365,7 +412,62 @@ func (wg *WebsiteGenerator) absolutePodcastURL(filePath string) string {
 }
 
 func (wg *WebsiteGenerator) podcastGUID(fileName string) string {
-	return strings.TrimRight(podcastSiteURL, "/") + "/" + url.PathEscape(filepath.ToSlash(fileName))
+	return strings.TrimRight(podcastSiteURL, "/") + "/assets/podcasts/" + url.PathEscape(filepath.ToSlash(fileName))
+}
+
+func defaultPodcastChannel() PodcastChannel {
+	return PodcastChannel{
+		Title:       "Self Aware Fantasy Podcast",
+		Description: "Fantasy football league podcasts and analysis.",
+		Author:      "Self Aware Fantasy Podcast",
+		Language:    "en-us",
+		Explicit:    false,
+		Category:    "Sports",
+		OwnerName:   "Self Aware Fantasy Podcast",
+		Copyright:   "Self Aware Fantasy Podcast",
+	}
+}
+
+func (pc PodcastChannel) withDefaults() PodcastChannel {
+	defaults := defaultPodcastChannel()
+	pc.Title = firstNonEmpty(pc.Title, defaults.Title)
+	pc.Description = firstNonEmpty(pc.Description, defaults.Description)
+	pc.Author = firstNonEmpty(pc.Author, defaults.Author)
+	pc.Language = firstNonEmpty(pc.Language, defaults.Language)
+	pc.Category = firstNonEmpty(pc.Category, defaults.Category)
+	pc.OwnerName = firstNonEmpty(pc.OwnerName, defaults.OwnerName)
+	pc.Copyright = firstNonEmpty(pc.Copyright, defaults.Copyright)
+	if pc.Image != "" && !strings.HasPrefix(pc.Image, "http://") && !strings.HasPrefix(pc.Image, "https://") {
+		pc.Image = strings.TrimRight(podcastSiteURL, "/") + "/" + strings.TrimLeft(pc.Image, "/")
+	}
+	pc.ExplicitText = formatBool(pc.Explicit)
+	return pc
+}
+
+func (pm PodcastMetadata) episodesByFile() map[string]PodcastEpisodeMetadata {
+	episodes := make(map[string]PodcastEpisodeMetadata, len(pm.Episodes))
+	for _, episode := range pm.Episodes {
+		if episode.File != "" {
+			episodes[episode.File] = episode
+		}
+	}
+	return episodes
+}
+
+func firstNonEmpty(values ...string) string {
+	for _, value := range values {
+		if value != "" {
+			return value
+		}
+	}
+	return ""
+}
+
+func formatBool(value bool) string {
+	if value {
+		return "true"
+	}
+	return "false"
 }
 
 // formatFileSize formats file size in human-readable format
@@ -1610,17 +1712,50 @@ type DraftData struct {
 type PodcastData struct {
 	GeneratedAt string
 	FeedURL     string
+	Channel     PodcastChannel
 	Podcasts    []PodcastInfo
 }
 
 // PodcastRSSData represents the data passed to the podcast RSS template.
 type PodcastRSSData struct {
-	Title       string
-	Description string
-	Link        string
-	FeedURL     string
-	BuildDate   string
-	Podcasts    []PodcastInfo
+	Channel   PodcastChannel
+	Link      string
+	FeedURL   string
+	BuildDate string
+	Podcasts  []PodcastInfo
+}
+
+// PodcastMetadata is the standardized source of truth for podcast RSS fields.
+type PodcastMetadata struct {
+	Channel  PodcastChannel           `json:"channel"`
+	Episodes []PodcastEpisodeMetadata `json:"episodes"`
+}
+
+// PodcastChannel represents show-level podcast RSS metadata.
+type PodcastChannel struct {
+	Title        string `json:"title"`
+	Description  string `json:"description"`
+	Author       string `json:"author"`
+	Language     string `json:"language"`
+	Explicit     bool   `json:"explicit"`
+	ExplicitText string `json:"-"`
+	Category     string `json:"category"`
+	Subcategory  string `json:"subcategory"`
+	Image        string `json:"image"`
+	OwnerName    string `json:"ownerName"`
+	OwnerEmail   string `json:"ownerEmail"`
+	Copyright    string `json:"copyright"`
+}
+
+// PodcastEpisodeMetadata represents per-episode RSS metadata.
+type PodcastEpisodeMetadata struct {
+	File        string `json:"file"`
+	Title       string `json:"title"`
+	Description string `json:"description"`
+	PubDate     string `json:"pubDate"`
+	Duration    string `json:"duration"`
+	Explicit    bool   `json:"explicit"`
+	EpisodeType string `json:"episodeType"`
 }
 
 // PodcastInfo represents information about a podcast file
@@ -1635,29 +1770,43 @@ type PodcastInfo struct {
 	PubDate       string
 	GUID          string
 	Description   string
+	Duration      string
+	Explicit      string
+	EpisodeType   string
 }
 
 const podcastRSSTemplate = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>{{.Title}}</title>
+    <title>{{xml .Channel.Title}}</title>
     <link>{{.Link}}</link>
-    <description>{{.Description}}</description>
-    <language>en-us</language>
+    <description>{{xml .Channel.Description}}</description>
+    <language>{{xml .Channel.Language}}</language>
+    <copyright>{{xml .Channel.Copyright}}</copyright>
     <lastBuildDate>{{.BuildDate}}</lastBuildDate>
     <atom:link href="{{.FeedURL}}" rel="self" type="application/rss+xml" />
-    <itunes:author>Self Aware Fantasy Podcast</itunes:author>
-    <itunes:summary>{{.Description}}</itunes:summary>
-    <itunes:explicit>false</itunes:explicit>
-    <itunes:category text="Sports" />
+    <itunes:author>{{xml .Channel.Author}}</itunes:author>
+    <itunes:summary>{{xml .Channel.Description}}</itunes:summary>
+    <itunes:explicit>{{.Channel.ExplicitText}}</itunes:explicit>
+    {{if .Channel.Image}}<itunes:image href="{{.Channel.Image}}" />{{end}}
+    {{if .Channel.OwnerEmail}}<itunes:owner>
+      <itunes:name>{{xml .Channel.OwnerName}}</itunes:name>
+      <itunes:email>{{xml .Channel.OwnerEmail}}</itunes:email>
+    </itunes:owner>{{end}}
+    {{if .Channel.Subcategory}}<itunes:category text="{{xml .Channel.Category}}">
+      <itunes:category text="{{xml .Channel.Subcategory}}" />
+    </itunes:category>{{else}}<itunes:category text="{{xml .Channel.Category}}" />{{end}}
     {{range .Podcasts}}
     <item>
-      <title>{{.Title}}</title>
-      <description>{{.Description}}</description>
-      <itunes:summary>{{.Description}}</itunes:summary>
+      <title>{{xml .Title}}</title>
+      <description>{{xml .Description}}</description>
+      <itunes:summary>{{xml .Description}}</itunes:summary>
       <pubDate>{{.PubDate}}</pubDate>
       <guid isPermaLink="false">{{.GUID}}</guid>
       <enclosure url="{{.AbsoluteURL}}" length="{{.FileSizeBytes}}" type="audio/wav" />
+      {{if .Duration}}<itunes:duration>{{.Duration}}</itunes:duration>{{end}}
+      <itunes:explicit>{{.Explicit}}</itunes:explicit>
+      <itunes:episodeType>{{.EpisodeType}}</itunes:episodeType>
     </item>
     {{end}}
   </channel>

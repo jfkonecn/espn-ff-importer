@@ -1,51 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Self Aware Fantasy Podcast</title>
+    <title>Slop Take</title>
     <link>https://jfkonecn.github.io/espn-ff-importer/podcasts.html</link>
-    <description>Fantasy football league podcasts and analysis.</description>
+    <description>The League&#39;s Official AI Slop Podcast</description>
     <language>en-us</language>
-    <lastBuildDate>Sat, 01 Aug 2026 10:32:12 -0400</lastBuildDate>
+    <copyright>Slop Take</copyright>
+    <lastBuildDate>Sat, 01 Aug 2026 10:50:50 -0400</lastBuildDate>
     <atom:link href="https://jfkonecn.github.io/espn-ff-importer/podcasts.xml" rel="self" type="application/rss+xml" />
-    <itunes:author>Self Aware Fantasy Podcast</itunes:author>
-    <itunes:summary>Fantasy football league podcasts and analysis.</itunes:summary>
+    <itunes:author>Eric&#39;s Beard</itunes:author>
+    <itunes:summary>The League&#39;s Official AI Slop Podcast</itunes:summary>
     <itunes:explicit>false</itunes:explicit>
-    <itunes:category text="Sports" />
+    <itunes:image href="https://jfkonecn.github.io/espn-ff-importer/assets/podcasts/cover.png" />
+    
+    <itunes:category text="Sports">
+      <itunes:category text="Fantasy Sports" />
+    </itunes:category>
     
     <item>
-      <title>Week3</title>
-      <description>Fantasy football league podcast</description>
-      <itunes:summary>Fantasy football league podcast</itunes:summary>
+      <title>2025 Week 3</title>
+      <description>Week 3 league recap and fantasy analysis.</description>
+      <itunes:summary>Week 3 league recap and fantasy analysis.</itunes:summary>
       <pubDate>Wed, 24 Sep 2025 17:47:09 -0400</pubDate>
-      <guid isPermaLink="false">https://jfkonecn.github.io/espn-ff-importer/2025_Week3.wav</guid>
+      <guid isPermaLink="false">https://jfkonecn.github.io/espn-ff-importer/assets/podcasts/2025_Week3.wav</guid>
       <enclosure url="https://jfkonecn.github.io/espn-ff-importer/assets/podcasts/2025_Week3.wav" length="73100414" type="audio/wav" />
+      <itunes:duration>00:13:49</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
     </item>
     
     <item>
-      <title>Week1</title>
-      <description>Fantasy football league podcast</description>
-      <itunes:summary>Fantasy football league podcast</itunes:summary>
+      <title>2025 Week 1</title>
+      <description>Week 1 league recap and fantasy analysis.</description>
+      <itunes:summary>Week 1 league recap and fantasy analysis.</itunes:summary>
       <pubDate>Thu, 11 Sep 2025 09:25:08 -0400</pubDate>
-      <guid isPermaLink="false">https://jfkonecn.github.io/espn-ff-importer/2025_Week1.wav</guid>
+      <guid isPermaLink="false">https://jfkonecn.github.io/espn-ff-importer/assets/podcasts/2025_Week1.wav</guid>
       <enclosure url="https://jfkonecn.github.io/espn-ff-importer/assets/podcasts/2025_Week1.wav" length="63522946" type="audio/wav" />
+      <itunes:duration>00:12:00</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
     </item>
     
     <item>
-      <title>Predraft</title>
-      <description>Pre-draft analysis and strategy discussion</description>
-      <itunes:summary>Pre-draft analysis and strategy discussion</itunes:summary>
+      <title>2025 Predraft</title>
+      <description>Pre-draft analysis and strategy discussion.</description>
+      <itunes:summary>Pre-draft analysis and strategy discussion.</itunes:summary>
       <pubDate>Sun, 31 Aug 2025 17:52:27 -0400</pubDate>
-      <guid isPermaLink="false">https://jfkonecn.github.io/espn-ff-importer/2025_Predraft.wav</guid>
+      <guid isPermaLink="false">https://jfkonecn.github.io/espn-ff-importer/assets/podcasts/2025_Predraft.wav</guid>
       <enclosure url="https://jfkonecn.github.io/espn-ff-importer/assets/podcasts/2025_Predraft.wav" length="30343724" type="audio/wav" />
+      <itunes:duration>00:10:32</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
     </item>
     
     <item>
-      <title>PostDraft</title>
-      <description>Draft recap and analysis</description>
-      <itunes:summary>Draft recap and analysis</itunes:summary>
+      <title>2025 Post Draft</title>
+      <description>Draft recap and analysis.</description>
+      <itunes:summary>Draft recap and analysis.</itunes:summary>
       <pubDate>Sun, 31 Aug 2025 17:52:27 -0400</pubDate>
-      <guid isPermaLink="false">https://jfkonecn.github.io/espn-ff-importer/2025_PostDraft.wav</guid>
+      <guid isPermaLink="false">https://jfkonecn.github.io/espn-ff-importer/assets/podcasts/2025_PostDraft.wav</guid>
       <enclosure url="https://jfkonecn.github.io/espn-ff-importer/assets/podcasts/2025_PostDraft.wav" length="29408718" type="audio/wav" />
+      <itunes:duration>00:10:13</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
     </item>
     
   </channel>

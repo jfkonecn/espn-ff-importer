@@ -1,0 +1,53 @@
+{
+  "channel": {
+    "title": "Slop Take",
+    "description": "The League's Official AI Slop Podcast",
+    "author": "Eric's Beard",
+    "language": "en-us",
+    "explicit": false,
+    "category": "Sports",
+    "subcategory": "Fantasy Sports",
+    "image": "assets/podcasts/cover.png",
+    "ownerName": "Slop Take",
+    "ownerEmail": "",
+    "copyright": "Slop Take"
+  },
+  "episodes": [
+    {
+      "file": "2025_Week3.wav",
+      "title": "2025 Week 3",
+      "description": "Week 3 league recap and fantasy analysis.",
+      "pubDate": "2025-09-24T17:47:09-04:00",
+      "duration": "00:13:49",
+      "explicit": false,
+      "episodeType": "full"
+    },
+    {
+      "file": "2025_Week1.wav",
+      "title": "2025 Week 1",
+      "description": "Week 1 league recap and fantasy analysis.",
+      "pubDate": "2025-09-11T09:25:08-04:00",
+      "duration": "00:12:00",
+      "explicit": false,
+      "episodeType": "full"
+    },
+    {
+      "file": "2025_Predraft.wav",
+      "title": "2025 Predraft",
+      "description": "Pre-draft analysis and strategy discussion.",
+      "pubDate": "2025-08-31T17:52:27-04:00",
+      "duration": "00:10:32",
+      "explicit": false,
+      "episodeType": "full"
+    },
+    {
+      "file": "2025_PostDraft.wav",
+      "title": "2025 Post Draft",
+      "description": "Draft recap and analysis.",
+      "pubDate": "2025-08-31T17:52:27-04:00",
+      "duration": "00:10:13",
+      "explicit": false,
+      "episodeType": "full"
+    }
+  ]
+}
