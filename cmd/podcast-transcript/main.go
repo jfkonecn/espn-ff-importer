@@ -33,10 +33,12 @@ func main() {
 		path = filepath.Join(*aiDir, fmt.Sprintf("%d", *season), "season-state.json")
 	}
 
+	fmt.Printf("Reading podcast season state from %s\n", path)
 	var state podcast.SeasonState
 	if err := podcast.ReadJSON(path, &state); err != nil {
 		fatal("read season state", err)
 	}
+	fmt.Printf("Generating transcript for season=%d phase=%s week=%d using model=%s\n", state.Season, state.Phase, state.Week, *model)
 
 	script, err := podcast.GenerateTranscript(apiKey, *model, *aiDir, state)
 	if err != nil {
@@ -44,9 +46,11 @@ func main() {
 	}
 
 	outputPath := filepath.Join(*outputDir, script.EpisodeID+".json")
+	fmt.Printf("Writing transcript JSON for episode %s to %s\n", script.EpisodeID, outputPath)
 	if err := podcast.WriteJSON(outputPath, script); err != nil {
 		fatal("write transcript", err)
 	}
+	fmt.Printf("Transcript contains %d segments, %d selected commercials, and %d source files\n", len(script.Segments), len(script.Commercials), len(script.SourceFiles))
 	fmt.Printf("Wrote podcast transcript to %s\n", outputPath)
 }
 

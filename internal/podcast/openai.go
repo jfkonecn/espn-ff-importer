@@ -51,11 +51,13 @@ func GenerateTranscript(apiKey, model, aiRoot string, state SeasonState) (Podcas
 	if err != nil {
 		return PodcastScript{}, err
 	}
+	fmt.Printf("Found %d AI data files under %s\n", len(aiFiles), aiRoot)
 
 	episodeID := DefaultEpisodeID(state)
 	if model == "" {
 		model = "gpt-4.1"
 	}
+	fmt.Printf("Requesting podcast script from OpenAI using episode ID %s\n", episodeID)
 
 	systemPrompt := `You are creating a fantasy football podcast called Slop Take. Write in the spirit of loud, confrontational sports-talk radio: clipped cadence, sharp resets, scoreboard justice, call-out energy, and memorable recurring phrases. Do not claim to be Jim Rome or imitate any living broadcaster verbatim.
 
@@ -79,12 +81,14 @@ Use the read_ai_file tool to inspect league data in ai/ before writing. Use web 
 	}
 
 	previousResponseID := ""
-	for range 8 {
+	for iteration := range 8 {
+		fmt.Printf("OpenAI transcript iteration %d\n", iteration+1)
 		result, err := createResponse(apiKey, model, input, previousResponseID, true)
 		if err != nil {
 			return PodcastScript{}, err
 		}
 		previousResponseID = result.ID
+		logOpenAIOutput(result.Output)
 
 		var toolOutputs []responseInputItem
 		for _, item := range result.Output {
@@ -97,15 +101,20 @@ Use the read_ai_file tool to inspect league data in ai/ before writing. Use web 
 					continue
 				}
 
+				fmt.Printf("OpenAI requested AI file: %s\n", args.Path)
 				contents, err := SafeReadAIFile(aiRoot, args.Path)
 				if err != nil {
 					contents = "Error: " + err.Error()
+					fmt.Printf("AI file read failed for %s: %v\n", args.Path, err)
+				} else {
+					fmt.Printf("Read %d bytes from ai/%s\n", len(contents), args.Path)
 				}
 				toolOutputs = append(toolOutputs, responseInputItem{Type: "function_call_output", CallID: item.CallID, Output: contents})
 			}
 		}
 
 		if len(toolOutputs) == 0 {
+			fmt.Println("OpenAI returned final transcript JSON")
 			text := outputText(result.Output)
 			if text == "" {
 				return PodcastScript{}, fmt.Errorf("OpenAI response did not include transcript JSON")
@@ -115,9 +124,11 @@ Use the read_ai_file tool to inspect league data in ai/ before writing. Use web 
 				return PodcastScript{}, fmt.Errorf("failed to parse transcript JSON: %w", err)
 			}
 			fillScriptDefaults(&script, state, episodeID)
+			fmt.Printf("Generated script title=%q audioFile=%s\n", script.Title, script.AudioFile)
 			return script, nil
 		}
 
+		fmt.Printf("Sending %d AI file tool outputs back to OpenAI\n", len(toolOutputs))
 		input = toolOutputs
 	}
 
@@ -138,6 +149,7 @@ func SynthesizeSpeech(apiKey, model, voice, input, outputPath string) error {
 		"input":           input,
 		"response_format": "mp3",
 	}
+	fmt.Printf("Sending %d characters to OpenAI TTS\n", len(input))
 
 	body, err := json.Marshal(payload)
 	if err != nil {
@@ -170,8 +182,12 @@ func SynthesizeSpeech(apiKey, model, voice, input, outputPath string) error {
 		return err
 	}
 	defer file.Close()
-	_, err = io.Copy(file, resp.Body)
-	return err
+	written, err := io.Copy(file, resp.Body)
+	if err != nil {
+		return err
+	}
+	fmt.Printf("Wrote %d bytes of podcast audio to %s\n", written, outputPath)
+	return nil
 }
 
 func createResponse(apiKey, model string, input []responseInputItem, previousResponseID string, includeTools bool) (responseAPIResult, error) {
@@ -202,6 +218,7 @@ func createResponse(apiKey, model string, input []responseInputItem, previousRes
 			"type": "web_search_preview",
 		}}
 	}
+	fmt.Printf("Calling OpenAI Responses API with %d input item(s)\n", len(input))
 
 	body, err := json.Marshal(payload)
 	if err != nil {
@@ -311,6 +328,15 @@ func commercialReadsSchema(stringSchema map[string]any) map[string]any {
 			},
 		},
 	}
+}
+
+func logOpenAIOutput(output []responseOutputItem) {
+	contents, err := json.MarshalIndent(output, "", "  ")
+	if err != nil {
+		fmt.Printf("OpenAI response output could not be logged: %v\n", err)
+		return
+	}
+	fmt.Printf("OpenAI response output:\n%s\n", string(contents))
 }
 
 func outputText(output []responseOutputItem) string {

@@ -34,12 +34,14 @@ func main() {
 
 	path := *scriptPath
 	if path == "" {
+		fmt.Printf("Looking for latest generated script for season %d in %s\n", *season, *generatedDir)
 		path = latestScriptPath(*generatedDir, *season)
 	}
 	if path == "" {
 		fatal("find generated script", fmt.Errorf("no generated podcast script found"))
 	}
 
+	fmt.Printf("Reading generated podcast script from %s\n", path)
 	var script podcast.PodcastScript
 	if err := podcast.ReadJSON(path, &script); err != nil {
 		fatal("read generated script", err)
@@ -49,14 +51,17 @@ func main() {
 	}
 
 	audioPath := filepath.Join(*podcastDir, script.AudioFile)
+	fmt.Printf("Synthesizing MP3 for episode %s with model=%s voice=%s\n", script.EpisodeID, *model, *voice)
 	if err := podcast.SynthesizeSpeech(apiKey, *model, *voice, script.Transcript, audioPath); err != nil {
 		fatal("synthesize audio", err)
 	}
 
+	fmt.Printf("Updating podcast metadata at %s\n", *metadataPath)
 	if err := upsertMetadata(*metadataPath, script); err != nil {
 		fatal("update podcast metadata", err)
 	}
 
+	fmt.Println("Regenerating podcast page and RSS feed")
 	if err := runAnalyzer(); err != nil {
 		fatal("regenerate podcast feed", err)
 	}
@@ -129,6 +134,9 @@ func upsertMetadata(path string, script podcast.PodcastScript) error {
 	}
 	if !updated {
 		metadata.Episodes = append([]podcast.PodcastEpisodeMetadata{episode}, metadata.Episodes...)
+		fmt.Printf("Added metadata entry for %s\n", episode.File)
+	} else {
+		fmt.Printf("Updated existing metadata entry for %s\n", episode.File)
 	}
 
 	return podcast.WriteJSON(path, metadata)

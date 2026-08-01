@@ -43,11 +43,13 @@ func main() {
 	}
 
 	leaguePath := filepath.Join(*dataDir, fmt.Sprintf("espn_league_%d.json", *season))
+	fmt.Printf("Reading league data from %s\n", leaguePath)
 	contents, err := os.ReadFile(leaguePath)
 	if err != nil {
 		fatal("read league data", err)
 	}
 
+	fmt.Printf("Determining podcast season state for %d\n", *season)
 	var league leagueFile
 	if err := json.Unmarshal(contents, &league); err != nil {
 		fatal("parse league data", err)
@@ -66,6 +68,8 @@ func main() {
 	if err := podcast.WriteJSON(outputPath, state); err != nil {
 		fatal("write season state", err)
 	}
+	fmt.Printf("Season state: phase=%s week=%d draftComplete=%t completedMatchups=%d totalMatchups=%d\n",
+		state.Phase, state.Week, state.DraftComplete, state.CompletedMatchups, state.TotalMatchups)
 	fmt.Printf("Wrote podcast season state to %s\n", outputPath)
 }
 
