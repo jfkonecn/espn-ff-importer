@@ -38,7 +38,11 @@ type responseOutputItem struct {
 }
 
 type responseAPIResult struct {
-	ID     string               `json:"id"`
+	ID                string `json:"id"`
+	Status            string `json:"status"`
+	IncompleteDetails *struct {
+		Reason string `json:"reason"`
+	} `json:"incomplete_details"`
 	Output []responseOutputItem `json:"output"`
 	Error  *struct {
 		Message string `json:"message"`
@@ -65,7 +69,7 @@ The episode must have exactly four main segments in this order: Intro, Best Team
 
 Final Take must analyze the whole league using league data and current NFL context. Use web search to look up the latest NFL news before writing the Final Take. Do not invent specific breaking news; rely on searched current context when making NFL-news claims.
 
-Return only valid JSON matching the requested schema. The transcript should be ready for text-to-speech: no markdown tables, no stage directions, and no citations.`
+Return only valid JSON matching the requested schema. The transcript should be ready for text-to-speech: no markdown tables, no stage directions, no URLs, and no citations. Keep duration as an empty string; the publisher will not know the real duration until audio exists.`
 
 	userPrompt := fmt.Sprintf(`Season state:
 %s
@@ -73,7 +77,7 @@ Return only valid JSON matching the requested schema. The transcript should be r
 Available files under ai/:
 %s
 
-Use the read_ai_file tool to inspect league data in ai/ before writing. Use web search for current NFL news and injury context. Produce all podcast metadata. Use episodeId %q and audioFile %q. Keep the full transcript under roughly 2,200 words.`, mustJSON(state), strings.Join(aiFiles, "\n"), episodeID, episodeID+".mp3")
+Use the read_ai_file tool to inspect league data in ai/ before writing. Use web search for current NFL news and injury context. Produce all podcast metadata. Use episodeId %q and audioFile %q. Keep the full transcript under 1,400 words so the JSON response is complete.`, mustJSON(state), strings.Join(aiFiles, "\n"), episodeID, episodeID+".mp3")
 
 	input := []responseInputItem{
 		{Role: "system", Content: []responseContent{{Type: "input_text", Text: systemPrompt}}},
@@ -115,6 +119,13 @@ Use the read_ai_file tool to inspect league data in ai/ before writing. Use web 
 
 		if len(toolOutputs) == 0 {
 			fmt.Println("OpenAI returned final transcript JSON")
+			if result.Status == "incomplete" {
+				reason := "unknown"
+				if result.IncompleteDetails != nil && result.IncompleteDetails.Reason != "" {
+					reason = result.IncompleteDetails.Reason
+				}
+				return PodcastScript{}, fmt.Errorf("OpenAI returned an incomplete transcript response: %s", reason)
+			}
 			text := outputText(result.Output)
 			if text == "" {
 				return PodcastScript{}, fmt.Errorf("OpenAI response did not include transcript JSON")
@@ -192,8 +203,9 @@ func SynthesizeSpeech(apiKey, model, voice, input, outputPath string) error {
 
 func createResponse(apiKey, model string, input []responseInputItem, previousResponseID string, includeTools bool) (responseAPIResult, error) {
 	payload := map[string]any{
-		"model": model,
-		"input": input,
+		"model":             model,
+		"input":             input,
+		"max_output_tokens": 20000,
 		"text": map[string]any{
 			"format": podcastScriptSchema(),
 		},
@@ -340,14 +352,15 @@ func logOpenAIOutput(output []responseOutputItem) {
 }
 
 func outputText(output []responseOutputItem) string {
+	var texts []string
 	for _, item := range output {
 		for _, content := range item.Content {
 			if content.Type == "output_text" && content.Text != "" {
-				return content.Text
+				texts = append(texts, content.Text)
 			}
 		}
 	}
-	return ""
+	return strings.Join(texts, "")
 }
 
 func fillScriptDefaults(script *PodcastScript, state SeasonState, episodeID string) {
