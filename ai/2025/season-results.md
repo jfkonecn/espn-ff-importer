@@ -200,9 +200,13 @@
 
 ## Week 15
 
+**Jensen Huang and Sons** 134.50 *(Bye)*
+
 **Embrace the Darkness** 123.90 - **#1 GangGreen** 147.00 *(Winner: #1 GangGreen)*
 
 **Latin Fury** 111.60 - **It's MillerTime** 131.66 *(Winner: It's MillerTime)*
+
+**Boeing's Hitmen ** 102.40 *(Bye)*
 
 **Caleb's Cats** 108.62 - **The Injured Preserve** 116.80 *(Winner: The Injured Preserve)*
 

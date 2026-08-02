@@ -150,12 +150,24 @@ func (lr *LeagueReader) GetSchedule() []Matchup {
 	// remove games that haven't ended
 	var schedule []Matchup
 	for _, item := range lr.league.Schedule {
-		if item.Winner != "UNDECIDED" {
+		if item.Winner != "UNDECIDED" || lr.isCompletedByeMatchup(item) {
 			schedule = append(schedule, item)
 		}
 	}
 	return schedule
 
+}
+
+func (lr *LeagueReader) isCompletedByeMatchup(matchup Matchup) bool {
+	if !isByeMatchup(matchup) {
+		return false
+	}
+
+	return matchup.Home.TotalPoints > 0 || matchup.MatchupPeriodID < lr.league.ScoringPeriodID
+}
+
+func isByeMatchup(matchup Matchup) bool {
+	return matchup.Home.TeamID != 0 && matchup.Away.TeamID == 0
 }
 
 // GetMatchupsByPeriod returns all matchups for a specific period
@@ -173,7 +185,7 @@ func (lr *LeagueReader) GetMatchupsByPeriod(periodID int) []Matchup {
 func (lr *LeagueReader) GetCurrentMatchups() []Matchup {
 	var currentMatchups []Matchup
 	currentPeriod := lr.league.ScoringPeriodID
-	
+
 	for _, matchup := range lr.league.Schedule {
 		if matchup.MatchupPeriodID == currentPeriod && matchup.Winner == "UNDECIDED" {
 			currentMatchups = append(currentMatchups, matchup)

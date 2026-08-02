@@ -8,21 +8,41 @@
         <h3 class="text-lg font-semibold">Week {{.Week}}</h3>
       </div>
       <div class="p-6 space-y-4">
+        {{range .Groups}}
+        {{if ne .Name "Matchups"}}
+        <div class="rounded-lg border border-dashed {{if eq .Name "Winners Bracket"}}border-fantasy-gold border-dashed{{else}}border-gray-300{{end}} p-4 space-y-4">
+        <h4 class="flex items-center justify-between text-sm font-bold uppercase tracking-wide {{if eq .Name "Winners Bracket"}}text-fantasy-gold{{else}}text-gray-600{{end}}">
+          <span>{{.Name}}</span>
+          <span class="rounded-full {{if eq .Name "Winners Bracket"}}bg-fantasy-gold text-white{{else}}bg-gray-600 text-white{{end}} px-2 py-0.5 text-xs normal-case tracking-normal">
+            {{if eq .Name "Winners Bracket"}}Championship{{else}}Consolation{{end}}
+          </span>
+        </h4>
+        {{end}}
         {{range .Games}}
         <div class="border border-gray-200 rounded-lg p-4">
           <div class="flex justify-between items-center mb-3">
             <span class="text-sm text-gray-500">Matchup #{{.MatchupID}}</span>
           </div>
+          {{if .IsBye}}
+          <div class="grid grid-cols-1 gap-4 items-center md:grid-cols-3">
+            <div class="hidden md:block"></div>
+            <div class="text-center text-gray-500 font-semibold">Bye</div>
+            {{template "team-score.html" .GetHomeTeamData}}
+          </div>
+          {{else}}
           <div class="grid grid-cols-3 gap-4 items-center">
             {{template "team-score.html" .GetAwayTeamData}}
             <div class="text-center text-gray-500">vs</div>
             {{template "team-score.html" .GetHomeTeamData}}
           </div>
+          {{end}}
           <div class="mt-4 text-center">
             <span class="text-sm text-gray-600">Winner: </span>
             <span class="{{.WinnerClass}}">{{.Winner}}</span>
           </div>
         </div>
+        {{end}}
+        {{if ne .Name "Matchups"}}</div>{{end}}
         {{end}}
       </div>
     </div>

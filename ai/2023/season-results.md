@@ -200,9 +200,13 @@
 
 ## Week 15
 
+**No More Chills** 120.06 *(Bye)*
+
 **Latin Fury** 83.28 - **America's Team** 158.04 *(Winner: America's Team)*
 
 **It's MillerTime** 106.26 - **One Way Ticket  To Thailand** 134.30 *(Winner: One Way Ticket  To Thailand)*
+
+**Cutler's Cats** 102.56 *(Bye)*
 
 **FDA Control Group** 99.82 - **Advanced Metrics** 125.26 *(Winner: Advanced Metrics)*
 

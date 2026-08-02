@@ -17,7 +17,9 @@ type leagueFile struct {
 		Drafted bool `json:"drafted"`
 	} `json:"draftDetail"`
 	Schedule []struct {
-		Winner string `json:"winner"`
+		MatchupPeriodID int    `json:"matchupPeriodId"`
+		PlayoffTierType string `json:"playoffTierType"`
+		Winner          string `json:"winner"`
 	} `json:"schedule"`
 	ScoringPeriodID int `json:"scoringPeriodId"`
 	SeasonID        int `json:"seasonId"`
@@ -32,10 +34,9 @@ type leagueFile struct {
 
 func main() {
 	var (
-		season   = flag.Int("season", seasonFromEnv(), "Season year")
-		dataDir  = flag.String("data", "data", "Directory containing ESPN league JSON files")
-		output   = flag.String("output", "", "Output season-state JSON path")
-		postWeek = flag.Int("post-season-week", 15, "Week where post-season starts")
+		season  = flag.Int("season", seasonFromEnv(), "Season year")
+		dataDir = flag.String("data", "data", "Directory containing ESPN league JSON files")
+		output  = flag.String("output", "", "Output season-state JSON path")
 	)
 	flag.Parse()
 	if *season == 0 {
@@ -55,7 +56,7 @@ func main() {
 		fatal("parse league data", err)
 	}
 
-	state := determineState(league, *postWeek)
+	state := determineState(league)
 	if state.Season == 0 {
 		state.Season = *season
 	}
@@ -85,7 +86,7 @@ func seasonFromEnv() int {
 	return season
 }
 
-func determineState(league leagueFile, postSeasonWeek int) podcast.SeasonState {
+func determineState(league leagueFile) podcast.SeasonState {
 	completed, total := 0, len(league.Schedule)
 	for _, matchup := range league.Schedule {
 		if matchup.Winner != "" && matchup.Winner != "UNDECIDED" {
@@ -107,7 +108,7 @@ func determineState(league leagueFile, postSeasonWeek int) podcast.SeasonState {
 		phase = podcast.PhaseSeasonComplete
 	} else if total > 0 && completed == total {
 		phase = podcast.PhaseSeasonComplete
-	} else if league.ScoringPeriodID >= postSeasonWeek {
+	} else if isPostSeason(league) {
 		phase = podcast.PhasePostSeason
 	}
 
@@ -121,6 +122,20 @@ func determineState(league leagueFile, postSeasonWeek int) podcast.SeasonState {
 		TotalMatchups:     total,
 		GeneratedAt:       time.Now().Format(time.RFC3339),
 	}
+}
+
+func isPostSeason(league leagueFile) bool {
+	postSeasonWeek := 0
+	for _, matchup := range league.Schedule {
+		if matchup.PlayoffTierType == "" || matchup.PlayoffTierType == "NONE" {
+			continue
+		}
+		if postSeasonWeek == 0 || matchup.MatchupPeriodID < postSeasonWeek {
+			postSeasonWeek = matchup.MatchupPeriodID
+		}
+	}
+
+	return postSeasonWeek > 0 && league.ScoringPeriodID >= postSeasonWeek
 }
 
 func fatal(action string, err error) {

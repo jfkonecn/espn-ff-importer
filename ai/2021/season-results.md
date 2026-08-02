@@ -200,9 +200,13 @@
 
 ## Week 15
 
+**Appreciate My Greatness** 156.56 *(Bye)*
+
 **No More Chills** 104.70 - **FDA Control Group** 104.48 *(Winner: No More Chills)*
 
 **Cutler's Cats** 78.36 - **It's MillerTime** 120.50 *(Winner: It's MillerTime)*
+
+**Advanced Metrics** 90.64 *(Bye)*
 
 **Latin Fury** 122.92 - **America's Team** 65.56 *(Winner: Latin Fury)*
 

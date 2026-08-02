@@ -1056,7 +1056,14 @@ type TemplateData struct {
 
 // WeekGames represents a week with its games
 type WeekGames struct {
-	Week  int
+	Week   int
+	Groups []BracketGames
+	Games  []GameRow
+}
+
+// BracketGames represents games grouped by playoff bracket within a week.
+type BracketGames struct {
+	Name  string
 	Games []GameRow
 }
 
@@ -1102,14 +1109,19 @@ type TeamPayoutTotal struct {
 type GameRow struct {
 	Week            int
 	MatchupID       int
+	IsBye           bool
+	PlayoffTierType string
+	BracketName     string
 	AwayTeamName    string
 	AwayScore       string
 	AwayTeamID      int
 	AwayOwnerName   string
+	AwaySeed        int
 	HomeTeamName    string
 	HomeScore       string
 	HomeTeamID      int
 	HomeOwnerName   string
+	HomeSeed        int
 	Winner          string
 	WinnerClass     string
 	AwayIsTopHalf   bool
@@ -1124,6 +1136,7 @@ func (gr *GameRow) GetAwayTeamData() map[string]interface{} {
 		"TeamName":    gr.AwayTeamName,
 		"OwnerName":   gr.AwayOwnerName,
 		"Score":       gr.AwayScore,
+		"Seed":        gr.AwaySeed,
 		"IsHighScore": gr.AwayIsHighScore,
 		"IsTopHalf":   gr.AwayIsTopHalf,
 	}
@@ -1135,9 +1148,41 @@ func (gr *GameRow) GetHomeTeamData() map[string]interface{} {
 		"TeamName":    gr.HomeTeamName,
 		"OwnerName":   gr.HomeOwnerName,
 		"Score":       gr.HomeScore,
+		"Seed":        gr.HomeSeed,
 		"IsHighScore": gr.HomeIsHighScore,
 		"IsTopHalf":   gr.HomeIsTopHalf,
 	}
+}
+
+func playoffBracketName(playoffTierType string) string {
+	if strings.HasPrefix(playoffTierType, "WINNERS") {
+		return "Winners Bracket"
+	}
+	if strings.HasPrefix(playoffTierType, "LOSERS") {
+		return "Losers Bracket"
+	}
+	return ""
+}
+
+func matchupScores(matchup Matchup) []WeeklyHighScoreData {
+	week := matchup.MatchupPeriodID
+	scores := []WeeklyHighScoreData{
+		{
+			TeamID: matchup.Home.TeamID,
+			Score:  matchup.Home.TotalPoints,
+			Week:   week,
+		},
+	}
+
+	if matchup.Away.TeamID != 0 {
+		scores = append(scores, WeeklyHighScoreData{
+			TeamID: matchup.Away.TeamID,
+			Score:  matchup.Away.TotalPoints,
+			Week:   week,
+		})
+	}
+
+	return scores
 }
 
 // prepareTemplateData prepares all the data needed for the template
@@ -1347,20 +1392,7 @@ func (wg *WebsiteGenerator) getWeeklyHighScorers() []WeeklyHighScoreData {
 	// Group scores by week
 	for _, matchup := range schedule {
 		week := matchup.MatchupPeriodID
-
-		// Add home team score
-		weeklyScores[week] = append(weeklyScores[week], WeeklyHighScoreData{
-			TeamID: matchup.Home.TeamID,
-			Score:  matchup.Home.TotalPoints,
-			Week:   week,
-		})
-
-		// Add away team score
-		weeklyScores[week] = append(weeklyScores[week], WeeklyHighScoreData{
-			TeamID: matchup.Away.TeamID,
-			Score:  matchup.Away.TotalPoints,
-			Week:   week,
-		})
+		weeklyScores[week] = append(weeklyScores[week], matchupScores(matchup)...)
 	}
 
 	// Find highest scorer for each week
@@ -1399,20 +1431,7 @@ func (wg *WebsiteGenerator) getWeeklyTopHalfScorers() [][]WeeklyHighScoreData {
 			continue
 		}
 		week := matchup.MatchupPeriodID
-
-		// Add home team score
-		weeklyScores[week] = append(weeklyScores[week], WeeklyHighScoreData{
-			TeamID: matchup.Home.TeamID,
-			Score:  matchup.Home.TotalPoints,
-			Week:   week,
-		})
-
-		// Add away team score
-		weeklyScores[week] = append(weeklyScores[week], WeeklyHighScoreData{
-			TeamID: matchup.Away.TeamID,
-			Score:  matchup.Away.TotalPoints,
-			Week:   week,
-		})
+		weeklyScores[week] = append(weeklyScores[week], matchupScores(matchup)...)
 	}
 
 	// Find highest scorer for each week
@@ -1563,7 +1582,7 @@ func (wg *WebsiteGenerator) prepareGameRows(games []Matchup) []GameRow {
 		homeTeam := wg.reader.GetTeamByID(game.Home.TeamID)
 		awayTeam := wg.reader.GetTeamByID(game.Away.TeamID)
 
-		if homeTeam == nil || awayTeam == nil {
+		if homeTeam == nil || (!isByeMatchup(game) && awayTeam == nil) {
 			continue
 		}
 
@@ -1575,38 +1594,60 @@ func (wg *WebsiteGenerator) prepareGameRows(games []Matchup) []GameRow {
 		} else if game.Winner == "AWAY" {
 			winner = awayTeam.Name
 			winnerClass = "text-fantasy-green font-bold"
+		} else if isByeMatchup(game) {
+			winner = "Bye"
 		}
 
 		// Check if teams were in top half or highest scorer for this week
 		week := game.MatchupPeriodID
+		bracketName := playoffBracketName(game.PlayoffTierType)
 		homeIsTopHalf := topHalfMap[week][game.Home.TeamID]
 		awayIsTopHalf := topHalfMap[week][game.Away.TeamID]
 		homeIsHighScore := highScorerMap[week] == game.Home.TeamID
 		awayIsHighScore := highScorerMap[week] == game.Away.TeamID
 
 		// Get owner names
-		awayOwner := wg.reader.GetMemberByID(awayTeam.PrimaryOwner)
 		homeOwner := wg.reader.GetMemberByID(homeTeam.PrimaryOwner)
 		awayOwnerName := "Unknown"
 		homeOwnerName := "Unknown"
-		if awayOwner != nil {
-			awayOwnerName = fmt.Sprintf("%s %s", awayOwner.FirstName, awayOwner.LastName)
+		awayTeamName := "Bye"
+		awayScore := ""
+		awaySeed := 0
+		homeSeed := 0
+		if awayTeam != nil {
+			awayOwner := wg.reader.GetMemberByID(awayTeam.PrimaryOwner)
+			if awayOwner != nil {
+				awayOwnerName = fmt.Sprintf("%s %s", awayOwner.FirstName, awayOwner.LastName)
+			}
+			awayTeamName = awayTeam.Name
+			awayScore = fmt.Sprintf("%.2f", game.Away.TotalPoints)
+			if bracketName != "" {
+				awaySeed = awayTeam.PlayoffSeed
+			}
 		}
 		if homeOwner != nil {
 			homeOwnerName = fmt.Sprintf("%s %s", homeOwner.FirstName, homeOwner.LastName)
+		}
+		if bracketName != "" {
+			homeSeed = homeTeam.PlayoffSeed
 		}
 
 		rows = append(rows, GameRow{
 			Week:            week,
 			MatchupID:       game.ID,
-			AwayTeamName:    awayTeam.Name,
-			AwayScore:       fmt.Sprintf("%.2f", game.Away.TotalPoints),
+			IsBye:           isByeMatchup(game),
+			PlayoffTierType: game.PlayoffTierType,
+			BracketName:     bracketName,
+			AwayTeamName:    awayTeamName,
+			AwayScore:       awayScore,
 			AwayTeamID:      game.Away.TeamID,
 			AwayOwnerName:   awayOwnerName,
+			AwaySeed:        awaySeed,
 			HomeTeamName:    homeTeam.Name,
 			HomeScore:       fmt.Sprintf("%.2f", game.Home.TotalPoints),
 			HomeTeamID:      game.Home.TeamID,
 			HomeOwnerName:   homeOwnerName,
+			HomeSeed:        homeSeed,
 			Winner:          winner,
 			WinnerClass:     winnerClass,
 			AwayIsTopHalf:   awayIsTopHalf,
@@ -1637,7 +1678,7 @@ func (wg *WebsiteGenerator) groupGamesByWeek(games []GameRow) []WeekGames {
 	// Convert to slice and sort by week (descending)
 	var result []WeekGames
 	for week, games := range grouped {
-		result = append(result, WeekGames{Week: week, Games: games})
+		result = append(result, WeekGames{Week: week, Groups: groupGamesByBracket(games), Games: games})
 	}
 
 	// Sort by week in descending order (most recent first)
@@ -1646,6 +1687,44 @@ func (wg *WebsiteGenerator) groupGamesByWeek(games []GameRow) []WeekGames {
 	})
 
 	return result
+}
+
+func groupGamesByBracket(games []GameRow) []BracketGames {
+	groupsByName := make(map[string][]GameRow)
+	var groupNames []string
+
+	for _, game := range games {
+		name := game.BracketName
+		if name == "" {
+			name = "Matchups"
+		}
+		if _, exists := groupsByName[name]; !exists {
+			groupNames = append(groupNames, name)
+		}
+		groupsByName[name] = append(groupsByName[name], game)
+	}
+
+	sort.Slice(groupNames, func(i, j int) bool {
+		return bracketSortOrder(groupNames[i]) < bracketSortOrder(groupNames[j])
+	})
+
+	groups := make([]BracketGames, 0, len(groupNames))
+	for _, name := range groupNames {
+		groups = append(groups, BracketGames{Name: name, Games: groupsByName[name]})
+	}
+
+	return groups
+}
+
+func bracketSortOrder(name string) int {
+	switch name {
+	case "Winners Bracket":
+		return 0
+	case "Losers Bracket":
+		return 1
+	default:
+		return 2
+	}
 }
 
 // prepareTeamPayoutTotals calculates total payouts for each team

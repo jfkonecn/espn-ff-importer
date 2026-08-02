@@ -200,9 +200,13 @@
 
 ## Week 15
 
+**Advanced Metrics** 118.86 *(Bye)*
+
 **Embrace the Darkness** 119.14 - **Boeing's Hitmen ** 102.34 *(Winner: Embrace the Darkness)*
 
 **FDA Control Group** 121.70 - **#1 GangGreen** 168.30 *(Winner: #1 GangGreen)*
+
+**Jensen Huang and Sons** 154.74 *(Bye)*
 
 **Caleb's Cats** 162.08 - **America's Team** 127.14 *(Winner: Caleb's Cats)*
 

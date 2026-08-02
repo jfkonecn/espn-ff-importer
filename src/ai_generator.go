@@ -518,7 +518,12 @@ func (g *AIDataGenerator) generateSeasonResults() error {
 			homeTeam := g.reader.GetTeamByID(matchup.Home.TeamID)
 			awayTeam := g.reader.GetTeamByID(matchup.Away.TeamID)
 
-			if homeTeam == nil || awayTeam == nil {
+			if homeTeam == nil || (!isByeMatchup(matchup) && awayTeam == nil) {
+				continue
+			}
+
+			if isByeMatchup(matchup) {
+				content += fmt.Sprintf("**%s** %.2f *(Bye)*\n\n", homeTeam.Name, matchup.Home.TotalPoints)
 				continue
 			}
 

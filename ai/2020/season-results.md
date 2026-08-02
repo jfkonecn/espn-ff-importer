@@ -186,9 +186,13 @@
 
 ## Week 14
 
+**Comeback From Injury Kids** 147.08 *(Bye)*
+
 **Appreciate My Greatness** 122.40 - **Latin Fury** 79.58 *(Winner: Appreciate My Greatness)*
 
 **Cutler's Cats** 184.04 - **It's MillerTime** 147.54 *(Winner: Cutler's Cats)*
+
+**No More Chills** 0.00 *(Bye)*
 
 **#1 GangGreen** 117.36 - **Eat Sh!t Jordan ** 88.40 *(Winner: #1 GangGreen)*
 
