@@ -32,7 +32,13 @@ jobs:
           ESPN_SWID: ${{ secrets.ESPN_SWID }}
           CURRENT_YEAR: ${{ vars.CURRENT_YEAR }}
         run: |
-          ./get-season-results.sh ${{ vars.CURRENT_YEAR }}
+          ./get-season-results.sh "$CURRENT_YEAR"
+
+          if [ "$(jq -r '.draftDetail.drafted' "data/espn_league_${CURRENT_YEAR}.json")" = "false" ]; then
+            ./get-season-results.sh "$((CURRENT_YEAR - 1))"
+            ./get-season-results.sh "$((CURRENT_YEAR - 2))"
+          fi
+
           ./run-analyzer.sh
           go run ./cmd/podcast-season-state
 
