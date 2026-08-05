@@ -62,8 +62,18 @@ func main() {
 		fatal("run safety check", fmt.Errorf("generated podcast audio already exists at %s; manually rerun with force enabled to overwrite it", audioPath))
 	}
 	fmt.Printf("Synthesizing segmented MP3 for episode %s with model=%s voice=%s\n", script.EpisodeID, *model, *voice)
-	if err := synthesizeSegmentedEpisode(apiKey, *model, *voice, script, audioPath, *introSound, *transitionSound, *outroSound, *generatedDir); err != nil {
+	chapters, err := synthesizeSegmentedEpisode(apiKey, *model, *voice, script, audioPath, *introSound, *transitionSound, *outroSound, *generatedDir)
+	if err != nil {
 		fatal("synthesize segmented audio", err)
+	}
+	if len(chapters) > 0 {
+		script.Chapters = chapters
+		chaptersFile := chaptersFileName(script.AudioFile)
+		chaptersPath := filepath.Join(*podcastDir, chaptersFile)
+		fmt.Printf("Writing podcast chapters to %s\n", chaptersPath)
+		if err := podcast.WriteJSON(chaptersPath, podcast.PodcastChaptersDocument{Version: "1.2.0", Chapters: chapters}); err != nil {
+			fatal("write podcast chapters", err)
+		}
 	}
 	if duration, err := probeDuration(audioPath); err == nil && duration != "" {
 		script.Duration = duration
@@ -85,45 +95,69 @@ func main() {
 	fmt.Printf("Published podcast audio to %s\n", audioPath)
 }
 
-func synthesizeSegmentedEpisode(apiKey, model, voice string, script podcast.PodcastScript, outputPath, introSound, transitionSound, outroSound, generatedDir string) error {
+func synthesizeSegmentedEpisode(apiKey, model, voice string, script podcast.PodcastScript, outputPath, introSound, transitionSound, outroSound, generatedDir string) ([]podcast.PodcastChapter, error) {
 	if err := requireFile(introSound); err != nil {
-		return err
+		return nil, err
 	}
 	if err := requireFile(transitionSound); err != nil {
-		return err
+		return nil, err
 	}
 	if err := requireFile(outroSound); err != nil {
-		return err
+		return nil, err
 	}
 
 	partsDir, err := os.MkdirTemp(generatedDir, script.EpisodeID+"-audio-parts-*")
 	if err != nil {
-		return err
+		return nil, err
 	}
 	defer os.RemoveAll(partsDir)
 	fmt.Printf("Writing temporary audio parts to %s\n", partsDir)
 
 	spokenParts := orderedSpokenParts(script)
 	if len(spokenParts) == 0 {
-		return fmt.Errorf("no segment or commercial text found for TTS")
+		return nil, fmt.Errorf("no segment or commercial text found for TTS")
 	}
 
 	concatParts := []string{introSound}
+	introDuration, err := probeDurationSeconds(introSound)
+	if err != nil {
+		return nil, fmt.Errorf("probe intro duration: %w", err)
+	}
+	transitionDuration, err := probeDurationSeconds(transitionSound)
+	if err != nil {
+		return nil, fmt.Errorf("probe transition duration: %w", err)
+	}
+	currentStart := introDuration
+	var chapters []podcast.PodcastChapter
 	for i, part := range spokenParts {
 		partPath := filepath.Join(partsDir, fmt.Sprintf("%02d_%s.mp3", i+1, sanitizeFilePart(part.Name)))
 		fmt.Printf("Synthesizing audio part %d/%d: %s (%d characters)\n", i+1, len(spokenParts), part.Name, len(part.Text))
 		if err := podcast.SynthesizeSpeech(apiKey, model, voice, part.Text, partPath); err != nil {
-			return fmt.Errorf("synthesize %s: %w", part.Name, err)
+			return nil, fmt.Errorf("synthesize %s: %w", part.Name, err)
 		}
+		partDuration, err := probeDurationSeconds(partPath)
+		if err != nil {
+			return nil, fmt.Errorf("probe %s duration: %w", part.Name, err)
+		}
+		chapterStart := currentStart
+		if i == 0 {
+			chapterStart = 0
+		}
+		chapters = append(chapters, podcast.PodcastChapter{StartTime: int(chapterStart + 0.5), Title: part.Name})
+		currentStart += partDuration
 		concatParts = append(concatParts, partPath)
 		if i != len(spokenParts)-1 {
 			concatParts = append(concatParts, transitionSound)
+			currentStart += transitionDuration
 		}
 	}
 	concatParts = append(concatParts, outroSound)
 
 	fmt.Printf("Combining %d audio parts with ffmpeg\n", len(concatParts))
-	return concatenateMP3s(concatParts, outputPath, partsDir)
+	if err := concatenateMP3s(concatParts, outputPath, partsDir); err != nil {
+		return nil, err
+	}
+	return chapters, nil
 }
 
 type spokenPart struct {
@@ -196,17 +230,25 @@ func concatenateMP3s(parts []string, outputPath, workDir string) error {
 }
 
 func probeDuration(path string) (string, error) {
-	cmd := exec.Command("ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "default=noprint_wrappers=1:nokey=1", path)
-	output, err := cmd.Output()
-	if err != nil {
-		return "", err
-	}
-	seconds, err := strconv.ParseFloat(strings.TrimSpace(string(output)), 64)
+	seconds, err := probeDurationSeconds(path)
 	if err != nil {
 		return "", err
 	}
 	total := int(seconds + 0.5)
 	return fmt.Sprintf("%02d:%02d:%02d", total/3600, (total%3600)/60, total%60), nil
+}
+
+func probeDurationSeconds(path string) (float64, error) {
+	cmd := exec.Command("ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "default=noprint_wrappers=1:nokey=1", path)
+	output, err := cmd.Output()
+	if err != nil {
+		return 0, err
+	}
+	seconds, err := strconv.ParseFloat(strings.TrimSpace(string(output)), 64)
+	if err != nil {
+		return 0, err
+	}
+	return seconds, nil
 }
 
 func requireFile(path string) error {
@@ -300,6 +342,7 @@ func upsertMetadata(path string, script podcast.PodcastScript) error {
 		Description: firstNonEmpty(script.Description, script.Summary),
 		PubDate:     script.PubDate,
 		Duration:    script.Duration,
+		Chapters:    chaptersFileName(script.AudioFile),
 		Explicit:    script.Explicit,
 		EpisodeType: firstNonEmpty(script.EpisodeType, "full"),
 	}
@@ -320,6 +363,10 @@ func upsertMetadata(path string, script podcast.PodcastScript) error {
 	}
 
 	return podcast.WriteJSON(path, metadata)
+}
+
+func chaptersFileName(audioFile string) string {
+	return strings.TrimSuffix(audioFile, filepath.Ext(audioFile)) + ".chapters.json"
 }
 
 func firstNonEmpty(values ...string) string {

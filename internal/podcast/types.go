@@ -46,8 +46,19 @@ type PodcastScript struct {
 	Commercials          []CommercialRead `json:"commercials"`
 	Segments             []PodcastSegment `json:"segments"`
 	Transcript           string           `json:"transcript"`
+	Chapters             []PodcastChapter `json:"chapters,omitempty"`
 	SeasonContext        SeasonState      `json:"seasonContext"`
 	SourceFiles          []string         `json:"sourceFiles"`
+}
+
+type PodcastChapter struct {
+	StartTime int    `json:"startTime"`
+	Title     string `json:"title"`
+}
+
+type PodcastChaptersDocument struct {
+	Version  string           `json:"version"`
+	Chapters []PodcastChapter `json:"chapters"`
 }
 
 type PodcastMetadata struct {
@@ -75,6 +86,7 @@ type PodcastEpisodeMetadata struct {
 	Description string `json:"description"`
 	PubDate     string `json:"pubDate"`
 	Duration    string `json:"duration"`
+	Chapters    string `json:"chapters,omitempty"`
 	Explicit    bool   `json:"explicit"`
 	EpisodeType string `json:"episodeType"`
 }

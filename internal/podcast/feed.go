@@ -17,6 +17,7 @@ type FeedEpisode struct {
 	Title         string
 	FileName      string
 	AbsoluteURL   string
+	ChaptersURL   string
 	FileSizeBytes int64
 	AudioType     string
 	PubDate       string
@@ -128,11 +129,16 @@ func scanPodcastEpisodes(podcastDir string, metadata PodcastMetadata, siteURL st
 				pubDate = parsed.Format(time.RFC1123Z)
 			}
 		}
+		chaptersURL := ""
+		if metadata.Chapters != "" {
+			chaptersURL = absolutePodcastURL(siteURL, metadata.Chapters)
+		}
 
 		episodes = append(episodes, FeedEpisode{
 			Title:         title,
 			FileName:      fileName,
 			AbsoluteURL:   absolutePodcastURL(siteURL, fileName),
+			ChaptersURL:   chaptersURL,
 			FileSizeBytes: info.Size(),
 			AudioType:     podcastAudioType(fileName),
 			PubDate:       pubDate,
@@ -219,7 +225,7 @@ func formatBool(value bool) string {
 }
 
 const podcastRSSTemplate = `<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:podcast="https://podcastindex.org/namespace/1.0">
   <channel>
     <title>{{xml .Channel.Title}}</title>
     <link>{{.Link}}</link>
@@ -247,6 +253,7 @@ const podcastRSSTemplate = `<?xml version="1.0" encoding="UTF-8"?>
       <pubDate>{{.PubDate}}</pubDate>
       <guid isPermaLink="false">{{.GUID}}</guid>
       <enclosure url="{{.AbsoluteURL}}" length="{{.FileSizeBytes}}" type="{{.AudioType}}" />
+      {{if .ChaptersURL}}<podcast:chapters url="{{.ChaptersURL}}" type="application/json" />{{end}}
       {{if .Duration}}<itunes:duration>{{.Duration}}</itunes:duration>{{end}}
       <itunes:explicit>{{.Explicit}}</itunes:explicit>
       <itunes:episodeType>{{.EpisodeType}}</itunes:episodeType>
