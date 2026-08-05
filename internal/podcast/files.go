@@ -81,6 +81,8 @@ func DefaultEpisodeID(state SeasonState) string {
 	switch state.Phase {
 	case PhaseDraft:
 		return fmt.Sprintf("%d_Draft", state.Season)
+	case PhasePostDraft:
+		return fmt.Sprintf("%d_PostDraft", state.Season)
 	case PhasePostSeason:
 		return fmt.Sprintf("%d_PostSeason_Week%d", state.Season, state.Week)
 	case PhaseSeasonComplete:

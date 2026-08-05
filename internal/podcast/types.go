@@ -4,6 +4,7 @@ type SeasonPhase string
 
 const (
 	PhaseDraft          SeasonPhase = "draft"
+	PhasePostDraft      SeasonPhase = "post-draft"
 	PhaseRegularSeason  SeasonPhase = "regular-season"
 	PhasePostSeason     SeasonPhase = "post-season"
 	PhaseSeasonComplete SeasonPhase = "season-complete"

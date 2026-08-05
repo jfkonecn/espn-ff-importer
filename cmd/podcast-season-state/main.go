@@ -108,6 +108,8 @@ func determineState(league leagueFile) podcast.SeasonState {
 		phase = podcast.PhaseSeasonComplete
 	} else if total > 0 && completed == total {
 		phase = podcast.PhaseSeasonComplete
+	} else if completed == 0 {
+		phase = podcast.PhasePostDraft
 	} else if isPostSeason(league) {
 		phase = podcast.PhasePostSeason
 	}
