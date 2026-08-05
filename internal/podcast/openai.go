@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"math/rand/v2"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -80,6 +81,8 @@ func GenerateTranscript(apiKey, model, aiRoot string, state SeasonState) (Podcas
 	fmt.Printf("Found %d AI data files under %s\n", len(aiFiles), aiRoot)
 
 	episodeID := DefaultEpisodeID(state)
+	segmentNames := []string{"Intro", "Best Team", "Worst Team", "Final Take"}
+	segmentTangents := selectSegmentTangents(segmentNames)
 	if model == "" {
 		model = "gpt-4.1"
 	}
@@ -104,7 +107,10 @@ Available files under ai/:
 Phase-specific assignment:
 %s
 
-Use the read_ai_file tool to inspect league data in ai/. Use web search for current NFL news and injury context. Produce podcast metadata, two selected commercials, and concise plans for the four required segments. Use episodeId %q and audioFile %q.`, mustJSON(state), strings.Join(aiFiles, "\n"), phaseInstructions, episodeID, episodeID+".mp3")
+Assigned sports-talk tangent topics by segment:
+%s
+
+Use the read_ai_file tool to inspect league data in ai/. Use web search for current NFL news and injury context. Produce podcast metadata, two selected commercials, and concise plans for the four required segments. Each segment plan should include a quick, natural way to connect that segment's assigned tangent topic to the league take without letting the tangent take over. Use episodeId %q and audioFile %q.`, mustJSON(state), strings.Join(aiFiles, "\n"), phaseInstructions, mustJSON(segmentTangents), episodeID, episodeID+".mp3")
 
 	outlineResult, err := generateStructured(apiKey, model, aiRoot, "outline", outlineSystemPrompt, outlineUserPrompt, podcastOutlineSchema(), true)
 	if err != nil {
@@ -123,7 +129,6 @@ Use the read_ai_file tool to inspect league data in ai/. Use web search for curr
 	allSourceFiles := append([]string{}, outline.SourceFiles...)
 	allSourceFiles = append(allSourceFiles, outlineResult.SourceFiles...)
 
-	segmentNames := []string{"Intro", "Best Team", "Worst Team", "Final Take"}
 	for i, segmentName := range segmentNames {
 		if i == 1 && len(outline.Commercials) > 0 {
 			commercial, files, err := generateCommercial(apiKey, model, aiRoot, state, outline, outline.Commercials[0], 1)
@@ -135,7 +140,7 @@ Use the read_ai_file tool to inspect league data in ai/. Use web search for curr
 			allSourceFiles = append(allSourceFiles, files...)
 		}
 
-		segment, files, err := generateSegment(apiKey, model, aiRoot, state, outline, segmentName, segmentPlan(outline, segmentName))
+		segment, files, err := generateSegment(apiKey, model, aiRoot, state, outline, segmentName, segmentPlan(outline, segmentName), segmentTangents[segmentName])
 		if err != nil {
 			return PodcastScript{}, err
 		}
@@ -231,11 +236,11 @@ func SynthesizeSpeech(apiKey, model, voice, input, outputPath string) error {
 	return nil
 }
 
-func generateSegment(apiKey, model, aiRoot string, state SeasonState, outline podcastOutline, segmentName, plan string) (PodcastSegment, []string, error) {
+func generateSegment(apiKey, model, aiRoot string, state SeasonState, outline podcastOutline, segmentName, plan, tangentTopic string) (PodcastSegment, []string, error) {
 	fmt.Printf("Generating %s segment with about 3 minutes of copy\n", segmentName)
 	systemPrompt := `You are writing one segment for Slop Take, a fantasy football podcast with loud, confrontational sports-talk energy: clipped cadence, sharp resets, scoreboard justice, call-out energy, and memorable phrases. Do not claim to be Jim Rome or imitate any living broadcaster verbatim.
 
-Write only this one segment. Target about 3 minutes when read aloud, roughly 390 to 480 words. Make it TTS-ready: no markdown, no bullets, no stage directions, no URLs, and no citations. Use web search for current NFL news and injury context before writing this segment. Do not invent specific breaking news; rely on searched current context when making NFL-news claims. Every NFL news item you mention must be tied directly back to what is happening in this fantasy league: team outlooks, roster strengths or weaknesses, draft posture, standings pressure, owner decisions, keeper value, matchup consequences, trades, waivers, starts, or sits. Return only valid JSON matching the schema.`
+Write only this one segment. Target about 3 minutes when read aloud, roughly 390 to 480 words. Make it TTS-ready: no markdown, no bullets, no stage directions, no URLs, and no citations. Use web search for current NFL news and injury context before writing this segment. Do not invent specific breaking news; rely on searched current context when making NFL-news claims. Every NFL news item you mention must be tied directly back to what is happening in this fantasy league: team outlooks, roster strengths or weaknesses, draft posture, standings pressure, owner decisions, keeper value, matchup consequences, trades, waivers, starts, or sits. Include the assigned sports-talk tangent topic as a quick, natural aside or analogy that supports the segment's fantasy take. Do not let the tangent become the segment. Return only valid JSON matching the schema.`
 	if segmentName == "Intro" {
 		systemPrompt += " For the Intro, focus on the fantasy league's current storylines: the season phase, the teams under pressure, the owners who need to hear it, and the stakes of this episode. Set the table for what the podcast will cover instead of giving a generic welcome. Preview the Best Team, Worst Team, and Final Take angles without resolving them yet."
 	}
@@ -252,7 +257,9 @@ Segment plan: %s
 Phase-specific assignment:
 %s
 
-Use read_ai_file for league context if needed. Write the segment as a complete standalone block with a strong opening, escalating middle, and clean landing.`, mustJSON(state), mustJSON(outline), segmentName, plan, podcastPhaseInstructions(state))
+Assigned sports-talk tangent topic for this segment: %s
+
+Use read_ai_file for league context if needed. Write the segment as a complete standalone block with a strong opening, escalating middle, and clean landing.`, mustJSON(state), mustJSON(outline), segmentName, plan, podcastPhaseInstructions(state), tangentTopic)
 
 	result, err := generateStructured(apiKey, model, aiRoot, "segment "+segmentName, systemPrompt, userPrompt, podcastSegmentSchema(), true)
 	if err != nil {
@@ -668,6 +675,77 @@ func fillOutlineDefaults(outline *podcastOutline, state SeasonState, episodeID s
 	if outline.Summary == "" {
 		outline.Summary = outline.Description
 	}
+}
+
+var sportsTangentTopics = []string{
+	"Tom Brady",
+	"Dallas Cowboys",
+	"Bill Belichick",
+	"New York Knicks",
+	"LeBron James",
+	"Patrick Mahomes",
+	"Aaron Rodgers",
+	"Michael Jordan",
+	"Tiger Woods",
+	"Shohei Ohtani",
+	"Caitlin Clark",
+	"Deion Sanders",
+	"Coach Prime at Colorado",
+	"Stephen A. Smith",
+	"Skip Bayless",
+	"Jerry Jones",
+	"the Lakers",
+	"the Yankees",
+	"the Red Sox",
+	"the Celtics",
+	"the Chiefs dynasty",
+	"the Patriots dynasty",
+	"the SEC",
+	"Alabama football",
+	"Duke basketball",
+	"the transfer portal",
+	"NIL money",
+	"bad officiating",
+	"load management",
+	"analytics ruining sports",
+	"whether a player is clutch",
+	"the GOAT debate",
+	"Hall of Fame debates",
+	"legacy talk",
+	"Super Bowl rings",
+	"playoff choking",
+	"locker-room culture",
+	"coaching hot seats",
+	"New York media pressure",
+	"Philly fans",
+	"fantasy football bad beats",
+	"Vegas lines",
+	"sports betting parlays",
+	"stadium food",
+	"terrible uniforms",
+	"national anthem controversies",
+	"referee conspiracies",
+	"media hot-take shows",
+	"player podcasts",
+	"old-school vs modern athletes",
+}
+
+func selectSegmentTangents(segmentNames []string) map[string]string {
+	selected := make(map[string]string, len(segmentNames))
+	if len(sportsTangentTopics) == 0 {
+		return selected
+	}
+
+	topics := append([]string{}, sportsTangentTopics...)
+	for i := range topics {
+		j := i + rand.IntN(len(topics)-i)
+		topics[i], topics[j] = topics[j], topics[i]
+	}
+
+	for i, segmentName := range segmentNames {
+		selected[segmentName] = topics[i%len(topics)]
+	}
+	return selected
 }
 
 func podcastPhaseInstructions(state SeasonState) string {
