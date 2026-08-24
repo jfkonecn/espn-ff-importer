@@ -34,11 +34,19 @@ curl -sSL \
   -H "Cookie: $COOKIE" \
   "$URL_SEASON" -o "data/espn_league_${YEAR}.json"
 
-URL_TRANSACTIONS="https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/seasons/$YEAR/segments/0/leagues/$ESPN_LEAGUE_ID?view=mTransactions2"
-
-curl -sSL \
-  -H "Cookie: $COOKIE" \
-  "$URL_TRANSACTIONS" -o "data/espn_transactions_${YEAR}.json"
+TRANSACTION_SCORING_PERIOD="$(jq -r '.status.finalScoringPeriod // .status.latestScoringPeriod // .scoringPeriodId' "data/espn_league_${YEAR}.json")"
+TRANSACTION_FILES=()
+trap 'rm -f "${TRANSACTION_FILES[@]}"' EXIT
+for SCORING_PERIOD in $(seq 1 "$TRANSACTION_SCORING_PERIOD"); do
+  URL_TRANSACTIONS="https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/seasons/$YEAR/segments/0/leagues/$ESPN_LEAGUE_ID?view=mTransactions2&scoringPeriodId=$SCORING_PERIOD"
+  TRANSACTION_FILE="$(mktemp)"
+  TRANSACTION_FILES+=("$TRANSACTION_FILE")
+  curl -sSL \
+    -H "Cookie: $COOKIE" \
+    -H 'X-Fantasy-Filter: {"transactions":{"filterType":{"value":["FREEAGENT","WAIVER","WAIVER_ERROR"]}}}' \
+    "$URL_TRANSACTIONS" -o "$TRANSACTION_FILE"
+done
+jq -s '{transactions: [.[].transactions[]?]}' "${TRANSACTION_FILES[@]}" > "data/espn_transactions_${YEAR}.json"
 
 
 URL_PLAYERS="https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/seasons/$YEAR/players?scoringPeriodId=0&view=players_wl"

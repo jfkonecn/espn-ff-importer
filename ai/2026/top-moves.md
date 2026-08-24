@@ -4,48 +4,48 @@
 
 | Rank | Player | Position | Team | % Change | % Owned |
 |------|--------|----------|------|----------|----------|
-| 1 | Keenan Allen | WR | IND | 3.0% | 3.9% |
-| 2 | De'Zhaun Stribling | WR | TB | 2.4% | 21.4% |
-| 3 | Ja'Kobi Lane | WR | BAL | 1.7% | 13.7% |
-| 4 | Braelon Allen | RB | NYJ | 1.4% | 8.0% |
-| 5 | Jaguars D/ST | D/ST | HOU | 1.3% | 52.1% |
-| 6 | Jordan Mason | RB | MIN | 1.2% | 52.4% |
-| 7 | Tyler Allgeier | RB | PIT | 1.0% | 18.6% |
-| 8 | Devaughn Vele | WR | NO | 0.9% | 2.2% |
-| 9 | Stefon Diggs | WR | ARI | 0.9% | 65.1% |
-| 10 | Caleb Douglas | WR | MIA | 0.8% | 5.0% |
-| 11 | MarShawn Lloyd | RB | GB | 0.4% | 5.0% |
-| 12 | Jonah Coleman | RB | DEN | 0.4% | 5.1% |
-| 13 | Chargers D/ST | D/ST | BAL | 0.4% | 46.8% |
-| 14 | Dalton Kincaid | WR | BUF | 0.4% | 65.3% |
-| 15 | Tyjae Spears | RB | TEN | 0.3% | 32.5% |
-| 16 | Lions D/ST | D/ST | DET | 0.3% | 65.1% |
-| 17 | Keaton Mitchell | RB | BAL | 0.3% | 9.2% |
-| 18 | Sam Darnold | RB | LAC | 0.3% | 19.0% |
-| 19 | Tre Tucker | WR | LV | 0.3% | 17.0% |
-| 20 | Tyrone Tracy Jr. | RB | NYG | 0.3% | 17.4% |
+| 1 | Mike Washington Jr. | RB | LV | 22.4% | 33.7% |
+| 2 | Tank Dell | WR | HOU | 4.5% | 32.6% |
+| 3 | De'Zhaun Stribling | WR | TB | 3.5% | 38.8% |
+| 4 | Keenan Allen | WR | IND | 2.4% | 17.7% |
+| 5 | Tyler Allgeier | RB | PIT | 2.3% | 25.0% |
+| 6 | Brian Robinson Jr. | RB | ATL | 2.2% | 21.9% |
+| 7 | Caleb Douglas | WR | MIA | 2.1% | 11.0% |
+| 8 | Keaton Mitchell | RB | BAL | 2.0% | 14.5% |
+| 9 | Terrance Ferguson | WR | LAR | 1.9% | 21.9% |
+| 10 | Rashid Shaheed | WR | LAC | 1.8% | 41.9% |
+| 11 | Jonah Coleman | RB | DEN | 1.8% | 10.9% |
+| 12 | Chris Rodriguez Jr. | RB | HOU | 1.7% | 21.1% |
+| 13 | Jordan Mason | RB | MIN | 1.6% | 59.0% |
+| 14 | Denzel Boston | WR | CIN | 1.6% | 22.4% |
+| 15 | Jordan Love | RB | GB | 1.6% | 30.9% |
+| 16 | Tyjae Spears | RB | TEN | 1.5% | 36.6% |
+| 17 | Daniel Jones | RB | IND | 1.5% | 32.9% |
+| 18 | Harrison Butker | TE | KC | 1.5% | 76.7% |
+| 19 | Baker Mayfield | RB | SF | 1.4% | 49.7% |
+| 20 | Adonai Mitchell | WR | NYJ | 1.4% | 12.7% |
 
 ## Most Dropped Players
 
 | Rank | Player | Position | Team | % Change | % Owned |
 |------|--------|----------|------|----------|----------|
-| 1 | Jordyn Tyson | WR | NO | -2.5% | 81.4% |
-| 2 | Ricky Pearsall | WR | TB | -1.2% | 21.6% |
-| 3 | Zach Charbonnet | RB | LAC | -0.9% | 58.1% |
-| 4 | Isiah Pacheco | RB | DET | -0.8% | 44.4% |
-| 5 | Omar Cooper Jr. | WR | NYJ | -0.7% | 14.3% |
-| 6 | Patriots D/ST | D/ST | NE | -0.6% | 72.9% |
-| 7 | Browns D/ST | D/ST | CIN | -0.6% | 59.1% |
-| 8 | Makai Lemon | WR | PHI | -0.6% | 77.0% |
-| 9 | Jerry Jeudy | WR | CIN | -0.5% | 28.5% |
-| 10 | Vikings D/ST | D/ST | MIN | -0.5% | 19.9% |
-| 11 | RJ Harvey | RB | DEN | -0.5% | 75.6% |
-| 12 | Rachaad White | RB | ARI | -0.5% | 75.3% |
-| 13 | Romeo Doubs | WR | NE | -0.4% | 59.2% |
-| 14 | Woody Marks | RB | HOU | -0.4% | 58.5% |
-| 15 | Aaron Jones Sr. | RB | MIN | -0.4% | 78.5% |
-| 16 | Alvin Kamara | RB | NO | -0.4% | 48.1% |
-| 17 | Calvin Ridley | WR | TEN | -0.4% | 20.7% |
-| 18 | Darnell Mooney | WR | NYG | -0.3% | 5.5% |
-| 19 | Tyreek Hill | WR | FA | -0.3% | 6.9% |
-| 20 | Oronde Gadsden | WR | BAL | -0.3% | 7.3% |
+| 1 | Jordyn Tyson | WR | NO | -6.3% | 59.2% |
+| 2 | Jayden Higgins | WR | HOU | -4.2% | 19.0% |
+| 3 | Ricky Pearsall | WR | TB | -2.5% | 13.3% |
+| 4 | Jaguars D/ST | D/ST | HOU | -1.9% | 48.9% |
+| 5 | Makai Lemon | WR | PHI | -1.4% | 72.9% |
+| 6 | Kenyon Sadiq | WR | NYJ | -1.4% | 65.3% |
+| 7 | Rachaad White | RB | ARI | -1.1% | 72.3% |
+| 8 | Omar Cooper Jr. | WR | NYJ | -1.1% | 10.5% |
+| 9 | Vikings D/ST | D/ST | MIN | -0.8% | 16.7% |
+| 10 | Zach Charbonnet | RB | LAC | -0.8% | 54.4% |
+| 11 | Josh Downs | WR | IND | -0.8% | 73.8% |
+| 12 | Isiah Pacheco | RB | DET | -0.8% | 40.0% |
+| 13 | RJ Harvey | RB | DEN | -0.7% | 73.2% |
+| 14 | Alvin Kamara | RB | NO | -0.7% | 43.1% |
+| 15 | Tyreek Hill | WR | FA | -0.6% | 4.9% |
+| 16 | Aaron Jones Sr. | RB | MIN | -0.5% | 76.7% |
+| 17 | Darnell Mooney | WR | NYG | -0.5% | 3.8% |
+| 18 | Oronde Gadsden | WR | BAL | -0.5% | 5.7% |
+| 19 | Chuba Hubbard | RB | JAX | -0.4% | 81.0% |
+| 20 | Germie Bernard | WR | SEA | -0.4% | 8.1% |

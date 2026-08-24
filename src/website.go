@@ -913,19 +913,20 @@ func (wg *WebsiteGenerator) getPreDraftKeeperEligibility() []KeeperEligibility {
 				isEligible := keeperHistory.KeeperYears < 2
 
 				eligibility := KeeperEligibility{
-					PlayerID:        player.ID,
-					PlayerName:      player.FullName,
-					TeamName:        team.Name,
-					OwnerName:       ownerName,
-					Position:        position,
-					ProTeamName:     proTeamName,
-					ProTeamAbbrev:   proTeamAbbrev,
-					IsEligible:      isEligible,
-					KeeperYears:     keeperHistory.KeeperYears,
-					AcquisitionType: keeperHistory.AcquisitionType,
-					CurrentPrice:    keeperHistory.CurrentPrice,
-					NextYearPrice:   nextYearPrice,
-					IsKeeper:        keeperHistory.KeeperYears > 0,
+					PlayerID:              player.ID,
+					PlayerName:            player.FullName,
+					TeamName:              team.Name,
+					OwnerName:             ownerName,
+					Position:              position,
+					ProTeamName:           proTeamName,
+					ProTeamAbbrev:         proTeamAbbrev,
+					IsEligible:            isEligible,
+					KeeperYears:           keeperHistory.KeeperYears,
+					AcquisitionType:       keeperHistory.AcquisitionType,
+					OriginalDraftTeamName: keeperHistory.OriginalDraftTeamName,
+					CurrentPrice:          keeperHistory.CurrentPrice,
+					NextYearPrice:         nextYearPrice,
+					IsKeeper:              keeperHistory.KeeperYears > 0,
 				}
 
 				eligibilities = append(eligibilities, eligibility)
@@ -945,7 +946,7 @@ func (wg *WebsiteGenerator) getPreDraftKeeperEligibility() []KeeperEligibility {
 				AcquisitionType: "unknown",
 				CurrentPrice:    0,
 				NextYearPrice:   0,
-		IsKeeper:        false,
+				IsKeeper:        false,
 			}
 
 			eligibilities = append(eligibilities, eligibility)
