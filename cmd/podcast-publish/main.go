@@ -28,6 +28,7 @@ func main() {
 		model           = flag.String("model", getenv("PODCAST_TTS_MODEL", "gpt-4o-mini-tts"), "OpenAI TTS model")
 		voice           = flag.String("voice", getenv("PODCAST_VOICE", "ballad"), "OpenAI TTS voice")
 		forceRun        = flag.Bool("force", boolFromEnv("PODCAST_FORCE_RUN"), "Allow overwriting an existing generated podcast")
+		skipExisting    = flag.Bool("skip-existing", boolFromEnv("PODCAST_SKIP_EXISTING"), "Exit successfully when generated podcast audio already exists")
 	)
 	flag.Parse()
 	if *season == 0 {
@@ -59,6 +60,10 @@ func main() {
 
 	audioPath := filepath.Join(*podcastDir, script.AudioFile)
 	if !*forceRun && fileExists(audioPath) {
+		if *skipExisting {
+			fmt.Printf("Podcast audio already exists at %s; skipping publication\n", audioPath)
+			return
+		}
 		fatal("run safety check", fmt.Errorf("generated podcast audio already exists at %s; manually rerun with force enabled to overwrite it", audioPath))
 	}
 	fmt.Printf("Synthesizing segmented MP3 for episode %s with model=%s voice=%s\n", script.EpisodeID, *model, *voice)

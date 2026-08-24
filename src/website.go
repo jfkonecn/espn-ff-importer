@@ -25,15 +25,17 @@ var templateFS embed.FS
 
 // WebsiteGenerator handles the generation of the static website
 type WebsiteGenerator struct {
-	reader            *LeagueReader
-	historicalReaders map[int]*LeagueReader // Map of season ID to reader
+	reader                 *LeagueReader
+	historicalReaders      map[int]*LeagueReader // Map of season ID to reader
+	historicalTransactions map[int]TransactionHistory
 }
 
 // NewWebsiteGenerator creates a new website generator
 func NewWebsiteGenerator(reader *LeagueReader) *WebsiteGenerator {
 	return &WebsiteGenerator{
-		reader:            reader,
-		historicalReaders: make(map[int]*LeagueReader),
+		reader:                 reader,
+		historicalReaders:      make(map[int]*LeagueReader),
+		historicalTransactions: make(map[int]TransactionHistory),
 	}
 }
 
@@ -144,6 +146,20 @@ func (wg *WebsiteGenerator) LoadHistoricalData(dataDir string) error {
 		}
 		wg.historicalReaders[year] = reader
 		fmt.Printf("    Successfully loaded %s\n", filePath)
+
+		transactionPath := fmt.Sprintf("%s/espn_transactions_%d.json", dataDir, year)
+		data, err := os.ReadFile(transactionPath)
+		if err != nil {
+			fmt.Printf("    No transaction history at %s: %v\n", transactionPath, err)
+			continue
+		}
+		var transactions TransactionHistory
+		if err := json.Unmarshal(data, &transactions); err != nil {
+			fmt.Printf("    Could not parse transaction history at %s: %v\n", transactionPath, err)
+			continue
+		}
+		wg.historicalTransactions[year] = transactions
+		fmt.Printf("    Loaded %d transactions from %s\n", len(transactions.Transactions), transactionPath)
 	}
 
 	fmt.Printf("Loaded %d historical seasons\n", len(wg.historicalReaders))
@@ -806,6 +822,15 @@ func (wg *WebsiteGenerator) calculateNextYearKeeperPrice(currentPrice int, acqui
 		case 1: // Second year being kept
 			return 22
 		}
+	} else if acquisitionType == "free_agency_readd" {
+		minimumPrice := 15
+		if keeperYears == 1 {
+			minimumPrice = 22
+		}
+		if currentPrice < minimumPrice {
+			return minimumPrice
+		}
+		return currentPrice
 	}
 
 	return 0
@@ -900,7 +925,7 @@ func (wg *WebsiteGenerator) getPreDraftKeeperEligibility() []KeeperEligibility {
 					AcquisitionType: keeperHistory.AcquisitionType,
 					CurrentPrice:    keeperHistory.CurrentPrice,
 					NextYearPrice:   nextYearPrice,
-					IsKeeper:        false, // Not a keeper yet, just showing eligibility
+					IsKeeper:        keeperHistory.KeeperYears > 0,
 				}
 
 				eligibilities = append(eligibilities, eligibility)
@@ -920,7 +945,7 @@ func (wg *WebsiteGenerator) getPreDraftKeeperEligibility() []KeeperEligibility {
 				AcquisitionType: "unknown",
 				CurrentPrice:    0,
 				NextYearPrice:   0,
-				IsKeeper:        false,
+		IsKeeper:        false,
 			}
 
 			eligibilities = append(eligibilities, eligibility)
@@ -936,6 +961,7 @@ func (wg *WebsiteGenerator) analyzeKeeperHistory(playerID int, teamName string, 
 	var acquisitionType string
 	var currentPrice int
 	var previousYearDraftPrice int
+	var previousYearDraftTeamName string
 
 	// Only search the previous year for the draft value
 	prevYear := currentSeason - 1
@@ -945,6 +971,9 @@ func (wg *WebsiteGenerator) analyzeKeeperHistory(playerID int, teamName string, 
 		for _, pick := range league.DraftDetail.Picks {
 			if pick.PlayerID == playerID {
 				previousYearDraftPrice = pick.BidAmount
+				if team := reader.GetTeamByID(pick.TeamID); team != nil {
+					previousYearDraftTeamName = team.Name
+				}
 				break
 			}
 		}
@@ -996,30 +1025,67 @@ func (wg *WebsiteGenerator) analyzeKeeperHistory(playerID int, teamName string, 
 		}
 	}
 
-	// Determine acquisition type and price based on previous year's draft
+	// Determine acquisition type and price based on the previous year's draft.
 	if previousYearDraftPrice > 0 {
 		acquisitionType = "draft"
 		currentPrice = previousYearDraftPrice
+		if wg.wasReacquiredThroughFreeAgency(playerID, teamName, prevYear) {
+			acquisitionType = "free_agency_readd"
+		}
 	} else {
 		acquisitionType = "free_agency"
 		currentPrice = 0
 	}
 
 	return KeeperEligibility{
-		PlayerID:        playerID,
-		PlayerName:      "", // Will be filled by caller
-		TeamName:        teamName,
-		OwnerName:       "", // Will be filled by caller
-		Position:        "", // Will be filled by caller
-		ProTeamName:     "", // Will be filled by caller
-		ProTeamAbbrev:   "", // Will be filled by caller
-		IsEligible:      keeperYears < 3,
-		KeeperYears:     keeperYears,
-		AcquisitionType: acquisitionType,
-		CurrentPrice:    currentPrice,
-		NextYearPrice:   0, // Will be calculated by caller
-		IsKeeper:        false,
+		PlayerID:              playerID,
+		PlayerName:            "", // Will be filled by caller
+		TeamName:              teamName,
+		OwnerName:             "", // Will be filled by caller
+		Position:              "", // Will be filled by caller
+		ProTeamName:           "", // Will be filled by caller
+		ProTeamAbbrev:         "", // Will be filled by caller
+		IsEligible:            keeperYears < 3,
+		KeeperYears:           keeperYears,
+		AcquisitionType:       acquisitionType,
+		OriginalDraftTeamName: previousYearDraftTeamName,
+		CurrentPrice:          currentPrice,
+		NextYearPrice:         0, // Will be calculated by caller
+		IsKeeper:              false,
 	}
+}
+
+// wasReacquiredThroughFreeAgency reports whether the team's current player was
+// added from the free-agent pool after being drafted that season.
+func (wg *WebsiteGenerator) wasReacquiredThroughFreeAgency(playerID int, teamName string, season int) bool {
+	reader, exists := wg.historicalReaders[season]
+	if !exists {
+		return false
+	}
+	team := reader.GetTeamByName(teamName)
+	if team == nil {
+		return false
+	}
+
+	transactions, exists := wg.historicalTransactions[season]
+	if !exists {
+		return false
+	}
+	for _, transaction := range transactions.Transactions {
+		if !strings.EqualFold(transaction.Status, "EXECUTED") || strings.EqualFold(transaction.Type, "TRADE") {
+			continue
+		}
+		items := transaction.Items
+		if len(items) == 0 {
+			items = transaction.TransactionItems
+		}
+		for _, item := range items {
+			if item.PlayerID == playerID && item.ToTeamID == team.ID && strings.EqualFold(item.Type, "ADD") {
+				return true
+			}
+		}
+	}
+	return false
 }
 
 // getPlayerDraftPrice looks up a player's draft price from the specified season

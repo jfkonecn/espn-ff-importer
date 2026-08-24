@@ -12,13 +12,14 @@ import (
 
 func main() {
 	var (
-		season     = flag.Int("season", seasonFromEnv(), "Season year")
-		statePath  = flag.String("state", "", "Path to season-state JSON")
-		aiDir      = flag.String("ai", "ai", "AI data directory")
-		outputDir  = flag.String("output", "static/assets/podcasts/generated", "Directory for generated podcast scripts")
-		podcastDir = flag.String("podcasts", "static/assets/podcasts", "Podcast asset directory")
-		model      = flag.String("model", getenv("PODCAST_MODEL", "gpt-4.1"), "OpenAI model for transcript generation")
-		forceRun   = flag.Bool("force", boolFromEnv("PODCAST_FORCE_RUN"), "Allow overwriting an existing generated podcast")
+		season       = flag.Int("season", seasonFromEnv(), "Season year")
+		statePath    = flag.String("state", "", "Path to season-state JSON")
+		aiDir        = flag.String("ai", "ai", "AI data directory")
+		outputDir    = flag.String("output", "static/assets/podcasts/generated", "Directory for generated podcast scripts")
+		podcastDir   = flag.String("podcasts", "static/assets/podcasts", "Podcast asset directory")
+		model        = flag.String("model", getenv("PODCAST_MODEL", "gpt-4.1"), "OpenAI model for transcript generation")
+		forceRun     = flag.Bool("force", boolFromEnv("PODCAST_FORCE_RUN"), "Allow overwriting an existing generated podcast")
+		skipExisting = flag.Bool("skip-existing", boolFromEnv("PODCAST_SKIP_EXISTING"), "Exit successfully when a generated podcast already exists")
 	)
 	flag.Parse()
 	if *season == 0 {
@@ -45,9 +46,17 @@ func main() {
 	audioPath := filepath.Join(*podcastDir, episodeID+".mp3")
 	if !*forceRun {
 		if fileExists(outputPath) {
+			if *skipExisting {
+				fmt.Printf("Podcast transcript already exists at %s; skipping generation\n", outputPath)
+				return
+			}
 			fatal("run safety check", fmt.Errorf("generated transcript already exists at %s; manually rerun with force enabled to overwrite it", outputPath))
 		}
 		if fileExists(audioPath) {
+			if *skipExisting {
+				fmt.Printf("Podcast audio already exists at %s; skipping generation\n", audioPath)
+				return
+			}
 			fatal("run safety check", fmt.Errorf("generated podcast audio already exists at %s; manually rerun with force enabled to overwrite it", audioPath))
 		}
 	}

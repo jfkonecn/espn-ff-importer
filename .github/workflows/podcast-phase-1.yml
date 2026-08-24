@@ -38,6 +38,7 @@ jobs:
           CURRENT_YEAR: ${{ vars.CURRENT_YEAR }}
           PODCAST_MODEL: ${{ vars.PODCAST_MODEL }}
           PODCAST_FORCE_RUN: ${{ inputs.force_run }}
+          PODCAST_SKIP_EXISTING: true
         run: go run ./cmd/podcast-transcript
 
       - name: Commit transcript

@@ -50,7 +50,7 @@ if ! ls "$DATA_DIR"/espn_league_*.json 1> /dev/null 2>&1; then
 fi
 
 # Build the command
-CMD="go run src/*.go -data \"$DATA_DIR\" -output \"$OUTPUT_DIR\""
+CMD="go run ./src -data \"$DATA_DIR\" -output \"$OUTPUT_DIR\""
 
 # Run the command
 echo "Running: $CMD"

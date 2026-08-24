@@ -34,6 +34,12 @@ curl -sSL \
   -H "Cookie: $COOKIE" \
   "$URL_SEASON" -o "data/espn_league_${YEAR}.json"
 
+URL_TRANSACTIONS="https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/seasons/$YEAR/segments/0/leagues/$ESPN_LEAGUE_ID?view=mTransactions2"
+
+curl -sSL \
+  -H "Cookie: $COOKIE" \
+  "$URL_TRANSACTIONS" -o "data/espn_transactions_${YEAR}.json"
+
 
 URL_PLAYERS="https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/seasons/$YEAR/players?scoringPeriodId=0&view=players_wl"
 

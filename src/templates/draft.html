@@ -25,7 +25,7 @@
 <body class="bg-gray-50 min-h-screen">
     <div class="container mx-auto px-4 py-8">
         <!-- Navigation -->
-        <nav class="mb-6">
+        <nav class="mb-6 flex flex-wrap gap-2">
             <a href="index.html"
                 class="inline-flex items-center px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 transition-colors duration-200 mr-4">
                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -221,8 +221,9 @@
                                 Drop & Re-acquire Rule:
                             </h4>
                             <p>
-                                If a player is drafted and then dropped, they retain their
-                                draft value (not FA price) when re-acquired.
+                                A player drafted, dropped, and re-acquired through free agency
+                                has a keeper price equal to the higher of their original draft
+                                price or $15 in the first year, and $22 in the second year.
                             </p>
                         </div>
                     </div>
@@ -251,10 +252,10 @@
                             <li>"Acquired via
                                 draft: 1st year = Draft Price + $5 and 2nd year = previous price
                                 +$7</li>
-                            <li>Aquired via Free Agency: FA
-                                - 1st year $15 and 2nd year $22" If a player is
-                                drafted and then dropped, he is kept for his draft value, not
-                                his FA price, whichever is more</li>
+                            <li>Acquired via free agency: 1st year $15 and 2nd year $22.</li>
+                            <li>If a player was drafted, dropped, and re-acquired through free
+                                agency, their keeper price is the higher of the original draft
+                                price or $15 in the first year, and $22 in the second year.</li>
                         </ul>
                         </p>
                     </div>
@@ -298,8 +299,30 @@
                                         {{.PlayerName}}
                                     </div>
                                 </div>
-                                <div class="text-sm text-gray-600 mb-2">
-                                    Current: ${{.CurrentPrice}} → Next Year: ${{.NextYearPrice}}
+                                <div class="mb-2 rounded-md bg-fantasy-green px-3 py-2 text-white">
+                                    <div class="text-xs font-medium uppercase tracking-wide text-green-100">Keeper Price</div>
+                                    <div class="text-2xl font-bold">${{.NextYearPrice}}</div>
+                                    <div class="text-xs text-green-100">Current price: ${{.CurrentPrice}}</div>
+                                </div>
+                                <div class="text-xs text-gray-500 mb-2">
+                                    Based on: {{if eq .AcquisitionType "draft"}}prior draft price (${{.CurrentPrice}}){{if eq .KeeperYears 0}} + $5{{else}} + $7{{end}}{{else if eq .AcquisitionType "free_agency_readd"}}{{if eq .OriginalDraftTeamName .TeamName}}re-added through free agency after this team drafted them{{else}}drafted by {{.OriginalDraftTeamName}}, then added by this team through free agency{{end}}: higher of prior draft price (${{.CurrentPrice}}) or ${{if eq .KeeperYears 0}}15{{else}}22{{end}}{{else if eq .AcquisitionType "free_agency"}}free-agency keeper price (${{if eq .KeeperYears 0}}15{{else}}22{{end}}){{else}}available roster history{{end}}
+                                </div>
+                                <div class="flex flex-wrap gap-1 mb-2">
+                                    {{if eq .AcquisitionType "draft"}}
+                                    <span class="inline-flex items-center rounded-full bg-blue-100 px-2 py-0.5 text-xs font-medium text-blue-800">Drafted by this team</span>
+                                    {{else if eq .AcquisitionType "free_agency_readd"}}
+                                    {{if eq .OriginalDraftTeamName .TeamName}}
+                                    <span class="inline-flex items-center rounded-full bg-blue-100 px-2 py-0.5 text-xs font-medium text-blue-800">Drafted by this team</span>
+                                    {{else}}
+                                    <span class="inline-flex items-center rounded-full bg-purple-100 px-2 py-0.5 text-xs font-medium text-purple-800">Drafted by another team</span>
+                                    {{end}}
+                                    <span class="inline-flex items-center rounded-full bg-orange-100 px-2 py-0.5 text-xs font-medium text-orange-800">Free agent acquisition</span>
+                                    {{else if eq .AcquisitionType "free_agency"}}
+                                    <span class="inline-flex items-center rounded-full bg-orange-100 px-2 py-0.5 text-xs font-medium text-orange-800">Free agent acquisition</span>
+                                    {{end}}
+                                    {{if .IsKeeper}}
+                                    <span class="inline-flex items-center rounded-full bg-yellow-100 px-2 py-0.5 text-xs font-medium text-yellow-800">Keeper</span>
+                                    {{end}}
                                 </div>
                                 <div class="flex items-center justify-between">
                                     <span class="text-xs text-gray-500">{{.KeeperYears}}/2 years kept</span>

@@ -42,6 +42,7 @@ jobs:
           PODCAST_TTS_MODEL: ${{ vars.PODCAST_TTS_MODEL }}
           PODCAST_VOICE: ${{ vars.PODCAST_VOICE }}
           PODCAST_FORCE_RUN: ${{ inputs.force_run }}
+          PODCAST_SKIP_EXISTING: true
         run: go run ./cmd/podcast-publish
 
       - name: Commit podcast publication
