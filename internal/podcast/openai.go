@@ -9,11 +9,20 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"regexp"
+	"strconv"
 	"strings"
 	"time"
 )
 
-const openAIBaseURL = "https://api.openai.com/v1"
+const (
+	openAIBaseURL             = "https://api.openai.com/v1"
+	openAIRateLimitMaxRetries = 3
+	openAIRateLimitBaseDelay  = 30 * time.Second
+	openAIRateLimitMaxDelay   = 2 * time.Minute
+)
+
+var openAIRetryAfterMessageRE = regexp.MustCompile(`(?i)try again in ([0-9]+(?:\.[0-9]+)?)s`)
 
 type responseContent struct {
 	Type string `json:"type"`
@@ -202,14 +211,7 @@ func SynthesizeSpeech(apiKey, model, voice, input, outputPath string) error {
 		return err
 	}
 
-	req, err := http.NewRequest(http.MethodPost, openAIBaseURL+"/audio/speech", bytes.NewReader(body))
-	if err != nil {
-		return err
-	}
-	req.Header.Set("Authorization", "Bearer "+apiKey)
-	req.Header.Set("Content-Type", "application/json")
-
-	resp, err := http.DefaultClient.Do(req)
+	resp, err := postOpenAI(apiKey, "/audio/speech", body)
 	if err != nil {
 		return err
 	}
@@ -404,14 +406,7 @@ func createResponse(apiKey, model string, input []responseInputItem, previousRes
 		return responseAPIResult{}, err
 	}
 
-	req, err := http.NewRequest(http.MethodPost, openAIBaseURL+"/responses", bytes.NewReader(body))
-	if err != nil {
-		return responseAPIResult{}, err
-	}
-	req.Header.Set("Authorization", "Bearer "+apiKey)
-	req.Header.Set("Content-Type", "application/json")
-
-	resp, err := http.DefaultClient.Do(req)
+	resp, err := postOpenAI(apiKey, "/responses", body)
 	if err != nil {
 		return responseAPIResult{}, err
 	}
@@ -433,6 +428,57 @@ func createResponse(apiKey, model string, input []responseInputItem, previousRes
 		return responseAPIResult{}, fmt.Errorf("OpenAI response error: %s", result.Error.Message)
 	}
 	return result, nil
+}
+
+func postOpenAI(apiKey, path string, body []byte) (*http.Response, error) {
+	for attempt := range openAIRateLimitMaxRetries + 1 {
+		req, err := http.NewRequest(http.MethodPost, openAIBaseURL+path, bytes.NewReader(body))
+		if err != nil {
+			return nil, err
+		}
+		req.Header.Set("Authorization", "Bearer "+apiKey)
+		req.Header.Set("Content-Type", "application/json")
+
+		resp, err := http.DefaultClient.Do(req)
+		if err != nil {
+			return nil, err
+		}
+		if resp.StatusCode != http.StatusTooManyRequests || attempt == openAIRateLimitMaxRetries {
+			return resp, nil
+		}
+
+		contents, _ := io.ReadAll(resp.Body)
+		resp.Body.Close()
+		delay := openAIRateLimitDelay(resp, string(contents), attempt)
+		fmt.Printf("OpenAI rate limit hit for %s; sleeping %s before retry %d/%d\n", path, delay, attempt+1, openAIRateLimitMaxRetries)
+		time.Sleep(delay)
+	}
+
+	return nil, fmt.Errorf("OpenAI request retry loop exited unexpectedly")
+}
+
+func openAIRateLimitDelay(resp *http.Response, body string, attempt int) time.Duration {
+	if retryAfter := resp.Header.Get("Retry-After"); retryAfter != "" {
+		if seconds, err := strconv.Atoi(retryAfter); err == nil && seconds > 0 {
+			return time.Duration(seconds) * time.Second
+		}
+		if retryAt, err := http.ParseTime(retryAfter); err == nil {
+			if delay := time.Until(retryAt); delay > 0 {
+				return delay
+			}
+		}
+	}
+	if matches := openAIRetryAfterMessageRE.FindStringSubmatch(body); len(matches) == 2 {
+		if seconds, err := strconv.ParseFloat(matches[1], 64); err == nil && seconds > 0 {
+			return time.Duration(seconds * float64(time.Second))
+		}
+	}
+
+	delay := openAIRateLimitBaseDelay << attempt
+	if delay > openAIRateLimitMaxDelay {
+		return openAIRateLimitMaxDelay
+	}
+	return delay
 }
 
 func podcastScriptSchema() map[string]any {
