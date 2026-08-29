@@ -1,9 +1,10 @@
 {
   "season": 2026,
   "leagueName": "The League",
-  "phase": "draft",
-  "draftComplete": false,
+  "phase": "post-draft",
+  "week": 1,
+  "draftComplete": true,
   "completedMatchups": 0,
-  "totalMatchups": 70,
-  "generatedAt": "2026-08-25T09:34:20Z"
+  "totalMatchups": 84,
+  "generatedAt": "2026-08-29T16:58:36Z"
 }
