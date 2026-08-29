@@ -54,9 +54,7 @@ func main() {
 	if err := podcast.ReadJSON(path, &script); err != nil {
 		fatal("read generated script", err)
 	}
-	if script.AudioFile == "" {
-		script.AudioFile = script.EpisodeID + ".mp3"
-	}
+	podcast.NormalizeScriptIdentity(&script, strings.TrimSuffix(filepath.Base(path), filepath.Ext(path)))
 
 	audioPath := filepath.Join(*podcastDir, script.AudioFile)
 	if !*forceRun && fileExists(audioPath) {

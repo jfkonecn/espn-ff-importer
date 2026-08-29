@@ -51,7 +51,7 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add static/podcasts.xml static/assets/podcasts
+          git add static/podcasts.xml static/assets/podcasts/metadata.json static/assets/podcasts/generated/*.json static/assets/podcasts/*.mp3 static/assets/podcasts/*.wav static/assets/podcasts/*.chapters.json
           if git diff --staged --quiet; then
             echo "No podcast publication changes to commit"
           else

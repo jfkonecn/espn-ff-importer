@@ -94,3 +94,31 @@ func DefaultEpisodeID(state SeasonState) string {
 		return fmt.Sprintf("%d_Season", state.Season)
 	}
 }
+
+func NormalizeScriptIdentity(script *PodcastScript, fallbackEpisodeID string) {
+	if fallbackEpisodeID != "" {
+		script.EpisodeID = fallbackEpisodeID
+	} else if !isSafePodcastFileName(script.EpisodeID) {
+		script.EpisodeID = "episode"
+	}
+	if !isSafePodcastAudioFileName(script.AudioFile) || strings.TrimSuffix(script.AudioFile, filepath.Ext(script.AudioFile)) != script.EpisodeID {
+		script.AudioFile = script.EpisodeID + ".mp3"
+	}
+}
+
+func isSafePodcastAudioFileName(value string) bool {
+	return isSafePodcastFileName(value) && strings.EqualFold(filepath.Ext(value), ".mp3")
+}
+
+func isSafePodcastFileName(value string) bool {
+	if value == "" || filepath.Base(value) != value || strings.ContainsAny(value, `:/\\`) {
+		return false
+	}
+	for _, r := range value {
+		if (r >= 'a' && r <= 'z') || (r >= 'A' && r <= 'Z') || (r >= '0' && r <= '9') || r == '_' || r == '-' || r == '.' {
+			continue
+		}
+		return false
+	}
+	return true
+}

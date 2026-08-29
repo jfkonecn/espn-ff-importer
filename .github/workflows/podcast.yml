@@ -29,3 +29,8 @@ jobs:
     with:
       force_run: ${{ github.event_name == 'workflow_dispatch' && inputs.force_run }}
     secrets: inherit
+
+  phase-3:
+    needs: phase-2
+    uses: ./.github/workflows/podcast-phase-3.yml
+    secrets: inherit

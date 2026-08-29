@@ -1,0 +1,39 @@
+name: Podcast Phase 3 Website
+
+on:
+  workflow_call:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  website:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+
+      - name: Regenerate website
+        run: go run ./src
+
+      - name: Commit podcast website page
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add static/podcasts.html
+          if git diff --staged --quiet; then
+            echo "No podcast website page changes to commit"
+          else
+            git commit -m "Update podcast page [skip ci]"
+            git push
+          fi

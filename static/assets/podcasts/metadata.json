@@ -14,12 +14,12 @@
   },
   "episodes": [
     {
-      "file": "https://example.com/podcast/episode1.mp3",
+      "file": "2026_PostDraft.mp3",
       "title": "2026 Fantasy Football Season Preview",
       "description": "In this episode, we provide a comprehensive overview of the upcoming 2026 fantasy football season, including league standings, keeper eligibility, and recent NFL news.",
       "pubDate": "2026-08-29T17:07:38Z",
       "duration": "00:10:23",
-      "chapters": "https://example.com/podcast/episode1.chapters.json",
+      "chapters": "2026_PostDraft.chapters.json",
       "explicit": false,
       "episodeType": "full"
     },

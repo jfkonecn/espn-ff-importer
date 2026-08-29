@@ -66,6 +66,7 @@ func main() {
 	if err != nil {
 		fatal("generate transcript", err)
 	}
+	podcast.NormalizeScriptIdentity(&script, episodeID)
 
 	fmt.Printf("Writing transcript JSON for episode %s to %s\n", script.EpisodeID, outputPath)
 	if err := podcast.WriteJSON(outputPath, script); err != nil {
