@@ -1,0 +1,29 @@
+{
+  "version": "1.2.0",
+  "chapters": [
+    {
+      "startTime": 0,
+      "title": "Intro"
+    },
+    {
+      "startTime": 154,
+      "title": "Commercial 1 - Fantasy Football Wizard Wands"
+    },
+    {
+      "startTime": 192,
+      "title": "Best Team"
+    },
+    {
+      "startTime": 316,
+      "title": "Worst Team"
+    },
+    {
+      "startTime": 448,
+      "title": "Commercial 2 - Gridiron Guru Helmet Polish"
+    },
+    {
+      "startTime": 486,
+      "title": "Final Take"
+    }
+  ]
+}

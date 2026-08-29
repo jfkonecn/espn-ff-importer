@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:podcast="https://podcastindex.org/namespace/1.0">
   <channel>
     <title>Slop Take</title>
     <link>https://jfkonecn.github.io/espn-ff-importer/podcasts.html</link>
     <description>The League&#39;s Official AI Slop Podcast</description>
     <language>en-us</language>
     <copyright>Slop Take</copyright>
-    <lastBuildDate>Sat, 01 Aug 2026 12:34:57 -0400</lastBuildDate>
+    <lastBuildDate>Sat, 29 Aug 2026 17:13:13 +0000</lastBuildDate>
     <atom:link href="https://jfkonecn.github.io/espn-ff-importer/podcasts.xml" rel="self" type="application/rss+xml" />
     <itunes:author>Eric&#39;s Beard</itunes:author>
     <itunes:summary>The League&#39;s Official AI Slop Podcast</itunes:summary>
@@ -24,6 +24,7 @@
       <pubDate>Sat, 01 Aug 2026 16:32:14 +0000</pubDate>
       <guid isPermaLink="false">https://jfkonecn.github.io/espn-ff-importer/assets/podcasts/2026_Draft.mp3</guid>
       <enclosure url="https://jfkonecn.github.io/espn-ff-importer/assets/podcasts/2026_Draft.mp3" length="11233533" type="audio/mpeg" />
+      
       <itunes:duration>00:11:42</itunes:duration>
       <itunes:explicit>true</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -36,6 +37,7 @@
       <pubDate>Wed, 24 Sep 2025 17:47:09 -0400</pubDate>
       <guid isPermaLink="false">https://jfkonecn.github.io/espn-ff-importer/assets/podcasts/2025_Week3.wav</guid>
       <enclosure url="https://jfkonecn.github.io/espn-ff-importer/assets/podcasts/2025_Week3.wav" length="73100414" type="audio/wav" />
+      
       <itunes:duration>00:13:49</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -48,6 +50,7 @@
       <pubDate>Thu, 11 Sep 2025 09:25:08 -0400</pubDate>
       <guid isPermaLink="false">https://jfkonecn.github.io/espn-ff-importer/assets/podcasts/2025_Week1.wav</guid>
       <enclosure url="https://jfkonecn.github.io/espn-ff-importer/assets/podcasts/2025_Week1.wav" length="63522946" type="audio/wav" />
+      
       <itunes:duration>00:12:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -60,6 +63,7 @@
       <pubDate>Sun, 31 Aug 2025 17:52:27 -0400</pubDate>
       <guid isPermaLink="false">https://jfkonecn.github.io/espn-ff-importer/assets/podcasts/2025_Predraft.wav</guid>
       <enclosure url="https://jfkonecn.github.io/espn-ff-importer/assets/podcasts/2025_Predraft.wav" length="30343724" type="audio/wav" />
+      
       <itunes:duration>00:10:32</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
@@ -72,6 +76,7 @@
       <pubDate>Sun, 31 Aug 2025 17:52:27 -0400</pubDate>
       <guid isPermaLink="false">https://jfkonecn.github.io/espn-ff-importer/assets/podcasts/2025_PostDraft.wav</guid>
       <enclosure url="https://jfkonecn.github.io/espn-ff-importer/assets/podcasts/2025_PostDraft.wav" length="29408718" type="audio/wav" />
+      
       <itunes:duration>00:10:13</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>

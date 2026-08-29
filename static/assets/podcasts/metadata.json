@@ -14,6 +14,16 @@
   },
   "episodes": [
     {
+      "file": "https://example.com/podcast/episode1.mp3",
+      "title": "2026 Fantasy Football Season Preview",
+      "description": "In this episode, we provide a comprehensive overview of the upcoming 2026 fantasy football season, including league standings, keeper eligibility, and recent NFL news.",
+      "pubDate": "2026-08-29T17:07:38Z",
+      "duration": "00:10:23",
+      "chapters": "https://example.com/podcast/episode1.chapters.json",
+      "explicit": false,
+      "episodeType": "full"
+    },
+    {
       "file": "2026_Draft.mp3",
       "title": "Slop Take: 2026 Draft Preview",
       "description": "In this episode of Slop Take, we dive into the high-stakes world of 'The League' as the 2026 fantasy football draft approaches. We analyze the pressure on team owners, dissect the best and worst teams from last season, and provide a comprehensive league analysis to prepare you for the upcoming season.",
