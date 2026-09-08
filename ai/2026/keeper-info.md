@@ -211,7 +211,7 @@
 | Tyler Shough | Bench | NO | 1 | 6 | 0 | Yes |
 | Tank Dell | Bench | HOU | 1 | 6 | 0 | Yes |
 
-### Matthew's Magnificent Team
+### Majestic mountain men
 
 | Player | Position | Pro Team | Current Price | Keeper Cost | Years Kept | Eligible |
 |--------|----------|----------|---------------|-------------|------------|----------|

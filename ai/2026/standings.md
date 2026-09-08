@@ -17,4 +17,4 @@
 | 9 | Boeing's Hitmen  | Bradford Evans | 0.00 | 0-0-0 | 0.00 | 0.00 |
 | 10 | Latin Fury | Benito Molina | 0.00 | 0-0-0 | 0.00 | 0.00 |
 | 11 | Love Handles | Justin Willer | 0.00 | 0-0-0 | 0.00 | 0.00 |
-| 12 | Matthew's Magnificent Team | Matthew Stevens | 0.00 | 0-0-0 | 0.00 | 0.00 |
+| 12 | Majestic mountain men | Matthew Stevens | 0.00 | 0-0-0 | 0.00 | 0.00 |

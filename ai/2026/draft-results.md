@@ -15,17 +15,17 @@
 | 8 | Boeing's Hitmen  | Bradford Evans | Puka Nacua | WR | LAR | $54 | Yes |
 | 9 | Latin Fury | Benito Molina | Chris Olave | WR | NO | $8 | Yes |
 | 10 | Advanced Metrics | John Konecny | Drake London | WR | ATL | $45 | No |
-| 11 | Matthew's Magnificent Team | Matthew Stevens | Cam Skattebo | RB | NYG | $26 | No |
+| 11 | Majestic mountain men | Matthew Stevens | Cam Skattebo | RB | NYG | $26 | No |
 | 12 | The Injured Preserve | Conner Graeff | Ashton Jeanty | RB | LV | $46 | No |
 | 13 | Love Handles | Justin Willer | Saquon Barkley | RB | PHI | $49 | No |
 | 14 | It's MillerTime | Colin Miller | Brandon Aubrey | K | DAL | $3 | No |
 | 15 | Caleb's Cats | michael machas | Jahmyr Gibbs | RB | DET | $73 | No |
 | 16 | Boeing's Hitmen  | Bradford Evans | Colston Loveland | TE | CHI | $18 | No |
 | 17 | Latin Fury | Benito Molina | Texans D/ST | D/ST | HOU | $2 | No |
-| 18 | Matthew's Magnificent Team | Matthew Stevens | Bijan Robinson | RB | ATL | $75 | No |
+| 18 | Majestic mountain men | Matthew Stevens | Bijan Robinson | RB | ATL | $75 | No |
 | 19 | Advanced Metrics | John Konecny | Josh Allen | QB | BUF | $39 | No |
 | 20 | Latin Fury | Benito Molina | Christian McCaffrey | RB | SF | $63 | No |
-| 21 | Matthew's Magnificent Team | Matthew Stevens | Lamar Jackson | QB | BAL | $19 | No |
+| 21 | Majestic mountain men | Matthew Stevens | Lamar Jackson | QB | BAL | $19 | No |
 | 22 | The Injured Preserve | Conner Graeff | Derrick Henry | RB | BAL | $43 | No |
 | 23 | #1 GangGreen | Paul Konecny | Broncos D/ST | D/ST | DEN | $3 | No |
 | 24 | Boeing's Hitmen  | Bradford Evans | Bucky Irving | RB | TB | $18 | No |
@@ -41,7 +41,7 @@
 | 34 | #1 GangGreen | Paul Konecny | Chase Brown | RB | CIN | $55 | No |
 | 35 | #1 GangGreen | Paul Konecny | Ka'imi Fairbairn | K | HOU | $2 | No |
 | 36 | Boeing's Hitmen  | Bradford Evans | Eddy Pineiro | K | SF | $3 | No |
-| 37 | Matthew's Magnificent Team | Matthew Stevens | George Pickens | WR | DAL | $38 | No |
+| 37 | Majestic mountain men | Matthew Stevens | George Pickens | WR | DAL | $38 | No |
 | 38 | Boeing's Hitmen  | Bradford Evans | D'Andre Swift | RB | CHI | $25 | No |
 | 39 | Caleb's Cats | michael machas | A.J. Brown | WR | NE | $46 | No |
 | 40 | Embrace the Darkness | Jordan Cunningham | CeeDee Lamb | WR | DAL | $63 | No |
@@ -60,13 +60,13 @@
 | 53 | Latin Fury | Benito Molina | Jayden Daniels | QB | WSH | $10 | No |
 | 54 | The Injured Preserve | Conner Graeff | Zay Flowers | WR | BAL | $22 | No |
 | 55 | America's Team | Eric Stevens | Malik Nabers | FLEX | NYG | $33 | No |
-| 56 | Matthew's Magnificent Team | Matthew Stevens | Garrett Wilson | WR | NYJ | $31 | No |
+| 56 | Majestic mountain men | Matthew Stevens | Garrett Wilson | WR | NYJ | $31 | No |
 | 57 | #1 GangGreen | Paul Konecny | Harrison Butker | Bench | KC | $2 | No |
 | 58 | The Injured Preserve | Conner Graeff | Joe Burrow | QB | CIN | $9 | No |
 | 59 | The Injured Preserve | Conner Graeff | Ravens D/ST | D/ST | BAL | $1 | No |
 | 60 | #1 GangGreen | Paul Konecny | Bo Nix | QB | DEN | $3 | No |
 | 61 | Caleb's Cats | michael machas | Tee Higgins | WR | CIN | $20 | No |
-| 62 | Matthew's Magnificent Team | Matthew Stevens | Isaiah Likely | TE | NYG | $2 | No |
+| 62 | Majestic mountain men | Matthew Stevens | Isaiah Likely | TE | NYG | $2 | No |
 | 63 | #1 GangGreen | Paul Konecny | DeVonta Smith | WR | PHI | $25 | No |
 | 64 | Love Handles | Justin Willer | Emeka Egbuka | WR | TB | $20 | No |
 | 65 | Latin Fury | Benito Molina | Tyler Warren | TE | IND | $17 | No |
@@ -119,7 +119,7 @@
 | 112 | It's MillerTime | Colin Miller | Alec Pierce | Bench | IND | $3 | No |
 | 113 | Latin Fury | Benito Molina | Matthew Stafford | Bench | LAR | $2 | No |
 | 114 | Caleb's Cats | michael machas | Kenny Gainwell | Bench | TB | $4 | No |
-| 115 | Matthew's Magnificent Team | Matthew Stevens | Brian Thomas Jr. | FLEX | JAX | $1 | No |
+| 115 | Majestic mountain men | Matthew Stevens | Brian Thomas Jr. | FLEX | JAX | $1 | No |
 | 116 | It's MillerTime | Colin Miller | Rico Dowdle | Bench | PIT | $4 | No |
 | 117 | America's Team | Eric Stevens | Rachaad White | Bench | WSH | $3 | No |
 | 118 | Jensen Huang and Sons | Tarek Kaakani | RJ Harvey | Bench | DEN | $1 | No |
@@ -131,7 +131,7 @@
 | 124 | It's MillerTime | Colin Miller | Kyle Monangai | Bench | CHI | $3 | No |
 | 125 | Latin Fury | Benito Molina | Travis Hunter | Bench | JAX | $2 | No |
 | 126 | Embrace the Darkness | Jordan Cunningham | Justin Herbert | Bench | LAC | $3 | No |
-| 127 | Matthew's Magnificent Team | Matthew Stevens | Jordan Addison | Bench | MIN | $1 | No |
+| 127 | Majestic mountain men | Matthew Stevens | Jordan Addison | Bench | MIN | $1 | No |
 | 128 | It's MillerTime | Colin Miller | Patriots D/ST | D/ST | NE | $22 | No |
 | 129 | America's Team | Eric Stevens | Kyler Murray | Bench | MIN | $1 | No |
 | 130 | Jensen Huang and Sons | Tarek Kaakani | Wan'Dale Robinson | Bench | TEN | $3 | No |
@@ -143,7 +143,7 @@
 | 136 | Jensen Huang and Sons | Tarek Kaakani | Blake Corum | Bench | LAR | $4 | No |
 | 137 | Latin Fury | Benito Molina | Tyjae Spears | Bench | TEN | $1 | No |
 | 138 | Embrace the Darkness | Jordan Cunningham | Chris Godwin Jr. | Bench | TB | $1 | No |
-| 139 | Matthew's Magnificent Team | Matthew Stevens | Jacory Croskey-Merritt | Bench | WSH | $1 | No |
+| 139 | Majestic mountain men | Matthew Stevens | Jacory Croskey-Merritt | Bench | WSH | $1 | No |
 | 140 | America's Team | Eric Stevens | Jake Bates | K | DET | $1 | No |
 | 141 | Jensen Huang and Sons | Tarek Kaakani | Makai Lemon | Bench | PHI | $1 | No |
 | 142 | Caleb's Cats | michael machas | MarShawn Lloyd | Bench | GB | $2 | No |
@@ -154,7 +154,7 @@
 | 147 | Caleb's Cats | michael machas | Jordan Mason | Bench | MIN | $1 | No |
 | 148 | Latin Fury | Benito Molina | Isiah Pacheco | Bench | DET | $1 | No |
 | 149 | Embrace the Darkness | Jordan Cunningham | Xavier Worthy | Bench | KC | $1 | No |
-| 150 | Matthew's Magnificent Team | Matthew Stevens | Zach Charbonnet | Bench | SEA | $1 | No |
+| 150 | Majestic mountain men | Matthew Stevens | Zach Charbonnet | Bench | SEA | $1 | No |
 | 151 | Jensen Huang and Sons | Tarek Kaakani | Baker Mayfield | QB | TB | $1 | No |
 | 152 | The Injured Preserve | Conner Graeff | Tre' Harris | Bench | LAC | $1 | No |
 | 153 | Boeing's Hitmen  | Bradford Evans | Woody Marks | Bench | HOU | $1 | No |
@@ -164,7 +164,7 @@
 | 157 | Caleb's Cats | michael machas | T.J. Hockenson | TE | MIN | $1 | No |
 | 158 | Latin Fury | Benito Molina | Alvin Kamara | Bench | NO | $1 | No |
 | 159 | Embrace the Darkness | Jordan Cunningham | Browns D/ST | D/ST | CLE | $1 | No |
-| 160 | Matthew's Magnificent Team | Matthew Stevens | Jared Goff | Bench | DET | $1 | No |
+| 160 | Majestic mountain men | Matthew Stevens | Jared Goff | Bench | DET | $1 | No |
 | 161 | Jensen Huang and Sons | Tarek Kaakani | Will Reichard | K | MIN | $20 | No |
 | 162 | The Injured Preserve | Conner Graeff | Ja'Kobi Lane | Bench | BAL | $1 | No |
 | 163 | Boeing's Hitmen  | Bradford Evans | Brenton Strange | Bench | JAX | $1 | No |
@@ -172,16 +172,16 @@
 | 165 | Love Handles | Justin Willer | Cam Little | K | JAX | $1 | No |
 | 166 | The Injured Preserve | Conner Graeff | Lions D/ST | Bench | DET | $2 | No |
 | 167 | Embrace the Darkness | Jordan Cunningham | Tyler Loop | K | BAL | $1 | No |
-| 168 | Matthew's Magnificent Team | Matthew Stevens | Tyler Allgeier | Bench | ARI | $1 | No |
+| 168 | Majestic mountain men | Matthew Stevens | Tyler Allgeier | Bench | ARI | $1 | No |
 | 169 | Jensen Huang and Sons | Tarek Kaakani | Chiefs D/ST | D/ST | KC | $1 | No |
 | 170 | Advanced Metrics | John Konecny | Keenan Allen | Bench | IND | $1 | No |
 | 171 | Love Handles | Justin Willer | Tyler Shough | Bench | NO | $1 | No |
 | 172 | Caleb's Cats | michael machas | Chargers D/ST | D/ST | LAC | $1 | No |
 | 173 | Embrace the Darkness | Jordan Cunningham | KC Concepcion | Bench | CLE | $1 | No |
-| 174 | Matthew's Magnificent Team | Matthew Stevens | Jalen McMillan | Bench | TB | $1 | No |
+| 174 | Majestic mountain men | Matthew Stevens | Jalen McMillan | Bench | TB | $1 | No |
 | 175 | Advanced Metrics | John Konecny | Najee Harris | Bench | NYG | $1 | No |
 | 176 | Love Handles | Justin Willer | Tank Dell | Bench | HOU | $1 | No |
 | 177 | Caleb's Cats | michael machas | Cairo Santos | K | CHI | $1 | No |
 | 178 | Embrace the Darkness | Jordan Cunningham | Daniel Jones | Bench | IND | $1 | No |
-| 179 | Matthew's Magnificent Team | Matthew Stevens | Buccaneers D/ST | D/ST | TB | $1 | No |
-| 180 | Matthew's Magnificent Team | Matthew Stevens | Chris Boswell | K | PIT | $1 | No |
+| 179 | Majestic mountain men | Matthew Stevens | Buccaneers D/ST | D/ST | TB | $1 | No |
+| 180 | Majestic mountain men | Matthew Stevens | Chris Boswell | K | PIT | $1 | No |

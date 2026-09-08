@@ -6,9 +6,9 @@
 
 ---
 
-## Advanced Metrics vs Matthew's Magnificent Team
+## Advanced Metrics vs Majestic mountain men
 
-**Final Score:** Advanced Metrics 0.00 - Matthew's Magnificent Team 0.00
+**Final Score:** Advanced Metrics 0.00 - Majestic mountain men 0.00
 
 ---
 
