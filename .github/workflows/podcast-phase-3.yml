@@ -2,6 +2,7 @@ name: Podcast Phase 3 Website
 
 on:
   workflow_call:
+  workflow_dispatch:
 
 permissions:
   contents: write
