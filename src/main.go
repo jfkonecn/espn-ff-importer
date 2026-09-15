@@ -11,8 +11,9 @@ import (
 func main() {
 	// Define command line flags
 	var (
-		dataDir = flag.String("data", "data", "Directory containing ESPN league JSON files")
-		output  = flag.String("output", "static", "Output directory for static website")
+		dataDir      = flag.String("data", "data", "Directory containing ESPN league JSON files")
+		output       = flag.String("output", "static", "Output directory for static website")
+		podcastsOnly = flag.Bool("podcasts-only", false, "Generate only the podcasts page")
 	)
 
 	flag.Parse()
@@ -21,6 +22,16 @@ func main() {
 	if err := os.MkdirAll(*output, 0755); err != nil {
 		fmt.Printf("Error creating output directory: %v\n", err)
 		os.Exit(1)
+	}
+
+	if *podcastsOnly {
+		if err := generatePodcastsPage(*output); err != nil {
+			fmt.Printf("Error generating podcasts page: %v\n", err)
+			os.Exit(1)
+		}
+
+		fmt.Printf("Podcasts page generated successfully in: %s\n", *output)
+		return
 	}
 
 	// Find all JSON files in the data directory

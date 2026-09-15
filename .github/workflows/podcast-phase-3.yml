@@ -21,7 +21,7 @@ jobs:
           go-version-file: go.mod
 
       - name: Regenerate website
-        run: go run ./src
+        run: go run ./src -podcasts-only
 
       - name: Commit podcast website page
         env:
