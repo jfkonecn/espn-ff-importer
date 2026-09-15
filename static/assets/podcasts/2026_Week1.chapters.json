@@ -1,0 +1,29 @@
+{
+  "version": "1.2.0",
+  "chapters": [
+    {
+      "startTime": 0,
+      "title": "Intro"
+    },
+    {
+      "startTime": 148,
+      "title": "Commercial 1 - FantasyFlex"
+    },
+    {
+      "startTime": 186,
+      "title": "Best Team"
+    },
+    {
+      "startTime": 229,
+      "title": "Worst Team"
+    },
+    {
+      "startTime": 377,
+      "title": "Commercial 2 - RosterWizard"
+    },
+    {
+      "startTime": 415,
+      "title": "Final Take"
+    }
+  ]
+}
