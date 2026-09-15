@@ -20,6 +20,12 @@ type leagueFile struct {
 		MatchupPeriodID int    `json:"matchupPeriodId"`
 		PlayoffTierType string `json:"playoffTierType"`
 		Winner          string `json:"winner"`
+		Home            struct {
+			TotalPoints float64 `json:"totalPoints"`
+		} `json:"home"`
+		Away struct {
+			TotalPoints float64 `json:"totalPoints"`
+		} `json:"away"`
 	} `json:"schedule"`
 	ScoringPeriodID int `json:"scoringPeriodId"`
 	SeasonID        int `json:"seasonId"`
@@ -87,10 +93,13 @@ func seasonFromEnv() int {
 }
 
 func determineState(league leagueFile) podcast.SeasonState {
-	completed, total := 0, len(league.Schedule)
+	completed, total, latestCompletedWeek := 0, len(league.Schedule), 0
 	for _, matchup := range league.Schedule {
-		if matchup.Winner != "" && matchup.Winner != "UNDECIDED" {
+		if isCompletedMatchup(matchup.Winner, matchup.Home.TotalPoints, matchup.Away.TotalPoints) {
 			completed++
+			if matchup.MatchupPeriodID > latestCompletedWeek {
+				latestCompletedWeek = matchup.MatchupPeriodID
+			}
 		}
 	}
 
@@ -114,16 +123,25 @@ func determineState(league leagueFile) podcast.SeasonState {
 		phase = podcast.PhasePostSeason
 	}
 
+	week := league.ScoringPeriodID
+	if latestCompletedWeek > 0 {
+		week = latestCompletedWeek
+	}
+
 	return podcast.SeasonState{
 		Season:            league.SeasonID,
 		LeagueName:        league.Settings.Name,
 		Phase:             phase,
-		Week:              league.ScoringPeriodID,
+		Week:              week,
 		DraftComplete:     league.DraftDetail.Drafted,
 		CompletedMatchups: completed,
 		TotalMatchups:     total,
 		GeneratedAt:       time.Now().Format(time.RFC3339),
 	}
+}
+
+func isCompletedMatchup(winner string, homePoints, awayPoints float64) bool {
+	return winner != "" && winner != "UNDECIDED" && (homePoints > 0 || awayPoints > 0)
 }
 
 func isPostSeason(league leagueFile) bool {

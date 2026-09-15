@@ -456,10 +456,13 @@ func (g *AIDataGenerator) generateTopMoves() error {
 
 // generateLatestWeekResults generates the latest week's results
 func (g *AIDataGenerator) generateLatestWeekResults() error {
-	currentPeriod := g.reader.GetScoringPeriodID()
-	matchups := g.reader.GetMatchupsByPeriod(currentPeriod)
+	latestPeriod := g.reader.GetLatestCompletedMatchupPeriod()
+	if latestPeriod == 0 {
+		latestPeriod = g.reader.GetScoringPeriodID()
+	}
+	matchups := g.reader.GetMatchupsByPeriod(latestPeriod)
 
-	content := fmt.Sprintf("# Week %d Results\n\n", currentPeriod)
+	content := fmt.Sprintf("# Week %d Results\n\n", latestPeriod)
 
 	if len(matchups) == 0 {
 		content += "No completed games for this week yet.\n"

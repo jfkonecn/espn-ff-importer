@@ -181,6 +181,17 @@ func (lr *LeagueReader) GetMatchupsByPeriod(periodID int) []Matchup {
 	return matchups
 }
 
+// GetLatestCompletedMatchupPeriod returns the most recent week with completed matchups.
+func (lr *LeagueReader) GetLatestCompletedMatchupPeriod() int {
+	latest := 0
+	for _, matchup := range lr.GetSchedule() {
+		if matchup.MatchupPeriodID > latest {
+			latest = matchup.MatchupPeriodID
+		}
+	}
+	return latest
+}
+
 // GetCurrentMatchups returns matchups for the current scoring period that are pending
 func (lr *LeagueReader) GetCurrentMatchups() []Matchup {
 	var currentMatchups []Matchup

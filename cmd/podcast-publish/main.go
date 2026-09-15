@@ -18,6 +18,7 @@ func main() {
 		season          = flag.Int("season", seasonFromEnv(), "Season year")
 		scriptPath      = flag.String("script", "", "Generated podcast script JSON path")
 		generatedDir    = flag.String("generated", "static/assets/podcasts/generated", "Generated script directory")
+		statePath       = flag.String("state", "", "Path to season-state JSON")
 		podcastDir      = flag.String("podcasts", "static/assets/podcasts", "Podcast asset directory")
 		metadataPath    = flag.String("metadata", "static/assets/podcasts/metadata.json", "Podcast metadata JSON path")
 		feedPath        = flag.String("feed", "static/podcasts.xml", "Podcast RSS feed output path")
@@ -42,8 +43,17 @@ func main() {
 
 	path := *scriptPath
 	if path == "" {
-		fmt.Printf("Looking for latest generated script for season %d in %s\n", *season, *generatedDir)
-		path = latestScriptPath(*generatedDir, *season)
+		episodeID, err := episodeIDFromState(*statePath, *season)
+		if err != nil {
+			fatal("read season state", err)
+		}
+		if episodeID != "" {
+			path = filepath.Join(*generatedDir, episodeID+".json")
+			fmt.Printf("Using generated script from season state: %s\n", path)
+		} else {
+			fmt.Printf("Looking for latest generated script for season %d in %s\n", *season, *generatedDir)
+			path = latestScriptPath(*generatedDir, *season)
+		}
 	}
 	if path == "" {
 		fatal("find generated script", fmt.Errorf("no generated podcast script found"))
@@ -304,6 +314,20 @@ func seasonFromEnv() int {
 		fatal("parse CURRENT_YEAR", err)
 	}
 	return season
+}
+
+func episodeIDFromState(path string, season int) (string, error) {
+	if path == "" {
+		path = filepath.Join("ai", fmt.Sprintf("%d", season), "season-state.json")
+	}
+	var state podcast.SeasonState
+	if err := podcast.ReadJSON(path, &state); err != nil {
+		if os.IsNotExist(err) {
+			return "", nil
+		}
+		return "", err
+	}
+	return podcast.DefaultEpisodeID(state), nil
 }
 
 func latestScriptPath(dir string, season int) string {
