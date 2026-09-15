@@ -4,48 +4,48 @@
 
 | Rank | Player | Position | Team | % Change | % Owned |
 |------|--------|----------|------|----------|----------|
-| 1 | Jonah Coleman | RB | DEN | 1.7% | 29.4% |
-| 2 | MarShawn Lloyd | RB | GB | 1.4% | 80.9% |
-| 3 | Samaje Perine | RB | CHI | 1.2% | 11.9% |
-| 4 | Kaelon Black | RB | TB | 1.2% | 13.2% |
-| 5 | Juwan Johnson | WR | NO | 1.0% | 46.0% |
-| 6 | De'Zhaun Stribling | WR | TB | 0.8% | 65.2% |
-| 7 | Malachi Fields | WR | NYG | 0.8% | 6.0% |
-| 8 | Jalen McMillan | WR | SF | 0.7% | 33.0% |
-| 9 | Jaguars D/ST | D/ST | HOU | 0.6% | 55.5% |
-| 10 | Tyjae Spears | RB | TEN | 0.5% | 55.9% |
-| 11 | Keenan Allen | WR | IND | 0.5% | 29.9% |
-| 12 | Chris Rodriguez Jr. | RB | HOU | 0.5% | 31.7% |
-| 13 | Jalen Coker | WR | JAX | 0.5% | 51.1% |
-| 14 | Stefon Diggs | WR | ARI | 0.5% | 83.8% |
-| 15 | Jordan Love | RB | GB | 0.4% | 42.6% |
-| 16 | Keaton Mitchell | RB | BAL | 0.4% | 21.9% |
-| 17 | Kyler Murray | RB | MIN | 0.4% | 68.0% |
-| 18 | Rhamondre Stevenson | RB | NE | 0.4% | 91.6% |
-| 19 | Najee Harris | RB | NYG | 0.4% | 12.1% |
-| 20 | Dylan Sampson | RB | CIN | 0.4% | 19.7% |
+| 1 | Evan Engram | WR | DEN | 0.1% | 3.0% |
+| 2 | Bryce Young | RB | JAX | 0.1% | 11.2% |
+| 3 | Bengals D/ST | D/ST | CHI | 0.1% | 2.1% |
+| 4 | 49ers D/ST | D/ST | TB | 0.1% | 7.3% |
+| 5 | Wil Lutz | TE | DEN | 0.0% | 6.0% |
+| 6 | Mike Gesicki | WR | CHI | 0.0% | 1.5% |
+| 7 | Pat Bryant | WR | DEN | 0.0% | 1.9% |
+| 8 | Tyler Bass | TE | BUF | 0.0% | 5.0% |
+| 9 | Kalif Raymond | WR | CAR | 0.0% | 0.2% |
+| 10 | Devin Singletary | RB | NYG | 0.0% | 0.3% |
+| 11 | Evan McPherson | TE | CHI | 0.0% | 21.7% |
+| 12 | Emari Demercado | RB | DAL | 0.0% | 1.9% |
+| 13 | Giants D/ST | D/ST | NYG | 0.0% | 2.4% |
+| 14 | Ricky Pearsall | WR | TB | 0.0% | 2.8% |
+| 15 | Marvin Mims Jr. | WR | DEN | 0.0% | 0.9% |
+| 16 | Tyquan Thornton | WR | KC | 0.0% | 0.9% |
+| 17 | Brashard Smith | RB | KC | 0.0% | 0.9% |
+| 18 | Cole Kmet | WR | CAR | 0.0% | 0.9% |
+| 19 | Darnell Washington | WR | SEA | 0.0% | 1.5% |
+| 20 | Noah Gray | WR | KC | 0.0% | 0.3% |
 
 ## Most Dropped Players
 
 | Rank | Player | Position | Team | % Change | % Owned |
 |------|--------|----------|------|----------|----------|
-| 1 | Kenyon Sadiq | WR | NYJ | -2.2% | 39.4% |
-| 2 | Isiah Pacheco | RB | DET | -1.3% | 36.1% |
-| 3 | T.J. Hockenson | WR | MIN | -1.0% | 60.5% |
-| 4 | Kaleb Johnson | RB | GB | -0.9% | 8.0% |
-| 5 | Jordyn Tyson | WR | NO | -0.9% | 37.1% |
-| 6 | Josh Jacobs | RB | GB | -0.8% | 91.3% |
-| 7 | Alvin Kamara | RB | NO | -0.7% | 38.6% |
-| 8 | Jayden Higgins | WR | HOU | -0.7% | 4.4% |
-| 9 | Patriots D/ST | D/ST | NE | -0.6% | 69.2% |
-| 10 | Josh Downs | WR | IND | -0.6% | 70.8% |
-| 11 | Tyrone Tracy Jr. | RB | NYG | -0.6% | 6.9% |
-| 12 | Hunter Henry | WR | NE | -0.6% | 55.9% |
-| 13 | Makai Lemon | WR | PHI | -0.5% | 74.1% |
-| 14 | Deebo Samuel Sr. | WR | TB | -0.5% | 68.6% |
-| 15 | Ricky Pearsall | WR | TB | -0.5% | 3.5% |
-| 16 | KC Concepcion | WR | CIN | -0.4% | 65.0% |
-| 17 | Khalil Shakir | WR | BUF | -0.4% | 70.5% |
-| 18 | Bears D/ST | D/ST | CAR | -0.4% | 9.0% |
-| 19 | Chris Boswell | TE | SEA | -0.4% | 38.0% |
-| 20 | Calvin Ridley | WR | TEN | -0.4% | 24.3% |
+| 1 | MarShawn Lloyd | RB | GB | -0.2% | 83.2% |
+| 2 | Travis Hunter | WR | HOU | -0.2% | 65.1% |
+| 3 | Chargers D/ST | D/ST | BAL | -0.2% | 60.4% |
+| 4 | Jaguars D/ST | D/ST | HOU | -0.2% | 68.3% |
+| 5 | Baker Mayfield | RB | SF | -0.2% | 59.4% |
+| 6 | De'Zhaun Stribling | WR | TB | -0.2% | 65.8% |
+| 7 | KC Concepcion | WR | CIN | -0.2% | 63.4% |
+| 8 | Zach Charbonnet | RB | LAC | -0.2% | 53.8% |
+| 9 | Mike Washington Jr. | RB | LV | -0.2% | 38.5% |
+| 10 | Tyler Allgeier | RB | PIT | -0.2% | 41.7% |
+| 11 | Kyler Murray | RB | MIN | -0.1% | 67.8% |
+| 12 | Jonah Coleman | RB | DEN | -0.1% | 29.2% |
+| 13 | Jonathon Brooks | RB | JAX | -0.1% | 83.9% |
+| 14 | J.K. Dobbins | RB | DEN | -0.1% | 83.8% |
+| 15 | Kenny Gainwell | RB | SF | -0.1% | 85.9% |
+| 16 | RJ Harvey | RB | DEN | -0.1% | 75.1% |
+| 17 | Alec Pierce | WR | IND | -0.1% | 85.0% |
+| 18 | Rico Dowdle | RB | SEA | -0.1% | 88.7% |
+| 19 | Jordan Mason | RB | MIN | -0.1% | 67.7% |
+| 20 | Justin Herbert | RB | BAL | -0.1% | 93.1% |
