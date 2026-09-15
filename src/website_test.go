@@ -47,3 +47,105 @@ func TestWasReacquiredThroughFreeAgency(t *testing.T) {
 		t.Fatal("pending add must not be treated as a free-agency re-add")
 	}
 }
+
+func TestTopHalfScoringUsesCurrentTeamCount(t *testing.T) {
+	var teams []Team
+	var schedule []Matchup
+	for i := 1; i <= 12; i++ {
+		teams = append(teams, Team{
+			ID:     i,
+			Name:   "Team",
+			Points: float64(i),
+		})
+	}
+	for i := 1; i <= 6; i++ {
+		schedule = append(schedule, Matchup{
+			MatchupPeriodID: 1,
+			PlayoffTierType: "NONE",
+			Winner:          "HOME",
+			Home: TeamScore{
+				TeamID:      i,
+				TotalPoints: float64(i),
+			},
+			Away: TeamScore{
+				TeamID:      i + 6,
+				TotalPoints: float64(i + 6),
+			},
+		})
+	}
+
+	wg := &WebsiteGenerator{
+		reader: &LeagueReader{league: &ESPNLeague{
+			Teams:    teams,
+			Schedule: schedule,
+		}},
+	}
+
+	topHalfScorers := wg.getWeeklyTopHalfScorers()
+	if len(topHalfScorers) != 1 {
+		t.Fatalf("got %d top-half weeks, want 1", len(topHalfScorers))
+	}
+	if len(topHalfScorers[0]) != 6 {
+		t.Fatalf("got %d top-half scorers, want 6 for a 12-team week", len(topHalfScorers[0]))
+	}
+
+	topHalfByTeamID := make(map[int]bool)
+	for _, scorer := range topHalfScorers[0] {
+		topHalfByTeamID[scorer.TeamID] = true
+	}
+	for teamID := 1; teamID <= 12; teamID++ {
+		wantTopHalf := teamID >= 7
+		if topHalfByTeamID[teamID] != wantTopHalf {
+			t.Fatalf("team %d top-half = %v, want %v", teamID, topHalfByTeamID[teamID], wantTopHalf)
+		}
+	}
+
+	standings := wg.calculateStandings()
+	topHalfWinsByTeamID := make(map[int]int)
+	for _, standing := range standings {
+		topHalfWinsByTeamID[standing.Team.ID] = standing.TopHalfWins
+	}
+	for teamID := 1; teamID <= 12; teamID++ {
+		wantWins := 0
+		if teamID >= 7 {
+			wantWins = 1
+		}
+		if topHalfWinsByTeamID[teamID] != wantWins {
+			t.Fatalf("team %d TopHalfWins = %d, want %d", teamID, topHalfWinsByTeamID[teamID], wantWins)
+		}
+	}
+}
+
+func TestPayoutsUse2026AmountsFor2026AndBeyond(t *testing.T) {
+	for _, test := range []struct {
+		season      int
+		weekly      int
+		firstPlace  int
+		secondPlace int
+		thirdPlace  int
+	}{
+		{season: 2025, weekly: 10, firstPlace: 550, secondPlace: 180, thirdPlace: 100},
+		{season: 2026, weekly: 15, firstPlace: 650, secondPlace: 195, thirdPlace: 100},
+		{season: 2027, weekly: 15, firstPlace: 650, secondPlace: 195, thirdPlace: 100},
+	} {
+		t.Run("season", func(t *testing.T) {
+			wg := &WebsiteGenerator{reader: &LeagueReader{league: &ESPNLeague{SeasonID: test.season}}}
+
+			if got := wg.weeklyHighScorePayout(); got != test.weekly {
+				t.Fatalf("weeklyHighScorePayout() = %d, want %d", got, test.weekly)
+			}
+			if got := wg.finalStandingPayout(1); got != test.firstPlace {
+				t.Fatalf("finalStandingPayout(1) = %d, want %d", got, test.firstPlace)
+			}
+			if got := wg.finalStandingPayout(2); got != test.secondPlace {
+				t.Fatalf("finalStandingPayout(2) = %d, want %d", got, test.secondPlace)
+			}
+			if got := wg.finalStandingPayout(3); got != test.thirdPlace {
+				t.Fatalf("finalStandingPayout(3) = %d, want %d", got, test.thirdPlace)
+			}
+			if got := wg.finalStandingPayout(4); got != 0 {
+				t.Fatalf("finalStandingPayout(4) = %d, want 0", got)
+			}
+		})
+	}
+}

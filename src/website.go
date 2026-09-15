@@ -1108,17 +1108,18 @@ func (wg *WebsiteGenerator) getPlayerDraftPrice(playerID int, teamID int, season
 
 // TemplateData represents the data passed to the HTML template
 type TemplateData struct {
-	LeagueName          string
-	SeasonID            int
-	LastUpdated         string
-	HasDraft            bool
-	Standings           []StandingRow
-	WeeklyHighScorers   []WeeklyHighScoreRow
-	FinalStandings      []FinalStandingRow
-	TeamPayoutTotals    []TeamPayoutTotal
-	RecentGamesByWeek   []WeekGames
-	WeeklyHighScorerMap map[int]int
-	TopHalfMap          map[int]map[int]bool
+	LeagueName            string
+	SeasonID              int
+	LastUpdated           string
+	HasDraft              bool
+	Standings             []StandingRow
+	WeeklyHighScorers     []WeeklyHighScoreRow
+	WeeklyHighScorePayout int
+	FinalStandings        []FinalStandingRow
+	TeamPayoutTotals      []TeamPayoutTotal
+	RecentGamesByWeek     []WeekGames
+	WeeklyHighScorerMap   map[int]int
+	TopHalfMap            map[int]map[int]bool
 }
 
 // WeekGames represents a week with its games
@@ -1291,17 +1292,18 @@ func (wg *WebsiteGenerator) prepareTemplateData() TemplateData {
 	}
 
 	return TemplateData{
-		LeagueName:          wg.getLeagueName(),
-		SeasonID:            league.SeasonID,
-		LastUpdated:         time.Now().Format("January 2, 2006 at 3:04 PM"),
-		HasDraft:            len(league.DraftDetail.Picks) > 0,
-		Standings:           wg.prepareStandingsRows(standings),
-		WeeklyHighScorers:   wg.prepareWeeklyHighScorerRows(payouts.WeeklyHighScorers),
-		FinalStandings:      wg.prepareFinalStandingRows(payouts.FinalStandings),
-		TeamPayoutTotals:    wg.prepareTeamPayoutTotals(payouts.WeeklyHighScorers, payouts.FinalStandings),
-		RecentGamesByWeek:   recentGamesByWeek,
-		WeeklyHighScorerMap: weeklyHighScorerMap,
-		TopHalfMap:          topHalfMap,
+		LeagueName:            wg.getLeagueName(),
+		SeasonID:              league.SeasonID,
+		LastUpdated:           time.Now().Format("January 2, 2006 at 3:04 PM"),
+		HasDraft:              len(league.DraftDetail.Picks) > 0,
+		Standings:             wg.prepareStandingsRows(standings),
+		WeeklyHighScorers:     wg.prepareWeeklyHighScorerRows(payouts.WeeklyHighScorers),
+		WeeklyHighScorePayout: wg.weeklyHighScorePayout(),
+		FinalStandings:        wg.prepareFinalStandingRows(payouts.FinalStandings),
+		TeamPayoutTotals:      wg.prepareTeamPayoutTotals(payouts.WeeklyHighScorers, payouts.FinalStandings),
+		RecentGamesByWeek:     recentGamesByWeek,
+		WeeklyHighScorerMap:   weeklyHighScorerMap,
+		TopHalfMap:            topHalfMap,
 	}
 }
 
@@ -1416,15 +1418,8 @@ func (wg *WebsiteGenerator) calculatePayouts() Payout {
 	// Final standings payouts (top 3)
 	finalPayouts := make([]FinalStanding, 0, 3)
 	for _, team := range teams {
-		payout := 0
-		switch team.RankCalculatedFinal {
-		case 1:
-			payout = 550
-		case 2:
-			payout = 180
-		case 3:
-			payout = 100
-		default:
+		payout := wg.finalStandingPayout(team.RankCalculatedFinal)
+		if payout == 0 {
 			continue
 		}
 
@@ -1442,6 +1437,38 @@ func (wg *WebsiteGenerator) calculatePayouts() Payout {
 		WeeklyHighScorers: weeklyPayouts,
 		FinalStandings:    finalPayouts,
 	}
+}
+
+func (wg *WebsiteGenerator) finalStandingPayout(rank int) int {
+	if wg.reader.GetSeasonID() >= 2026 {
+		switch rank {
+		case 1:
+			return 650
+		case 2:
+			return 195
+		case 3:
+			return 100
+		}
+		return 0
+	}
+
+	switch rank {
+	case 1:
+		return 550
+	case 2:
+		return 180
+	case 3:
+		return 100
+	default:
+		return 0
+	}
+}
+
+func (wg *WebsiteGenerator) weeklyHighScorePayout() int {
+	if wg.reader.GetSeasonID() >= 2026 {
+		return 15
+	}
+	return 10
 }
 
 // WeeklyHighScoreData represents weekly high score data
@@ -1818,10 +1845,11 @@ func (wg *WebsiteGenerator) prepareTeamPayoutTotals(weeklyHighScorers []WeeklyHi
 	}
 
 	// Count weekly high scores
+	weeklyHighScorePayout := wg.weeklyHighScorePayout()
 	for _, hs := range weeklyHighScorers {
 		if team, exists := teamPayouts[hs.TeamName]; exists {
 			team.WeeklyHighScores++
-			team.TotalPayout += 10 // $10 per weekly high score
+			team.TotalPayout += weeklyHighScorePayout
 		}
 	}
 

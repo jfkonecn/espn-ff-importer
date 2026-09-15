@@ -32,5 +32,6 @@ jobs:
 
   phase-3:
     needs: phase-2
+    if: needs.phase-2.result == 'success'
     uses: ./.github/workflows/podcast-phase-3.yml
     secrets: inherit
