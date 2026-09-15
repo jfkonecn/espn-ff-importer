@@ -1,38 +1,38 @@
-# Week 1 Results
+# Week 2 Results
 
-## Caleb's Cats vs America's Team
+## Advanced Metrics vs Caleb's Cats
 
-**Final Score:** Caleb's Cats 0.00 - America's Team 0.00
-
----
-
-## Advanced Metrics vs Majestic mountain men
-
-**Final Score:** Advanced Metrics 0.00 - Majestic mountain men 0.00
+**Final Score:** Advanced Metrics 0.00 - Caleb's Cats 0.00
 
 ---
 
-## Love Handles vs Jensen Huang and Sons
+## America's Team vs Love Handles
 
-**Final Score:** Love Handles 0.00 - Jensen Huang and Sons 0.00
-
----
-
-## Latin Fury vs Boeing's Hitmen 
-
-**Final Score:** Latin Fury 0.00 - Boeing's Hitmen  0.00
+**Final Score:** America's Team 0.00 - Love Handles 0.00
 
 ---
 
-## The Injured Preserve vs #1 GangGreen
+## Majestic mountain men vs Latin Fury
 
-**Final Score:** The Injured Preserve 0.00 - #1 GangGreen 0.00
+**Final Score:** Majestic mountain men 0.00 - Latin Fury 0.00
 
 ---
 
-## It's MillerTime vs Embrace the Darkness
+## Jensen Huang and Sons vs The Injured Preserve
 
-**Final Score:** It's MillerTime 0.00 - Embrace the Darkness 0.00
+**Final Score:** Jensen Huang and Sons 0.00 - The Injured Preserve 0.00
+
+---
+
+## Boeing's Hitmen  vs It's MillerTime
+
+**Final Score:** Boeing's Hitmen  0.00 - It's MillerTime 0.00
+
+---
+
+## #1 GangGreen vs Embrace the Darkness
+
+**Final Score:** #1 GangGreen 0.00 - Embrace the Darkness 0.00
 
 ---
 
