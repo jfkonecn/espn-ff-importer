@@ -179,29 +179,20 @@ type spokenPart struct {
 }
 
 func orderedSpokenParts(script podcast.PodcastScript) []spokenPart {
-	segments := make(map[string]string, len(script.Segments))
-	for _, segment := range script.Segments {
-		segments[strings.ToLower(segment.Name)] = segment.Transcript
-	}
-
 	var parts []spokenPart
-	if text := segments["intro"]; text != "" {
-		parts = append(parts, spokenPart{Name: "Intro", Text: text})
-	}
-	if len(script.Commercials) > 0 && script.Commercials[0].Read != "" {
-		parts = append(parts, spokenPart{Name: "Commercial 1 - " + script.Commercials[0].CompanyName, Text: script.Commercials[0].Read})
-	}
-	if text := segments["best team"]; text != "" {
-		parts = append(parts, spokenPart{Name: "Best Team", Text: text})
-	}
-	if text := segments["worst team"]; text != "" {
-		parts = append(parts, spokenPart{Name: "Worst Team", Text: text})
-	}
-	if len(script.Commercials) > 1 && script.Commercials[1].Read != "" {
-		parts = append(parts, spokenPart{Name: "Commercial 2 - " + script.Commercials[1].CompanyName, Text: script.Commercials[1].Read})
-	}
-	if text := segments["final take"]; text != "" {
-		parts = append(parts, spokenPart{Name: "Final Take", Text: text})
+	commercialIndex := 0
+	for _, segment := range script.Segments {
+		if segment.Transcript == "" {
+			continue
+		}
+		parts = append(parts, spokenPart{Name: segment.Name, Text: segment.Transcript})
+		if hasCommercialAfterPublishedSegment(script, segment.Name) && commercialIndex < len(script.Commercials) && script.Commercials[commercialIndex].Read != "" {
+			parts = append(parts, spokenPart{
+				Name: fmt.Sprintf("Commercial %d - %s", commercialIndex+1, script.Commercials[commercialIndex].CompanyName),
+				Text: script.Commercials[commercialIndex].Read,
+			})
+			commercialIndex++
+		}
 	}
 
 	if len(parts) > 0 {
@@ -211,6 +202,37 @@ func orderedSpokenParts(script podcast.PodcastScript) []spokenPart {
 		return []spokenPart{{Name: "Full Transcript", Text: script.Transcript}}
 	}
 	return nil
+}
+
+func hasCommercialAfterPublishedSegment(script podcast.PodcastScript, segmentName string) bool {
+	if script.SeasonContext.Phase == podcast.PhaseSeasonComplete {
+		if strings.EqualFold(segmentName, "Intro") {
+			return true
+		}
+		if containsPublishedSegment(script, "Third Place Game") {
+			return strings.EqualFold(segmentName, "Third Place Game")
+		}
+		return strings.EqualFold(segmentName, "Worst Team")
+	}
+	if strings.EqualFold(segmentName, "Intro") {
+		return true
+	}
+	if containsPublishedSegment(script, "Matchup Preview") {
+		return strings.EqualFold(segmentName, "Matchup Preview")
+	}
+	if containsPublishedSegment(script, "Power Ranking") {
+		return strings.EqualFold(segmentName, "Power Ranking")
+	}
+	return strings.EqualFold(segmentName, "Worst Team")
+}
+
+func containsPublishedSegment(script podcast.PodcastScript, name string) bool {
+	for _, segment := range script.Segments {
+		if strings.EqualFold(segment.Name, name) {
+			return true
+		}
+	}
+	return false
 }
 
 func concatenateMP3s(parts []string, outputPath, workDir string) error {

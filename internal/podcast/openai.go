@@ -90,7 +90,7 @@ func GenerateTranscript(apiKey, model, aiRoot string, state SeasonState) (Podcas
 	fmt.Printf("Found %d AI data files under %s\n", len(aiFiles), aiRoot)
 
 	episodeID := DefaultEpisodeID(state)
-	segmentNames := []string{"Intro", "Best Team", "Worst Team", "Final Take"}
+	segmentNames := podcastSegmentNames(state)
 	segmentTangents := selectSegmentTangents(segmentNames)
 	if model == "" {
 		model = "gpt-4.1"
@@ -99,13 +99,13 @@ func GenerateTranscript(apiKey, model, aiRoot string, state SeasonState) (Podcas
 
 	phaseInstructions := podcastPhaseInstructions(state)
 
-	outlineSystemPrompt := `You are planning a fantasy football podcast called Slop Take. Write in the spirit of loud, confrontational sports-talk radio: clipped cadence, sharp resets, scoreboard justice, call-out energy, and memorable recurring phrases. Do not claim to be Jim Rome or imitate any living broadcaster verbatim.
+	outlineSystemPrompt := fmt.Sprintf(`You are planning a fantasy football podcast called Slop Take. Write in the spirit of loud, confrontational sports-talk radio: clipped cadence, sharp resets, scoreboard justice, call-out energy, and memorable recurring phrases. Do not claim to be Jim Rome or imitate any living broadcaster verbatim.
 
-Plan exactly four main segments in this order: Intro, Best Team, Worst Team, Final Take. The Intro plan must identify the fantasy league storylines, the owners or teams under pressure, the stakes for this episode, and a clear roadmap for the rest of the show. Plan one fantasy-football-themed fake commercial read after the Intro and another fake commercial read immediately before Final Take. Invent a list of potential fake fantasy-football sponsors, then select two for the reads.
+Plan exactly %d main segments in this order: %s. The Intro plan must identify the fantasy league storylines, the owners or teams under pressure, the stakes for this episode, and a clear roadmap for the rest of the show. Plan two fantasy-football-themed fake commercial reads. Commercial placement: %s. Invent a list of potential fake fantasy-football sponsors, then select two for the reads.
 
 Every segment plan must use league data and current NFL context. Use web search to look up the latest NFL news, injuries, depth chart changes, camp reports, trades, suspensions, and role changes before planning the episode. Do not invent specific breaking news; rely on searched current context when making NFL-news claims.
 
-Return only valid JSON matching the requested schema. This is an outline and metadata pass, not the full transcript. Keep duration as an empty string; the publisher will not know the real duration until audio exists.`
+Return only valid JSON matching the requested schema. This is an outline and metadata pass, not the full transcript. Keep duration as an empty string; the publisher will not know the real duration until audio exists.`, len(segmentNames), strings.Join(segmentNames, ", "), commercialPlacementDescription(state))
 
 	outlineUserPrompt := fmt.Sprintf(`Season state:
 %s
@@ -119,7 +119,7 @@ Phase-specific assignment:
 Assigned sports-talk tangent topics by segment:
 %s
 
-Use the read_ai_file tool to inspect league data in ai/. Use web search for current NFL news and injury context. Produce podcast metadata, two selected commercials, and concise plans for the four required segments. Each segment plan should include a quick, natural way to connect that segment's assigned tangent topic to the league take without letting the tangent take over. Use episodeId %q and audioFile %q.`, mustJSON(state), strings.Join(aiFiles, "\n"), phaseInstructions, mustJSON(segmentTangents), episodeID, episodeID+".mp3")
+Use the read_ai_file tool to inspect league data in ai/. Use web search for current NFL news and injury context. Produce podcast metadata, two selected commercials, and concise plans for the required segments in the specified order. Each segment plan should include a quick, natural way to connect that segment's assigned tangent topic to the league take without letting the tangent take over. Use episodeId %q and audioFile %q.`, mustJSON(state), strings.Join(aiFiles, "\n"), phaseInstructions, mustJSON(segmentTangents), episodeID, episodeID+".mp3")
 
 	outlineResult, err := generateStructured(apiKey, model, aiRoot, "outline", outlineSystemPrompt, outlineUserPrompt, podcastOutlineSchema(), true)
 	if err != nil {
@@ -138,17 +138,8 @@ Use the read_ai_file tool to inspect league data in ai/. Use web search for curr
 	allSourceFiles := append([]string{}, outline.SourceFiles...)
 	allSourceFiles = append(allSourceFiles, outlineResult.SourceFiles...)
 
-	for i, segmentName := range segmentNames {
-		if i == 1 && len(outline.Commercials) > 0 {
-			commercial, files, err := generateCommercial(apiKey, model, aiRoot, state, outline, outline.Commercials[0], 1)
-			if err != nil {
-				return PodcastScript{}, err
-			}
-			outline.Commercials[0] = commercial
-			transcriptParts = append(transcriptParts, commercial.Read)
-			allSourceFiles = append(allSourceFiles, files...)
-		}
-
+	commercialIndex := 0
+	for _, segmentName := range segmentNames {
 		segment, files, err := generateSegment(apiKey, model, aiRoot, state, outline, segmentName, segmentPlan(outline, segmentName), segmentTangents[segmentName])
 		if err != nil {
 			return PodcastScript{}, err
@@ -157,14 +148,15 @@ Use the read_ai_file tool to inspect league data in ai/. Use web search for curr
 		transcriptParts = append(transcriptParts, segment.Transcript)
 		allSourceFiles = append(allSourceFiles, files...)
 
-		if i == 2 && len(outline.Commercials) > 1 {
-			commercial, files, err := generateCommercial(apiKey, model, aiRoot, state, outline, outline.Commercials[1], 2)
+		if hasCommercialAfterSegment(state, segmentName, segmentNames) && commercialIndex < len(outline.Commercials) {
+			commercial, files, err := generateCommercial(apiKey, model, aiRoot, state, outline, outline.Commercials[commercialIndex], commercialIndex+1)
 			if err != nil {
 				return PodcastScript{}, err
 			}
-			outline.Commercials[1] = commercial
+			outline.Commercials[commercialIndex] = commercial
 			transcriptParts = append(transcriptParts, commercial.Read)
 			allSourceFiles = append(allSourceFiles, files...)
+			commercialIndex++
 		}
 	}
 
@@ -244,7 +236,7 @@ func generateSegment(apiKey, model, aiRoot string, state SeasonState, outline po
 
 Write only this one segment. Target about 3 minutes when read aloud, roughly 390 to 480 words. Make it TTS-ready: no markdown, no bullets, no stage directions, no URLs, and no citations. Use web search for current NFL news and injury context before writing this segment. Do not invent specific breaking news; rely on searched current context when making NFL-news claims. Every NFL news item you mention must be tied directly back to what is happening in this fantasy league: team outlooks, roster strengths or weaknesses, draft posture, standings pressure, owner decisions, keeper value, matchup consequences, trades, waivers, starts, or sits. Include the assigned sports-talk tangent topic as a quick, natural aside or analogy that supports the segment's fantasy take. Do not let the tangent become the segment. Return only valid JSON matching the schema.`
 	if segmentName == "Intro" {
-		systemPrompt += " For the Intro, focus on the fantasy league's current storylines: the season phase, the teams under pressure, the owners who need to hear it, and the stakes of this episode. Set the table for what the podcast will cover instead of giving a generic welcome. Preview the Best Team, Worst Team, and Final Take angles without resolving them yet."
+		systemPrompt += fmt.Sprintf(" For the Intro, focus on the fantasy league's current storylines: the season phase, the teams under pressure, the owners who need to hear it, and the stakes of this episode. Set the table for what the podcast will cover instead of giving a generic welcome. Preview these segment angles without resolving them yet: %s.", strings.Join(nonIntroSegmentNames(state), ", "))
 	}
 
 	userPrompt := fmt.Sprintf(`Season state:
@@ -794,44 +786,104 @@ func selectSegmentTangents(segmentNames []string) map[string]string {
 	return selected
 }
 
+func podcastSegmentNames(state SeasonState) []string {
+	if state.Phase == PhaseSeasonComplete {
+		return []string{"Intro", "Season in Review", "Last Place Game", "Third Place Game", "Championship Game"}
+	}
+	return []string{"Intro", "Best Team", "Worst Team", "Power Ranking", "Matchup Preview", "Final Take"}
+}
+
+func nonIntroSegmentNames(state SeasonState) []string {
+	var names []string
+	for _, name := range podcastSegmentNames(state) {
+		if !strings.EqualFold(name, "Intro") {
+			names = append(names, name)
+		}
+	}
+	return names
+}
+
+func commercialPlacementDescription(state SeasonState) string {
+	if state.Phase == PhaseSeasonComplete {
+		return "first ad break after Intro; second ad break after Third Place Game"
+	}
+	return "first ad break after Intro; second ad break after Matchup Preview, immediately before Final Take"
+}
+
+func hasCommercialAfterSegment(state SeasonState, segmentName string, segmentNames []string) bool {
+	if state.Phase == PhaseSeasonComplete {
+		return strings.EqualFold(segmentName, "Intro") || strings.EqualFold(segmentName, "Third Place Game")
+	}
+	if strings.EqualFold(segmentName, "Intro") {
+		return true
+	}
+	if containsSegmentName(segmentNames, "Matchup Preview") {
+		return strings.EqualFold(segmentName, "Matchup Preview")
+	}
+	if containsSegmentName(segmentNames, "Power Ranking") {
+		return strings.EqualFold(segmentName, "Power Ranking")
+	}
+	return strings.EqualFold(segmentName, "Worst Team")
+}
+
+func containsSegmentName(segmentNames []string, name string) bool {
+	for _, segmentName := range segmentNames {
+		if strings.EqualFold(segmentName, name) {
+			return true
+		}
+	}
+	return false
+}
+
 func podcastPhaseInstructions(state SeasonState) string {
 	switch state.Phase {
 	case PhaseDraft:
 		return `Pre-draft episode assignment:
-- Intro: frame the pre-draft stakes and explain that this episode is about last year's bottom, last year's top, and keeper decisions.
-- Best Team: focus on last season's first-place team, why that roster/owner succeeded, what can carry forward, and which NFL news affects the repeat case.
-- Worst Team: focus on last season's last-place team, why it failed, what must change, and which NFL news creates either danger or opportunity.
-- Final Take: recommend which keepers people should pick for the season. Use keeper-info, prior standings/results, roster context, and current NFL news to support the keeper takes.`
+	- Intro: frame the pre-draft stakes and explain that this episode is about last year's bottom, last year's top, keeper decisions, power ranking, and matchup preview.
+	- Best Team: focus on last season's first-place team, why that roster/owner succeeded, what can carry forward, and which NFL news affects the repeat case.
+	- Worst Team: focus on last season's last-place team, why it failed, what must change, and which NFL news creates either danger or opportunity.
+	- Power Ranking: rank every team using prior results, keeper value, roster context, draft posture, and current NFL context.
+	- Matchup Preview: preview the first upcoming matchups if available; if current-matchups is unavailable, preview the most important likely early-season clashes using schedule, rosters, and current NFL context.
+	- Final Take: recommend which keepers people should pick for the season. Use keeper-info, prior standings/results, roster context, and current NFL news to support the keeper takes.`
 	case PhasePostDraft:
 		return `Post-draft episode assignment:
-- Intro: frame the league immediately after the draft and preview draft winners, draft disasters, and season predictions.
-- Best Team: determine the best draft in the league. Use draft results, roster construction, value, positional scarcity, keeper context, and current NFL news.
-- Worst Team: determine the worst draft in the league. Call out reaches, roster holes, fragile NFL situations, injury/news risk, and missed opportunities.
-- Final Take: deliver season predictions for the fantasy league, including projected contenders, collapse candidates, sleeper teams, and NFL news that could swing the standings.`
+	- Intro: frame the league immediately after the draft and preview draft winners, draft disasters, power ranking, season predictions, and matchup preview.
+	- Best Team: determine the best draft in the league. Use draft results, roster construction, value, positional scarcity, keeper context, and current NFL news.
+	- Worst Team: determine the worst draft in the league. Call out reaches, roster holes, fragile NFL situations, injury/news risk, and missed opportunities.
+	- Power Ranking: rank every team after the draft using roster construction, keeper value, projected scoring, positional depth, upside, and current NFL context.
+	- Matchup Preview: preview upcoming matchups from current-matchups when available, including projected totals, key starters, lineup risks, and NFL news that could swing each matchup.
+	- Final Take: deliver season predictions for the fantasy league, including projected contenders, collapse candidates, sleeper teams, and NFL news that could swing the standings.`
 	case PhaseRegularSeason:
 		return `Regular-season episode assignment:
-- Intro: frame the current week around scoreboard pressure, standings movement, and urgent roster decisions.
-- Best Team: analyze the team that scored the highest that week, how they succeeded, which lineup choices worked, and which NFL news confirms or complicates the success.
-- Worst Team: analyze the team that scored the lowest that week, how they failed, which starts/benches hurt them, and which NFL news explains the damage.
-- Final Take: recommend trades, free-agent moves, starts, sits, and bench decisions for league teams. Use top moves, roster context, matchup results, and current NFL news.`
+	- Intro: frame the current week around scoreboard pressure, standings movement, urgent roster decisions, power ranking, and matchup preview.
+	- Best Team: analyze the team that scored the highest that week, how they succeeded, which lineup choices worked, and which NFL news confirms or complicates the success.
+	- Worst Team: analyze the team that scored the lowest that week, how they failed, which starts/benches hurt them, and which NFL news explains the damage.
+	- Power Ranking: rank every team right now using standings, weekly scoring, roster quality, momentum, injuries, and current NFL context.
+	- Matchup Preview: preview upcoming matchups from current-matchups, including projected totals, key starters, lineup risks, swing players, and NFL news that could decide each matchup.
+	- Final Take: recommend trades, free-agent moves, starts, sits, and bench decisions for league teams. Use top moves, roster context, matchup results, and current NFL news.`
 	case PhasePostSeason:
 		return `Post-season episode assignment:
-- Intro: frame the playoff stakes, bracket pressure, elimination danger, and payout implications.
-- Best Team: analyze the playoff-week high scorer, how they succeeded, which lineup choices worked, and which NFL news confirms or complicates the success.
-- Worst Team: analyze the playoff-week low scorer, how they failed, which starts/benches hurt them, and which NFL news explains the damage.
-- Final Take: recommend trades where still relevant, free-agent moves, starts, sits, and bench decisions for playoff teams and consolation spoilers. Use playoff bracket context, matchup results, and current NFL news.`
+	- Intro: frame the playoff stakes, bracket pressure, elimination danger, payout implications, power ranking, and matchup preview.
+	- Best Team: analyze the playoff-week high scorer, how they succeeded, which lineup choices worked, and which NFL news confirms or complicates the success.
+	- Worst Team: analyze the playoff-week low scorer, how they failed, which starts/benches hurt them, and which NFL news explains the damage.
+	- Power Ranking: rank the remaining contenders and consolation spoilers using bracket position, scoring form, roster health, matchups, and current NFL context.
+	- Matchup Preview: preview upcoming playoff and consolation matchups from current-matchups, including projected totals, key starters, lineup risks, swing players, and payout implications.
+	- Final Take: recommend trades where still relevant, free-agent moves, starts, sits, and bench decisions for playoff teams and consolation spoilers. Use playoff bracket context, matchup results, and current NFL news.`
 	case PhaseSeasonComplete:
-		return `Season-complete episode assignment:
-- Intro: frame the completed season, champion, final standings, payouts, and the biggest league-wide verdicts.
-- Best Team: analyze the champion or most dominant finisher, how they won, and which NFL developments validated their roster.
-- Worst Team: analyze the biggest collapse or weakest final finisher, why the season failed, and which NFL developments exposed the roster.
-- Final Take: deliver offseason lessons, keeper implications, draft lessons, and early next-season predictions using final standings and current NFL context.`
+		return `Post-championship episode assignment:
+	- Intro: frame the completed season, champion, final standings, payouts, last-place punishment, and the show roadmap.
+	- Season in Review: briefly go team by team through season highlights and lowlights. Keep each team concise; this is a league-wide review, not six separate deep dives.
+	- Last Place Game: break down the last-place game, explain how it happened, identify the worst decisions and roster failures, and roast the last-place team.
+	- Third Place Game: break down the third-place game and celebrate the third-place team for finishing strong.
+	- Championship Game: break down the first-place game and celebrate the league winner, including the roster choices and NFL developments that validated the title run.`
 	default:
 		return `General episode assignment:
-- Intro: frame the current league stakes.
-- Best Team: identify and analyze the strongest team or performance for this phase.
-- Worst Team: identify and analyze the weakest team or performance for this phase.
-- Final Take: give actionable league-wide advice using available league data and current NFL news.`
+	- Intro: frame the current league stakes.
+	- Best Team: identify and analyze the strongest team or performance for this phase.
+	- Worst Team: identify and analyze the weakest team or performance for this phase.
+	- Power Ranking: rank every team using available league data and current NFL news.
+	- Matchup Preview: preview upcoming matchups using available league data and current NFL news.
+	- Final Take: give actionable league-wide advice using available league data and current NFL news.`
 	}
 }
 
