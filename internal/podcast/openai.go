@@ -842,7 +842,7 @@ func podcastPhaseInstructions(state SeasonState) string {
 	- Intro: frame the pre-draft stakes and explain that this episode is about last year's bottom, last year's top, keeper decisions, power ranking, and matchup preview.
 	- Best Team: focus on last season's first-place team, why that roster/owner succeeded, what can carry forward, and which NFL news affects the repeat case.
 	- Worst Team: focus on last season's last-place team, why it failed, what must change, and which NFL news creates either danger or opportunity.
-	- Power Ranking: rank every team using prior results, keeper value, roster context, draft posture, and current NFL context.
+	- Power Ranking: rank every team by current team strength, not by simply repeating the standings. Ground the ranking in reality using prior results, scoring profile, keeper value, roster context, draft posture, manager decisions, injury/news risk, and current NFL context.
 	- Matchup Preview: preview the first upcoming matchups if available; if current-matchups is unavailable, preview the most important likely early-season clashes using schedule, rosters, and current NFL context.
 	- Final Take: recommend which keepers people should pick for the season. Use keeper-info, prior standings/results, roster context, and current NFL news to support the keeper takes.`
 	case PhasePostDraft:
@@ -850,7 +850,7 @@ func podcastPhaseInstructions(state SeasonState) string {
 	- Intro: frame the league immediately after the draft and preview draft winners, draft disasters, power ranking, season predictions, and matchup preview.
 	- Best Team: determine the best draft in the league. Use draft results, roster construction, value, positional scarcity, keeper context, and current NFL news.
 	- Worst Team: determine the worst draft in the league. Call out reaches, roster holes, fragile NFL situations, injury/news risk, and missed opportunities.
-	- Power Ranking: rank every team after the draft using roster construction, keeper value, projected scoring, positional depth, upside, and current NFL context.
+	- Power Ranking: rank every team after the draft by current team strength, not by simply repeating the draft order, standings, or projections. Ground the ranking in reality using roster construction, keeper value, projected scoring, positional depth, upside, risk, manager decisions, and current NFL context.
 	- Matchup Preview: preview upcoming matchups from current-matchups when available, including projected totals, key starters, lineup risks, and NFL news that could swing each matchup.
 	- Final Take: deliver season predictions for the fantasy league, including projected contenders, collapse candidates, sleeper teams, and NFL news that could swing the standings.`
 	case PhaseRegularSeason:
@@ -858,7 +858,7 @@ func podcastPhaseInstructions(state SeasonState) string {
 	- Intro: frame the current week around scoreboard pressure, standings movement, urgent roster decisions, power ranking, and matchup preview.
 	- Best Team: analyze the team that scored the highest that week, how they succeeded, which lineup choices worked, and which NFL news confirms or complicates the success.
 	- Worst Team: analyze the team that scored the lowest that week, how they failed, which starts/benches hurt them, and which NFL news explains the damage.
-	- Power Ranking: rank every team right now using standings, weekly scoring, roster quality, momentum, injuries, and current NFL context.
+	- Power Ranking: rank every team by current team strength, not by simply repeating the standings. Standings matter, but the analysis must go deeper: weekly scoring, roster quality, lineup decisions, momentum, injuries, schedule context, sustainability, and current NFL context.
 	- Matchup Preview: preview upcoming matchups from current-matchups, including projected totals, key starters, lineup risks, swing players, and NFL news that could decide each matchup.
 	- Final Take: recommend trades, free-agent moves, starts, sits, and bench decisions for league teams. Use top moves, roster context, matchup results, and current NFL news.`
 	case PhasePostSeason:
@@ -866,7 +866,7 @@ func podcastPhaseInstructions(state SeasonState) string {
 	- Intro: frame the playoff stakes, bracket pressure, elimination danger, payout implications, power ranking, and matchup preview.
 	- Best Team: analyze the playoff-week high scorer, how they succeeded, which lineup choices worked, and which NFL news confirms or complicates the success.
 	- Worst Team: analyze the playoff-week low scorer, how they failed, which starts/benches hurt them, and which NFL news explains the damage.
-	- Power Ranking: rank the remaining contenders and consolation spoilers using bracket position, scoring form, roster health, matchups, and current NFL context.
+	- Power Ranking: rank the remaining contenders and consolation spoilers by current team strength, not by simply repeating playoff seeds or standings. Ground the ranking in reality using bracket position, scoring form, roster health, matchup difficulty, lineup decisions, sustainability, and current NFL context.
 	- Matchup Preview: preview upcoming playoff and consolation matchups from current-matchups, including projected totals, key starters, lineup risks, swing players, and payout implications.
 	- Final Take: recommend trades where still relevant, free-agent moves, starts, sits, and bench decisions for playoff teams and consolation spoilers. Use playoff bracket context, matchup results, and current NFL news.`
 	case PhaseSeasonComplete:
@@ -881,7 +881,7 @@ func podcastPhaseInstructions(state SeasonState) string {
 	- Intro: frame the current league stakes.
 	- Best Team: identify and analyze the strongest team or performance for this phase.
 	- Worst Team: identify and analyze the weakest team or performance for this phase.
-	- Power Ranking: rank every team using available league data and current NFL news.
+	- Power Ranking: rank every team by current team strength, not by simply repeating the standings. Ground the ranking in reality using available league data, scoring profile, roster quality, manager decisions, trend lines, risk, and current NFL news.
 	- Matchup Preview: preview upcoming matchups using available league data and current NFL news.
 	- Final Take: give actionable league-wide advice using available league data and current NFL news.`
 	}
