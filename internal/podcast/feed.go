@@ -125,7 +125,7 @@ func scanPodcastEpisodes(podcastDir string, metadata PodcastMetadata, siteURL st
 		}
 		pubDate := info.ModTime().Format(time.RFC1123Z)
 		if metadata.PubDate != "" {
-			if parsed, err := time.Parse(time.RFC3339, metadata.PubDate); err == nil {
+			if parsed, err := parsePodcastPubDate(metadata.PubDate); err == nil {
 				pubDate = parsed.Format(time.RFC1123Z)
 			}
 		}
@@ -154,6 +154,13 @@ func scanPodcastEpisodes(podcastDir string, metadata PodcastMetadata, siteURL st
 		return episodes[i].FileName > episodes[j].FileName
 	})
 	return episodes, nil
+}
+
+func parsePodcastPubDate(value string) (time.Time, error) {
+	if parsed, err := time.Parse(time.RFC3339, value); err == nil {
+		return parsed, nil
+	}
+	return time.Parse("2006-01-02", value)
 }
 
 func absolutePodcastURL(siteURL, fileName string) string {

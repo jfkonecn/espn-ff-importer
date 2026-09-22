@@ -3,7 +3,7 @@ name: Deploy static content to Pages
 
 on:
   workflow_run:
-    workflows: ["Weekly Fantasy Football Analyzer"]
+    workflows: ["Weekly Fantasy Football Analyzer", "Podcast Publisher"]
     types: [completed]
   # Runs on pushes targeting the default branch
   push:

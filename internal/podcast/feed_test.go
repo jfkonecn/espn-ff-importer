@@ -48,3 +48,42 @@ func TestGeneratePodcastFeedIncludesChapters(t *testing.T) {
 		t.Fatalf("feed missing chapters tag: %s", feed)
 	}
 }
+
+func TestGeneratePodcastFeedAcceptsDateOnlyPubDate(t *testing.T) {
+	tmpDir := t.TempDir()
+	podcastDir := filepath.Join(tmpDir, "podcasts")
+	if err := os.MkdirAll(podcastDir, 0755); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.WriteFile(filepath.Join(podcastDir, "episode.mp3"), []byte("audio"), 0644); err != nil {
+		t.Fatal(err)
+	}
+
+	metadataPath := filepath.Join(tmpDir, "metadata.json")
+	metadata := PodcastMetadata{
+		Episodes: []PodcastEpisodeMetadata{
+			{
+				File:    "episode.mp3",
+				Title:   "Episode",
+				PubDate: "2026-09-15",
+			},
+		},
+	}
+	if err := WriteJSON(metadataPath, metadata); err != nil {
+		t.Fatal(err)
+	}
+
+	feedPath := filepath.Join(tmpDir, "podcasts.xml")
+	if err := GeneratePodcastFeed(feedPath, podcastDir, metadataPath, "https://example.com/show"); err != nil {
+		t.Fatal(err)
+	}
+
+	contents, err := os.ReadFile(feedPath)
+	if err != nil {
+		t.Fatal(err)
+	}
+	feed := string(contents)
+	if !strings.Contains(feed, `<pubDate>Tue, 15 Sep 2026 00:00:00 +0000</pubDate>`) {
+		t.Fatalf("feed missing date-only pubDate: %s", feed)
+	}
+}

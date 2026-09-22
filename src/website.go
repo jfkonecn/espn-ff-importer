@@ -393,8 +393,12 @@ func (wg *WebsiteGenerator) scanPodcastFiles(metadata PodcastMetadata) []Podcast
 				GUID:          wg.podcastGUID(fileName),
 				Description:   wg.generatePodcastDescription(fileName),
 				Duration:      episode.Duration,
+				ChaptersURL:   wg.absolutePodcastURL(fmt.Sprintf("assets/podcasts/%s", episode.Chapters)),
 				Explicit:      formatBool(episode.Explicit),
 				EpisodeType:   firstNonEmpty(episode.EpisodeType, "full"),
+			}
+			if episode.Chapters == "" {
+				podcast.ChaptersURL = ""
 			}
 
 			if episode.Title != "" {
@@ -404,9 +408,10 @@ func (wg *WebsiteGenerator) scanPodcastFiles(metadata PodcastMetadata) []Podcast
 				podcast.Description = episode.Description
 			}
 			if episode.PubDate != "" {
-				parsedPubDate, err := time.Parse(time.RFC3339, episode.PubDate)
+				parsedPubDate, err := parsePodcastPubDate(episode.PubDate)
 				if err == nil {
 					podcast.PubDate = parsedPubDate.Format(time.RFC1123Z)
+					podcast.Date = parsedPubDate.Format("January 2, 2006")
 				} else {
 					fmt.Printf("Warning: Could not parse pubDate for %s: %v\n", fileName, err)
 				}
@@ -422,6 +427,13 @@ func (wg *WebsiteGenerator) scanPodcastFiles(metadata PodcastMetadata) []Podcast
 	})
 
 	return podcasts
+}
+
+func parsePodcastPubDate(value string) (time.Time, error) {
+	if parsed, err := time.Parse(time.RFC3339, value); err == nil {
+		return parsed, nil
+	}
+	return time.Parse("2006-01-02", value)
 }
 
 func (wg *WebsiteGenerator) absolutePodcastURL(filePath string) string {
@@ -1948,6 +1960,7 @@ type PodcastEpisodeMetadata struct {
 	Description string `json:"description"`
 	PubDate     string `json:"pubDate"`
 	Duration    string `json:"duration"`
+	Chapters    string `json:"chapters"`
 	Explicit    bool   `json:"explicit"`
 	EpisodeType string `json:"episodeType"`
 }
@@ -1966,12 +1979,13 @@ type PodcastInfo struct {
 	GUID          string
 	Description   string
 	Duration      string
+	ChaptersURL   string
 	Explicit      string
 	EpisodeType   string
 }
 
 const podcastRSSTemplate = `<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:podcast="https://podcastindex.org/namespace/1.0">
   <channel>
     <title>{{xml .Channel.Title}}</title>
     <link>{{.Link}}</link>
@@ -1999,6 +2013,7 @@ const podcastRSSTemplate = `<?xml version="1.0" encoding="UTF-8"?>
       <pubDate>{{.PubDate}}</pubDate>
       <guid isPermaLink="false">{{.GUID}}</guid>
       <enclosure url="{{.AbsoluteURL}}" length="{{.FileSizeBytes}}" type="{{.AudioType}}" />
+      {{if .ChaptersURL}}<podcast:chapters url="{{.ChaptersURL}}" type="application/json" />{{end}}
       {{if .Duration}}<itunes:duration>{{.Duration}}</itunes:duration>{{end}}
       <itunes:explicit>{{.Explicit}}</itunes:explicit>
       <itunes:episodeType>{{.EpisodeType}}</itunes:episodeType>

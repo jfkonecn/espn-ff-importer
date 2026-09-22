@@ -158,8 +158,7 @@ func generatePodcastsPage(outputDir string) error {
 	if err != nil || len(files) == 0 {
 		// If no league files, create a minimal generator
 		generator := &WebsiteGenerator{}
-		outputFile := filepath.Join(outputDir, "podcasts.html")
-		if err := generator.GeneratePodcastsPage(outputFile); err != nil {
+		if err := generatePodcastOutputs(generator, outputDir); err != nil {
 			return err
 		}
 
@@ -175,13 +174,14 @@ func generatePodcastsPage(outputDir string) error {
 	// Create website generator
 	generator := NewWebsiteGenerator(reader)
 
-	// Generate the podcasts page
-	outputFile := filepath.Join(outputDir, "podcasts.html")
-	if err := generator.GeneratePodcastsPage(outputFile); err != nil {
+	return generatePodcastOutputs(generator, outputDir)
+}
+
+func generatePodcastOutputs(generator *WebsiteGenerator, outputDir string) error {
+	if err := generator.GeneratePodcastsPage(filepath.Join(outputDir, "podcasts.html")); err != nil {
 		return err
 	}
-
-	return nil
+	return generator.GeneratePodcastRSS(filepath.Join(outputDir, podcastFeedFileName))
 }
 
 // generateAIData generates AI data files for all seasons

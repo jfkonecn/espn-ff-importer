@@ -2,6 +2,16 @@ package main
 
 import "testing"
 
+func TestParsePodcastPubDateAcceptsDateOnly(t *testing.T) {
+	parsed, err := parsePodcastPubDate("2026-09-15")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if got := parsed.Format("January 2, 2006"); got != "September 15, 2026" {
+		t.Fatalf("parsed date = %q, want September 15, 2026", got)
+	}
+}
+
 func TestReacquiredPlayerUsesHigherOfDraftPriceOrFreeAgencyMinimum(t *testing.T) {
 	wg := &WebsiteGenerator{}
 	for _, test := range []struct {
