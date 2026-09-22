@@ -16,21 +16,21 @@
 |----------|--------|----------|--------|------------------|
 | QB | Drake Maye | NE | Active | 18.6 |
 | RB | Jahmyr Gibbs | DET | Active | 25.3 |
-| RB | Javonte Williams | DAL | Active | 15.0 |
+| RB | Rhamondre Stevenson | NE | Active | 12.0 |
 | WR | Mike Evans | SF | Active | 12.5 |
 | WR | Tee Higgins | CIN | Active | 12.7 |
 | TE | T.J. Hockenson | MIN | Active | 9.2 |
-| FLEX | Rhamondre Stevenson | NE | Active | 12.0 |
-| D/ST | Chargers D/ST | LAC | Active | 2.6 |
+| FLEX | Javonte Williams | DAL | Active | 15.0 |
+| D/ST | Packers D/ST | GB | Active | 4.9 |
 | K | Cairo Santos | CHI | Active | 7.7 |
 | Bench | Jameson Williams | DET | Active | 10.9 |
 | Bench | Kenny Gainwell | TB | Active | 7.6 |
 | Bench | MarShawn Lloyd | GB | Active | 8.6 |
 | Bench | Romeo Doubs | NE | Active | 11.5 |
+| Bench | Chargers D/ST | LAC | Active | 2.6 |
 | Bench | Dontayvion Wicks | PHI | Active | 9.9 |
-| Bench | Packers D/ST | GB | Active | 4.9 |
-| IR | Jordan Mason | MIN | Injured | N/A |
 | IR | A.J. Brown | NE | Injured | N/A |
+| IR | Jordan Mason | MIN | Injured | N/A |
 
 ### Love Handles (Justin Willer)
 
@@ -221,19 +221,17 @@
 | RB | David Montgomery | HOU | Active | 11.9 |
 | WR | CeeDee Lamb | DAL | Active | 17.3 |
 | WR | Jaylen Waddle | DEN | Active | 13.4 |
-| TE | Michael Mayer | LV | Active | 6.3 |
+| TE | Brock Bowers | LV | Injured | 14.2 |
 | FLEX | Tetairoa McMillan | CAR | Active | 14.3 |
 | D/ST | 49ers D/ST | SF | Active | 7.2 |
 | K | Harrison Butker | KC | Active | 8.9 |
 | Bench | Justin Herbert | LAC | Active | 17.3 |
 | Bench | Xavier Worthy | KC | Active | 11.4 |
-| Bench | Chris Rodriguez Jr. | JAX | Active | 4.3 |
+| Bench | Alvin Kamara | NO | Active | 9.6 |
 | Bench | Chris Godwin Jr. | TB | Active | 8.8 |
 | Bench | Brian Robinson Jr. | ATL | Active | 5.7 |
 | Bench | Courtland Sutton | DEN | Active | 11.2 |
 | IR | Jordyn Tyson | NO | Injured | N/A |
-| IR | Alvin Kamara | NO | Active | 9.6 |
-| IR | Brock Bowers | LV | Injured | 14.2 |
 
 ### Jensen Huang and Sons (Tarek Kaakani)
 
