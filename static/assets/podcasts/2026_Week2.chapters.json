@@ -1,0 +1,37 @@
+{
+  "version": "1.2.0",
+  "chapters": [
+    {
+      "startTime": 0,
+      "title": "Intro"
+    },
+    {
+      "startTime": 165,
+      "title": "Commercial 1 - FantasyFlex"
+    },
+    {
+      "startTime": 203,
+      "title": "Best Team"
+    },
+    {
+      "startTime": 309,
+      "title": "Worst Team"
+    },
+    {
+      "startTime": 434,
+      "title": "Power Ranking"
+    },
+    {
+      "startTime": 767,
+      "title": "Matchup Preview"
+    },
+    {
+      "startTime": 1021,
+      "title": "Commercial 2 - Draft Wizardry"
+    },
+    {
+      "startTime": 1057,
+      "title": "Final Take"
+    }
+  ]
+}

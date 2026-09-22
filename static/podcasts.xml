@@ -6,7 +6,7 @@
     <description>The League&#39;s Official AI Slop Podcast</description>
     <language>en-us</language>
     <copyright>Slop Take</copyright>
-    <lastBuildDate>Tue, 15 Sep 2026 10:06:48 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 22 Sep 2026 10:15:02 +0000</lastBuildDate>
     <atom:link href="https://jfkonecn.github.io/espn-ff-importer/podcasts.xml" rel="self" type="application/rss+xml" />
     <itunes:author>Eric&#39;s Beard</itunes:author>
     <itunes:summary>The League&#39;s Official AI Slop Podcast</itunes:summary>
@@ -18,10 +18,23 @@
     </itunes:category>
     
     <item>
+      <title>Slop Take: Week 2 Breakdown and Week 3 Preview</title>
+      <description>In this week&#39;s episode of Slop Take, we dive into the highs and lows of Week 2 in &#39;The League,&#39; analyze the top and bottom performers, provide a comprehensive power ranking, preview upcoming matchups, and offer strategic advice to keep your fantasy team competitive.</description>
+      <itunes:summary>In this week&#39;s episode of Slop Take, we dive into the highs and lows of Week 2 in &#39;The League,&#39; analyze the top and bottom performers, provide a comprehensive power ranking, preview upcoming matchups, and offer strategic advice to keep your fantasy team competitive.</itunes:summary>
+      <pubDate>Tue, 22 Sep 2026 10:07:54 +0000</pubDate>
+      <guid isPermaLink="false">https://jfkonecn.github.io/espn-ff-importer/assets/podcasts/2026_Week2.mp3</guid>
+      <enclosure url="https://jfkonecn.github.io/espn-ff-importer/assets/podcasts/2026_Week2.mp3" length="19444759" type="audio/mpeg" />
+      <podcast:chapters url="https://jfkonecn.github.io/espn-ff-importer/assets/podcasts/2026_Week2.chapters.json" type="application/json" />
+      <itunes:duration>00:20:15</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    
+    <item>
       <title>Slop Take: Week 1 Breakdown</title>
       <description>In this week&#39;s episode of Slop Take, we dive into the highs and lows of Week 1 in &#39;The League.&#39; We analyze the top-performing team, dissect the struggles of the lowest scorer, and provide strategic advice to help you dominate your fantasy matchups. Plus, we draw parallels between fantasy football dynamics and iconic sports figures and fan bases.</description>
       <itunes:summary>In this week&#39;s episode of Slop Take, we dive into the highs and lows of Week 1 in &#39;The League.&#39; We analyze the top-performing team, dissect the struggles of the lowest scorer, and provide strategic advice to help you dominate your fantasy matchups. Plus, we draw parallels between fantasy football dynamics and iconic sports figures and fan bases.</itunes:summary>
-      <pubDate>Tue, 15 Sep 2026 10:06:48 +0000</pubDate>
+      <pubDate>Tue, 22 Sep 2026 10:10:59 +0000</pubDate>
       <guid isPermaLink="false">https://jfkonecn.github.io/espn-ff-importer/assets/podcasts/2026_Week1.mp3</guid>
       <enclosure url="https://jfkonecn.github.io/espn-ff-importer/assets/podcasts/2026_Week1.mp3" length="9135795" type="audio/mpeg" />
       <podcast:chapters url="https://jfkonecn.github.io/espn-ff-importer/assets/podcasts/2026_Week1.chapters.json" type="application/json" />
