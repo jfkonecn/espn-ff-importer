@@ -18,3 +18,19 @@
 
 ---
 
+## Week 2
+
+**Advanced Metrics** 95.22 - **Caleb's Cats** 77.72 *(Winner: Advanced Metrics)*
+
+**America's Team** 120.92 - **Love Handles** 113.16 *(Winner: America's Team)*
+
+**Majestic mountain men** 84.20 - **Latin Fury** 128.34 *(Winner: Latin Fury)*
+
+**Jensen Huang and Sons** 99.48 - **The Injured Preserve** 145.28 *(Winner: The Injured Preserve)*
+
+**Boeing's Hitmen ** 59.00 - **It's MillerTime** 132.66 *(Winner: It's MillerTime)*
+
+**#1 GangGreen** 123.32 - **Embrace the Darkness** 152.36 *(Winner: Embrace the Darkness)*
+
+---
+
