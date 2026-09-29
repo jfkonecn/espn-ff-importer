@@ -16,7 +16,7 @@
 |----------|--------|----------|--------|------------------|
 | QB | Matthew Stafford | LAR | Active | 16.2 |
 | RB | Christian McCaffrey | SF | Active | 20.2 |
-| RB | Breece Hall | NYJ | Active | N/A |
+| RB | Tyjae Spears | TEN | Active | 8.0 |
 | WR | DK Metcalf | PIT | Active | 10.2 |
 | WR | Chris Olave | NO | Active | 18.3 |
 | TE | Tyler Warren | IND | Active | 13.0 |
@@ -24,14 +24,14 @@
 | D/ST | Texans D/ST | HOU | Active | 4.9 |
 | K | Evan McPherson | CIN | Active | 8.3 |
 | Bench | Cameron Dicker | LAC | Active | 7.9 |
-| Bench | Tyjae Spears | TEN | Active | 8.0 |
 | Bench | Rashid Shaheed | SEA | Active | 8.2 |
+| Bench | Breece Hall | NYJ | Active | N/A |
 | Bench | Chris Brooks | GB | Active | 3.9 |
 | Bench | Raiders D/ST | LV | Active | 3.7 |
 | Bench | Kayshon Boutte | HOU | Active | 5.2 |
 | IR | Jayden Daniels | WSH | Injured | N/A |
-| IR | Isiah Pacheco | DET | Injured | N/A |
 | IR | Nico Collins | HOU | Injured | 15.3 |
+| IR | Isiah Pacheco | DET | Injured | N/A |
 
 ### Caleb's Cats (michael machas)
 
@@ -42,10 +42,10 @@
 | QB | Drake Maye | NE | Active | 17.5 |
 | RB | Jahmyr Gibbs | DET | Active | 26.1 |
 | RB | Javonte Williams | DAL | Active | 14.6 |
-| WR | Jameson Williams | DET | Active | 10.4 |
+| WR | Mike Evans | SF | Active | 12.4 |
 | WR | Tee Higgins | CIN | Active | 13.7 |
 | TE | T.J. Hockenson | MIN | Active | 8.1 |
-| FLEX | Mike Evans | SF | Active | 12.4 |
+| FLEX | Jameson Williams | DET | Active | 10.4 |
 | D/ST | Packers D/ST | GB | Active | 6.3 |
 | K | Cairo Santos | CHI | Active | 8.2 |
 | Bench | Rhamondre Stevenson | NE | Active | 11.6 |
@@ -67,19 +67,19 @@
 
 | Position | Player | Pro Team | Status | Projected Points |
 |----------|--------|----------|--------|------------------|
-| QB | Jalen Hurts | PHI | Active | 18.1 |
+| QB | Jared Goff | DET | Active | 17.4 |
 | RB | Kenneth Walker III | KC | Active | 20.5 |
-| RB | Aaron Jones Sr. | MIN | Active | 17.2 |
-| WR | Emeka Egbuka | TB | Active | 11.2 |
+| RB | Saquon Barkley | PHI | Active | 15.7 |
 | WR | Davante Adams | LAR | Active | 14.5 |
+| WR | DJ Moore | BUF | Active | 13.0 |
 | TE | Kyle Pitts Sr. | ATL | Active | 7.4 |
-| FLEX | Saquon Barkley | PHI | Active | 15.7 |
+| FLEX | Emeka Egbuka | TB | Active | 11.2 |
 | D/ST | Rams D/ST | LAR | Active | 5.9 |
 | K | Cam Little | JAX | Active | 8.6 |
 | Bench | Rome Odunze | CHI | Active | 10.5 |
-| Bench | DJ Moore | BUF | Active | 13.0 |
+| Bench | Aaron Jones Sr. | MIN | Active | 17.2 |
 | Bench | TreVeyon Henderson | NE | Active | 9.5 |
-| Bench | Jared Goff | DET | Active | 17.4 |
+| Bench | Jalen Hurts | PHI | Active | 18.1 |
 | Bench | Dallas Goedert | PHI | Injured | N/A |
 | Bench | Pat Freiermuth | PIT | Active | 7.9 |
 | IR | Christian Kirk | SF | Injured | N/A |
@@ -127,13 +127,13 @@
 | D/ST | Seahawks D/ST | SEA | Active | 7.9 |
 | K | Jason Myers | SEA | Active | 9.6 |
 | Bench | Kendrick Bourne | ARI | Active | 5.4 |
+| Bench | Devin Singletary | NYG | Active | N/A |
 | Bench | Antonio Williams | WSH | Active | 5.6 |
 | Bench | Rashod Bateman | BAL | Active | 7.9 |
-| Bench | Adonai Mitchell | NYJ | Injured | 10.6 |
 | Bench | Terrance Ferguson | LAR | Active | 7.5 |
-| Bench | Travis Etienne Jr. | NO | Injured | N/A |
-| IR | Devin Singletary | NYG | Active | N/A |
 | IR | Jonah Coleman | DEN | Injured | N/A |
+| IR | Adonai Mitchell | NYJ | Injured | 10.6 |
+| IR | Travis Etienne Jr. | NO | Injured | N/A |
 
 ### It's MillerTime (Colin Miller)
 
@@ -169,19 +169,19 @@
 | Position | Player | Pro Team | Status | Projected Points |
 |----------|--------|----------|--------|------------------|
 | QB | Bryce Young | CAR | Active | 20.1 |
-| RB | Chuba Hubbard | CAR | Active | 16.3 |
 | RB | Omarion Hampton | LAC | Active | 10.9 |
+| RB | Chuba Hubbard | CAR | Active | 16.3 |
 | WR | Amon-Ra St. Brown | DET | Active | 20.1 |
 | WR | Parker Washington | JAX | Active | 15.3 |
-| TE | Sam LaPorta | DET | Active | 11.2 |
+| TE | George Kittle | SF | Active | 13.7 |
 | FLEX | Malik Nabers | NYG | Active | 13.6 |
 | D/ST | Eagles D/ST | PHI | Active | 4.3 |
 | K | Jake Bates | DET | Active | 8.5 |
-| Bench | George Kittle | SF | Active | 13.7 |
 | Bench | Luther Burden III | CHI | Active | 11.8 |
+| Bench | Sam LaPorta | DET | Active | 11.2 |
+| Bench | Jadarian Price | SEA | Active | 10.0 |
 | Bench | Rachaad White | WSH | Active | 8.3 |
 | Bench | Kyler Murray | MIN | Active | 19.3 |
-| Bench | Jadarian Price | SEA | Active | 10.0 |
 | Bench | Marvin Harrison Jr. | ARI | Active | 6.4 |
 | IR | Caleb Williams | CHI | Injured | N/A |
 | IR | Tank Dell | HOU | Injured | N/A |
