@@ -1,0 +1,37 @@
+{
+  "version": "1.2.0",
+  "chapters": [
+    {
+      "startTime": 0,
+      "title": "Intro"
+    },
+    {
+      "startTime": 154,
+      "title": "Commercial 1 - FantasyFlex"
+    },
+    {
+      "startTime": 191,
+      "title": "Best Team"
+    },
+    {
+      "startTime": 201,
+      "title": "Worst Team"
+    },
+    {
+      "startTime": 359,
+      "title": "Power Ranking"
+    },
+    {
+      "startTime": 545,
+      "title": "Matchup Preview"
+    },
+    {
+      "startTime": 736,
+      "title": "Commercial 2 - Bench Boss AI"
+    },
+    {
+      "startTime": 771,
+      "title": "Final Take"
+    }
+  ]
+}
