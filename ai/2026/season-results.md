@@ -34,3 +34,19 @@
 
 ---
 
+## Week 3
+
+**Caleb's Cats** 112.86 - **Love Handles** 99.52 *(Winner: Caleb's Cats)*
+
+**Latin Fury** 132.40 - **Advanced Metrics** 139.56 *(Winner: Advanced Metrics)*
+
+**The Injured Preserve** 152.44 - **America's Team** 80.14 *(Winner: The Injured Preserve)*
+
+**It's MillerTime** 97.68 - **Majestic mountain men** 138.94 *(Winner: Majestic mountain men)*
+
+**Embrace the Darkness** 110.44 - **Jensen Huang and Sons** 124.38 *(Winner: Jensen Huang and Sons)*
+
+**#1 GangGreen** 117.18 - **Boeing's Hitmen ** 74.44 *(Winner: #1 GangGreen)*
+
+---
+

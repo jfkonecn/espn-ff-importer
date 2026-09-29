@@ -2,62 +2,11 @@
 
 **League:** The League
 **Season:** 2026
-**Current Week:** 3
+**Current Week:** 4
 
 **Status:** Games are pending - showing projected lineups and totals
 
 ## Matchup 1
-
-### Caleb's Cats (michael machas)
-
-**Away Team Starting Lineup:**
-
-| Position | Player | Pro Team | Status | Projected Points |
-|----------|--------|----------|--------|------------------|
-| QB | Drake Maye | NE | Active | 18.6 |
-| RB | Jahmyr Gibbs | DET | Active | 25.3 |
-| RB | Rhamondre Stevenson | NE | Active | 12.0 |
-| WR | Mike Evans | SF | Active | 12.5 |
-| WR | Tee Higgins | CIN | Active | 12.7 |
-| TE | T.J. Hockenson | MIN | Active | 9.2 |
-| FLEX | Javonte Williams | DAL | Active | 15.0 |
-| D/ST | Packers D/ST | GB | Active | 4.9 |
-| K | Cairo Santos | CHI | Active | 7.7 |
-| Bench | Jameson Williams | DET | Active | 10.9 |
-| Bench | Kenny Gainwell | TB | Active | 7.6 |
-| Bench | MarShawn Lloyd | GB | Active | 8.6 |
-| Bench | Romeo Doubs | NE | Active | 11.5 |
-| Bench | Chargers D/ST | LAC | Active | 2.6 |
-| Bench | Dontayvion Wicks | PHI | Active | 9.9 |
-| IR | A.J. Brown | NE | Injured | N/A |
-| IR | Jordan Mason | MIN | Injured | N/A |
-
-### Love Handles (Justin Willer)
-
-**Home Team Starting Lineup:**
-
-| Position | Player | Pro Team | Status | Projected Points |
-|----------|--------|----------|--------|------------------|
-| QB | Jalen Hurts | PHI | Active | 19.8 |
-| RB | Kenneth Walker III | KC | Active | 21.0 |
-| RB | Saquon Barkley | PHI | Active | 17.4 |
-| WR | Emeka Egbuka | TB | Active | 12.4 |
-| WR | Davante Adams | LAR | Active | 12.8 |
-| TE | Kyle Pitts Sr. | ATL | Active | 9.9 |
-| FLEX | Aaron Jones Sr. | MIN | Active | 13.7 |
-| D/ST | Rams D/ST | LAR | Active | 4.3 |
-| K | Cam Little | JAX | Active | 8.6 |
-| Bench | Rome Odunze | CHI | Active | 10.3 |
-| Bench | DJ Moore | BUF | Active | 12.6 |
-| Bench | TreVeyon Henderson | NE | Active | 10.5 |
-| Bench | KC Concepcion | CLE | Active | 11.0 |
-| Bench | Jared Goff | DET | Active | 16.6 |
-| Bench | Caleb Douglas | MIA | Active | 8.7 |
-| IR | Christian Kirk | SF | Injured | N/A |
-
----
-
-## Matchup 2
 
 ### Latin Fury (Benito Molina)
 
@@ -65,221 +14,276 @@
 
 | Position | Player | Pro Team | Status | Projected Points |
 |----------|--------|----------|--------|------------------|
-| QB | Matthew Stafford | LAR | Active | 15.7 |
-| RB | Christian McCaffrey | SF | Active | 20.9 |
-| RB | Breece Hall | NYJ | Active | 16.2 |
-| WR | DK Metcalf | PIT | Active | 11.3 |
-| WR | Chris Olave | NO | Active | 17.8 |
-| TE | Tyler Warren | IND | Active | 12.3 |
-| FLEX | Travis Kelce | KC | Active | 12.7 |
-| D/ST | Texans D/ST | HOU | Active | 6.6 |
-| K | Evan McPherson | CIN | Active | 7.7 |
-| Bench | Cameron Dicker | LAC | Active | 9.0 |
-| Bench | Jayden Daniels | WSH | Active | N/A |
-| Bench | Tyjae Spears | TEN | Active | 9.3 |
-| Bench | Rashid Shaheed | SEA | Active | 10.9 |
-| Bench | Bengals D/ST | CIN | Active | 6.4 |
-| Bench | Chris Brooks | GB | Active | 7.3 |
+| QB | Matthew Stafford | LAR | Active | 16.2 |
+| RB | Christian McCaffrey | SF | Active | 20.2 |
+| RB | Breece Hall | NYJ | Active | N/A |
+| WR | DK Metcalf | PIT | Active | 10.2 |
+| WR | Chris Olave | NO | Active | 18.3 |
+| TE | Tyler Warren | IND | Active | 13.0 |
+| FLEX | Travis Kelce | KC | Active | 11.8 |
+| D/ST | Texans D/ST | HOU | Active | 4.9 |
+| K | Evan McPherson | CIN | Active | 8.3 |
+| Bench | Cameron Dicker | LAC | Active | 7.9 |
+| Bench | Tyjae Spears | TEN | Active | 8.0 |
+| Bench | Rashid Shaheed | SEA | Active | 8.2 |
+| Bench | Chris Brooks | GB | Active | 3.9 |
+| Bench | Raiders D/ST | LV | Active | 3.7 |
+| Bench | Kayshon Boutte | HOU | Active | 5.2 |
+| IR | Jayden Daniels | WSH | Injured | N/A |
 | IR | Isiah Pacheco | DET | Injured | N/A |
-| IR | Nico Collins | HOU | Injured | 15.8 |
+| IR | Nico Collins | HOU | Injured | 15.3 |
 
-### Advanced Metrics (John Konecny)
+### Caleb's Cats (michael machas)
 
 **Home Team Starting Lineup:**
 
 | Position | Player | Pro Team | Status | Projected Points |
 |----------|--------|----------|--------|------------------|
-| QB | Josh Allen | BUF | Active | 23.6 |
-| RB | Devin Singletary | NYG | Active | 7.2 |
-| RB | Tony Pollard | TEN | Active | 9.8 |
-| WR | Drake London | ATL | Active | 15.4 |
-| WR | Keenan Allen | IND | Active | 9.5 |
-| TE | Juwan Johnson | NO | Active | 9.2 |
-| FLEX | Jeremiyah Love | ARI | Active | 12.8 |
-| D/ST | Seahawks D/ST | SEA | Active | 7.5 |
-| K | Jason Myers | SEA | Active | 9.3 |
-| Bench | Dallas Goedert | PHI | Active | N/A |
-| Bench | Cyrus Allen | KC | Active | 1.1 |
-| Bench | Jonah Coleman | DEN | Active | 1.8 |
-| Bench | Mike Washington Jr. | LV | Active | 3.7 |
-| Bench | Antonio Williams | WSH | Active | 5.2 |
-| Bench | Kendrick Bourne | ARI | Active | 6.7 |
-| IR | Josh Jacobs | GB | Active | N/A |
-| IR | Michael Pittman Jr. | PIT | Injured | 11.4 |
+| QB | Drake Maye | NE | Active | 17.5 |
+| RB | Jahmyr Gibbs | DET | Active | 26.1 |
+| RB | Javonte Williams | DAL | Active | 14.6 |
+| WR | Jameson Williams | DET | Active | 10.4 |
+| WR | Tee Higgins | CIN | Active | 13.7 |
+| TE | T.J. Hockenson | MIN | Active | 8.1 |
+| FLEX | Mike Evans | SF | Active | 12.4 |
+| D/ST | Packers D/ST | GB | Active | 6.3 |
+| K | Cairo Santos | CHI | Active | 8.2 |
+| Bench | Rhamondre Stevenson | NE | Active | 11.6 |
+| Bench | Kenny Gainwell | TB | Active | 8.1 |
+| Bench | MarShawn Lloyd | GB | Active | 6.5 |
+| Bench | Romeo Doubs | NE | Active | 9.8 |
+| Bench | Dontayvion Wicks | PHI | Active | 9.7 |
+| Bench | Tre Tucker | LV | Active | 9.8 |
+| IR | Jordan Mason | MIN | Injured | N/A |
+| IR | A.J. Brown | NE | Injured | N/A |
+
+---
+
+## Matchup 2
+
+### Love Handles (Justin Willer)
+
+**Away Team Starting Lineup:**
+
+| Position | Player | Pro Team | Status | Projected Points |
+|----------|--------|----------|--------|------------------|
+| QB | Jalen Hurts | PHI | Active | 18.1 |
+| RB | Kenneth Walker III | KC | Active | 20.5 |
+| RB | Aaron Jones Sr. | MIN | Active | 17.2 |
+| WR | Emeka Egbuka | TB | Active | 11.2 |
+| WR | Davante Adams | LAR | Active | 14.5 |
+| TE | Kyle Pitts Sr. | ATL | Active | 7.4 |
+| FLEX | Saquon Barkley | PHI | Active | 15.7 |
+| D/ST | Rams D/ST | LAR | Active | 5.9 |
+| K | Cam Little | JAX | Active | 8.6 |
+| Bench | Rome Odunze | CHI | Active | 10.5 |
+| Bench | DJ Moore | BUF | Active | 13.0 |
+| Bench | TreVeyon Henderson | NE | Active | 9.5 |
+| Bench | Jared Goff | DET | Active | 17.4 |
+| Bench | Dallas Goedert | PHI | Injured | N/A |
+| Bench | Pat Freiermuth | PIT | Active | 7.9 |
+| IR | Christian Kirk | SF | Injured | N/A |
+| IR | Caleb Douglas | MIA | Injured | 7.7 |
+
+### The Injured Preserve (Conner Graeff)
+
+**Home Team Starting Lineup:**
+
+| Position | Player | Pro Team | Status | Projected Points |
+|----------|--------|----------|--------|------------------|
+| QB | Brock Purdy | SF | Active | 18.6 |
+| RB | Ashton Jeanty | LV | Active | 18.8 |
+| RB | Derrick Henry | BAL | Active | 20.3 |
+| WR | Jaxon Smith-Njigba | SEA | Active | 21.0 |
+| WR | Zay Flowers | BAL | Active | 15.3 |
+| TE | Dalton Kincaid | BUF | Active | 10.7 |
+| FLEX | Quinshon Judkins | CLE | Active | 12.5 |
+| D/ST | Vikings D/ST | MIN | Active | 8.5 |
+| K | Chase McLaughlin | TB | Active | 8.4 |
+| Bench | Terry McLaurin | WSH | Active | 12.9 |
+| Bench | Mark Andrews | BAL | Active | 10.0 |
+| Bench | Ravens D/ST | BAL | Active | 7.0 |
+| Bench | Joe Burrow | CIN | Active | 18.2 |
+| Bench | Devaughn Vele | NO | Active | 10.6 |
+| Bench | Emanuel Wilson | SEA | Active | 9.6 |
 
 ---
 
 ## Matchup 3
 
-### The Injured Preserve (Conner Graeff)
+### Advanced Metrics (John Konecny)
 
 **Away Team Starting Lineup:**
 
 | Position | Player | Pro Team | Status | Projected Points |
 |----------|--------|----------|--------|------------------|
-| QB | Brock Purdy | SF | Active | 20.8 |
-| RB | Ashton Jeanty | LV | Active | 18.9 |
-| RB | Derrick Henry | BAL | Active | 17.7 |
-| WR | Jaxon Smith-Njigba | SEA | Active | 20.8 |
-| WR | Zay Flowers | BAL | Injured | 15.6 |
-| TE | Dalton Kincaid | BUF | Active | 11.6 |
-| FLEX | Quinshon Judkins | CLE | Active | 13.7 |
-| D/ST | Ravens D/ST | BAL | Active | 4.4 |
-| K | Harrison Mevis | LAR | Active | 8.3 |
-| Bench | Mark Andrews | BAL | Active | 10.2 |
-| Bench | Terry McLaurin | WSH | Active | 11.9 |
-| Bench | Joe Burrow | CIN | Active | 16.4 |
-| Bench | Tre' Harris | LAC | Active | 8.0 |
-| Bench | Lions D/ST | DET | Active | 6.9 |
-| Bench | Devaughn Vele | NO | Active | 11.5 |
+| QB | Josh Allen | BUF | Active | 22.3 |
+| RB | Jeremiyah Love | ARI | Active | 15.5 |
+| RB | Tony Pollard | TEN | Active | 11.7 |
+| WR | Drake London | ATL | Active | 16.7 |
+| WR | Michael Pittman Jr. | PIT | Active | 9.8 |
+| TE | Juwan Johnson | NO | Active | 10.6 |
+| FLEX | Keenan Allen | IND | Active | 11.2 |
+| D/ST | Seahawks D/ST | SEA | Active | 7.9 |
+| K | Jason Myers | SEA | Active | 9.6 |
+| Bench | Kendrick Bourne | ARI | Active | 5.4 |
+| Bench | Antonio Williams | WSH | Active | 5.6 |
+| Bench | Rashod Bateman | BAL | Active | 7.9 |
+| Bench | Adonai Mitchell | NYJ | Injured | 10.6 |
+| Bench | Terrance Ferguson | LAR | Active | 7.5 |
+| Bench | Travis Etienne Jr. | NO | Injured | N/A |
+| IR | Devin Singletary | NYG | Active | N/A |
+| IR | Jonah Coleman | DEN | Injured | N/A |
 
-### America's Team (Eric Stevens)
+### It's MillerTime (Colin Miller)
 
 **Home Team Starting Lineup:**
 
 | Position | Player | Pro Team | Status | Projected Points |
 |----------|--------|----------|--------|------------------|
-| QB | Bryce Young | CAR | Active | 16.7 |
-| RB | Chuba Hubbard | CAR | Active | 13.9 |
-| RB | Omarion Hampton | LAC | Active | 15.0 |
-| WR | Amon-Ra St. Brown | DET | Active | 19.9 |
-| WR | Parker Washington | JAX | Active | 15.0 |
-| TE | Sam LaPorta | DET | Active | 11.2 |
-| FLEX | George Kittle | SF | Active | 12.7 |
-| D/ST | Eagles D/ST | PHI | Active | 5.5 |
-| K | Jake Bates | DET | Active | 8.6 |
-| Bench | Luther Burden III | CHI | Active | 11.6 |
-| Bench | Jadarian Price | SEA | Active | 12.1 |
-| Bench | Malik Nabers | NYG | Active | 15.2 |
-| Bench | Caleb Williams | CHI | Active | N/A |
-| Bench | Rachaad White | WSH | Active | 9.3 |
-| Bench | Marvin Harrison Jr. | ARI | Active | 7.1 |
-| IR | Kyler Murray | MIN | Active | 17.3 |
-| IR | Tank Dell | HOU | Injured | N/A |
+| QB | Trevor Lawrence | JAX | Active | 18.5 |
+| RB | Kyle Monangai | CHI | Active | 9.0 |
+| RB | Jonathan Taylor | IND | Active | 20.4 |
+| WR | Ladd McConkey | LAC | Active | 11.8 |
+| WR | Christian Watson | GB | Active | 14.4 |
+| TE | Tucker Kraft | GB | Active | 8.9 |
+| FLEX | Rashee Rice | KC | Active | 14.9 |
+| D/ST | Patriots D/ST | NE | Active | 3.0 |
+| K | Brandon Aubrey | DAL | Active | 9.4 |
+| Bench | Rico Dowdle | PIT | Injured | 8.9 |
+| Bench | Jake Ferguson | DAL | Active | 8.1 |
+| Bench | Quentin Johnston | LAC | Active | 8.6 |
+| Bench | Kaelon Black | SF | Active | 5.4 |
+| Bench | Kaleb Johnson | GB | Active | 7.2 |
+| Bench | Josh Jacobs | GB | Active | N/A |
+| IR | Alec Pierce | IND | Injured | N/A |
 
 ---
 
 ## Matchup 4
 
-### It's MillerTime (Colin Miller)
+### America's Team (Eric Stevens)
 
 **Away Team Starting Lineup:**
 
 | Position | Player | Pro Team | Status | Projected Points |
 |----------|--------|----------|--------|------------------|
-| QB | Trevor Lawrence | JAX | Active | 17.4 |
-| RB | Travis Etienne Jr. | NO | Active | 11.9 |
-| RB | Jonathan Taylor | IND | Active | 20.6 |
-| WR | Rashee Rice | KC | Active | 12.7 |
-| WR | Christian Watson | GB | Active | 14.0 |
-| TE | Jake Ferguson | DAL | Active | 8.7 |
-| FLEX | Ladd McConkey | LAC | Active | 13.6 |
-| D/ST | Patriots D/ST | NE | Active | 5.2 |
-| K | Brandon Aubrey | DAL | Active | 9.6 |
-| Bench | Alec Pierce | IND | Active | N/A |
-| Bench | Rico Dowdle | PIT | Active | 10.4 |
-| Bench | Quentin Johnston | LAC | Active | 10.9 |
-| Bench | Kyle Monangai | CHI | Active | 8.4 |
-| Bench | Tucker Kraft | GB | Active | 10.3 |
-| Bench | Kaelon Black | SF | Active | 7.4 |
+| QB | Bryce Young | CAR | Active | 20.1 |
+| RB | Chuba Hubbard | CAR | Active | 16.3 |
+| RB | Omarion Hampton | LAC | Active | 10.9 |
+| WR | Amon-Ra St. Brown | DET | Active | 20.1 |
+| WR | Parker Washington | JAX | Active | 15.3 |
+| TE | Sam LaPorta | DET | Active | 11.2 |
+| FLEX | Malik Nabers | NYG | Active | 13.6 |
+| D/ST | Eagles D/ST | PHI | Active | 4.3 |
+| K | Jake Bates | DET | Active | 8.5 |
+| Bench | George Kittle | SF | Active | 13.7 |
+| Bench | Luther Burden III | CHI | Active | 11.8 |
+| Bench | Rachaad White | WSH | Active | 8.3 |
+| Bench | Kyler Murray | MIN | Active | 19.3 |
+| Bench | Jadarian Price | SEA | Active | 10.0 |
+| Bench | Marvin Harrison Jr. | ARI | Active | 6.4 |
+| IR | Caleb Williams | CHI | Injured | N/A |
+| IR | Tank Dell | HOU | Injured | N/A |
 
-### Majestic mountain men (Matthew Stevens)
+### Embrace the Darkness (Jordan Cunningham)
 
 **Home Team Starting Lineup:**
 
 | Position | Player | Pro Team | Status | Projected Points |
 |----------|--------|----------|--------|------------------|
-| QB | Lamar Jackson | BAL | Active | 21.0 |
-| RB | Cam Skattebo | NYG | Active | 14.9 |
-| RB | Bijan Robinson | ATL | Active | 19.5 |
-| WR | George Pickens | DAL | Active | 13.8 |
-| WR | Garrett Wilson | NYJ | Active | 14.8 |
-| TE | Isaiah Likely | NYG | Active | 11.6 |
-| FLEX | Jacory Croskey-Merritt | WSH | Active | 8.8 |
-| D/ST | Buccaneers D/ST | TB | Active | 5.6 |
-| K | Chris Boswell | PIT | Active | 8.3 |
-| Bench | Jordan Addison | MIN | Active | 10.6 |
-| Bench | Brian Thomas Jr. | JAX | Active | 10.7 |
-| Bench | Tyler Allgeier | ARI | Active | 7.5 |
-| Bench | Jalen McMillan | TB | Active | 5.8 |
-| Bench | Tyler Shough | NO | Active | 18.8 |
-| Bench | Kalif Raymond | CHI | Active | 7.4 |
-| IR | Zach Charbonnet | SEA | Injured | N/A |
+| QB | Dak Prescott | DAL | Active | 17.2 |
+| RB | Kyren Williams | LAR | Active | 12.9 |
+| RB | David Montgomery | HOU | Active | 13.5 |
+| WR | CeeDee Lamb | DAL | Active | 16.9 |
+| WR | Jaylen Waddle | DEN | Active | 11.9 |
+| TE | Brock Bowers | LV | Active | 15.9 |
+| FLEX | Tetairoa McMillan | CAR | Active | 14.9 |
+| D/ST | 49ers D/ST | SF | Active | 5.8 |
+| K | Harrison Butker | KC | Active | 8.6 |
+| Bench | Justin Herbert | LAC | Active | 12.6 |
+| Bench | Xavier Worthy | KC | Active | 9.8 |
+| Bench | Alvin Kamara | NO | Active | 10.6 |
+| Bench | Chris Godwin Jr. | TB | Active | 6.5 |
+| Bench | Brian Robinson Jr. | ATL | Active | 6.1 |
+| Bench | Courtland Sutton | DEN | Active | 10.6 |
+| IR | Jordyn Tyson | NO | Injured | N/A |
 
 ---
 
 ## Matchup 5
 
-### Embrace the Darkness (Jordan Cunningham)
+### Majestic mountain men (Matthew Stevens)
 
 **Away Team Starting Lineup:**
 
 | Position | Player | Pro Team | Status | Projected Points |
 |----------|--------|----------|--------|------------------|
-| QB | Dak Prescott | DAL | Active | 17.1 |
-| RB | Kyren Williams | LAR | Active | 12.8 |
-| RB | David Montgomery | HOU | Active | 11.9 |
-| WR | CeeDee Lamb | DAL | Active | 17.3 |
-| WR | Jaylen Waddle | DEN | Active | 13.4 |
-| TE | Brock Bowers | LV | Injured | 14.2 |
-| FLEX | Tetairoa McMillan | CAR | Active | 14.3 |
-| D/ST | 49ers D/ST | SF | Active | 7.2 |
-| K | Harrison Butker | KC | Active | 8.9 |
-| Bench | Justin Herbert | LAC | Active | 17.3 |
-| Bench | Xavier Worthy | KC | Active | 11.4 |
-| Bench | Alvin Kamara | NO | Active | 9.6 |
-| Bench | Chris Godwin Jr. | TB | Active | 8.8 |
-| Bench | Brian Robinson Jr. | ATL | Active | 5.7 |
-| Bench | Courtland Sutton | DEN | Active | 11.2 |
-| IR | Jordyn Tyson | NO | Injured | N/A |
+| QB | Lamar Jackson | BAL | Active | 21.1 |
+| RB | Bijan Robinson | ATL | Active | 21.5 |
+| RB | Cam Skattebo | NYG | Active | 16.3 |
+| WR | George Pickens | DAL | Active | 13.7 |
+| WR | Garrett Wilson | NYJ | Active | 15.5 |
+| TE | Isaiah Likely | NYG | Active | 11.7 |
+| FLEX | Dalton Schultz | HOU | Active | 9.0 |
+| D/ST | Panthers D/ST | CAR | Active | 2.6 |
+| K | Chris Boswell | PIT | Active | 7.9 |
+| Bench | Jacory Croskey-Merritt | WSH | Active | 9.2 |
+| Bench | Tyler Shough | NO | Active | 18.9 |
+| Bench | Kalif Raymond | CHI | Active | 7.6 |
+| Bench | Jordan Addison | MIN | Active | 11.5 |
+| Bench | Brian Thomas Jr. | JAX | Active | 8.2 |
+| Bench | Tank Bigsby | PHI | Active | 3.0 |
+| IR | Zach Charbonnet | SEA | Injured | N/A |
 
-### Jensen Huang and Sons (Tarek Kaakani)
+### #1 GangGreen (Paul Konecny)
 
 **Home Team Starting Lineup:**
 
 | Position | Player | Pro Team | Status | Projected Points |
 |----------|--------|----------|--------|------------------|
-| QB | Baker Mayfield | TB | Active | 15.6 |
-| RB | Bhayshul Tuten | JAX | Active | 11.0 |
-| RB | Jonathon Brooks | CAR | Active | 7.2 |
-| WR | Justin Jefferson | MIN | Active | 18.3 |
-| WR | Ja'Marr Chase | CIN | Active | 19.0 |
-| TE | Harold Fannin Jr. | CLE | Active | 9.8 |
-| FLEX | Jalen Coker | CAR | Active | 13.9 |
-| D/ST | Chiefs D/ST | KC | Active | 6.5 |
-| K | Will Reichard | MIN | Active | 8.1 |
-| Bench | J.K. Dobbins | DEN | Active | 11.3 |
-| Bench | Blake Corum | LAR | Active | 8.1 |
-| Bench | Makai Lemon | PHI | Active | 7.3 |
-| Bench | Wan'Dale Robinson | TEN | Active | 7.8 |
-| Bench | RJ Harvey | DEN | Injured | 9.8 |
-| Bench | Josh Downs | IND | Active | 11.5 |
+| QB | Jordan Love | GB | Active | 15.0 |
+| RB | James Cook III | BUF | Active | 17.5 |
+| RB | Chase Brown | CIN | Active | 16.2 |
+| WR | DeVonta Smith | PHI | Active | 15.1 |
+| WR | Matthew Golden | GB | Active | 12.9 |
+| TE | Trey McBride | ARI | Active | 17.4 |
+| FLEX | Deebo Samuel Sr. | SF | Active | 10.7 |
+| D/ST | Bengals D/ST | CIN | Active | 4.4 |
+| K | Ka'imi Fairbairn | HOU | Active | 9.7 |
+| Bench | Michael Wilson | ARI | Active | 13.4 |
+| Bench | Hunter Henry | NE | Active | 8.9 |
+| Bench | Jaylen Warren | PIT | Active | 14.1 |
+| Bench | Justice Hill | BAL | Active | 5.4 |
+| Bench | Denzel Boston | CLE | Active | 10.6 |
+| Bench | Bo Nix | DEN | Active | 15.3 |
 
 ---
 
 ## Matchup 6
 
-### #1 GangGreen (Paul Konecny)
+### Jensen Huang and Sons (Tarek Kaakani)
 
 **Away Team Starting Lineup:**
 
 | Position | Player | Pro Team | Status | Projected Points |
 |----------|--------|----------|--------|------------------|
-| QB | Bo Nix | DEN | Active | 17.2 |
-| RB | Chase Brown | CIN | Active | 16.6 |
-| RB | James Cook III | BUF | Active | 17.0 |
-| WR | DeVonta Smith | PHI | Active | 15.6 |
-| WR | Matthew Golden | GB | Active | 11.4 |
-| TE | Trey McBride | ARI | Active | 16.5 |
-| FLEX | Deebo Samuel Sr. | SF | Active | 12.3 |
-| D/ST | Broncos D/ST | DEN | Active | 3.8 |
-| K | Ka'imi Fairbairn | HOU | Active | 9.1 |
-| Bench | Michael Wilson | ARI | Active | 11.3 |
-| Bench | Jaylen Warren | PIT | Active | 13.3 |
-| Bench | Hunter Henry | NE | Active | 10.6 |
-| Bench | Jordan Love | GB | Active | 17.3 |
-| Bench | Justice Hill | BAL | Active | 6.6 |
-| Bench | Denzel Boston | CLE | Active | 11.3 |
+| QB | Baker Mayfield | TB | Injured | N/A |
+| RB | Bhayshul Tuten | JAX | Active | 12.6 |
+| RB | J.K. Dobbins | DEN | Active | 10.1 |
+| WR | Justin Jefferson | MIN | Active | 18.6 |
+| WR | Ja'Marr Chase | CIN | Active | 20.5 |
+| TE | Harold Fannin Jr. | CLE | Active | 11.2 |
+| FLEX | Josh Downs | IND | Active | 13.7 |
+| D/ST | Chiefs D/ST | KC | Active | 6.6 |
+| K | Will Reichard | MIN | Active | 9.0 |
+| Bench | RJ Harvey | DEN | Active | 10.2 |
+| Bench | Wan'Dale Robinson | TEN | Active | 9.2 |
+| Bench | Jalen Coker | CAR | Active | 13.8 |
+| Bench | Blake Corum | LAR | Active | 8.1 |
+| Bench | Makai Lemon | PHI | Active | 7.0 |
+| Bench | Malik Washington | MIA | Active | 10.0 |
+| IR | Jonathon Brooks | CAR | Injured | N/A |
 
 ### Boeing's Hitmen  (Bradford Evans)
 
@@ -287,21 +291,21 @@
 
 | Position | Player | Pro Team | Status | Projected Points |
 |----------|--------|----------|--------|------------------|
-| QB | Jaxson Dart | NYG | Active | 20.4 |
-| RB | Bucky Irving | TB | Active | 15.8 |
-| RB | D'Andre Swift | CHI | Active | 12.7 |
-| WR | Puka Nacua | LAR | Injured | 20.0 |
-| WR | Carnell Tate | TEN | Active | 11.6 |
-| TE | Colston Loveland | CHI | Active | 9.9 |
-| FLEX | De'Von Achane | MIA | Active | 19.4 |
-| D/ST | Steelers D/ST | PIT | Active | 6.5 |
-| K | Eddy Pineiro | SF | Active | 9.7 |
-| Bench | Stefon Diggs | WSH | Active | 10.8 |
-| Bench | Patrick Mahomes | KC | Active | 19.6 |
-| Bench | Jakobi Meyers | JAX | Active | 9.3 |
-| Bench | Khalil Shakir | BUF | Active | 10.3 |
-| Bench | Woody Marks | HOU | Active | 8.6 |
-| Bench | Brenton Strange | JAX | Active | 7.9 |
+| QB | Patrick Mahomes | KC | Active | 18.6 |
+| RB | Bucky Irving | TB | Active | 16.7 |
+| RB | D'Andre Swift | CHI | Active | 13.7 |
+| WR | Carnell Tate | TEN | Active | 11.9 |
+| WR | Stefon Diggs | WSH | Active | 11.6 |
+| TE | Colston Loveland | CHI | Active | 10.0 |
+| FLEX | De'Von Achane | MIA | Injured | N/A |
+| D/ST | Steelers D/ST | PIT | Active | 8.1 |
+| K | Eddy Pineiro | SF | Active | 9.1 |
+| Bench | Puka Nacua | LAR | Injured | 20.4 |
+| Bench | Jakobi Meyers | JAX | Active | 10.8 |
+| Bench | Khalil Shakir | BUF | Active | 9.8 |
+| Bench | Woody Marks | HOU | Active | 8.3 |
+| Bench | Brenton Strange | JAX | Active | 8.0 |
+| Bench | KC Concepcion | CLE | Active | 9.5 |
 
 ---
 
