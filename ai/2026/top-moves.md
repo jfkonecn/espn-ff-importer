@@ -4,48 +4,48 @@
 
 | Rank | Player | Position | Team | % Change | % Owned |
 |------|--------|----------|------|----------|----------|
-| 1 | Tyreek Hill | WR | FA | 0.7% | 6.8% |
-| 2 | Ollie Gordon II | RB | MIA | 0.4% | 1.4% |
-| 3 | Braelon Allen | RB | NYJ | 0.2% | 14.2% |
-| 4 | Austin Ekeler | RB | FA | 0.2% | 0.4% |
-| 5 | Vikings D/ST | D/ST | MIN | 0.2% | 47.3% |
-| 6 | Kenyon Sadiq | WR | NYJ | 0.1% | 33.6% |
-| 7 | Case Keenum | RB | CAR | 0.1% | 0.7% |
-| 8 | Spencer Shrader | TE | IND | 0.1% | 6.5% |
-| 9 | Juwan Johnson | WR | NO | 0.1% | 55.3% |
-| 10 | Kalif Raymond | WR | CAR | 0.1% | 10.2% |
-| 11 | Jaylen Wright | RB | MIA | 0.1% | 1.7% |
-| 12 | Keenan Allen | WR | IND | 0.0% | 23.8% |
-| 13 | Zach Ertz | WR | PHI | 0.0% | 2.7% |
-| 14 | Johnny Mundt | WR | PHI | 0.0% | 0.2% |
-| 15 | Bills D/ST | D/ST | BUF | 0.0% | 8.4% |
-| 16 | Bears D/ST | D/ST | CAR | 0.0% | 7.7% |
-| 17 | Raiders D/ST | D/ST | LV | 0.0% | 4.8% |
-| 18 | Marcus Mariota | RB | ARI | 0.0% | 3.3% |
-| 19 | Sam Darnold | RB | LAC | 0.0% | 34.0% |
-| 20 | Kendre Miller | RB | NO | 0.0% | 0.9% |
+| 1 | Joe Mixon | RB | FA | 6.5% | 9.4% |
+| 2 | Tyreek Hill | WR | FA | 2.1% | 29.2% |
+| 3 | Will Shipley | RB | PHI | 0.1% | 0.7% |
+| 4 | Keon Coleman | WR | BUF | 0.1% | 4.2% |
+| 5 | Will Reichard | TE | MIN | 0.1% | 40.4% |
+| 6 | Spencer Shrader | TE | IND | 0.1% | 30.7% |
+| 7 | Roman Wilson | WR | SEA | 0.0% | 3.7% |
+| 8 | Dohnte Meyers | WR | CHI | 0.0% | 0.3% |
+| 9 | Bengals D/ST | D/ST | CHI | 0.0% | 17.5% |
+| 10 | Austin Hooper | WR | ATL | 0.0% | 0.1% |
+| 11 | Kirk Cousins | RB | LV | 0.0% | 16.9% |
+| 12 | Matt Gay | TE | LV | 0.0% | 2.0% |
+| 13 | Cowboys D/ST | D/ST | DAL | 0.0% | 6.4% |
+| 14 | Commanders D/ST | D/ST | ARI | 0.0% | 4.2% |
+| 15 | Jaguars D/ST | D/ST | HOU | 0.0% | 28.4% |
+| 16 | Darius Cooper | WR | PHI | 0.0% | 0.2% |
+| 17 | Emanuel Wilson | RB | LAC | 0.0% | 50.1% |
+| 18 | Jaheim Bell | WR | FA | 0.0% | 0.0% |
+| 19 | Marcedes Lewis | WR | FA | 0.0% | 0.0% |
+| 20 | Quez Watkins | WR | FA | 0.0% | 0.0% |
 
 ## Most Dropped Players
 
 | Rank | Player | Position | Team | % Change | % Owned |
 |------|--------|----------|------|----------|----------|
-| 1 | De'Von Achane | RB | MIA | -5.4% | 94.4% |
-| 2 | Panthers D/ST | D/ST | JAX | -0.9% | 50.0% |
-| 3 | Terrance Ferguson | WR | LAR | -0.7% | 34.4% |
-| 4 | Drake Maye | RB | NE | -0.6% | 98.0% |
-| 5 | Bengals D/ST | D/ST | CHI | -0.5% | 36.6% |
-| 6 | Baker Mayfield | RB | SF | -0.5% | 48.9% |
-| 7 | Jaxson Dart | RB | NYG | -0.5% | 44.4% |
-| 8 | Eagles D/ST | D/ST | PHI | -0.5% | 87.0% |
-| 9 | 49ers D/ST | D/ST | TB | -0.5% | 75.0% |
-| 10 | Oronde Gadsden | WR | BAL | -0.5% | 15.3% |
-| 11 | MarShawn Lloyd | RB | GB | -0.4% | 67.4% |
-| 12 | Rashod Bateman | WR | BAL | -0.4% | 34.4% |
-| 13 | Jonah Coleman | RB | DEN | -0.4% | 32.6% |
-| 14 | Kyle Pitts Sr. | WR | ATL | -0.3% | 88.0% |
-| 15 | Emanuel Wilson | RB | LAC | -0.3% | 34.2% |
-| 16 | Dalton Schultz | WR | HOU | -0.3% | 67.2% |
-| 17 | Trey Smack | TE | GB | -0.3% | 29.5% |
-| 18 | Jonathon Brooks | RB | JAX | -0.3% | 57.0% |
-| 19 | Justin Herbert | RB | BAL | -0.3% | 84.0% |
-| 20 | Tank Bigsby | RB | PHI | -0.3% | 22.7% |
+| 1 | Devaughn Vele | WR | NO | -1.1% | 64.8% |
+| 2 | Kendre Miller | RB | NO | -0.8% | 16.6% |
+| 3 | Marcus Mariota | RB | ARI | -0.8% | 20.0% |
+| 4 | Alvin Kamara | RB | NO | -0.7% | 64.7% |
+| 5 | Kyle Pitts Sr. | WR | ATL | -0.7% | 77.0% |
+| 6 | Bills D/ST | D/ST | BUF | -0.6% | 46.9% |
+| 7 | Travis Etienne Jr. | RB | NO | -0.5% | 89.8% |
+| 8 | Chiefs D/ST | D/ST | KC | -0.5% | 63.1% |
+| 9 | Darren Waller | WR | JAX | -0.4% | 34.8% |
+| 10 | Brian Robinson Jr. | RB | ATL | -0.4% | 26.9% |
+| 11 | Braelon Allen | RB | NYJ | -0.3% | 75.6% |
+| 12 | Jordyn Tyson | WR | NO | -0.3% | 34.0% |
+| 13 | Jadarian Price | RB | LAC | -0.3% | 82.8% |
+| 14 | Dalton Schultz | WR | HOU | -0.3% | 57.4% |
+| 15 | Juwan Johnson | WR | NO | -0.3% | 75.3% |
+| 16 | Kalif Raymond | WR | CAR | -0.3% | 51.1% |
+| 17 | Packers D/ST | D/ST | GB | -0.3% | 29.8% |
+| 18 | Kenyon Sadiq | WR | NYJ | -0.3% | 58.0% |
+| 19 | Harrison Butker | TE | KC | -0.3% | 80.0% |
+| 20 | Jaylen Wright | RB | MIA | -0.3% | 25.5% |

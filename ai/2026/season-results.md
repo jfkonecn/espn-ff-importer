@@ -50,3 +50,19 @@
 
 ---
 
+## Week 4
+
+**Latin Fury** 118.38 - **Caleb's Cats** 152.92 *(Winner: Caleb's Cats)*
+
+**Love Handles** 103.08 - **The Injured Preserve** 133.22 *(Winner: The Injured Preserve)*
+
+**Advanced Metrics** 94.32 - **It's MillerTime** 98.98 *(Winner: It's MillerTime)*
+
+**America's Team** 140.36 - **Embrace the Darkness** 191.70 *(Winner: Embrace the Darkness)*
+
+**Majestic mountain men** 103.08 - **#1 GangGreen** 120.78 *(Winner: #1 GangGreen)*
+
+**Jensen Huang and Sons** 77.64 - **Boeing's Hitmen ** 109.90 *(Winner: Boeing's Hitmen )*
+
+---
+

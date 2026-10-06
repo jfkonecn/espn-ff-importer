@@ -2,19 +2,19 @@
 
 **League:** The League
 **Season:** 2026
-**Current Week:** 4
+**Current Week:** 5
 
 | Rank | Team Name | Owner | Points | Record (W-L-T) | Points For | Points Against |
 |------|-----------|-------|--------|----------------|------------|----------------|
-| 1 | The Injured Preserve | Conner Graeff | 453.98 | 3-0-0 | 453.98 | 283.36 |
-| 2 | Latin Fury | Benito Molina | 377.70 | 1-2-0 | 377.70 | 362.86 |
-| 3 | Majestic mountain men | Matthew Stevens | 370.00 | 2-1-0 | 370.00 | 352.48 |
-| 4 | Embrace the Darkness | Jordan Cunningham | 365.76 | 1-2-0 | 365.76 | 358.50 |
-| 5 | Advanced Metrics | John Konecny | 361.24 | 2-1-0 | 361.24 | 356.98 |
-| 6 | #1 GangGreen | Paul Konecny | 344.24 | 1-2-0 | 344.24 | 383.06 |
-| 7 | It's MillerTime | Colin Miller | 341.14 | 2-1-0 | 341.14 | 300.90 |
-| 8 | America's Team | Eric Stevens | 333.72 | 2-1-0 | 333.72 | 387.82 |
-| 9 | Love Handles | Justin Willer | 331.40 | 1-2-0 | 331.40 | 331.62 |
-| 10 | Jensen Huang and Sons | Tarek Kaakani | 321.70 | 1-2-0 | 321.70 | 374.44 |
-| 11 | Caleb's Cats | michael machas | 312.80 | 1-2-0 | 312.80 | 327.40 |
-| 12 | Boeing's Hitmen  | Bradford Evans | 272.54 | 1-2-0 | 272.54 | 366.80 |
+| 1 | The Injured Preserve | Conner Graeff | 587.20 | 4-0-0 | 587.20 | 386.44 |
+| 2 | Embrace the Darkness | Jordan Cunningham | 557.46 | 2-2-0 | 557.46 | 498.86 |
+| 3 | Latin Fury | Benito Molina | 496.08 | 1-3-0 | 496.08 | 515.78 |
+| 4 | America's Team | Eric Stevens | 474.08 | 2-2-0 | 474.08 | 579.52 |
+| 5 | Majestic mountain men | Matthew Stevens | 473.08 | 2-2-0 | 473.08 | 473.26 |
+| 6 | Caleb's Cats | michael machas | 465.72 | 2-2-0 | 465.72 | 445.78 |
+| 7 | #1 GangGreen | Paul Konecny | 465.02 | 2-2-0 | 465.02 | 486.14 |
+| 8 | Advanced Metrics | John Konecny | 455.56 | 2-2-0 | 455.56 | 455.96 |
+| 9 | It's MillerTime | Colin Miller | 440.12 | 3-1-0 | 440.12 | 395.22 |
+| 10 | Love Handles | Justin Willer | 434.48 | 1-3-0 | 434.48 | 464.84 |
+| 11 | Jensen Huang and Sons | Tarek Kaakani | 399.34 | 1-3-0 | 399.34 | 484.34 |
+| 12 | Boeing's Hitmen  | Bradford Evans | 382.44 | 2-2-0 | 382.44 | 444.44 |
