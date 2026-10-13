@@ -6,7 +6,7 @@
     <description>The League&#39;s Official AI Slop Podcast</description>
     <language>en-us</language>
     <copyright>Slop Take</copyright>
-    <lastBuildDate>Tue, 06 Oct 2026 14:24:27 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 13 Oct 2026 08:50:09 +0000</lastBuildDate>
     <atom:link href="https://jfkonecn.github.io/espn-ff-importer/podcasts.xml" rel="self" type="application/rss+xml" />
     <itunes:author>Eric&#39;s Beard</itunes:author>
     <itunes:summary>The League&#39;s Official AI Slop Podcast</itunes:summary>
@@ -16,6 +16,19 @@
     <itunes:category text="Sports">
       <itunes:category text="Fantasy Sports" />
     </itunes:category>
+    
+    <item>
+      <title>Slop Take: Week 5 Breakdown and Week 6 Preview</title>
+      <description>In this week&#39;s episode of Slop Take, we dive into the latest developments in &#39;The League&#39; as we approach Week 6. We analyze standout performances, dissect underwhelming outings, and provide strategic insights to help you navigate the fantasy football landscape. Plus, we draw parallels between the pressures of fantasy management and the high-stakes world of professional sports.</description>
+      <itunes:summary>In this week&#39;s episode of Slop Take, we dive into the latest developments in &#39;The League&#39; as we approach Week 6. We analyze standout performances, dissect underwhelming outings, and provide strategic insights to help you navigate the fantasy football landscape. Plus, we draw parallels between the pressures of fantasy management and the high-stakes world of professional sports.</itunes:summary>
+      <pubDate>Tue, 13 Oct 2026 00:00:00 +0000</pubDate>
+      <guid isPermaLink="false">https://jfkonecn.github.io/espn-ff-importer/assets/podcasts/2026_Week5.mp3</guid>
+      <enclosure url="https://jfkonecn.github.io/espn-ff-importer/assets/podcasts/2026_Week5.mp3" length="17017252" type="audio/mpeg" />
+      <podcast:chapters url="https://jfkonecn.github.io/espn-ff-importer/assets/podcasts/2026_Week5.chapters.json" type="application/json" />
+      <itunes:duration>00:17:44</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
     
     <item>
       <title>Slop Take: Week 4 Recap and Week 5 Preview</title>
