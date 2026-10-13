@@ -53,7 +53,7 @@
 | 46 | Advanced Metrics | John Konecny | Josh Jacobs | RB | GB | $32 | No |
 | 47 | The Injured Preserve | Conner Graeff | Harrison Mevis | K | LAR | $1 | No |
 | 48 | Boeing's Hitmen  | Bradford Evans | Steelers D/ST | D/ST | PIT | $3 | No |
-| 49 | America's Team | Eric Stevens | Marvin Harrison Jr. | WR | ARI | $12 | No |
+| 49 | America's Team | Eric Stevens | Marvin Harrison Jr. | WR | HOU | $12 | No |
 | 50 | Advanced Metrics | John Konecny | Seahawks D/ST | D/ST | SEA | $3 | No |
 | 51 | Love Handles | Justin Willer | Kenneth Walker III | RB | KC | $44 | No |
 | 52 | Embrace the Darkness | Jordan Cunningham | Tetairoa McMillan | WR | CAR | $27 | No |

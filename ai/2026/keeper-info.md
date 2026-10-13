@@ -57,7 +57,7 @@
 |--------|----------|----------|---------------|-------------|------------|----------|
 | Omarion Hampton | RB | LAC | 31 | 36 | 0 | Yes |
 | Amon-Ra St. Brown | WR | DET | 61 | 66 | 0 | Yes |
-| Marvin Harrison Jr. | WR | ARI | 12 | 17 | 0 | Yes |
+| Marvin Harrison Jr. | WR | HOU | 12 | 17 | 0 | Yes |
 | Malik Nabers | FLEX | NYG | 33 | 38 | 0 | Yes |
 | Eagles D/ST | D/ST | PHI | 2 | 7 | 0 | Yes |
 | Jadarian Price | RB | SEA | 22 | 27 | 0 | Yes |

@@ -2,19 +2,19 @@
 
 **League:** The League
 **Season:** 2026
-**Current Week:** 5
+**Current Week:** 6
 
 | Rank | Team Name | Owner | Points | Record (W-L-T) | Points For | Points Against |
 |------|-----------|-------|--------|----------------|------------|----------------|
-| 1 | The Injured Preserve | Conner Graeff | 587.20 | 4-0-0 | 587.20 | 386.44 |
-| 2 | Embrace the Darkness | Jordan Cunningham | 557.46 | 2-2-0 | 557.46 | 498.86 |
-| 3 | Latin Fury | Benito Molina | 496.08 | 1-3-0 | 496.08 | 515.78 |
-| 4 | America's Team | Eric Stevens | 474.08 | 2-2-0 | 474.08 | 579.52 |
-| 5 | Majestic mountain men | Matthew Stevens | 473.08 | 2-2-0 | 473.08 | 473.26 |
-| 6 | Caleb's Cats | michael machas | 465.72 | 2-2-0 | 465.72 | 445.78 |
-| 7 | #1 GangGreen | Paul Konecny | 465.02 | 2-2-0 | 465.02 | 486.14 |
-| 8 | Advanced Metrics | John Konecny | 455.56 | 2-2-0 | 455.56 | 455.96 |
-| 9 | It's MillerTime | Colin Miller | 440.12 | 3-1-0 | 440.12 | 395.22 |
-| 10 | Love Handles | Justin Willer | 434.48 | 1-3-0 | 434.48 | 464.84 |
-| 11 | Jensen Huang and Sons | Tarek Kaakani | 399.34 | 1-3-0 | 399.34 | 484.34 |
-| 12 | Boeing's Hitmen  | Bradford Evans | 382.44 | 2-2-0 | 382.44 | 444.44 |
+| 1 | The Injured Preserve | Conner Graeff | 709.36 | 4-1-0 | 709.36 | 545.70 |
+| 2 | Embrace the Darkness | Jordan Cunningham | 660.30 | 2-3-0 | 660.30 | 610.90 |
+| 3 | Latin Fury | Benito Molina | 632.14 | 2-3-0 | 632.14 | 617.22 |
+| 4 | #1 GangGreen | Paul Konecny | 625.06 | 3-2-0 | 625.06 | 595.14 |
+| 5 | Caleb's Cats | michael machas | 624.98 | 3-2-0 | 624.98 | 567.94 |
+| 6 | Majestic mountain men | Matthew Stevens | 616.82 | 3-2-0 | 616.82 | 566.56 |
+| 7 | America's Team | Eric Stevens | 576.78 | 2-3-0 | 576.78 | 703.80 |
+| 8 | Advanced Metrics | John Konecny | 564.56 | 2-3-0 | 564.56 | 616.00 |
+| 9 | Love Handles | Justin Willer | 546.52 | 2-3-0 | 546.52 | 567.68 |
+| 10 | It's MillerTime | Colin Miller | 541.56 | 3-2-0 | 541.56 | 531.28 |
+| 11 | Boeing's Hitmen  | Bradford Evans | 506.72 | 3-2-0 | 506.72 | 547.14 |
+| 12 | Jensen Huang and Sons | Tarek Kaakani | 492.64 | 1-4-0 | 492.64 | 628.08 |

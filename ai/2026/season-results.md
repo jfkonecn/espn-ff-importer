@@ -66,3 +66,19 @@
 
 ---
 
+## Week 5
+
+**Caleb's Cats** 159.26 - **The Injured Preserve** 122.16 *(Winner: Caleb's Cats)*
+
+**It's MillerTime** 101.44 - **Latin Fury** 136.06 *(Winner: Latin Fury)*
+
+**Embrace the Darkness** 102.84 - **Love Handles** 112.04 *(Winner: Love Handles)*
+
+**#1 GangGreen** 160.04 - **Advanced Metrics** 109.00 *(Winner: #1 GangGreen)*
+
+**Boeing's Hitmen ** 124.28 - **America's Team** 102.70 *(Winner: Boeing's Hitmen )*
+
+**Jensen Huang and Sons** 93.30 - **Majestic mountain men** 143.74 *(Winner: Majestic mountain men)*
+
+---
+

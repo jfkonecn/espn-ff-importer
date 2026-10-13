@@ -4,48 +4,48 @@
 
 | Rank | Player | Position | Team | % Change | % Owned |
 |------|--------|----------|------|----------|----------|
-| 1 | Joe Mixon | RB | FA | 6.5% | 9.5% |
-| 2 | Tyreek Hill | WR | FA | 1.8% | 29.2% |
-| 3 | Will Shipley | RB | PHI | 0.1% | 0.7% |
-| 4 | Keon Coleman | WR | BUF | 0.1% | 4.3% |
-| 5 | Will Reichard | TE | MIN | 0.1% | 40.5% |
-| 6 | Roman Wilson | WR | SEA | 0.1% | 3.7% |
-| 7 | Bengals D/ST | D/ST | CHI | 0.1% | 17.5% |
-| 8 | Spencer Shrader | TE | IND | 0.1% | 30.7% |
-| 9 | Emanuel Wilson | RB | LAC | 0.1% | 50.1% |
-| 10 | Dohnte Meyers | WR | CHI | 0.1% | 0.3% |
-| 11 | Kirk Cousins | RB | LV | 0.1% | 16.9% |
-| 12 | Cowboys D/ST | D/ST | DAL | 0.0% | 6.5% |
-| 13 | Jaguars D/ST | D/ST | HOU | 0.0% | 28.4% |
-| 14 | Matt Gay | TE | LV | 0.0% | 2.0% |
-| 15 | Austin Hooper | WR | ATL | 0.0% | 0.1% |
-| 16 | Darius Cooper | WR | PHI | 0.0% | 0.2% |
-| 17 | Commanders D/ST | D/ST | ARI | 0.0% | 4.2% |
-| 18 | Chad Ryland | TE | PIT | 0.0% | 0.5% |
-| 19 | Dominic Zvada | TE | NYG | 0.0% | 2.2% |
-| 20 | Jaheim Bell | WR | FA | 0.0% | 0.0% |
+| 1 | Keon Coleman | WR | BUF | 1.1% | 39.4% |
+| 2 | Skyler Bell | WR | BUF | 0.4% | 0.8% |
+| 3 | Khalil Shakir | WR | BUF | 0.4% | 62.5% |
+| 4 | Konata Mumpfield | WR | LAR | 0.1% | 0.6% |
+| 5 | Colby Parkinson | WR | LAR | 0.1% | 1.2% |
+| 6 | Tyler Bass | TE | BUF | 0.1% | 9.1% |
+| 7 | Tyler Higbee | WR | LAR | 0.1% | 3.2% |
+| 8 | Ty Johnson | RB | BUF | 0.1% | 1.6% |
+| 9 | Jordan Whittington | WR | LAR | 0.0% | 0.2% |
+| 10 | Spencer Shrader | TE | IND | 0.0% | 53.9% |
+| 11 | Dameon Pierce | RB | PHI | 0.0% | 2.4% |
+| 12 | Jets D/ST | D/ST | NYJ | 0.0% | 35.5% |
+| 13 | Greg Dortch | WR | BUF | 0.0% | 0.1% |
+| 14 | Darius Cooper | WR | PHI | 0.0% | 8.9% |
+| 15 | Dominic Zvada | TE | NYG | 0.0% | 4.1% |
+| 16 | Germie Bernard | WR | SEA | 0.0% | 3.0% |
+| 17 | Justin Watson | WR | FA | 0.0% | 0.0% |
+| 18 | Kendrick Bourne | WR | PIT | 0.0% | 1.7% |
+| 19 | Jameis Winston | RB | NYG | 0.0% | 4.0% |
+| 20 | Tutu Atwell | WR | LAR | 0.0% | 0.2% |
 
 ## Most Dropped Players
 
 | Rank | Player | Position | Team | % Change | % Owned |
 |------|--------|----------|------|----------|----------|
-| 1 | Marcus Mariota | RB | ARI | -1.2% | 19.6% |
-| 2 | Devaughn Vele | WR | NO | -1.0% | 64.8% |
-| 3 | Kendre Miller | RB | NO | -0.9% | 16.4% |
-| 4 | Bills D/ST | D/ST | BUF | -0.8% | 46.7% |
-| 5 | Alvin Kamara | RB | NO | -0.7% | 64.7% |
-| 6 | Kyle Pitts Sr. | WR | ATL | -0.7% | 76.9% |
-| 7 | Chiefs D/ST | D/ST | KC | -0.7% | 62.9% |
-| 8 | Darren Waller | WR | JAX | -0.6% | 34.6% |
-| 9 | Braelon Allen | RB | NYJ | -0.6% | 75.4% |
-| 10 | Travis Etienne Jr. | RB | NO | -0.5% | 89.8% |
-| 11 | Kalif Raymond | WR | CAR | -0.5% | 50.9% |
-| 12 | Jaylen Wright | RB | MIA | -0.5% | 25.3% |
-| 13 | Jadarian Price | RB | LAC | -0.5% | 82.6% |
-| 14 | De'Von Achane | RB | MIA | -0.5% | 49.0% |
-| 15 | Packers D/ST | D/ST | GB | -0.4% | 29.6% |
-| 16 | Jayden Reed | WR | GB | -0.4% | 37.2% |
-| 17 | Dalton Schultz | WR | HOU | -0.4% | 57.2% |
-| 18 | Isaiah Davis | RB | NYJ | -0.4% | 8.0% |
-| 19 | George Holani | RB | LAC | -0.4% | 16.2% |
-| 20 | Brian Robinson Jr. | RB | ATL | -0.4% | 26.9% |
+| 1 | DJ Moore | WR | BUF | -0.7% | 92.6% |
+| 2 | Harrison Butker | TE | KC | -0.3% | 48.5% |
+| 3 | Tyreek Hill | WR | FA | -0.3% | 44.5% |
+| 4 | Will Shipley | RB | PHI | -0.3% | 43.5% |
+| 5 | Cowboys D/ST | D/ST | DAL | -0.3% | 47.6% |
+| 6 | Xavier Worthy | WR | KC | -0.3% | 67.6% |
+| 7 | Tyler Shough | RB | NO | -0.2% | 83.7% |
+| 8 | T.J. Hockenson | WR | MIN | -0.2% | 70.4% |
+| 9 | Jalen Coker | WR | JAX | -0.2% | 83.4% |
+| 10 | Travis Kelce | WR | KC | -0.2% | 93.6% |
+| 11 | Bryce Young | RB | JAX | -0.2% | 81.8% |
+| 12 | Kenyon Sadiq | WR | NYJ | -0.2% | 49.7% |
+| 13 | Darren Waller | WR | JAX | -0.2% | 20.6% |
+| 14 | Dalton Kincaid | WR | BUF | -0.2% | 87.2% |
+| 15 | CeeDee Lamb | WR | DAL | -0.2% | 99.8% |
+| 16 | Deebo Samuel Sr. | WR | TB | -0.2% | 85.7% |
+| 17 | Joe Mixon | RB | FA | -0.2% | 6.0% |
+| 18 | Harold Fannin Jr. | WR | CIN | -0.2% | 92.9% |
+| 19 | Jonathon Brooks | RB | JAX | -0.2% | 43.3% |
+| 20 | Sam Darnold | RB | LAC | -0.2% | 48.3% |
