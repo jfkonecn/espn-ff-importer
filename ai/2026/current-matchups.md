@@ -120,18 +120,18 @@
 | RB | D'Andre Swift | CHI | Active | 14.9 |
 | WR | Carnell Tate | TEN | Active | 11.1 |
 | WR | Puka Nacua | LAR | Active | 24.8 |
-| TE | Brenton Strange | JAX | Active | N/A |
-| FLEX | Stefon Diggs | WSH | Active | N/A |
+| TE | Colston Loveland | CHI | Active | 11.5 |
+| FLEX | Chris Godwin Jr. | TB | Active | 8.7 |
 | D/ST | Steelers D/ST | PIT | Active | 6.4 |
 | K | Eddy Pineiro | SF | Active | 8.3 |
+| Bench | Stefon Diggs | WSH | Active | N/A |
 | Bench | Jakobi Meyers | JAX | Active | N/A |
 | Bench | Khalil Shakir | BUF | Active | N/A |
-| Bench | Colston Loveland | CHI | Active | 11.5 |
+| Bench | Brenton Strange | JAX | Active | N/A |
 | Bench | Darren Waller | CAR | Active | 5.8 |
 | Bench | Jacoby Brissett | ARI | Active | 14.3 |
-| Bench | Chris Godwin Jr. | TB | Active | 8.7 |
-| IR | De'Von Achane | MIA | Injured | N/A |
 | IR | Tyreek Hill | Unknown | Active | N/A |
+| IR | De'Von Achane | MIA | Injured | N/A |
 
 ### The Injured Preserve (Conner Graeff)
 
