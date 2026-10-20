@@ -51,7 +51,7 @@
 | 44 | Boeing's Hitmen  | Bradford Evans | De'Von Achane | FLEX | MIA | $59 | No |
 | 45 | Embrace the Darkness | Jordan Cunningham | Kyren Williams | RB | LAR | $37 | No |
 | 46 | Advanced Metrics | John Konecny | Josh Jacobs | RB | GB | $32 | No |
-| 47 | The Injured Preserve | Conner Graeff | Harrison Mevis | K | LAR | $1 | No |
+| 47 | The Injured Preserve | Conner Graeff | Harrison Mevis | K | FA | $1 | No |
 | 48 | Boeing's Hitmen  | Bradford Evans | Steelers D/ST | D/ST | PIT | $3 | No |
 | 49 | America's Team | Eric Stevens | Marvin Harrison Jr. | WR | HOU | $12 | No |
 | 50 | Advanced Metrics | John Konecny | Seahawks D/ST | D/ST | SEA | $3 | No |

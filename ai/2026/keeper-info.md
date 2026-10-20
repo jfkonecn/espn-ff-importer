@@ -238,7 +238,7 @@
 | Jaxon Smith-Njigba | WR | SEA | 29 | 34 | 0 | Yes |
 | Ashton Jeanty | RB | LV | 46 | 51 | 0 | Yes |
 | Derrick Henry | RB | BAL | 43 | 48 | 0 | Yes |
-| Harrison Mevis | K | LAR | 1 | 6 | 0 | Yes |
+| Harrison Mevis | K | FA | 1 | 6 | 0 | Yes |
 | Zay Flowers | WR | BAL | 22 | 27 | 0 | Yes |
 | Joe Burrow | QB | CIN | 9 | 14 | 0 | Yes |
 | Ravens D/ST | D/ST | BAL | 1 | 6 | 0 | Yes |

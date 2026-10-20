@@ -1,18 +1,8 @@
-# Week 5 Results
+# Week 6 Results
 
-## Caleb's Cats vs The Injured Preserve
+## It's MillerTime vs Caleb's Cats
 
-**Final Score:** Caleb's Cats 159.26 - The Injured Preserve 122.16
-
-### Key Performances
-
-*This section would show individual player performances*
-
----
-
-## It's MillerTime vs Latin Fury
-
-**Final Score:** It's MillerTime 101.44 - Latin Fury 136.06
+**Final Score:** It's MillerTime 98.94 - Caleb's Cats 95.30
 
 ### Key Performances
 
@@ -20,19 +10,9 @@
 
 ---
 
-## Embrace the Darkness vs Love Handles
+## The Injured Preserve vs Embrace the Darkness
 
-**Final Score:** Embrace the Darkness 102.84 - Love Handles 112.04
-
-### Key Performances
-
-*This section would show individual player performances*
-
----
-
-## #1 GangGreen vs Advanced Metrics
-
-**Final Score:** #1 GangGreen 160.04 - Advanced Metrics 109.00
+**Final Score:** The Injured Preserve 119.26 - Embrace the Darkness 95.82
 
 ### Key Performances
 
@@ -40,9 +20,9 @@
 
 ---
 
-## Boeing's Hitmen  vs America's Team
+## Latin Fury vs #1 GangGreen
 
-**Final Score:** Boeing's Hitmen  124.28 - America's Team 102.70
+**Final Score:** Latin Fury 118.78 - #1 GangGreen 116.74
 
 ### Key Performances
 
@@ -50,9 +30,29 @@
 
 ---
 
-## Jensen Huang and Sons vs Majestic mountain men
+## Love Handles vs Boeing's Hitmen 
 
-**Final Score:** Jensen Huang and Sons 93.30 - Majestic mountain men 143.74
+**Final Score:** Love Handles 120.02 - Boeing's Hitmen  115.18
+
+### Key Performances
+
+*This section would show individual player performances*
+
+---
+
+## Advanced Metrics vs Jensen Huang and Sons
+
+**Final Score:** Advanced Metrics 84.80 - Jensen Huang and Sons 85.28
+
+### Key Performances
+
+*This section would show individual player performances*
+
+---
+
+## America's Team vs Majestic mountain men
+
+**Final Score:** America's Team 127.04 - Majestic mountain men 99.06
 
 ### Key Performances
 

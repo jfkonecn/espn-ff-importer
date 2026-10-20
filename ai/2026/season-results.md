@@ -82,3 +82,19 @@
 
 ---
 
+## Week 6
+
+**It's MillerTime** 98.94 - **Caleb's Cats** 95.30 *(Winner: It's MillerTime)*
+
+**The Injured Preserve** 119.26 - **Embrace the Darkness** 95.82 *(Winner: The Injured Preserve)*
+
+**Latin Fury** 118.78 - **#1 GangGreen** 116.74 *(Winner: Latin Fury)*
+
+**Love Handles** 120.02 - **Boeing's Hitmen ** 115.18 *(Winner: Love Handles)*
+
+**Advanced Metrics** 84.80 - **Jensen Huang and Sons** 85.28 *(Winner: Jensen Huang and Sons)*
+
+**America's Team** 127.04 - **Majestic mountain men** 99.06 *(Winner: America's Team)*
+
+---
+
