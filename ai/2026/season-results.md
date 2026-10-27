@@ -98,3 +98,19 @@
 
 ---
 
+## Week 7
+
+**Caleb's Cats** 134.34 - **Embrace the Darkness** 122.48 *(Winner: Caleb's Cats)*
+
+**#1 GangGreen** 135.76 - **It's MillerTime** 107.12 *(Winner: #1 GangGreen)*
+
+**Boeing's Hitmen ** 129.68 - **The Injured Preserve** 158.42 *(Winner: The Injured Preserve)*
+
+**Jensen Huang and Sons** 85.88 - **Latin Fury** 94.10 *(Winner: Latin Fury)*
+
+**Majestic mountain men** 93.92 - **Love Handles** 69.12 *(Winner: Majestic mountain men)*
+
+**America's Team** 124.82 - **Advanced Metrics** 109.80 *(Winner: America's Team)*
+
+---
+

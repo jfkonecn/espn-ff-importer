@@ -179,7 +179,7 @@
 | 172 | Caleb's Cats | michael machas | Chargers D/ST | D/ST | LAC | $1 | No |
 | 173 | Embrace the Darkness | Jordan Cunningham | KC Concepcion | Bench | CLE | $1 | No |
 | 174 | Majestic mountain men | Matthew Stevens | Jalen McMillan | Bench | TB | $1 | No |
-| 175 | Advanced Metrics | John Konecny | Najee Harris | Bench | NYG | $1 | No |
+| 175 | Advanced Metrics | John Konecny | Najee Harris | Bench | FA | $1 | No |
 | 176 | Love Handles | Justin Willer | Tank Dell | Bench | HOU | $1 | No |
 | 177 | Caleb's Cats | michael machas | Cairo Santos | K | CHI | $1 | No |
 | 178 | Embrace the Darkness | Jordan Cunningham | Daniel Jones | Bench | IND | $1 | No |

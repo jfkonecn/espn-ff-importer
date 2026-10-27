@@ -49,7 +49,7 @@
 | Jonah Coleman | Bench | DEN | 1 | 6 | 0 | Yes |
 | Mike Washington Jr. | Bench | LV | 1 | 6 | 0 | Yes |
 | Keenan Allen | Bench | IND | 1 | 6 | 0 | Yes |
-| Najee Harris | Bench | NYG | 1 | 6 | 0 | Yes |
+| Najee Harris | Bench | FA | 1 | 6 | 0 | Yes |
 
 ### America's Team
 
