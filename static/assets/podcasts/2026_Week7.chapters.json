@@ -1,0 +1,37 @@
+{
+  "version": "1.2.0",
+  "chapters": [
+    {
+      "startTime": 0,
+      "title": "Intro"
+    },
+    {
+      "startTime": 149,
+      "title": "Commercial 1 - FantasyFlex"
+    },
+    {
+      "startTime": 186,
+      "title": "Best Team"
+    },
+    {
+      "startTime": 276,
+      "title": "Worst Team"
+    },
+    {
+      "startTime": 388,
+      "title": "Power Ranking"
+    },
+    {
+      "startTime": 578,
+      "title": "Matchup Preview"
+    },
+    {
+      "startTime": 809,
+      "title": "Commercial 2 - Roster Refresh"
+    },
+    {
+      "startTime": 851,
+      "title": "Final Take"
+    }
+  ]
+}
