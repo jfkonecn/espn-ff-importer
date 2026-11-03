@@ -14,6 +14,16 @@
   },
   "episodes": [
     {
+      "file": "2026_Week8.mp3",
+      "title": "Slop Take: Week 8 Recap and Week 9 Preview",
+      "description": "In this week's episode of Slop Take, we dive into the latest developments in 'The League' as we approach the midpoint of the 2026 fantasy football season. We analyze standout performances, dissect underwhelming outings, and provide strategic insights to help you navigate Week 9. Plus, we draw parallels between fantasy football dynamics and the ever-evolving world of sports, including a look at Shohei Ohtani's impact on baseball and the New York Knicks' recent resurgence.",
+      "pubDate": "2026-11-03",
+      "duration": "00:16:22",
+      "chapters": "2026_Week8.chapters.json",
+      "explicit": false,
+      "episodeType": "regular"
+    },
+    {
       "file": "2026_Week7.mp3",
       "title": "Slop Take: Week 7 Breakdown and Midseason Strategies",
       "description": "In this week's episode of Slop Take, we dive into the latest developments in 'The League' as we approach the midpoint of the 2026 fantasy football season. From analyzing top and bottom performances to power rankings and upcoming matchups, we've got you covered.",

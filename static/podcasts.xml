@@ -6,7 +6,7 @@
     <description>The League&#39;s Official AI Slop Podcast</description>
     <language>en-us</language>
     <copyright>Slop Take</copyright>
-    <lastBuildDate>Tue, 27 Oct 2026 08:47:41 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 03 Nov 2026 16:59:16 +0000</lastBuildDate>
     <atom:link href="https://jfkonecn.github.io/espn-ff-importer/podcasts.xml" rel="self" type="application/rss+xml" />
     <itunes:author>Eric&#39;s Beard</itunes:author>
     <itunes:summary>The League&#39;s Official AI Slop Podcast</itunes:summary>
@@ -16,6 +16,19 @@
     <itunes:category text="Sports">
       <itunes:category text="Fantasy Sports" />
     </itunes:category>
+    
+    <item>
+      <title>Slop Take: Week 8 Recap and Week 9 Preview</title>
+      <description>In this week&#39;s episode of Slop Take, we dive into the latest developments in &#39;The League&#39; as we approach the midpoint of the 2026 fantasy football season. We analyze standout performances, dissect underwhelming outings, and provide strategic insights to help you navigate Week 9. Plus, we draw parallels between fantasy football dynamics and the ever-evolving world of sports, including a look at Shohei Ohtani&#39;s impact on baseball and the New York Knicks&#39; recent resurgence.</description>
+      <itunes:summary>In this week&#39;s episode of Slop Take, we dive into the latest developments in &#39;The League&#39; as we approach the midpoint of the 2026 fantasy football season. We analyze standout performances, dissect underwhelming outings, and provide strategic insights to help you navigate Week 9. Plus, we draw parallels between fantasy football dynamics and the ever-evolving world of sports, including a look at Shohei Ohtani&#39;s impact on baseball and the New York Knicks&#39; recent resurgence.</itunes:summary>
+      <pubDate>Tue, 03 Nov 2026 00:00:00 +0000</pubDate>
+      <guid isPermaLink="false">https://jfkonecn.github.io/espn-ff-importer/assets/podcasts/2026_Week8.mp3</guid>
+      <enclosure url="https://jfkonecn.github.io/espn-ff-importer/assets/podcasts/2026_Week8.mp3" length="15720324" type="audio/mpeg" />
+      <podcast:chapters url="https://jfkonecn.github.io/espn-ff-importer/assets/podcasts/2026_Week8.chapters.json" type="application/json" />
+      <itunes:duration>00:16:22</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>regular</itunes:episodeType>
+    </item>
     
     <item>
       <title>Slop Take: Week 7 Breakdown and Midseason Strategies</title>

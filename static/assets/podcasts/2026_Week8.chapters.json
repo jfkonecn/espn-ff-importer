@@ -1,0 +1,37 @@
+{
+  "version": "1.2.0",
+  "chapters": [
+    {
+      "startTime": 0,
+      "title": "Intro"
+    },
+    {
+      "startTime": 157,
+      "title": "Commercial 1 - Trade Machine Max"
+    },
+    {
+      "startTime": 192,
+      "title": "Best Team"
+    },
+    {
+      "startTime": 326,
+      "title": "Worst Team"
+    },
+    {
+      "startTime": 459,
+      "title": "Power Ranking"
+    },
+    {
+      "startTime": 618,
+      "title": "Matchup Preview"
+    },
+    {
+      "startTime": 788,
+      "title": "Commercial 2 - Benchwarmer Brew"
+    },
+    {
+      "startTime": 826,
+      "title": "Final Take"
+    }
+  ]
+}
