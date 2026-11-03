@@ -114,3 +114,19 @@
 
 ---
 
+## Week 8
+
+**#1 GangGreen** 167.92 - **Caleb's Cats** 142.06 *(Winner: #1 GangGreen)*
+
+**Embrace the Darkness** 119.30 - **Boeing's Hitmen ** 152.60 *(Winner: Boeing's Hitmen )*
+
+**It's MillerTime** 124.20 - **Jensen Huang and Sons** 132.00 *(Winner: Jensen Huang and Sons)*
+
+**The Injured Preserve** 124.28 - **Majestic mountain men** 57.10 *(Winner: The Injured Preserve)*
+
+**Latin Fury** 128.18 - **America's Team** 109.18 *(Winner: Latin Fury)*
+
+**Love Handles** 63.24 - **Advanced Metrics** 92.36 *(Winner: Advanced Metrics)*
+
+---
+

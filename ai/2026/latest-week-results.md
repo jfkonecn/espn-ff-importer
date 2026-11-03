@@ -1,18 +1,8 @@
-# Week 7 Results
+# Week 8 Results
 
-## Caleb's Cats vs Embrace the Darkness
+## #1 GangGreen vs Caleb's Cats
 
-**Final Score:** Caleb's Cats 134.34 - Embrace the Darkness 122.48
-
-### Key Performances
-
-*This section would show individual player performances*
-
----
-
-## #1 GangGreen vs It's MillerTime
-
-**Final Score:** #1 GangGreen 135.76 - It's MillerTime 107.12
+**Final Score:** #1 GangGreen 167.92 - Caleb's Cats 142.06
 
 ### Key Performances
 
@@ -20,19 +10,9 @@
 
 ---
 
-## Boeing's Hitmen  vs The Injured Preserve
+## Embrace the Darkness vs Boeing's Hitmen 
 
-**Final Score:** Boeing's Hitmen  129.68 - The Injured Preserve 158.42
-
-### Key Performances
-
-*This section would show individual player performances*
-
----
-
-## Jensen Huang and Sons vs Latin Fury
-
-**Final Score:** Jensen Huang and Sons 85.88 - Latin Fury 94.10
+**Final Score:** Embrace the Darkness 119.30 - Boeing's Hitmen  152.60
 
 ### Key Performances
 
@@ -40,9 +20,9 @@
 
 ---
 
-## Majestic mountain men vs Love Handles
+## It's MillerTime vs Jensen Huang and Sons
 
-**Final Score:** Majestic mountain men 93.92 - Love Handles 69.12
+**Final Score:** It's MillerTime 124.20 - Jensen Huang and Sons 132.00
 
 ### Key Performances
 
@@ -50,9 +30,29 @@
 
 ---
 
-## America's Team vs Advanced Metrics
+## The Injured Preserve vs Majestic mountain men
 
-**Final Score:** America's Team 124.82 - Advanced Metrics 109.80
+**Final Score:** The Injured Preserve 124.28 - Majestic mountain men 57.10
+
+### Key Performances
+
+*This section would show individual player performances*
+
+---
+
+## Latin Fury vs America's Team
+
+**Final Score:** Latin Fury 128.18 - America's Team 109.18
+
+### Key Performances
+
+*This section would show individual player performances*
+
+---
+
+## Love Handles vs Advanced Metrics
+
+**Final Score:** Love Handles 63.24 - Advanced Metrics 92.36
 
 ### Key Performances
 
