@@ -130,3 +130,19 @@
 
 ---
 
+## Week 9
+
+**Caleb's Cats** 140.06 - **Boeing's Hitmen ** 136.08 *(Winner: Caleb's Cats)*
+
+**Jensen Huang and Sons** 112.52 - **#1 GangGreen** 154.98 *(Winner: #1 GangGreen)*
+
+**Majestic mountain men** 104.42 - **Embrace the Darkness** 141.80 *(Winner: Embrace the Darkness)*
+
+**America's Team** 117.66 - **It's MillerTime** 82.38 *(Winner: America's Team)*
+
+**Advanced Metrics** 92.86 - **The Injured Preserve** 85.32 *(Winner: Advanced Metrics)*
+
+**Love Handles** 119.50 - **Latin Fury** 111.26 *(Winner: Love Handles)*
+
+---
+

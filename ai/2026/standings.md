@@ -2,19 +2,19 @@
 
 **League:** The League
 **Season:** 2026
-**Current Week:** 9
+**Current Week:** 10
 
 | Rank | Team Name | Owner | Points | Record (W-L-T) | Points For | Points Against |
 |------|-----------|-------|--------|----------------|------------|----------------|
-| 1 | The Injured Preserve | Conner Graeff | 1111.32 | 7-1-0 | 1111.32 | 828.30 |
-| 2 | #1 GangGreen | Paul Konecny | 1045.48 | 5-3-0 | 1045.48 | 963.10 |
-| 3 | Embrace the Darkness | Jordan Cunningham | 997.90 | 2-6-0 | 997.90 | 1017.10 |
-| 4 | Caleb's Cats | michael machas | 996.68 | 4-4-0 | 996.68 | 957.28 |
-| 5 | Latin Fury | Benito Molina | 973.20 | 5-3-0 | 973.20 | 929.02 |
-| 6 | America's Team | Eric Stevens | 937.82 | 4-4-0 | 937.82 | 1040.84 |
-| 7 | Boeing's Hitmen  | Bradford Evans | 904.18 | 4-4-0 | 904.18 | 944.88 |
-| 8 | It's MillerTime | Colin Miller | 871.82 | 4-4-0 | 871.82 | 894.34 |
-| 9 | Majestic mountain men | Matthew Stevens | 866.90 | 4-4-0 | 866.90 | 887.00 |
-| 10 | Advanced Metrics | John Konecny | 851.52 | 3-5-0 | 851.52 | 889.34 |
-| 11 | Love Handles | Justin Willer | 798.90 | 3-5-0 | 798.90 | 869.14 |
-| 12 | Jensen Huang and Sons | Tarek Kaakani | 795.80 | 3-5-0 | 795.80 | 931.18 |
+| 1 | #1 GangGreen | Paul Konecny | 1200.46 | 6-3-0 | 1200.46 | 1075.62 |
+| 2 | The Injured Preserve | Conner Graeff | 1196.64 | 7-2-0 | 1196.64 | 921.16 |
+| 3 | Embrace the Darkness | Jordan Cunningham | 1139.70 | 3-6-0 | 1139.70 | 1121.52 |
+| 4 | Caleb's Cats | michael machas | 1136.74 | 5-4-0 | 1136.74 | 1093.36 |
+| 5 | Latin Fury | Benito Molina | 1084.46 | 5-4-0 | 1084.46 | 1048.52 |
+| 6 | America's Team | Eric Stevens | 1055.48 | 5-4-0 | 1055.48 | 1123.22 |
+| 7 | Boeing's Hitmen  | Bradford Evans | 1040.26 | 4-5-0 | 1040.26 | 1084.94 |
+| 8 | Majestic mountain men | Matthew Stevens | 971.32 | 4-5-0 | 971.32 | 1028.80 |
+| 9 | It's MillerTime | Colin Miller | 954.20 | 4-5-0 | 954.20 | 1012.00 |
+| 10 | Advanced Metrics | John Konecny | 944.38 | 4-5-0 | 944.38 | 974.66 |
+| 11 | Love Handles | Justin Willer | 918.40 | 4-5-0 | 918.40 | 980.40 |
+| 12 | Jensen Huang and Sons | Tarek Kaakani | 908.32 | 3-6-0 | 908.32 | 1086.16 |
