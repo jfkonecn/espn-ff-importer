@@ -1,0 +1,37 @@
+{
+  "version": "1.2.0",
+  "chapters": [
+    {
+      "startTime": 0,
+      "title": "Intro"
+    },
+    {
+      "startTime": 177,
+      "title": "Commercial 1 - FantasyFlex"
+    },
+    {
+      "startTime": 216,
+      "title": "Best Team"
+    },
+    {
+      "startTime": 250,
+      "title": "Worst Team"
+    },
+    {
+      "startTime": 396,
+      "title": "Power Ranking"
+    },
+    {
+      "startTime": 657,
+      "title": "Matchup Preview"
+    },
+    {
+      "startTime": 885,
+      "title": "Commercial 2 - Gridiron Grub"
+    },
+    {
+      "startTime": 924,
+      "title": "Final Take"
+    }
+  ]
+}

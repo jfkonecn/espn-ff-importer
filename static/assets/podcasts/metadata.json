@@ -14,6 +14,16 @@
   },
   "episodes": [
     {
+      "file": "2026_Week10.mp3",
+      "title": "Slop Take: Week 10 Breakdown",
+      "description": "Week 10 of The League's 2026 season is in the books, and Slop Take is here to break it all down. From the top performers to the biggest flops, we analyze the latest matchups, power rankings, and upcoming games. Plus, we tackle some hot sports-talk topics along the way.",
+      "pubDate": "2026-11-17",
+      "duration": "00:18:51",
+      "chapters": "2026_Week10.chapters.json",
+      "explicit": false,
+      "episodeType": "full"
+    },
+    {
       "file": "2026_Week9.mp3",
       "title": "Slop Take: Week 9 Breakdown and Playoff Push",
       "description": "In this week's episode of Slop Take, we dive into the intense action of Week 9 in 'The League.' From analyzing the top and bottom performers to power rankings and upcoming matchups, we cover it all with our signature confrontational style. Plus, we draw parallels between fantasy football dynamics and sports figures like Bill Belichick, Skip Bayless, and Tom Brady. Don't miss our final take on strategic moves to make as the playoffs approach.",
