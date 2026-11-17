@@ -114,7 +114,7 @@
 | 107 | Advanced Metrics | John Konecny | Dallas Goedert | Bench | PHI | $2 | No |
 | 108 | Embrace the Darkness | Jordan Cunningham | Courtland Sutton | Bench | DEN | $3 | No |
 | 109 | The Injured Preserve | Conner Graeff | Mark Andrews | TE | BAL | $4 | No |
-| 110 | Jensen Huang and Sons | Tarek Kaakani | Josh Downs | Bench | IND | $2 | No |
+| 110 | Jensen Huang and Sons | Tarek Kaakani | Josh Downs | Bench | KC | $2 | No |
 | 111 | America's Team | Eric Stevens | Caleb Williams | QB | CHI | $2 | No |
 | 112 | It's MillerTime | Colin Miller | Alec Pierce | Bench | IND | $3 | No |
 | 113 | Latin Fury | Benito Molina | Matthew Stafford | Bench | LAR | $2 | No |
@@ -174,7 +174,7 @@
 | 167 | Embrace the Darkness | Jordan Cunningham | Tyler Loop | K | BAL | $1 | No |
 | 168 | Majestic mountain men | Matthew Stevens | Tyler Allgeier | Bench | ARI | $1 | No |
 | 169 | Jensen Huang and Sons | Tarek Kaakani | Chiefs D/ST | D/ST | KC | $1 | No |
-| 170 | Advanced Metrics | John Konecny | Keenan Allen | Bench | IND | $1 | No |
+| 170 | Advanced Metrics | John Konecny | Keenan Allen | Bench | SF | $1 | No |
 | 171 | Love Handles | Justin Willer | Tyler Shough | Bench | NO | $1 | No |
 | 172 | Caleb's Cats | michael machas | Chargers D/ST | D/ST | LAC | $1 | No |
 | 173 | Embrace the Darkness | Jordan Cunningham | KC Concepcion | Bench | CLE | $1 | No |

@@ -4,48 +4,48 @@
 
 | Rank | Player | Position | Team | % Change | % Owned |
 |------|--------|----------|------|----------|----------|
-| 1 | Audric Estime | RB | NO | 0.2% | 9.3% |
-| 2 | Tank Dell | WR | HOU | 0.1% | 23.4% |
-| 3 | Corey Kiner | RB | NE | 0.1% | 5.4% |
-| 4 | Packers D/ST | D/ST | GB | 0.1% | 19.2% |
-| 5 | Bills D/ST | D/ST | BUF | 0.1% | 33.5% |
-| 6 | Ty Johnson | RB | BUF | 0.1% | 2.3% |
-| 7 | Odell Beckham Jr. | WR | MIN | 0.0% | 1.0% |
-| 8 | Kaleb Johnson | RB | GB | 0.0% | 1.0% |
-| 9 | Tutu Atwell | WR | LAR | 0.0% | 0.3% |
-| 10 | Cam Ward | RB | TEN | 0.0% | 4.0% |
-| 11 | Darren Waller | WR | JAX | 0.0% | 7.7% |
-| 12 | Jason Sanders | TE | NYJ | 0.0% | 3.3% |
-| 13 | Jordan Watkins | WR | TB | 0.0% | 0.8% |
-| 14 | Konata Mumpfield | WR | LAR | 0.0% | 1.6% |
-| 15 | Mack Hollins | WR | NE | 0.0% | 7.3% |
-| 16 | Aaron Rodgers | RB | SEA | 0.0% | 32.9% |
-| 17 | Dolphins D/ST | D/ST | MIA | 0.0% | 0.7% |
-| 18 | Carson Beck | RB | PIT | 0.0% | 0.4% |
-| 19 | Jaheim Bell | WR | FA | 0.0% | 0.0% |
-| 20 | Marcedes Lewis | WR | FA | 0.0% | 0.0% |
+| 1 | Xavier Hutchinson | WR | HOU | 0.1% | 8.8% |
+| 2 | Jordyn Tyson | WR | NO | 0.1% | 42.3% |
+| 3 | Tre' Harris | WR | BAL | 0.1% | 3.0% |
+| 4 | Cam Ward | RB | TEN | 0.1% | 4.6% |
+| 5 | Quentin Johnston | WR | BAL | 0.1% | 23.9% |
+| 6 | Riley Patterson | TE | BAL | 0.1% | 0.7% |
+| 7 | Emari Demercado | RB | HOU | 0.1% | 0.4% |
+| 8 | Chargers D/ST | D/ST | BAL | 0.1% | 9.9% |
+| 9 | Bo Nix | RB | DEN | 0.0% | 56.6% |
+| 10 | Pat Bryant | WR | DEN | 0.0% | 2.2% |
+| 11 | Cameron Dicker | TE | BAL | 0.0% | 42.0% |
+| 12 | Jets D/ST | D/ST | NYJ | 0.0% | 10.3% |
+| 13 | Chiefs D/ST | D/ST | KC | 0.0% | 55.0% |
+| 14 | Buccaneers D/ST | D/ST | SF | 0.0% | 29.7% |
+| 15 | Myles Price | WR | MIN | 0.0% | 0.8% |
+| 16 | Elic Ayomanor | WR | TEN | 0.0% | 0.3% |
+| 17 | Jimmy Garoppolo | RB | FA | 0.0% | 0.0% |
+| 18 | Jaheim Bell | WR | FA | 0.0% | 0.0% |
+| 19 | Marcedes Lewis | WR | FA | 0.0% | 0.0% |
+| 20 | Quez Watkins | WR | IND | 0.0% | 0.0% |
 
 ## Most Dropped Players
 
 | Rank | Player | Position | Team | % Change | % Owned |
 |------|--------|----------|------|----------|----------|
-| 1 | Michael Wilson | WR | PIT | -6.2% | 84.2% |
-| 2 | Devin Singletary | RB | NYG | -1.0% | 44.1% |
-| 3 | Malik Willis | RB | MIA | -0.8% | 22.9% |
-| 4 | Kendre Miller | RB | FA | -0.7% | 19.2% |
-| 5 | Bears D/ST | D/ST | CAR | -0.6% | 64.4% |
-| 6 | Kyler Murray | RB | MIN | -0.5% | 49.7% |
-| 7 | Cairo Santos | TE | CAR | -0.5% | 38.7% |
-| 8 | Giants D/ST | D/ST | NYG | -0.5% | 50.0% |
-| 9 | Adonai Mitchell | WR | NYJ | -0.4% | 42.6% |
-| 10 | Patriots D/ST | D/ST | NE | -0.4% | 58.8% |
-| 11 | Tyler Loop | TE | BAL | -0.4% | 30.1% |
-| 12 | Mike Washington Jr. | RB | LV | -0.4% | 29.4% |
-| 13 | J.J. McCarthy | RB | NYG | -0.4% | 33.6% |
-| 14 | Elijah Mitchell | RB | PHI | -0.4% | 12.6% |
-| 15 | Devaughn Vele | WR | NO | -0.4% | 57.7% |
-| 16 | Emanuel Wilson | RB | LAC | -0.4% | 33.8% |
-| 17 | Broncos D/ST | D/ST | DEN | -0.3% | 87.6% |
-| 18 | Lamar Jackson | RB | BAL | -0.3% | 86.5% |
-| 19 | Saints D/ST | D/ST | NO | -0.3% | 12.6% |
-| 20 | Ladd McConkey | WR | BAL | -0.3% | 86.3% |
+| 1 | Corey Kiner | RB | NE | -2.0% | 40.4% |
+| 2 | Audric Estime | RB | NO | -1.5% | 42.1% |
+| 3 | Ravens D/ST | D/ST | BAL | -1.4% | 82.5% |
+| 4 | Packers D/ST | D/ST | GB | -1.1% | 49.1% |
+| 5 | DeMario Douglas | WR | NE | -1.1% | 69.9% |
+| 6 | Devin Singletary | RB | NYG | -1.0% | 27.1% |
+| 7 | Drake Maye | RB | NE | -0.9% | 98.1% |
+| 8 | Woody Marks | RB | HOU | -0.8% | 79.6% |
+| 9 | Hunter Henry | WR | NE | -0.7% | 61.8% |
+| 10 | Tutu Atwell | WR | LAR | -0.7% | 16.2% |
+| 11 | Colts D/ST | D/ST | IND | -0.7% | 22.1% |
+| 12 | Dominic Zvada | TE | NYG | -0.6% | 45.2% |
+| 13 | Germie Bernard | WR | SEA | -0.6% | 64.6% |
+| 14 | Omar Cooper Jr. | WR | NYJ | -0.6% | 55.0% |
+| 15 | A.J. Brown | WR | NE | -0.6% | 92.2% |
+| 16 | Jordan Addison | WR | MIN | -0.6% | 74.0% |
+| 17 | Jalen Coker | WR | JAX | -0.6% | 86.9% |
+| 18 | Rams D/ST | D/ST | LAR | -0.6% | 94.3% |
+| 19 | Tyler Allgeier | RB | PIT | -0.5% | 64.4% |
+| 20 | Giants D/ST | D/ST | NYG | -0.5% | 31.5% |

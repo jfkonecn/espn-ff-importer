@@ -48,7 +48,7 @@
 | Cyrus Allen | Bench | KC | 1 | 6 | 0 | Yes |
 | Jonah Coleman | Bench | DEN | 1 | 6 | 0 | Yes |
 | Mike Washington Jr. | Bench | LV | 1 | 6 | 0 | Yes |
-| Keenan Allen | Bench | IND | 1 | 6 | 0 | Yes |
+| Keenan Allen | Bench | SF | 1 | 6 | 0 | Yes |
 | Najee Harris | Bench | FA | 1 | 6 | 0 | Yes |
 
 ### America's Team
@@ -161,7 +161,7 @@
 | J.K. Dobbins | RB | DEN | 5 | 10 | 0 | Yes |
 | Harold Fannin Jr. | TE | CLE | 7 | 12 | 0 | Yes |
 | Jonathon Brooks | FLEX | CAR | 4 | 9 | 0 | Yes |
-| Josh Downs | Bench | IND | 2 | 7 | 0 | Yes |
+| Josh Downs | Bench | KC | 2 | 7 | 0 | Yes |
 | RJ Harvey | Bench | DEN | 1 | 6 | 0 | Yes |
 | Wan'Dale Robinson | Bench | TEN | 3 | 8 | 0 | Yes |
 | Jalen Coker | Bench | CAR | 2 | 7 | 0 | Yes |

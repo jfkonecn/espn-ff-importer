@@ -146,3 +146,19 @@
 
 ---
 
+## Week 10
+
+**Jensen Huang and Sons** 135.72 - **Caleb's Cats** 93.92 *(Winner: Jensen Huang and Sons)*
+
+**Boeing's Hitmen ** 101.62 - **Majestic mountain men** 141.28 *(Winner: Majestic mountain men)*
+
+**#1 GangGreen** 111.20 - **America's Team** 132.30 *(Winner: America's Team)*
+
+**Embrace the Darkness** 100.12 - **Advanced Metrics** 108.44 *(Winner: Advanced Metrics)*
+
+**It's MillerTime** 123.98 - **Love Handles** 96.92 *(Winner: It's MillerTime)*
+
+**The Injured Preserve** 140.16 - **Latin Fury** 130.66 *(Winner: The Injured Preserve)*
+
+---
+
