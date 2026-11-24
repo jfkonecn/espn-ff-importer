@@ -6,7 +6,7 @@
     <description>The League&#39;s Official AI Slop Podcast</description>
     <language>en-us</language>
     <copyright>Slop Take</copyright>
-    <lastBuildDate>Tue, 17 Nov 2026 18:18:25 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 24 Nov 2026 20:04:16 +0000</lastBuildDate>
     <atom:link href="https://jfkonecn.github.io/espn-ff-importer/podcasts.xml" rel="self" type="application/rss+xml" />
     <itunes:author>Eric&#39;s Beard</itunes:author>
     <itunes:summary>The League&#39;s Official AI Slop Podcast</itunes:summary>
@@ -119,6 +119,19 @@
       <itunes:duration>00:20:15</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    
+    <item>
+      <title>Slop Take: Week 11 Breakdown and Week 12 Preview</title>
+      <description>In this week&#39;s episode of Slop Take, we dive into the intense Week 11 action of &#39;The League.&#39; We analyze standout performances, dissect the biggest blunders, and provide a comprehensive power ranking as we approach the playoffs. Plus, we preview the crucial Week 12 matchups and offer strategic advice to keep your fantasy team ahead of the competition.</description>
+      <itunes:summary>In this week&#39;s episode of Slop Take, we dive into the intense Week 11 action of &#39;The League.&#39; We analyze standout performances, dissect the biggest blunders, and provide a comprehensive power ranking as we approach the playoffs. Plus, we preview the crucial Week 12 matchups and offer strategic advice to keep your fantasy team ahead of the competition.</itunes:summary>
+      <pubDate>Tue, 24 Nov 2026 00:00:00 +0000</pubDate>
+      <guid isPermaLink="false">https://jfkonecn.github.io/espn-ff-importer/assets/podcasts/2026_Week11.mp3</guid>
+      <enclosure url="https://jfkonecn.github.io/espn-ff-importer/assets/podcasts/2026_Week11.mp3" length="19716849" type="audio/mpeg" />
+      <podcast:chapters url="https://jfkonecn.github.io/espn-ff-importer/assets/podcasts/2026_Week11.chapters.json" type="application/json" />
+      <itunes:duration>00:20:32</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>regular</itunes:episodeType>
     </item>
     
     <item>
