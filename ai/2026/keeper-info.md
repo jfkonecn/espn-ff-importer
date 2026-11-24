@@ -129,7 +129,7 @@
 | Browns D/ST | D/ST | CLE | 1 | 6 | 0 | Yes |
 | Tyler Loop | K | BAL | 1 | 6 | 0 | Yes |
 | KC Concepcion | Bench | CLE | 1 | 6 | 0 | Yes |
-| Daniel Jones | Bench | IND | 1 | 6 | 0 | Yes |
+| Daniel Jones | Bench | FA | 1 | 6 | 0 | Yes |
 
 ### It's MillerTime
 

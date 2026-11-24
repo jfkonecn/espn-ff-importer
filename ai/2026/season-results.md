@@ -162,3 +162,19 @@
 
 ---
 
+## Week 11
+
+**Caleb's Cats** 134.62 - **Majestic mountain men** 75.78 *(Winner: Caleb's Cats)*
+
+**America's Team** 131.34 - **Jensen Huang and Sons** 79.08 *(Winner: America's Team)*
+
+**Advanced Metrics** 104.86 - **Boeing's Hitmen ** 134.56 *(Winner: Boeing's Hitmen )*
+
+**Love Handles** 94.36 - **#1 GangGreen** 88.40 *(Winner: Love Handles)*
+
+**Latin Fury** 116.86 - **Embrace the Darkness** 151.10 *(Winner: Embrace the Darkness)*
+
+**The Injured Preserve** 124.50 - **It's MillerTime** 92.94 *(Winner: The Injured Preserve)*
+
+---
+
